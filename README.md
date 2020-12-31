@@ -1,3 +1,3 @@
-# Canvas
+# Planetarium Place
 Multiplayer drawing application.
-Check it out at <https://canvas.wellsfletcher.com/>.
+Check it out at <https://planetarium.place/>.
