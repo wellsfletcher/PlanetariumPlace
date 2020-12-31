@@ -69,49 +69,7 @@ const BoardPage = (props) => {
         );
 }
 
-// export default connect(mapStateToProps)(BoardPage);
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(BoardPage);
-/*
-const BoardPage = connect(mapStateToProps)(BoardPageClass);
-export default BoardPage;
-*/
-
-
-/*
-class BoardPage extends React.Component {
-    render() {
-        const style = { // may wanna move this elsewhere and delet the div
-            position: "absolute",
-            width: "100%",
-            height: "100%"
-        };
-
-        const onChangeComplete = (color) => {
-            var brushColorInt = hexcolor2int(color);
-            this.props.setBrushColor(brushColorInt);
-        };
-
-        // var tiles = [];
-        return (
-            <>
-                <div style={style}>
-                    <PersistentDrawer
-                        onChangeComplete={onChangeComplete}
-                    />
-                    <Board
-                        tiles={this.props.tiles}
-                        map={this.props.map}
-                        values={this.props.values}
-                        width={this.props.width}
-                        mouseDown={this.props.mouseDown}
-                        brushColor={this.props.brushColor}
-                    />
-                </div>
-            </>
-        );
-    }
-}
-*/

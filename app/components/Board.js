@@ -5,7 +5,6 @@ import { setTile } from "../actions/index";
 import { MapInteractionCSS } from 'react-map-interaction';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import Canvas from './Canvas';
 import useCanvas from './useCanvas';
 import { int2rgba, vector2index } from '../utils/general';
 // import Tooltip from './TrackingTooltip.js';
@@ -353,9 +352,3 @@ const Board = (props) => {
 }
 
 export default Board;
-/*
-export default connect(
-  null,
-  mapDispatchToProps
-)(Board);
-*/
