@@ -1,0 +1,8 @@
+.DS_STORE
+test/
+
+# npm
+node_modules/
+logs
+*.log
+build/
