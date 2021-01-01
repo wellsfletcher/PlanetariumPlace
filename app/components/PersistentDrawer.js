@@ -150,7 +150,7 @@ export default function PersistentDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Place Map
+            Planetarium Place
           </Typography>
         </Toolbar>
       </AppBar>

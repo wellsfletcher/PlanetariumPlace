@@ -6,10 +6,12 @@ import { setTile, setBrushColor } from "../actions/index";
 import { bindActionCreators } from 'redux';
 
 import Board from './Board';
-import Form from './Form';
+import Globe from './Globe';
 import PersistentDrawer from './PersistentDrawer';
 import { hexcolor2int } from '../utils/general';
 
+import Fab from '@material-ui/core/Fab';
+import GlobeIcon from '@material-ui/icons/Public';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -48,26 +50,65 @@ const BoardPage = (props) => {
         };
 
         // var tiles = [];
+        const boardProps = {
+            tiles: props.tiles,
+            map: props.map,
+            values: props.values,
+            width: props.width,
+            mouseDown: props.mouseDown,
+            brushColor: props.brushColor,
+
+            setTile: props.setTile
+        }
+
+        // var useGlobe = false;
+        const [useGlobe, setUseGlobe] = React.useState(true);
+        const boardViewer = (!useGlobe) ?
+            <Board
+                {...boardProps}
+            />
+            :
+            <Globe
+                {...boardProps}
+            />
+        ;
+
         return (
             <>
                 <div style={style}>
                     <PersistentDrawer
                         onChangeComplete={onChangeComplete}
                     />
-                    <Board
-                        tiles={props.tiles}
-                        map={props.map}
-                        values={props.values}
-                        width={props.width}
-                        mouseDown={props.mouseDown}
-                        brushColor={props.brushColor}
-
-                        setTile={props.setTile}
-                    />
+                    {boardViewer}
                 </div>
+                <Fab
+                    color="primary"
+                    aria-label="view"
+                    style={{
+                        position: 'absolute',
+                        bottom: "5px", // theme.spacing(2),
+                        right: "5px" // theme.spacing(2),
+                    }}
+                    onClick={() => setUseGlobe(!useGlobe)}
+                 >
+                    <GlobeIcon />
+                </Fab>
             </>
         );
 }
+
+/*
+<Board
+    tiles={props.tiles}
+    map={props.map}
+    values={props.values}
+    width={props.width}
+    mouseDown={props.mouseDown}
+    brushColor={props.brushColor}
+
+    setTile={props.setTile}
+/>
+*/
 
 export default connect(
   mapStateToProps,
