@@ -55,7 +55,7 @@ const BoardPage = (props) => {
             map: props.map,
             values: props.values,
             width: props.width,
-            mouseDown: props.mouseDown,
+            // mouseDown: props.mouseDown,
             brushColor: props.brushColor,
 
             setTile: props.setTile
@@ -66,6 +66,7 @@ const BoardPage = (props) => {
         const boardViewer = (!useGlobe) ?
             <Board
                 {...boardProps}
+                mouseDown={props.mouseDown}
             />
             :
             <Globe

@@ -4,8 +4,11 @@
 Converts the given x, y coordinate to an array buffer index.
 */
 export function xy2index(x, y, width) {
-    return (y * width) + x;
+    return (y * width) + x; // = index
 }
+// x = (index) - (y * width)
+// y = (index - x) / width
+// height = bufferLength / width
 
 export function coordinate2index(x, y, width) {
     return xy2index(x, y, width);
@@ -17,6 +20,13 @@ where a vector is represented by {x,y}
 */
 export function vector2index({x, y}, width) {
     return xy2index(x, y, width);
+}
+
+/**
+Converts the array buffer index to an x, y coordinate vector
+*/
+export function index2vector(index, width) {
+    return {};
 }
 
 /**

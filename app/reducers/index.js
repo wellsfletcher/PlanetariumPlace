@@ -2,6 +2,7 @@ import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR } from "../const
 // import { hexcolor2int } from '../utils/general';
 
 
+/*
 const initBoard = (width, height) => {
     var result = [];
     var index = 0;
@@ -14,6 +15,38 @@ const initBoard = (width, height) => {
                 // color = 1;
                 // color = 1752220;
                 color = 0xCF6EE4;
+            }
+
+            result.push(color);
+
+            index++;
+        }
+    }
+    return result;
+};
+*/
+const initBoard = (width, height) => {
+    var result = [];
+    var index = 0;
+    for (var y = 0; y < height; y++) {
+        for (var x = 0; x < width; x++) {
+            // var color = 0;
+            var color = 0x1B1B1B;
+
+            if ((1 * (x + y)) % 16 == 0  ^  (1 * (x - y)) % 16 == 0 ) {
+                // color = 1;
+                // color = 1752220;
+                color = 0xCF6EE4;
+                if (x < width / 2) {
+                    color = 1752220;
+                    if (y < height / 2) {
+                        color = 0x0083C7;
+                    }
+                } else {
+                    if (y < height / 2) {
+                        color = 0xE5D900;
+                    }
+                }
             }
 
             result.push(color);
@@ -58,7 +91,7 @@ const initMap = (width, height) => { // technically should be an array of lists 
 };
 
 const INITIAL_WIDTH = 512;
-const INITIAL_HEIGHT = 420;
+const INITIAL_HEIGHT = 256;
 const INITIAL_BRUSH_COLOR = 1752220;
 
 const initialState = {
