@@ -95,6 +95,28 @@ function CanvasGlobe(props) {
         props.setTile({x, y}, color);
     };
 
+    /*
+    const [countries, setCountries] = React.useState({ features: []});
+    React.useEffect(() => {
+        // load data
+        // fetch('../datasets/ne_110m_admin_0_countries.geojson').then(res => res.json()).then(setCountries);
+        fetch('/assets/ne_110m_admin_0_countries.geojson').then(res => res.json()).then(setCountries);
+    }, []);
+    // this adds a considerable amount of load time
+    // and it blocks clicks :(
+    // god damn it of course the polygons block clicks
+    const countryProps = {
+        polygonsData: countries.features,
+        polygonAltitude: .008,
+        polygonCapColor: () => 'rgba(100, 100, 100, 0)',
+        polygonSideColor: () => 'rgba(0, 0, 0, 0)',
+        polygonLabel: ({ properties: d }) => `
+            <b>${d.ADMIN}</b> <br />
+        `,
+    };
+    */
+    const countryProps = {};
+
     const rest = {
         width: width,
         height: height,
@@ -117,6 +139,8 @@ function CanvasGlobe(props) {
                 globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe_dark.jpg"
                 showGraticules={true}
                 onGlobeClick={onGlobeClick}
+
+                {...countryProps}
             />
             <canvas
                 ref={canvasRef}
