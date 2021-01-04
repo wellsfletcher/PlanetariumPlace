@@ -26,6 +26,27 @@ function drawRandomDot(ctx) {
     ctx.fill();
 }
 
+/*
+Converts the given latitude and longitude to be in terms of x, y texture coordinates.
+@width the width in pixels of the texture
+@height the height in pixels of the texture
+ */
+function geo2xy(lat, lng, width, height) {
+    // note y needs to start from the top of the globe
+    const MIN_LNG = -180;
+    const MAX_LNG = 180;
+    const MIN_LAT = -90;
+    const MAX_LAT = 90;
+    const TOTAL_LNG = MAX_LNG - MIN_LNG;
+    const TOTAL_LAT = MAX_LAT - MIN_LAT;
+    const LNG_TO_X = width / TOTAL_LNG;
+    const LAT_TO_Y = height / TOTAL_LAT;
+    const x = (lng - MIN_LNG) * LNG_TO_X;
+    const y = height - ((lat - MIN_LAT) * LAT_TO_Y);
+    // return {x: x, y: y};
+    return {x: Math.floor(x), y: Math.floor(y)};
+}
+
 function CanvasGlobe(props) {
     const globeEl = React.useRef();
 
@@ -43,27 +64,12 @@ function CanvasGlobe(props) {
     const { context, ...moreConfig } = options;
     const canvasRef = useCanvas(draw, {context});
 
+
+
     React.useEffect(() => {
         const globeMaterial = globeEl.current.globeMaterial();
 
         const canvas = canvasRef.current;
-        /*
-        const ctx = document.createElement('canvas').getContext('2d');
-        const canvas = ctx.canvas;
-        ctx.canvas.width = 512;
-        ctx.canvas.height = 256;
-        ctx.fillStyle = '#FFF';
-        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-        // draw some stuff in there
-        for (var k = 0; k < 10; k++) {
-            drawRandomDot(ctx);
-        }
-        var dataUrl = canvas.toDataURL("image/png");
-        console.log(dataUrl);
-
-        const texture = new THREE.CanvasTexture(ctx.canvas);
-        */
         const texture = new THREE.CanvasTexture(canvas);
         // pixelate the texture
         texture.magFilter = THREE.NearestFilter;
@@ -78,19 +84,16 @@ function CanvasGlobe(props) {
         globeMaterial.emissiveMap = texture;
         texture.needsUpdate = true;
 
-        /*
-        var animate = function () {
-            requestAnimationFrame( animate );
-            // cube.rotation.x += 0.01;
-            // cube.rotation.y += 0.01;
-            // renderer.render( scene, camera );
-            texture.needsUpdate = true;
-        };
-        animate();
-        */
-        // return () => clearTimeout(timer); // gets run on unmount
+    }, [props.tiles]);
 
-    }, []);
+    const onGlobeClick = ({ lat, lng }, event) => {
+        // console.log(event);
+        // console.log({ lat, lng });
+        const {x, y} = geo2xy(lat, lng, width, height);
+        // console.log({x, y});
+        var color = props.brushColor;
+        props.setTile({x, y}, color);
+    };
 
     const rest = {
         width: width,
@@ -105,12 +108,15 @@ function CanvasGlobe(props) {
     // default backgroundColor = 000011
     // default backgroundColor in practice = #00000E
     // #242424
+    // showGraticules={true}
     return (
         <>
             <Globe
                 ref={globeEl}
                 backgroundColor={"#000011"}
                 globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe_dark.jpg"
+                showGraticules={true}
+                onGlobeClick={onGlobeClick}
             />
             <canvas
                 ref={canvasRef}

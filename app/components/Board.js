@@ -189,6 +189,8 @@ const Board = (props) => {
     */
 
     const handleCanvasClick = (event) => {
+        if (event.defaultPrevented) return; // console.log("drag!");
+
         const rect = canvas.getBoundingClientRect();
         // zoom = {x: canvas.width / rect.width,  y: canvas.height / rect.height};
         zoom = {x: rect.width / canvas.width,  y: rect.height / canvas.height};
@@ -210,6 +212,9 @@ const Board = (props) => {
     }
 
     const handleMouseEnter = (event) => {
+        // if (event.defaultPrevented) return;
+        if (props.mouseDown) return;
+
         if (canvas === null) return; // I'm not sure why it gives me an error when this is line isn't here...
         const rect = canvas.getBoundingClientRect();
         // zoom = {x: canvas.width / rect.width,  y: canvas.height / rect.height};
@@ -282,6 +287,31 @@ const Board = (props) => {
     );
     */
 
+    /*
+    const tooltip = (
+        <Tooltip title="Delete">
+            <canvas
+                ref={canvasRef}
+                {...rest}
+            />
+        </Tooltip>
+    );
+    */
+
+    const highligths = (
+        <Highlights
+            width={width}
+            map={props.map}
+            values={props.values}
+            selectedTile={selectedTile}
+
+            onClick={handleCanvasClick} // onClick still not working as I want it
+            onMouseMove={handleMouseEnter} // need to turn off highlights while dragging
+        />
+    );
+    // const highligths = (<> </>);
+
+    // onMouseDown={handleCanvasClick} // onClick={handleCanvasClick} // look into onTouchEnd
     // const { height, width } = useWindowDimensions();
     // .125, 16
     const INITIAL_SCALE = 1.0;
@@ -299,21 +329,11 @@ const Board = (props) => {
                 }
             }}
         >
-            <Highlights
-                width={width}
-                map={props.map}
-                values={props.values}
-                selectedTile={selectedTile}
-
-                onMouseDown={handleCanvasClick} // onClick still not working as I want it
-                onMouseMove={handleMouseEnter}
-            />
-            <Tooltip title="Delete">
+            {highligths}
             <canvas
                 ref={canvasRef}
                 {...rest}
             />
-            </Tooltip>
         </MapInteractionCSS>
     );
 }
