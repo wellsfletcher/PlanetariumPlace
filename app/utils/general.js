@@ -8,7 +8,11 @@ export function xy2index(x, y, width) {
 }
 // x = (index) - (y * width)
 // y = (index - x) / width
+// x = index % width
+// y = (index - (index % width)) / width
 // height = bufferLength / width
+// 0 < x < width
+// 0 < y < height
 
 export function coordinate2index(x, y, width) {
     return xy2index(x, y, width);
@@ -26,7 +30,9 @@ export function vector2index({x, y}, width) {
 Converts the array buffer index to an x, y coordinate vector
 */
 export function index2vector(index, width) {
-    return {};
+    const x = index % width;
+    const y = (index - x) / width;
+    return {x: x, y: y};
 }
 
 /**

@@ -73,6 +73,27 @@ const BoardPage = (props) => {
                 {...boardProps}
             />
         ;
+        /*
+        // var boardStyle = (!useGlobe) ? {} : {display: "none"};
+        var boardStyle = {};
+        var board = (
+            <Board
+                {...boardProps}
+                mouseDown={props.mouseDown}
+                style={boardStyle}
+            />
+        );
+        var globe = (!useGlobe) ?
+            <> </>
+            :
+            <Globe
+                {...boardProps}
+
+            />
+        ;
+        // {board}
+        // {globe}
+        */
 
         return (
             <>

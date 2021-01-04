@@ -7,14 +7,17 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import useCanvas from './useCanvas';
 import { int2rgba, vector2index } from '../utils/general';
+import { drawPixel, drawPixelBuffer, drawImageData } from '../utils/draw';
 // import Tooltip from './TrackingTooltip.js';
 
 
+/*
 function mapDispatchToProps(dispatch) {
   return {
     setTile: ({x, y}, color) => dispatch(setTile({x, y, color}))
   };
 }
+*/
 
 function round(num) {
     // 0.375 seems to work for y
@@ -28,59 +31,6 @@ var drawAnimatedCircle = (ctx, frameCount) => {
     ctx.beginPath();
     ctx.arc(50, 100, 20*Math.sin(frameCount*0.05)**2, 0, 2*Math.PI);
     ctx.fill();
-};
-
-var drawPixel = (ctx, x, y) => {
-    var r = 255;
-    var g = 100;
-    var b = 100;
-    var a = 255;
-    var id = ctx.createImageData(1,1); // only do this once per page
-    var d  = id.data;                        // only do this once per page
-    d[0]   = r;
-    d[1]   = g;
-    d[2]   = b;
-    d[3]   = a;
-    ctx.putImageData(id, x, y);
-};
-
-const drawPixelBuffer = (ctx, pixels, bufferWidth, hasAlpha=false) => {
-    var width = bufferWidth;
-    var height = pixels.length / width; // floor?
-
-    // var bufferLength = width * height * 4;
-    var bufferLength = pixels.length * 4;
-    const arrayBuffer = new ArrayBuffer(bufferLength);
-    const buffer = new Uint8ClampedArray(arrayBuffer);
-    // console.log("buffer.length = " + buffer.length);
-
-    var k = 0;
-    for (var pixel of pixels) {
-        const i = k * 4;
-        /*
-        var r = 255;
-        var g = 100;
-        var b = 100;
-        var a = 255 * pixel;
-        // console.log("pixel = " + pixel);
-        */
-        var {r, g, b, a} = int2rgba(pixel);
-        if (!hasAlpha) a = 255;
-
-        buffer[i + 0]   = r; // red
-        buffer[i + 1]   = g; // green
-        buffer[i + 2]   = b; // blue
-        buffer[i + 3]   = a; // alpha
-        k++;
-    }
-
-    const imageData = new ImageData(buffer, width, height);
-    ctx.putImageData(imageData, 0, 0);
-    return imageData;
-};
-
-const drawImageData = (ctx, imageData) => {
-    ctx.putImageData(imageData, 0, 0);
 };
 
 const extractPixelBufferFromMap = (map, selectedId) => {
@@ -252,6 +202,11 @@ const Board = (props) => {
         var color = props.brushColor;
         props.setTile(mouse, color);
         // alert("Clicked!");
+
+        // save the canvas
+        // var dataUrl = canvas.toDataURL("image/png");
+        // var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        // console.log(dataUrl);
     }
 
     const handleMouseEnter = (event) => {
@@ -326,11 +281,23 @@ const Board = (props) => {
         </div>
     );
     */
+
+    // const { height, width } = useWindowDimensions();
     // .125, 16
+    const INITIAL_SCALE = 1.0;
+    const INITIAL_CANVAS_WIDTH = width * INITIAL_SCALE;
+    const INITIAL_CANVAS_HEIGHT = height * INITIAL_SCALE;
     return (
         <MapInteractionCSS
             minScale={.125}
             maxScale={32}
+            defaultValue={{
+                scale: INITIAL_SCALE,
+                translation: {
+                    x: (window.innerWidth - INITIAL_CANVAS_WIDTH) / 2,
+                    y: (window.innerHeight - INITIAL_CANVAS_HEIGHT) / 2
+                }
+            }}
         >
             <Highlights
                 width={width}
