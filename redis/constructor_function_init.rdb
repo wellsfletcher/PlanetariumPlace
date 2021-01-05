@@ -1,0 +1,9 @@
+# NOTE: all the stuff here is technically pseudocode
+
+
+# creates an empty board with dimemsions of @width and @height
+# call create_board(board_id, width, height):
+    const max_x = width - 1;
+    const max_y = height - 1;
+    BITFIELD tiles:board_id SET u4 #(max_x + (width * max_y)) 0
+    BITFIELD links:board_id SET u8 #(max_x + (width * max_y)) 0

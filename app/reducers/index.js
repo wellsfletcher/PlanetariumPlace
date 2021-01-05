@@ -39,7 +39,7 @@ const initBoard = (width, height) => {
                 // color = 1752220;
                 color = 0xCF6EE4;
                 if (x < width / 2) {
-                    color = 1752220;
+                    color = 0x02BE01;
                     if (y < height / 2) {
                         color = 0x0083C7;
                     }
@@ -136,6 +136,8 @@ const initMap = (width, height) => { // technically should be an array of lists 
     return result;
 };
 
+// as of now, the code can run fine with some pretty crazy high resolutions,
+// but the server would probably explode
 const INITIAL_WIDTH = 1024; // 512
 const INITIAL_HEIGHT = 512; // 256
 const INITIAL_BRUSH_COLOR = 0x00D3DD; // 1752220;
@@ -149,7 +151,7 @@ const initialState = {
         tiles: initBoard(INITIAL_WIDTH, INITIAL_HEIGHT),
         // links: initLinks, // maps pixel to relative url string
         map: initMap(INITIAL_WIDTH, INITIAL_HEIGHT), // new Map(), // initMap(),
-        values: ["", "canada", "usa", "mexico", "brazil"],
+        values: ["", "canada", "usa", "mexico", "brazil"], // features
         width: INITIAL_WIDTH
     },
     brushColor: INITIAL_BRUSH_COLOR

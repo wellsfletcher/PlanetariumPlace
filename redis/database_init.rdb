@@ -1,0 +1,13 @@
+# BITFIELD testBitField SET u4 #2 7
+# GET testBitField
+# BITFIELD SET testBitField 0 1
+# BITFIELD testBitField SET u4 #(x + (width * y)) color
+# BITFIELD testBitField SET u4 #0 1
+
+# BITFIELD testBitField SET u4 #2 2*2
+
+# call create_board(1, 512, 256):
+    # BITFIELD tiles:1 SET u4 #(511 + (512 * 255)) 0
+    # BITFIELD links:1 SET u8 #(511 + (512 * 255)) 0
+    BITFIELD tiles:1 SET u4 #131071 1
+    BITFIELD links:1 SET u8 #131071 1
