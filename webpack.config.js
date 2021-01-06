@@ -6,6 +6,18 @@ var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
 });
 
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+var CopyWebpackPluginConfig = new CopyWebpackPlugin(
+    {
+        patterns: [
+            {
+                from: 'app/api',
+                to: 'api',
+                force: true
+            }
+        ]
+    }
+);
 module.exports = {
     entry: __dirname + '/app/index.js',
     module: {
@@ -21,5 +33,5 @@ module.exports = {
         filename: 'transformed.js',
         path: __dirname + '/build'
     },
-    plugins: [HTMLWebpackPluginConfig]
+    plugins: [HTMLWebpackPluginConfig, CopyWebpackPluginConfig]
 };
