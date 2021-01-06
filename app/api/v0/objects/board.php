@@ -12,7 +12,7 @@ class Board {
         // init the json holder
         // $json = $this->conn->get('myFirstRedisVariableEver');
         $tilesKey = "tiles:$boardId";
-        echo "tile key = " . $tilesKey;
+        // echo "tile key = " . $tilesKey . "\n";
         $json = $this->conn->get($tilesKey);
 
         // show canvas data in json format

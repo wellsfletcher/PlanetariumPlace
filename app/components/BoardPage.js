@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { connect } from "react-redux";
-import { setTile, setBrushColor } from "../actions/index";
+import { setTile, setBrushColor, getData, fetchTiles } from "../actions/index";
 import { bindActionCreators } from 'redux';
 
 import Board from './Board';
@@ -15,6 +15,9 @@ import GlobeIcon from '@material-ui/icons/Public';
 
 function mapDispatchToProps(dispatch) {
   return {
+    //- getData: () => getData()(dispatch), //  cursed
+    // getData: () => getData(dispatch),
+    fetchTiles: () => fetchTiles()(dispatch),
     // setTile: ({x, y}, color) => dispatch(setTile({x, y, color})),
     setTile: bindActionCreators(({x, y}, color) => setTile({x, y, color}), dispatch),
     // setBrushColor: (color) => dipatch(setBrushColor(color))
@@ -26,6 +29,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
+        // articles: state.articles,
+        // remoteTiles: state.remoteTiles,
         tiles: state.board.tiles,
         map: state.board.map,
         values: state.board.values,
@@ -42,6 +47,13 @@ const BoardPage = (props) => {
             width: "100%",
             height: "100%"
         };
+
+        React.useEffect(() => {
+            props.fetchTiles();
+            // props.getData();
+            // alert("doing something");
+        }, []);
+        // console.log(props.remoteTiles);
 
         const onChangeComplete = (color) => {
             var brushColorInt = hexcolor2int(color);
@@ -134,5 +146,6 @@ const BoardPage = (props) => {
 
 export default connect(
   mapStateToProps,
+  // { getData },
   mapDispatchToProps
 )(BoardPage);

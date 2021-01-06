@@ -1,30 +1,8 @@
-import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR } from "../constants/actionTypes";
+import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED } from "../constants/actionTypes";
 import { xy2index } from '../utils/general';
+import * as Board from '../modules/board';
 
 
-/*
-const initBoard = (width, height) => {
-    var result = [];
-    var index = 0;
-    for (var y = 0; y < height; y++) {
-        for (var x = 0; x < width; x++) {
-            // var color = 0;
-            var color = 0x1B1B1B;
-
-            if ((1 * (x + y)) % 16 == 0  ^  (1 * (x - y)) % 16 == 0 ) {
-                // color = 1;
-                // color = 1752220;
-                color = 0xCF6EE4;
-            }
-
-            result.push(color);
-
-            index++;
-        }
-    }
-    return result;
-};
-*/
 const initBoard = (width, height) => {
     var result = [];
     var index = 0;
@@ -146,8 +124,10 @@ const initialState = {
     articles: [],
     mouseDown: false,
     boardId: 1,
+    // remoteTiles: null,
     board: {
         // tiles: [],
+        tileBuffer: null, // new Uint8ClampedArray(),
         tiles: initBoard(INITIAL_WIDTH, INITIAL_HEIGHT),
         // links: initLinks, // maps pixel to relative url string
         map: initMap(INITIAL_WIDTH, INITIAL_HEIGHT), // new Map(), // initMap(),
@@ -171,30 +151,36 @@ function rootReducer(state = initialState, action) {
         });
         */
         return { ...state, articles: state.articles.concat(action.payload) };
+    } else if (action.type === "DATA_LOADED") {
+        // alert("hello");
+        return { ...state, articles: state.articles.concat(action.payload) };
+    } else if (action.type === TILES_FETCHED) {
+        // alert("hey");
+        // return { ...state, remoteTiles: action.payload };
+        return Board.setTiles(state, action.payload);
     } else if (action.type === SET_MOUSE_DOWN) {
         return { ...state, mouseDown: action.payload };
     } else if (action.type === SET_BRUSH_COLOR) {
         // const brushColor = (); // assuming the payload hex color is a hex string
         return { ...state, brushColor: action.payload };
     } else if (action.type === SET_TILE) {
+        const {x, y} = action.payload;
+        const width = state.board.width;
+        const color = action.payload.color;
+        /*
         // return state;
         var tiles = state.board.tiles.slice();
-        var {x, y} = action.payload;
         //- console.log({x, y});
         const index = (action.payload.y * state.board.width) + action.payload.x;
         tiles[index] = action.payload.color;
         // alert("Set!");
-        /*
-        return { ...state, board: {
-            tiles: tiles,
-            width: 1
-        }};
-        */
         // alert("Set! " + x + ", " + y);
         return { ...state, board: {
             ...state.board,
             tiles: tiles
         }};
+        */
+        return Board.setTile(state, {x, y}, width, color);
     }
     return state;
 }

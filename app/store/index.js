@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from "redux";
 import { forbiddenWordsMiddleware } from "../middleware";
+import thunk from "redux-thunk";
 
 import rootReducer from "../reducers/index";
 
@@ -13,7 +14,7 @@ const store = createStore(rootReducer);
 const store = createStore(
   rootReducer,
   // storeEnhancers(applyMiddleware(forbiddenWordsMiddleware))
-  applyMiddleware(forbiddenWordsMiddleware)
+  applyMiddleware(forbiddenWordsMiddleware, thunk)
 );
 
 export default store;
