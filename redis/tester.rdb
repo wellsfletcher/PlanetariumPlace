@@ -1,0 +1,27 @@
+
+
+# call draw2x2Rectangle(1, 255, 127, 5):
+    # BITFIELD tiles:board_id SET u4 #((255 + 0) + (512 * (127 + 0))) 5
+    # BITFIELD tiles:board_id SET u4 #((255 + 1) + (512 * (127 + 0))) 5
+    # BITFIELD tiles:board_id SET u4 #((255 + 1) + (512 * (127 + 1))) 5
+    # BITFIELD tiles:board_id SET u4 #((255 + 0) + (512 * (127 + 1))) 5
+    BITFIELD tiles:1 SET u4 #65279 5
+    BITFIELD tiles:1 SET u4 #65280 5
+    BITFIELD tiles:1 SET u4 #65792 5
+    BITFIELD tiles:1 SET u4 #65791 5
+
+# call drawLongLine(1, 256, 128 5):
+    BITFIELD tiles:1 SET u4 #65791 5
+    BITFIELD tiles:1 SET u4 #65792 5
+    BITFIELD tiles:1 SET u4 #65793 5
+    BITFIELD tiles:1 SET u4 #65794 5
+    BITFIELD tiles:1 SET u4 #65795 5
+
+
+# call drawLongLine(1, 511, 255, 5):
+    # BITFIELD tiles:board_id SET u4 #((511 + 0) + (1024 * (255 + 0))) 5
+    BITFIELD tiles:1 SET u4 #261631 5
+    BITFIELD tiles:1 SET u4 #261632 5
+    BITFIELD tiles:1 SET u4 #261633 5
+    BITFIELD tiles:1 SET u4 #261634 5
+    BITFIELD tiles:1 SET u4 #261635 5

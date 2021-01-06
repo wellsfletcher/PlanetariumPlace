@@ -59,11 +59,11 @@ export const values = [
 ];
 */
 export const values = [
-    0xFFA7D1,
-    0xFFFFFF,
-    0xE4E4E4,
-    0x888888,
     0x1B1B1B,
+    0x888888,
+    0xE4E4E4,
+    0xFFFFFF,
+    0xFFA7D1,
     0xE50000,
     0xE59500,
     0xA06A42,

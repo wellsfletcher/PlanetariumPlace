@@ -1,0 +1,13 @@
+
+
+# call setTile(board_id, x, y, color):
+    # BITFIELD tiles:board_id SET u8 #(x + (width * y)) color
+
+# call drawRectangle(board_id, x, y, width, height, color):
+    #
+
+# call draw2x2Rectangle(board_id, x, y, color):
+    # BITFIELD tiles:board_id SET u8 #((x + 0) + (width * (y + 0))) color
+    # BITFIELD tiles:board_id SET u8 #((x + 1) + (width * (y + 0))) color
+    # BITFIELD tiles:board_id SET u8 #((x + 1) + (width * (y + 1))) color
+    # BITFIELD tiles:board_id SET u8 #((x + 0) + (width * (y + 1))) color
