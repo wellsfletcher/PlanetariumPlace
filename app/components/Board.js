@@ -190,6 +190,7 @@ const Board = (props) => {
 
     const handleCanvasClick = (event) => {
         if (event.defaultPrevented) return; // console.log("drag!");
+        // console.log(event);
 
         const rect = canvas.getBoundingClientRect();
         // zoom = {x: canvas.width / rect.width,  y: canvas.height / rect.height};
@@ -200,7 +201,20 @@ const Board = (props) => {
             top: height - zoomedHeight
         };
         */
-        const mouse = {x: round((event.clientX - rect.left) / zoom.x), y: round((event.clientY - rect.top)/ zoom.y)};
+        var screenPosition = {x: 0, y: 0};
+
+        // if (e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel') {
+        if (event.type == 'touchend') {
+            var evt = (typeof event.originalEvent === 'undefined') ? event : event.originalEvent;
+            // var touch = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
+            // var touch = evt.touches[0] || evt.changedTouches[0];
+            var touch = evt.changedTouches[0];
+            screenPosition = {x: touch.pageX, y: touch.pageY};
+        } else {
+            screenPosition = {x: event.clientX, y: event.clientY};
+        }
+
+        const mouse = {x: round((screenPosition.x - rect.left) / zoom.x), y: round((screenPosition.y - rect.top)/ zoom.y)};
         var color = props.brushColor;
         props.setTile(mouse, color);
         // alert("Clicked!");
@@ -305,6 +319,7 @@ const Board = (props) => {
             values={props.values}
             selectedTile={selectedTile}
 
+            onTouchEnd={handleCanvasClick}
             onClick={handleCanvasClick} // onClick still not working as I want it
             onMouseMove={handleMouseEnter} // need to turn off highlights while dragging
         />

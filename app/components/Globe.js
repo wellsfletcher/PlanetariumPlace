@@ -84,7 +84,7 @@ function CanvasGlobe(props) {
         globeMaterial.emissiveMap = texture;
         texture.needsUpdate = true;
 
-    }, [props.tiles]);
+    }, [props.tiles]); // the props.tiles made it magically start updating the globe; but it still doesn't update on Safari
 
     const onGlobeClick = ({ lat, lng }, event) => {
         // console.log(event);

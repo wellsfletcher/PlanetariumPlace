@@ -24,7 +24,7 @@ export function forbiddenWordsMiddleware({ getState, dispatch }) { // { getState
                 const tiles = state.board.tiles;
                 const index = (action.payload.y * state.board.width) + action.payload.x;
                 if (mod(index, tiles.length) != index) {
-                    alert("TILE_OUT_OF_BOUNDS");
+                    alert("TILE_OUT_OF_BOUNDS: " + x + ", " + y + " is invalid.");
                     return dispatch({ type: "TILE_OUT_OF_BOUNDS" });
                 }
             }
