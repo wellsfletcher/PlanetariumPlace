@@ -16,7 +16,7 @@ class Database {
             // $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
             // $this->conn->exec("set names utf8");
             $this->conn = new Redis();
-            $objRedis->connect($host, $port);
+            $this->conn->connect($host, $port);
         } catch(Exception $exception) {
             echo "Connection error: " . $exception->getMessage();
         }
