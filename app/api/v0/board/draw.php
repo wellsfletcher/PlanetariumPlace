@@ -18,6 +18,7 @@ $db = $database->getConnection();
 
 // initialize object
 $board = new Board($db);
+$board->test();
 
 // get input parameters
 $data = json_decode(file_get_contents("php://input"));

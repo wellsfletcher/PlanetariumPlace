@@ -55,11 +55,15 @@ class Board {
         // BITFIELD testBitField SET u4 #(x + (width * y)) color
         // if ($index >= $maxIndex && $index < $maxIndex)
         $offset = $index;
-        $this->conn->rawCommand("BITFIELD", $tilesKey, "SET", "u4", $offset, $color);
+        $this->conn->rawCommand("BITFIELD", $tilesKey, "SET", "u4", "#$offset", $color);
 
         // show canvas data in json format
         // $json = json_encode($canvas_dict);
         // return $json;
+    }
+
+    function test() {
+        $this->conn->rawCommand("BITFIELD", "tiles:1", "SET", "u4", "#1", 13);
     }
 }
 ?>
