@@ -34,12 +34,15 @@ class Board {
     }
 
     function setTile($boardId, $x, $y, $color) {
+        // TODO: check to see if board exists first...
+        // TODO: retrieve width and height of board dynamically (make it not be hardcoded anymore)
         $boardId = $this->sanitizeInteger($boardId);
         $x = $this->sanitizeInteger($x);
         $y = $this->sanitizeInteger($y);
         $color = $this->sanitizeInteger($color);
-        $width = $this->getWidth();
-        $height = $this->getHeight();
+
+        $width = $this->getWidth($boardId);
+        $height = $this->getHeight($boardId);
         $minIndex = 0;
         $maxIndex = $height * $width;
         $minColor = 0;
