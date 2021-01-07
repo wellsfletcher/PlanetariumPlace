@@ -312,6 +312,18 @@ const Board = (props) => {
     );
     */
 
+    const clickHandlerProps = {
+        onTouchEnd: handleCanvasClick,
+        onClick: handleCanvasClick,
+        onMouseMove: handleMouseEnter
+    }
+
+    /*
+    onTouchEnd={handleCanvasClick}
+    onClick={handleCanvasClick}
+    onMouseMove={handleMouseEnter}
+    */
+    /*
     const highligths = (
         <Highlights
             width={width}
@@ -319,16 +331,13 @@ const Board = (props) => {
             values={props.values}
             selectedTile={selectedTile}
 
-            onTouchEnd={handleCanvasClick}
-            onClick={handleCanvasClick} // onClick still not working as I want it
-            onMouseMove={handleMouseEnter} // need to turn off highlights while dragging
+            {...clickHandlerProps}
         />
     );
-    // const highligths = (<> </>);
+    */
+    const highligths = (<> </>);
 
-    // onMouseDown={handleCanvasClick} // onClick={handleCanvasClick} // look into onTouchEnd
     // const { height, width } = useWindowDimensions();
-    // .125, 16
     const INITIAL_SCALE = 1.0;
     const INITIAL_CANVAS_WIDTH = width * INITIAL_SCALE;
     const INITIAL_CANVAS_HEIGHT = height * INITIAL_SCALE;
@@ -348,6 +357,7 @@ const Board = (props) => {
             <canvas
                 ref={canvasRef}
                 {...rest}
+                {...clickHandlerProps}
             />
         </MapInteractionCSS>
     );
