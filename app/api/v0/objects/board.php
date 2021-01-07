@@ -34,28 +34,31 @@ class Board {
     }
 
     function setTile($boardId, $x, $y, $color) {
-        // $boardId = $this->sanitizeInteger($boardId);
+        $boardId = $this->sanitizeInteger($boardId);
         $x = $this->sanitizeInteger($x);
         $y = $this->sanitizeInteger($y);
         $color = $this->sanitizeInteger($color);
-        $width = 1024; // $this->getWidth();
-        // $height = $this->getHeight();
-        // $minIndex = 0;
-        // $maxIndex = $height * $width;
-        // $minColor = 0;
-        // $maxColor = 16;
+        $width = $this->getWidth();
+        $height = $this->getHeight();
+        $minIndex = 0;
+        $maxIndex = $height * $width;
+        $minColor = 0;
+        $maxColor = 16;
         // init the json holder
         // $json = $this->conn->get('myFirstRedisVariableEver');
         $tilesKey = "tiles:$boardId";
         // echo "tile key = " . $tilesKey . "\n";
 
-        $index = 0;
+        // $index = 0;
         $index = $x + ($width * $y);
 
         // BITFIELD testBitField SET u4 #(x + (width * y)) color
-        // if ($index >= $maxIndex && $index < $maxIndex)
-        $offset = $index;
-        $this->conn->rawCommand("BITFIELD", $tilesKey, "SET", "u4", "#$offset", $color);
+        $isIndexInBounds = $index >= $maxIndex && $index < $maxIndex;
+        $isColorInBounds = $color >= $minColor && $color < $maxColor;
+        if ($isIndexInBounds && $isColorInBounds) {
+            $offset = $index;
+            $this->conn->rawCommand("BITFIELD", $tilesKey, "SET", "u4", "#$offset", $color);
+        }
 
         // show canvas data in json format
         // $json = json_encode($canvas_dict);
@@ -63,7 +66,7 @@ class Board {
     }
 
     function test() {
-        $this->conn->rawCommand("BITFIELD", "tiles:1", "SET", "u4", "#1", 13);
+        // $this->conn->rawCommand("BITFIELD", "tiles:1", "SET", "u4", "#1", 13);
     }
 }
 ?>

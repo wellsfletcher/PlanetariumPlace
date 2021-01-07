@@ -78,7 +78,7 @@ export const values = [
 ];
 
 export function hexcolor2colorcode(hex) {
-    /*
+    // TODO: make this O(1)
     var result = 0;
     for (var k = 0; k < values.length; k++) {
         var currentHex = values[k];
@@ -86,7 +86,6 @@ export function hexcolor2colorcode(hex) {
             result = k;
         }
     }
+    // return 5;
     return result;
-    */
-    return 5;
 }
