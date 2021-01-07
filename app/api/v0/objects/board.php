@@ -56,7 +56,7 @@ class Board {
         $index = $x + ($width * $y);
 
         // BITFIELD testBitField SET u4 #(x + (width * y)) color
-        $isIndexInBounds = $index >= $maxIndex && $index < $maxIndex;
+        $isIndexInBounds = $index >= $minIndex && $index < $maxIndex;
         $isColorInBounds = $color >= $minColor && $color < $maxColor;
         if ($isIndexInBounds && $isColorInBounds) {
             $offset = $index;
