@@ -8,6 +8,10 @@ class Board {
         $this->conn = $db;
     }
 
+    function sanitizeInteger($str) {
+        return intval(FILTER_SANITIZE_NUMBER_INT($str));
+    }
+
     function getWidth($boardId) {
         return 1024;
     }
@@ -29,10 +33,10 @@ class Board {
     }
 
     function setTile($boardId, $x, $y, $color) {
-        // $boardId = FILTER_SANITIZE_NUMBER_INT($boardId)
-        // $x = FILTER_SANITIZE_NUMBER_INT($x)
-        // $y = FILTER_SANITIZE_NUMBER_INT($y)
-        // $color = FILTER_SANITIZE_NUMBER_INT($color)
+        // $boardId = $this->sanitizeInteger($boardId);
+        $x = $this->sanitizeInteger($x);
+        $y = $this->sanitizeInteger($y);
+        $color = $this->sanitizeInteger($color);
         $width = 1024; // $this->getWidth();
         // $height = $this->getHeight();
         // $minIndex = 0;
