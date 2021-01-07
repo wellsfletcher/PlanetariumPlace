@@ -9,7 +9,8 @@ class Board {
     }
 
     function sanitizeInteger($str) {
-        return intval(FILTER_SANITIZE_NUMBER_INT($str));
+        // return intval(FILTER_SANITIZE_NUMBER_INT($str)); // filter_var($number, FILTER_SANITIZE_NUMBER_INT)
+        return intval(filter_var($str, FILTER_SANITIZE_NUMBER_INT));
     }
 
     function getWidth($boardId) {
