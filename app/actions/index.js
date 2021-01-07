@@ -1,4 +1,5 @@
 import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED } from "../constants/actionTypes";
+import * as API from "../utils/api";
 
 
 export function addArticle(payload) {
@@ -65,6 +66,22 @@ export function fetchTiles() {
 */
 
 export function fetchTiles() {
+    // alert("aaaaa");
+    return function(dispatch) { // , getState
+        // const canvas = API.fetchTiles();
+        // return dispatch({ type: TILES_FETCHED, payload: API.fetchTiles() });
+        /*
+        return API.fetchTiles().then((canvas) => {
+            console.log("resolved!");
+            console.log(canvas);
+            return dispatch({ type: TILES_FETCHED, payload: canvas });
+        });
+        */
+        return API.fetchTiles(dispatch);
+    }
+}
+
+export function fetchTiles2() {
     // alert("aaaaa");
     return function(dispatch) { // , getState
         // alert("hhhhhhh");

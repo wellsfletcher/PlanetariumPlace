@@ -1,5 +1,6 @@
 import { xy2index } from '../utils/general';
-import { values as colorValues } from '../constants/colors';
+import { values as colorValues, hexcolor2colorcode } from '../constants/colors';
+import * as API from '../utils/api';
 
 
 function buffer2hex(buffer, colors) {
@@ -40,6 +41,10 @@ export function setTile(state, {x, y}, width, color) {
 
     const index = (y * width) + x;
     tiles[index] = color;
+
+    const boardId = state.boardId;
+    const colorCode = hexcolor2colorcode(color);
+    API.draw(boardId, {x, y}, colorCode);
 
     return { ...state, board: {
         ...state.board,

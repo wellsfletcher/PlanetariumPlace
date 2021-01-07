@@ -76,3 +76,17 @@ export const values = [
     0xCF6EE4,
     0x820080
 ];
+
+export function hexcolor2colorcode(hex) {
+    /*
+    var result = 0;
+    for (var k = 0; k < values.length; k++) {
+        var currentHex = values[k];
+        if (currentHex == hex) {
+            result = k;
+        }
+    }
+    return result;
+    */
+    return 5;
+}
