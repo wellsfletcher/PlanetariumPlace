@@ -28,7 +28,7 @@ class Board {
         return $json;
     }
 
-    function setTiles($boardId, $x, $y, $color) {
+    function setTile($boardId, $x, $y, $color) {
         // $boardId = FILTER_SANITIZE_NUMBER_INT($boardId)
         // $x = FILTER_SANITIZE_NUMBER_INT($x)
         // $y = FILTER_SANITIZE_NUMBER_INT($y)
