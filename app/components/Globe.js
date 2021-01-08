@@ -5,6 +5,7 @@ import Globe from 'react-globe.gl';
 
 import { int2hexcolor, xy2index } from '../utils/general';
 import useCanvas from './useCanvas';
+import useWindowDimensions from './useWindowDimensions';
 import { drawPixelBuffer, drawImageData } from '../utils/draw';
 
 function randInt(min, max) {
@@ -56,6 +57,7 @@ function CanvasGlobe(props) {
 
     var draw = (ctx, frameCount) => {
         drawPixelBuffer(ctx, tiles, width);
+        // console.log("drew");
     }
 
     const options = {
@@ -64,7 +66,7 @@ function CanvasGlobe(props) {
     const { context, ...moreConfig } = options;
     const canvasRef = useCanvas(draw, {context});
 
-
+    // console.log("globe rendered");
 
     React.useEffect(() => {
         const globeMaterial = globeEl.current.globeMaterial();
@@ -79,15 +81,23 @@ function CanvasGlobe(props) {
         // globeMaterial.map = texture;
         // texture.needsUpdate = true;
 
+        console.log("globe texture updating...");
+        var dataUrl = canvas.toDataURL("image/png"); // for someone reason this line of codes makes everything work on safari :(
+        // var context = canvas.getContext("2d");
+        // var dafdasdf = canvas.getImageData(10, 10, 50, 50);
+        // console.log(dataUrl);
+
         globeMaterial.emissive = new THREE.Color(0xffffff);
         // globeMaterial.emissive = new THREE.Color(0x111111);
         globeMaterial.emissiveMap = texture;
         texture.needsUpdate = true;
+        // globeMaterial.needsUpdate = true;
+        //- console.log("globe texture updated");
 
     }, [props.tiles]); // the props.tiles made it magically start updating the globe; but it still doesn't update on Safari
 
     const onGlobeClick = ({ lat, lng }, event) => {
-        // console.log(event);
+        console.log(event);
         // console.log({ lat, lng });
         const {x, y} = geo2xy(lat, lng, width, height);
         // console.log({x, y});
@@ -127,6 +137,10 @@ function CanvasGlobe(props) {
         }
     };
 
+
+    //- const { windowWidth, windowHeight } = useWindowDimensions();
+    //- rendererSize={new THREE.Vector2(windowWidth, windowHeight)}
+    // console.log({ windowHeight, windowWidth });
     // default backgroundColor = 000011
     // default backgroundColor in practice = #00000E
     // #242424

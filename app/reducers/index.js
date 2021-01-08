@@ -167,19 +167,7 @@ function rootReducer(state = initialState, action) {
         const {x, y} = action.payload;
         const width = state.board.width;
         const color = action.payload.color;
-        /*
-        // return state;
-        var tiles = state.board.tiles.slice();
-        //- console.log({x, y});
-        const index = (action.payload.y * state.board.width) + action.payload.x;
-        tiles[index] = action.payload.color;
-        // alert("Set!");
-        // alert("Set! " + x + ", " + y);
-        return { ...state, board: {
-            ...state.board,
-            tiles: tiles
-        }};
-        */
+
         return Board.setTile(state, {x, y}, width, color);
     }
     return state;

@@ -106,6 +106,11 @@ const Highlights = (props) => {
         height: height,
         style: {
             imageRendering: "pixelated",
+            /*
+            imageRendering: "-moz-crisp-edges",
+            imageRendering: "-webkit-crisp-edges",
+            imageRendering: "crisp-edges",
+            */
             position: "absolute",
             // zIndex: 100,
             cursor: "crosshair"
@@ -138,29 +143,6 @@ const Board = (props) => {
         // but this is the only way to do it in a reacty way methinks
         // unless maybe if lifecycle methods could solve my problems?
         drawPixelBuffer(ctx, tiles, width);
-        /*
-        drawPixelBuffer(
-            ctx,
-            [
-                1, 0, 0, 0, 1,
-                0, 1, 0, 1, 0,
-                0, 0, 1, 0, 0,
-                0, 1, 0, 1, 0,
-                1, 0, 0, 0, 1
-            ],
-            5
-        );
-        */
-
-        /*
-        if (selectedTile == null) return;
-        // drawPixelBuffer(ctx, map, width);
-        var index = vector2index(selectedTile, width);
-        var selectedIds = props.map[index];
-        // var value = props.values[props.map[index]];
-        // console.log("selected = " + selectedIds);
-        drawSelection(ctx, props.map, width, selectedIds);
-        */
     };
 
     const options = {
@@ -174,19 +156,6 @@ const Board = (props) => {
     var pan = {x: -100, y: 50};
     var zoomedWidth = width * zoom.x;
     var zoomedHeight = height * zoom.y;
-
-    /*
-    var style = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        // transform: `scale(2, 2)`
-        // transform: `scale(${zoom.x}, ${zoom.y})`,
-        // transform: `translate(${pan.x}px, ${pan.y}px)`
-        transform: `scale(${zoom.x}, ${zoom.y})` + `translate(${pan.x}px, ${pan.y}px)`
-        // transform: "translate(${pan.x} px, $(pan.y) px)"
-    };
-    */
 
     const handleCanvasClick = (event) => {
         if (event.defaultPrevented) return; // console.log("drag!");
