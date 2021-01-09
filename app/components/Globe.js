@@ -81,7 +81,7 @@ function CanvasGlobe(props) {
         // globeMaterial.map = texture;
         // texture.needsUpdate = true;
 
-        console.log("globe texture updating...");
+        // console.log("globe texture updating...");
         var dataUrl = canvas.toDataURL("image/png"); // for someone reason this line of codes makes everything work on safari :(
         // var context = canvas.getContext("2d");
         // var dafdasdf = canvas.getImageData(10, 10, 50, 50);
@@ -97,12 +97,37 @@ function CanvasGlobe(props) {
     }, [props.tiles]); // the props.tiles made it magically start updating the globe; but it still doesn't update on Safari
 
     const onGlobeClick = ({ lat, lng }, event) => {
+        if (event.defaultPrevented) return; // aaaaaaaaaaaaaaaaaaaa
+        console.log(event.defaultPrevented);
         console.log(event);
         // console.log({ lat, lng });
         const {x, y} = geo2xy(lat, lng, width, height);
         // console.log({x, y});
         var color = props.brushColor;
         props.setTile({x, y}, color);
+
+        /*
+        window.addEventListener(
+            'click',
+            captureClick,
+            true // <-- This registeres this listener for the capture
+                 //     phase instead of the bubbling phase!
+        );
+        */
+    };
+    /*
+    function captureClick(e) {
+        e.stopPropagation(); // Stop the click from being propagated.
+        console.log('click captured');
+        window.removeEventListener('click', captureClick, true); // cleanup
+    }
+    */
+
+    const clickHandlerProps = {
+        onGlobeClick: onGlobeClick,
+        onClick: function(e){
+            console.log('click');
+        }
     };
 
     /*
@@ -140,6 +165,7 @@ function CanvasGlobe(props) {
 
     //- const { windowWidth, windowHeight } = useWindowDimensions();
     //- rendererSize={new THREE.Vector2(windowWidth, windowHeight)}
+    // onGlobeClick={onGlobeClick}
     // console.log({ windowHeight, windowWidth });
     // default backgroundColor = 000011
     // default backgroundColor in practice = #00000E
@@ -152,7 +178,7 @@ function CanvasGlobe(props) {
                 backgroundColor={"#000011"}
                 globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe_dark.jpg"
                 showGraticules={true}
-                onGlobeClick={onGlobeClick}
+                {...clickHandlerProps}
 
                 {...countryProps}
             />

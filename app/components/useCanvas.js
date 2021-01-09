@@ -15,7 +15,7 @@ const useCanvas = (draw, options={}) => {
     const render = () => {
       frameCount++;
       draw(context, frameCount);
-      console.log("drawn");
+      // console.log("drawn");
       // uncommenting this will enable animation and cause it to constantly get rerendered
       // animationFrameId = window.requestAnimationFrame(render);
     }
