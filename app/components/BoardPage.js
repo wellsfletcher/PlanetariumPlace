@@ -107,6 +107,55 @@ const BoardPage = (props) => {
         // {globe}
         */
 
+
+        /*
+        const globeFab = <Fab
+            color="primary"
+            aria-label="view"
+            style={{
+                position: 'absolute',
+                bottom: "5px", // theme.spacing(2),
+                right: "5px" // theme.spacing(2),
+            }}
+            onClick={() => setUseGlobe(!useGlobe)}
+         >
+            <GlobeIcon />
+        </Fab>;
+        */
+        const globeFab = <Fab
+            color="primary"
+            aria-label="view"
+            style={{
+                margin: "5px"
+            }}
+            onClick={() => setUseGlobe(!useGlobe)}
+         >
+            <GlobeIcon />
+        </Fab>;
+
+        const flashbackFab = <Fab
+            color="primary"
+            aria-label="view"
+
+            onClick={() => setUseGlobe(!useGlobe)}
+         >
+            <GlobeIcon />
+        </Fab>;
+
+        const fabView = (
+            <div
+                style={{
+                    width: "45px",
+                    position: 'absolute',
+                    bottom: "10px", // theme.spacing(2),
+                    right: "10px" // theme.spacing(2),
+                }}
+            >
+                {flashbackFab}
+                {globeFab}
+            </div>
+        );
+
         return (
             <>
                 <div style={style}>
@@ -115,18 +164,7 @@ const BoardPage = (props) => {
                     />
                     {boardViewer}
                 </div>
-                <Fab
-                    color="primary"
-                    aria-label="view"
-                    style={{
-                        position: 'absolute',
-                        bottom: "5px", // theme.spacing(2),
-                        right: "5px" // theme.spacing(2),
-                    }}
-                    onClick={() => setUseGlobe(!useGlobe)}
-                 >
-                    <GlobeIcon />
-                </Fab>
+                {fabView}
             </>
         );
 }

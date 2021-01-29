@@ -171,12 +171,13 @@ function CanvasGlobe(props) {
     // default backgroundColor in practice = #00000E
     // #242424
     // showGraticules={true}
+    // globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe_dark.jpg"
     return (
         <>
             <Globe
                 ref={globeEl}
                 backgroundColor={"#000011"}
-                globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe_dark.jpg"
+                globeImageUrl="../../assets/pixel-countries-2.png"
                 showGraticules={true}
                 {...clickHandlerProps}
 
