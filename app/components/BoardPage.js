@@ -12,6 +12,7 @@ import { hexcolor2int } from '../utils/general';
 
 import Fab from '@material-ui/core/Fab';
 import GlobeIcon from '@material-ui/icons/Public';
+import ViewIcon from '@material-ui/icons/Visibility'; // VisibilityOff
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -108,7 +109,6 @@ const BoardPage = (props) => {
         */
 
 
-        /*
         const globeFab = <Fab
             color="primary"
             aria-label="view"
@@ -121,12 +121,12 @@ const BoardPage = (props) => {
          >
             <GlobeIcon />
         </Fab>;
-        */
+        /*
         const globeFab = <Fab
             color="primary"
             aria-label="view"
             style={{
-                margin: "5px"
+                margin: "7px"
             }}
             onClick={() => setUseGlobe(!useGlobe)}
          >
@@ -136,10 +136,13 @@ const BoardPage = (props) => {
         const flashbackFab = <Fab
             color="primary"
             aria-label="view"
+            style={{
+                margin: "7px"
+            }}
 
             onClick={() => setUseGlobe(!useGlobe)}
          >
-            <GlobeIcon />
+            <ViewIcon />
         </Fab>;
 
         const fabView = (
@@ -148,13 +151,16 @@ const BoardPage = (props) => {
                     width: "45px",
                     position: 'absolute',
                     bottom: "10px", // theme.spacing(2),
-                    right: "10px" // theme.spacing(2),
+                    right: "10px", // theme.spacing(2),
+                    // padding: "20px"
+                    margin: "10px"
                 }}
             >
                 {flashbackFab}
                 {globeFab}
             </div>
         );
+        */
 
         return (
             <>
@@ -164,7 +170,7 @@ const BoardPage = (props) => {
                     />
                     {boardViewer}
                 </div>
-                {fabView}
+                {globeFab}
             </>
         );
 }
