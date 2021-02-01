@@ -177,7 +177,7 @@ function CanvasGlobe(props) {
             <Globe
                 ref={globeEl}
                 backgroundColor={"#000011"}
-                globeImageUrl="../../assets/pixel-countries-2.png"
+                globeImageUrl="../../assets/pixel-countries-mid-res.png"
                 showGraticules={true}
                 {...clickHandlerProps}
 

@@ -7,4 +7,6 @@ pip3 install geopandas --user
 pip3 install descartes
 
 pip3 install matplotlib
-pip install pillow
+pip3 install pillow
+
+pip3 install requests
