@@ -44,6 +44,7 @@ class Board {
         $color = $this->sanitizeInteger($color);
 
         echo "Hello there.";
+        echo "$x, $x, color = $color, boardId = $boardId";
 
         $width = $this->getWidth($boardId);
         $height = $this->getHeight($boardId);
