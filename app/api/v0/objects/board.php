@@ -38,15 +38,15 @@ class Board {
     function setTile($boardId, $x, $y, $color) {
         // TODO: check to see if board exists first...
         // TODO: retrieve width and height of board dynamically (make it not be hardcoded anymore)
-        echo "Hello. ";
-        echo "$x, $x, color = $color, boardId = $boardId \n";
+        // echo "Hello. ";
+        // echo "$x, $y, color = $color, boardId = $boardId \n";
         $boardId = $this->sanitizeInteger($boardId);
         $x = $this->sanitizeInteger($x);
         $y = $this->sanitizeInteger($y);
         $color = $this->sanitizeInteger($color);
 
-        echo "Hello there. ";
-        echo "$x, $x, color = $color, boardId = $boardId \n";
+        // echo "Hello there. ";
+        // echo "$x, $y, color = $color, boardId = $boardId \n";
 
         $width = $this->getWidth($boardId);
         $height = $this->getHeight($boardId);
