@@ -63,6 +63,7 @@ class Board {
         if ($isIndexInBounds && $isColorInBounds) {
             $offset = $index;
             $this->conn->rawCommand("BITFIELD", $tilesKey, "SET", "u4", "#$offset", $color);
+            http_response_code(201);
         } else {
             http_response_code(404);
         }
@@ -70,7 +71,7 @@ class Board {
         // show canvas data in json format
         // $json = json_encode($canvas_dict);
         // return $json;
-        http_response_code(201);
+        // http_response_code(201);
     }
 
     function test() {
