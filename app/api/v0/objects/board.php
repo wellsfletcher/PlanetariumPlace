@@ -43,7 +43,7 @@ class Board {
         $y = $this->sanitizeInteger($y);
         $color = $this->sanitizeInteger($color);
 
-        echo "Hello there."
+        echo "Hello there.";
 
         $width = $this->getWidth($boardId);
         $height = $this->getHeight($boardId);
