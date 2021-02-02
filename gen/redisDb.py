@@ -98,7 +98,8 @@ def dbDraw(db, coordinate, color, width = 1024, boardId = 1):
     # $this->conn->rawCommand("BITFIELD", $tilesKey, "SET", "u4", "#$offset", $color);
     key = "tiles:" + str(boardId)
     bf = db.bitfield(key)
-    offset = vector2index(coordinate, width)
+    index = vector2index(coordinate, width)
+    offset = "#" + str(index)
 
     response = (bf
                 .set('u4', offset, color)
