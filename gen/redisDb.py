@@ -115,7 +115,7 @@ def dbDrawHorizontalLine(db, y, width, color = 5):
     # limit = 100
 
     for c in range(width):
-        # print((c, y))
+        print((c, y))
         if c > limit:
             break
         coordinate = (c, y)
