@@ -6,6 +6,7 @@ import { MapInteractionCSS } from 'react-map-interaction';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import useCanvas from './useCanvas';
+import useSwiping from './useSwiping';
 import { int2rgba, vector2index } from '../utils/general';
 import { drawPixel, drawPixelBuffer, drawImageData } from '../utils/draw';
 // import Tooltip from './TrackingTooltip.js';
@@ -152,6 +153,14 @@ const Board = (props) => {
     const canvasRef = useCanvas(draw, {context});
     const canvas = canvasRef.current;
 
+    const isSwiping = useSwiping();
+    // const isSwiping = false;
+    if (isSwiping) {
+        console.log("Currently swiping...");
+    } else {
+        console.log("Not swiping...");
+    }
+
     var zoom = {x: 1, y: 1};
     var pan = {x: -100, y: 50};
     var zoomedWidth = width * zoom.x;
@@ -159,6 +168,10 @@ const Board = (props) => {
 
     const handleCanvasClick = (event) => {
         if (event.defaultPrevented) return; // console.log("drag!");
+        if (isSwiping) {
+            console.log("Click aborted");
+            return;
+        }
         console.log(event);
 
         const rect = canvas.getBoundingClientRect();
@@ -290,8 +303,8 @@ const Board = (props) => {
     */
     const clickHandlerProps = {
         // onPointerUp: handleCanvasClick,
-        // onTouchEnd: handleCanvasClick,
-        onClick: handleCanvasClick,
+        onTouchEnd: handleCanvasClick,
+        onClick: handleCanvasClick, // this will never fire on mobile (trust me I tested it); It doesn't cause any issues as of now though
         // onMouseMove: handleMouseEnter
     }
 
