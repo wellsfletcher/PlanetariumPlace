@@ -137,7 +137,7 @@ def bitmap2db(db, bitmap, boardId = 1):
 def getDbConnection():
     r = redis.StrictRedis(host='localhost', port=6379, db=0)
     # r = "die"
-    print(dir(redis))
+    # print(dir(redis))
     return r
 
 def main():
