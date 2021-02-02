@@ -159,7 +159,7 @@ const Board = (props) => {
 
     const handleCanvasClick = (event) => {
         if (event.defaultPrevented) return; // console.log("drag!");
-        // console.log(event);
+        console.log(event);
 
         const rect = canvas.getBoundingClientRect();
         // zoom = {x: canvas.width / rect.width,  y: canvas.height / rect.height};
@@ -281,10 +281,18 @@ const Board = (props) => {
     );
     */
 
+    /*
     const clickHandlerProps = {
         onTouchEnd: handleCanvasClick,
         onClick: handleCanvasClick,
         onMouseMove: handleMouseEnter
+    }
+    */
+    const clickHandlerProps = {
+        // onPointerUp: handleCanvasClick,
+        // onTouchEnd: handleCanvasClick,
+        onClick: handleCanvasClick,
+        // onMouseMove: handleMouseEnter
     }
 
     /*

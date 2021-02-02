@@ -104,7 +104,9 @@ function CanvasGlobe(props) {
         const {x, y} = geo2xy(lat, lng, width, height);
         // console.log({x, y});
         var color = props.brushColor;
-        props.setTile({x, y}, color);
+
+        // temporarily disabled
+        // props.setTile({x, y}, color);
 
         /*
         window.addEventListener(
