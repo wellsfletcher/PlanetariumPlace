@@ -1,8 +1,8 @@
-import fiona
-from shapely.geometry import shape
-from shapely.geometry import Polygon
+# import fiona
+# from shapely.geometry import shape
+# from shapely.geometry import Polygon
 import matplotlib.pyplot as plt
-import geopandas as gpd
+# import geopandas as gpd
 import numpy as np
 from PIL import Image
 import redis
