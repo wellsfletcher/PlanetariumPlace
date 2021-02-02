@@ -5,6 +5,9 @@ import { setTile } from "../actions/index";
 import { MapInteractionCSS } from 'react-map-interaction';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import { useState, useEffect } from 'react';
+import { useSwipeable, Swipeable } from 'react-swipeable';
+
 import useCanvas from './useCanvas';
 import useSwiping from './useSwiping';
 import { int2rgba, vector2index } from '../utils/general';
@@ -153,8 +156,16 @@ const Board = (props) => {
     const canvasRef = useCanvas(draw, {context});
     const canvas = canvasRef.current;
 
-    const isSwiping = useSwiping();
+    // const isSwiping = useSwiping();
     // const isSwiping = false;
+    const [isSwiping, setSwiping] = useState(false);
+    const swipeHandlers = useSwipeable({
+        onSwiped: (eventData) => setSwiping(false),
+        onSwiping: (eventData) => setSwiping(true),
+    });
+    // const swipeHandlers = useSwipeable({});
+    console.log(swipeHandlers);
+
     if (isSwiping) {
         console.log("Currently swiping...");
     } else {
@@ -303,6 +314,7 @@ const Board = (props) => {
     */
     const clickHandlerProps = {
         // onPointerUp: handleCanvasClick,
+        // ...swipeHandlers,
         onTouchEnd: handleCanvasClick,
         onClick: handleCanvasClick, // this will never fire on mobile (trust me I tested it); It doesn't cause any issues as of now though
         // onMouseMove: handleMouseEnter
@@ -344,11 +356,16 @@ const Board = (props) => {
             }}
         >
             {highligths}
+            <div
+            {...swipeHandlers}
+
+            >
             <canvas
                 ref={canvasRef}
                 {...rest}
                 {...clickHandlerProps}
             />
+            </div>
         </MapInteractionCSS>
     );
 }
