@@ -166,6 +166,7 @@ const Board = (props) => {
     });
     // const swipeHandlers = useSwipeable({});
     console.log(swipeHandlers);
+    /*
     const swipeHandlers2 = useGesture({
         // onDrag: state => doSomethingWith(state),
         // onDragStart: state => doSomethingWith(state),
@@ -173,6 +174,18 @@ const Board = (props) => {
         // onPinch: (state) => setSwiping(state),
         onPinchStart: (state) => setSwiping(true),
         onPinchEnd: (state) => setSwiping(false),
+    });
+    */
+    const swipeHandlers2 = usePinch(state => {
+        const {
+            // dragging,    // is the component currently being dragged
+            // moving,      // "              "              "  moved
+            // scrolling,   // "              "              "  scrolled
+            // wheeling,    // "              "              "  wheeled
+            pinching     // "              "              "  pinched
+        } = state
+        setSwiping(pinching);
+        console.log("set pinching to = " + pinching);
     });
 
     if (isSwiping) {
