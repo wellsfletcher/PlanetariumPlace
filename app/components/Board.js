@@ -160,9 +160,12 @@ const Board = (props) => {
     // const isSwiping = useSwiping();
     // const isSwiping = false;
     const [isSwiping, setSwiping] = useState(false);
+    const [isPinching, setPinching] = useState(false);
     const swipeHandlers = useSwipeable({
         onSwiped: (eventData) => setSwiping(false),
         onSwiping: (eventData) => setSwiping(true),
+    }, {
+        preventDefaultTouchmoveEvent: true
     });
     // const swipeHandlers = useSwipeable({});
     console.log(swipeHandlers);
@@ -176,15 +179,16 @@ const Board = (props) => {
         onPinchEnd: (state) => setSwiping(false),
     });
     */
-    const swipeHandlers2 = usePinch(state => {
+    const swipeHandlers2 = useGesture(state => {
         const {
-            // dragging,    // is the component currently being dragged
-            // moving,      // "              "              "  moved
+            dragging,    // is the component currently being dragged
+            moving,      // "              "              "  moved
             // scrolling,   // "              "              "  scrolled
             // wheeling,    // "              "              "  wheeled
             pinching     // "              "              "  pinched
         } = state
-        setSwiping(pinching);
+        // setSwiping(pinching);
+        setPinching(pinching || moving || dragging);
         console.log("set pinching to = " + pinching);
     });
 
@@ -201,7 +205,7 @@ const Board = (props) => {
 
     const handleCanvasClick = (event) => {
         if (event.defaultPrevented) return; // console.log("drag!");
-        if (isSwiping) {
+        if (isSwiping || isPinching) {
             console.log("Click aborted");
             return;
         }
