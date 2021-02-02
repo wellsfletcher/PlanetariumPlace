@@ -115,7 +115,7 @@ def dbDrawHorizontalLine(db, y, width, color = 5):
     # limit = 100
 
     for c in range(width):
-        print((c, y))
+        # print((c, y))
         if c > limit:
             break
         coordinate = (c, y)
@@ -130,11 +130,13 @@ def bitmap2db(db, bitmap, boardId = 1):
         for c in range(columns):
             color = bitmap[r][c]
             coordinate = (c, r)
-            print(str(coordinate) + " = " + str(color))
+            # print(str(coordinate) + " = " + str(color))
             dbDraw(db, coordinate, color, width, boardId = boardId)
 
 def getDbConnection():
-    r = redis.StrictRedis(host='localhost', port=6379, db=0)
+    # r = redis.StrictRedis(host='localhost', port=6379, db=0)
+    r = "die"
+    print(dir(redis))
     return r
 
 def main():
