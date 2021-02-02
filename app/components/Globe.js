@@ -172,12 +172,12 @@ function CanvasGlobe(props) {
     // #242424
     // showGraticules={true}
     // globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe_dark.jpg"
+    // globeImageUrl="../../assets/pixel-countries-mid-res.png"
     return (
         <>
             <Globe
                 ref={globeEl}
                 backgroundColor={"#000011"}
-                globeImageUrl="../../assets/pixel-countries-mid-res.png"
                 showGraticules={true}
                 {...clickHandlerProps}
 
