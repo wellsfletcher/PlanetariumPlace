@@ -7,6 +7,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import { useState, useEffect } from 'react';
 import { useSwipeable, Swipeable } from 'react-swipeable';
+import { usePinch, useGesture } from 'react-use-gesture';
 
 import useCanvas from './useCanvas';
 import useSwiping from './useSwiping';
@@ -165,6 +166,14 @@ const Board = (props) => {
     });
     // const swipeHandlers = useSwipeable({});
     console.log(swipeHandlers);
+    const swipeHandlers2 = useGesture({
+        // onDrag: state => doSomethingWith(state),
+        // onDragStart: state => doSomethingWith(state),
+        // onDragEnd: state => doSomethingWith(state),
+        // onPinch: (state) => setSwiping(state),
+        onPinchStart: (state) => setSwiping(true),
+        onPinchEnd: (state) => setSwiping(false),
+    });
 
     if (isSwiping) {
         console.log("Currently swiping...");
@@ -358,7 +367,7 @@ const Board = (props) => {
             {highligths}
             <div
             {...swipeHandlers}
-
+            {...swipeHandlers2}
             >
             <canvas
                 ref={canvasRef}
