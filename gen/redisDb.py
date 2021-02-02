@@ -150,7 +150,7 @@ def main():
     dbWidth = 1024
     boardId = 1
     db = getDbConnection()
-    # bitmap2db(db, bitmap)
-    dbDrawHorizontalLine(db, 138, dbWidth, color = 12)
+    bitmap2db(db, bitmap)
+    # dbDrawHorizontalLine(db, 138, dbWidth, color = 12)
 
 main()
