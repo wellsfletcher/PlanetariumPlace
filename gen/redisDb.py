@@ -150,6 +150,6 @@ def main():
     boardId = 1
     db = getDbConnection()
     # bitmap2db(db, bitmap)
-    dbDrawHorizontalLine(db, 128, dbWidth, color = 5)
+    dbDrawHorizontalLine(db, 138, dbWidth, color = 12)
 
 main()
