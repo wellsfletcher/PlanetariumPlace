@@ -105,7 +105,7 @@ def dbDraw(db, coordinate, color, width = 1024, boardId = 1):
                 .set('u4', offset, color)
                 .execute())
 
-    print("response = " + str(response))
+    # print("response = " + str(response))
 
 
 
