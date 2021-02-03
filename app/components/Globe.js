@@ -103,7 +103,11 @@ function CanvasGlobe(props) {
     // const [mapRotation, setMapRotation] = useState(new THREE.Vector3( 0, 0, 0 ));
     const [mapRotationOnTouchStart, setMapRotationOnTouchStart] = useState(new THREE.Vector3( 0, 0, 0 ));
     const onMapTouchStart = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
+        console.log(event);
+        if (event.touches.length > 1) {
+            console.log("Aborted with weary face.");
+        }
         const camera = globeEl.current.camera();
         setMapRotationOnTouchStart(camera.getWorldDirection(new THREE.Vector3()));
     };
