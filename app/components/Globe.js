@@ -197,9 +197,11 @@ function CanvasGlobe(props) {
     // showGraticules={true}
     // globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe_dark.jpg"
     // globeImageUrl="../../assets/pixel-countries-mid-res.png"
+    // onPointerDown={onMapTouchStart}
     return (
         <div
-            onPointerDown={onMapTouchStart}
+            onTouchStart={onMapTouchStart}
+            onMouseUp={onMapTouchStart}
         >
             <Globe
                 ref={globeEl}
