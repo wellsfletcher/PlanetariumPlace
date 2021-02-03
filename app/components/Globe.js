@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 
 import * as THREE from "three";
 import Globe from 'react-globe.gl';
@@ -70,6 +71,8 @@ function CanvasGlobe(props) {
 
     React.useEffect(() => {
         const globeMaterial = globeEl.current.globeMaterial();
+        // const camera = globeEl.current.camera();
+        // console.log(camera);
 
         const canvas = canvasRef.current;
         const texture = new THREE.CanvasTexture(canvas);
@@ -96,17 +99,36 @@ function CanvasGlobe(props) {
 
     }, [props.tiles]); // the props.tiles made it magically start updating the globe; but it still doesn't update on Safari
 
+    const MAP_ROTATION_TOLERANCE = 0.001;
+    // const [mapRotation, setMapRotation] = useState(new THREE.Vector3( 0, 0, 0 ));
+    const [mapRotationOnTouchStart, setMapRotationOnTouchStart] = useState(new THREE.Vector3( 0, 0, 0 ));
+    const onMapTouchStart = () => {
+        const camera = globeEl.current.camera();
+        setMapRotationOnTouchStart(camera.getWorldDirection(new THREE.Vector3()));
+    };
+
     const onGlobeClick = ({ lat, lng }, event) => {
         if (event.defaultPrevented) return; // aaaaaaaaaaaaaaaaaaaa
         console.log(event.defaultPrevented);
         console.log(event);
+
+        const camera = globeEl.current.camera();
+        const mapRotation = camera.getWorldDirection(new THREE.Vector3());
+        console.log(camera);
+        var deltaRotation = mapRotation.distanceTo(mapRotationOnTouchStart);
+        console.log("deltaScale = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
+        if (Math.abs(deltaRotation) > MAP_ROTATION_TOLERANCE) {
+            console.log("Click do be aborted.");
+            return;
+        }
+
         // console.log({ lat, lng });
         const {x, y} = geo2xy(lat, lng, width, height);
         // console.log({x, y});
         var color = props.brushColor;
 
         // temporarily disabled
-        // props.setTile({x, y}, color);
+        props.setTile({x, y}, color);
 
         /*
         window.addEventListener(
@@ -176,7 +198,9 @@ function CanvasGlobe(props) {
     // globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe_dark.jpg"
     // globeImageUrl="../../assets/pixel-countries-mid-res.png"
     return (
-        <>
+        <div
+            onPointerDown={onMapTouchStart}
+        >
             <Globe
                 ref={globeEl}
                 backgroundColor={"#000011"}
@@ -189,7 +213,7 @@ function CanvasGlobe(props) {
                 ref={canvasRef}
                 {...rest}
             />
-        </>
+        </div>
     );
 }
 

@@ -179,12 +179,18 @@ const Board = (props) => {
         onPinchEnd: (state) => setSwiping(false),
     });
     */
+    const INITIAL_SCALE = 1.0;
+    const INITIAL_CANVAS_WIDTH = width * INITIAL_SCALE;
+    const INITIAL_CANVAS_HEIGHT = height * INITIAL_SCALE;
     const MAP_SCALE_TOLERANCE = 0.001;
     const [mapScale, setMapScale] = useState(1.0);
     const [mapTransform, setMapTransform] = useState({
-        scale: 1,
-        translation: { x: 0, y: 0 }
-      });
+        scale: INITIAL_SCALE,
+        translation: {
+            x: (window.innerWidth - INITIAL_CANVAS_WIDTH) / 2,
+            y: (window.innerHeight - INITIAL_CANVAS_HEIGHT) / 2
+        }
+    });
     const [mapScaleOnTouchStart, setMapScaleOnTouchStart] = useState(1.0);
     const onMapChange = (transform) => {
         console.log("transform = ");
@@ -390,9 +396,6 @@ const Board = (props) => {
 
     // change map value later
     // const { height, width } = useWindowDimensions();
-    const INITIAL_SCALE = 1.0;
-    const INITIAL_CANVAS_WIDTH = width * INITIAL_SCALE;
-    const INITIAL_CANVAS_HEIGHT = height * INITIAL_SCALE;
     return (
         <MapInteractionCSS
             minScale={.125}
