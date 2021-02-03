@@ -210,7 +210,7 @@ const Board = (props) => {
     if (isSwiping) {
         console.log("Currently swiping...");
     } else {
-        console.log("Not swiping...");
+        console.log("Not being swiping...");
     }
 
     var zoom = {x: 1, y: 1};
