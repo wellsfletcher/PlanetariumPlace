@@ -101,6 +101,8 @@ function CanvasGlobe(props) {
 
     const MAP_ROTATION_TOLERANCE = 0.001;
     // const [mapRotation, setMapRotation] = useState(new THREE.Vector3( 0, 0, 0 ));
+    const [mapScale, setMapScale] = useState(2.5);
+    const [mapScaleOnTouchStart, setMapScaleOnTouchStart] = useState(2.5);
     const [mapRotationOnTouchStart, setMapRotationOnTouchStart] = useState(new THREE.Vector3( 0, 0, 0 ));
     const onMapTouchStart = (event) => {
         // event.preventDefault();
@@ -111,9 +113,16 @@ function CanvasGlobe(props) {
         }
 
         const camera = globeEl.current.camera();
-        // setMapRotationOnTouchStart(camera.getWorldDirection(new THREE.Vector3()));
-        console.log(camera.position);
-        setMapRotationOnTouchStart(camera.position);
+        setMapRotationOnTouchStart(camera.getWorldDirection(new THREE.Vector3()));
+        // console.log(camera.position);
+        // setMapRotationOnTouchStart(camera.position);
+        setMapScaleOnTouchStart(mapScale);
+    };
+    const onZoom = (event) => {
+        // console.log(event);
+        // console.log();
+        const altitude = event.altitude;
+        setMapScale(altitude);
     };
 
     const onGlobeClick = ({ lat, lng }, event) => {
@@ -123,13 +132,16 @@ function CanvasGlobe(props) {
         console.log(event);
 
         const camera = globeEl.current.camera();
-        // const mapRotation = camera.getWorldDirection(new THREE.Vector3());
-        const mapRotation = camera.position;
-        console.log(camera.position);
+        const mapRotation = camera.getWorldDirection(new THREE.Vector3());
+        // const mapRotation = camera.position;
+        // const mapRotation = camera.rotation.toVector3();
+        // console.log(camera.position);
         console.log(camera);
         var deltaRotation = mapRotation.distanceTo(mapRotationOnTouchStart);
-        console.log("deltaScale = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
-        if (Math.abs(deltaRotation) > MAP_ROTATION_TOLERANCE) {
+        var deltaScale = mapScaleOnTouchStart - mapScale;
+        console.log("deltaRotation = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
+        console.log("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
+        if (Math.abs(deltaRotation) > MAP_ROTATION_TOLERANCE || Math.abs(deltaScale) > MAP_ROTATION_TOLERANCE) {
             console.log("Click do be aborted.");
             return;
         }
@@ -213,14 +225,14 @@ function CanvasGlobe(props) {
     return (
         <div
             onTouchStart={onMapTouchStart}
-            onMouseDown={onMapTouchStart}
+            onMouseUp={onMapTouchStart}
         >
             <Globe
                 ref={globeEl}
                 backgroundColor={"#000011"}
                 showGraticules={true}
                 {...clickHandlerProps}
-
+                onZoom={onZoom}
                 {...countryProps}
             />
             <canvas
