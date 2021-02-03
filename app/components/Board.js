@@ -179,6 +179,21 @@ const Board = (props) => {
         onPinchEnd: (state) => setSwiping(false),
     });
     */
+    const MAP_SCALE_TOLERANCE = 0.001;
+    const [mapScale, setMapScale] = useState(1.0);
+    const [mapTransform, setMapTransform] = useState({
+        scale: 1,
+        translation: { x: 0, y: 0 }
+      });
+    const [mapScaleOnTouchStart, setMapScaleOnTouchStart] = useState(1.0);
+    const onMapChange = (transform) => {
+        console.log("transform = ");
+        console.log(transform);
+        setMapTransform(transform);
+        setMapScale( transform.scale );
+    };
+    const onMapTouchStart = () => setMapScaleOnTouchStart(mapScale);
+
     const swipeHandlers2 = useGesture(state => {
         const {
             dragging,    // is the component currently being dragged
@@ -205,9 +220,17 @@ const Board = (props) => {
 
     const handleCanvasClick = (event) => {
         if (event.defaultPrevented) return; // console.log("drag!");
-        if (isSwiping || isPinching) {
+        if (isSwiping || isPinching ) {
             console.log("Click aborted");
             return;
+        }
+        if (event.type == 'touchend') {
+            var deltaScale = mapScaleOnTouchStart - mapScale;
+            console.log("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
+            if (Math.abs(deltaScale) > MAP_SCALE_TOLERANCE) {
+                console.log("Click do be aborted");
+                return;
+            }
         }
         console.log(event);
 
@@ -365,6 +388,7 @@ const Board = (props) => {
     */
     const highligths = (<> </>);
 
+    // change map value later
     // const { height, width } = useWindowDimensions();
     const INITIAL_SCALE = 1.0;
     const INITIAL_CANVAS_WIDTH = width * INITIAL_SCALE;
@@ -373,6 +397,8 @@ const Board = (props) => {
         <MapInteractionCSS
             minScale={.125}
             maxScale={32}
+            value={mapTransform}
+            onChange={onMapChange}
             defaultValue={{
                 scale: INITIAL_SCALE,
                 translation: {
@@ -385,6 +411,7 @@ const Board = (props) => {
             <div
             {...swipeHandlers}
             {...swipeHandlers2}
+            onTouchStart={onMapTouchStart}
             >
             <canvas
                 ref={canvasRef}
