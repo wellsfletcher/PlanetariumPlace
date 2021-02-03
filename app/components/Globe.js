@@ -103,12 +103,13 @@ function CanvasGlobe(props) {
     // const [mapRotation, setMapRotation] = useState(new THREE.Vector3( 0, 0, 0 ));
     const [mapRotationOnTouchStart, setMapRotationOnTouchStart] = useState(new THREE.Vector3( 0, 0, 0 ));
     const onMapTouchStart = (event) => {
+        event.preventDefault();
         const camera = globeEl.current.camera();
         setMapRotationOnTouchStart(camera.getWorldDirection(new THREE.Vector3()));
     };
 
     const onGlobeClick = ({ lat, lng }, event) => {
-        event.preventDefault(); // this may add a delay to clicks being registered?
+        // event.preventDefault(); // this may add a delay to clicks being registered?
         if (event.defaultPrevented) return; // aaaaaaaaaaaaaaaaaaaa
         console.log(event.defaultPrevented);
         console.log(event);
