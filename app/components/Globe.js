@@ -109,8 +109,11 @@ function CanvasGlobe(props) {
             console.log("Aborted with weary face.");
             return;
         }
+
         const camera = globeEl.current.camera();
-        setMapRotationOnTouchStart(camera.getWorldDirection(new THREE.Vector3()));
+        // setMapRotationOnTouchStart(camera.getWorldDirection(new THREE.Vector3()));
+        console.log(camera.position);
+        setMapRotationOnTouchStart(camera.position);
     };
 
     const onGlobeClick = ({ lat, lng }, event) => {
@@ -120,7 +123,9 @@ function CanvasGlobe(props) {
         console.log(event);
 
         const camera = globeEl.current.camera();
-        const mapRotation = camera.getWorldDirection(new THREE.Vector3());
+        // const mapRotation = camera.getWorldDirection(new THREE.Vector3());
+        const mapRotation = camera.position;
+        console.log(camera.position);
         console.log(camera);
         var deltaRotation = mapRotation.distanceTo(mapRotationOnTouchStart);
         console.log("deltaScale = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
@@ -208,7 +213,7 @@ function CanvasGlobe(props) {
     return (
         <div
             onTouchStart={onMapTouchStart}
-            onMouseUp={onMapTouchStart}
+            onMouseDown={onMapTouchStart}
         >
             <Globe
                 ref={globeEl}
