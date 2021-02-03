@@ -107,6 +107,7 @@ function CanvasGlobe(props) {
         console.log(event);
         if (event.touches.length > 1) {
             console.log("Aborted with weary face.");
+            return;
         }
         const camera = globeEl.current.camera();
         setMapRotationOnTouchStart(camera.getWorldDirection(new THREE.Vector3()));
