@@ -7,7 +7,7 @@ import Globe from 'react-globe.gl';
 import { int2hexcolor, xy2index } from '../utils/general';
 import useCanvas from './useCanvas';
 import useWindowDimensions from './useWindowDimensions';
-import { drawPixelBuffer, drawImageData } from '../utils/draw';
+import { drawPixelBuffer, drawPixelRgbaBuffer, drawImageData } from '../utils/draw';
 
 function randInt(min, max) {
     if (max === undefined) {
@@ -52,12 +52,14 @@ function geo2xy(lat, lng, width, height) {
 function CanvasGlobe(props) {
     const globeEl = React.useRef();
 
+    var tilesRgba = props.tilesRgba;
     var tiles = props.tiles;
     var width = props.width;
     var height = tiles.length / width;
 
     var draw = (ctx, frameCount) => {
-        drawPixelBuffer(ctx, tiles, width);
+        // drawPixelBuffer(ctx, tiles, width);
+        drawPixelRgbaBuffer(ctx, tilesRgba, width);
         // console.log("drew");
     }
 

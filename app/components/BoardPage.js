@@ -32,6 +32,7 @@ const mapStateToProps = (state) => {
     return {
         // articles: state.articles,
         // remoteTiles: state.remoteTiles,
+        tilesRgba: state.board.tilesRgba,
         tiles: state.board.tiles,
         map: state.board.map,
         values: state.board.values,
@@ -64,6 +65,7 @@ const BoardPage = (props) => {
 
         // var tiles = [];
         const boardProps = {
+            tilesRgba: props.tilesRgba,
             tiles: props.tiles,
             map: props.map,
             values: props.values,
@@ -177,6 +179,7 @@ const BoardPage = (props) => {
 
 /*
 <Board
+    tilesRgba={props.tilesRgba}
     tiles={props.tiles}
     map={props.map}
     values={props.values}

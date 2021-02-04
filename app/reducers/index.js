@@ -127,7 +127,7 @@ const initialState = {
     // remoteTiles: null,
     board: {
         // tiles: [],
-        tileBuffer: null, // new Uint8ClampedArray(),
+        tilesRgba: new Uint8ClampedArray(new ArrayBuffer(INITIAL_WIDTH * INITIAL_HEIGHT * 4)),
         tiles: initBoard(INITIAL_WIDTH, INITIAL_HEIGHT),
         // links: initLinks, // maps pixel to relative url string
         map: initMap(INITIAL_WIDTH, INITIAL_HEIGHT), // new Map(), // initMap(),

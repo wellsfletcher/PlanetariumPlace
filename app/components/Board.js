@@ -12,7 +12,7 @@ import { useSwipeable, Swipeable } from 'react-swipeable';
 import useCanvas from './useCanvas';
 import useSwiping from './useSwiping';
 import { int2rgba, vector2index } from '../utils/general';
-import { drawPixel, drawPixelBuffer, drawImageData } from '../utils/draw';
+import { drawPixel, drawPixelBuffer, drawPixelRgbaBuffer, drawImageData } from '../utils/draw';
 // import Tooltip from './TrackingTooltip.js';
 
 
@@ -57,7 +57,7 @@ const extractPixelBufferFromMap = (map, selectedId) => {
 const drawSelection = (ctx, map, bufferWidth, selectedId) => {
     var pixels = extractPixelBufferFromMap(map, selectedId);
     const hasAlpha = true;
-    return drawPixelBuffer(ctx, pixels, bufferWidth, hasAlpha);
+    return drawPixelBuffer(ctx, pixels, bufferWidth, hasAlpha); // currently not used
 };
 
 const Highlights = (props) => {
@@ -128,6 +128,7 @@ const Highlights = (props) => {
 }
 
 const Board = (props) => {
+    var tilesRgba = props.tilesRgba;
     var tiles = props.tiles;
     var width = props.width;
     var height = tiles.length / width;
@@ -140,7 +141,8 @@ const Board = (props) => {
         // has redraw the pixel buffer every time when I do it like this
         // but this is the only way to do it in a reacty way methinks
         // unless maybe if lifecycle methods could solve my problems?
-        drawPixelBuffer(ctx, tiles, width);
+        // drawPixelBuffer(ctx, tiles, width);
+        drawPixelRgbaBuffer(ctx, tilesRgba, width);
     };
 
     const options = {

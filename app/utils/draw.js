@@ -50,6 +50,11 @@ export function drawPixelBuffer(ctx, pixels, bufferWidth, hasAlpha=false) {
     return imageData;
 };
 
+export function drawPixelRgbaBuffer(ctx, pixels, bufferWidth) {
+    var bufferHeight = (pixels.length / 4) / bufferWidth;
+    return drawUint8ClampedArray(ctx, pixels, bufferWidth, bufferHeight);
+};
+
 export function drawUint8ClampedArray(ctx, buffer, width, height) {
     const imageData = new ImageData(buffer, width, height);
     ctx.putImageData(imageData, 0, 0);
