@@ -409,7 +409,6 @@ const Board = (props) => {
             {highligths}
             <div
             {...swipeHandlers}
-            {...swipeHandlers2}
             onTouchStart={onMapTouchStart}
             >
             <canvas
