@@ -149,22 +149,7 @@ function CanvasGlobe(props) {
         // temporarily disabled
         props.setTile({x, y}, color);
 
-        /*
-        window.addEventListener(
-            'click',
-            captureClick,
-            true // <-- This registeres this listener for the capture
-                 //     phase instead of the bubbling phase!
-        );
-        */
     };
-    /*
-    function captureClick(e) {
-        e.stopPropagation(); // Stop the click from being propagated.
-        console.log('click captured');
-        window.removeEventListener('click', captureClick, true); // cleanup
-    }
-    */
 
     const clickHandlerProps = {
         onGlobeClick: onGlobeClick,

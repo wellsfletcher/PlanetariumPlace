@@ -63,14 +63,7 @@ const drawSelection = (ctx, map, bufferWidth, selectedId) => {
 const Highlights = (props) => {
     const { map, values, width, selectedTile, ...otherProps } = props;
     var height = map.length / width;
-    /*
-    var map = props.map;
-    // var values = props.values;
-    var width = props.width;
-    var height = map.length / width;
-    var selectedTile = props.selectedTile;
-    // var selectedValue = props.selectedValue;
-    */
+
     var index, selectedIds, value;
     value = "";
     if (selectedTile != null) {
@@ -167,18 +160,7 @@ const Board = (props) => {
     }, {
         preventDefaultTouchmoveEvent: true
     });
-    // const swipeHandlers = useSwipeable({});
-    // console.log(swipeHandlers);
-    /*
-    const swipeHandlers2 = useGesture({
-        // onDrag: state => doSomethingWith(state),
-        // onDragStart: state => doSomethingWith(state),
-        // onDragEnd: state => doSomethingWith(state),
-        // onPinch: (state) => setSwiping(state),
-        onPinchStart: (state) => setSwiping(true),
-        onPinchEnd: (state) => setSwiping(false),
-    });
-    */
+
     const INITIAL_SCALE = 1.0;
     const INITIAL_CANVAS_WIDTH = width * INITIAL_SCALE;
     const INITIAL_CANVAS_HEIGHT = height * INITIAL_SCALE;
@@ -193,27 +175,10 @@ const Board = (props) => {
     });
     const [mapScaleOnTouchStart, setMapScaleOnTouchStart] = useState(1.0);
     const onMapChange = (transform) => {
-        // console.log("transform = ");
-        // console.log(transform);
         setMapTransform(transform);
         setMapScale( transform.scale );
     };
     const onMapTouchStart = () => setMapScaleOnTouchStart(mapScale);
-
-    /*
-    const swipeHandlers2 = useGesture(state => {
-        const {
-            dragging,    // is the component currently being dragged
-            moving,      // "              "              "  moved
-            // scrolling,   // "              "              "  scrolled
-            // wheeling,    // "              "              "  wheeled
-            pinching     // "              "              "  pinched
-        } = state
-        // setSwiping(pinching);
-        setPinching(pinching || moving || dragging);
-        console.log("set pinching to = " + pinching);
-    });
-    */
 
     var zoom = {x: 1, y: 1};
     var pan = {x: -100, y: 50};
@@ -239,12 +204,6 @@ const Board = (props) => {
         const rect = canvas.getBoundingClientRect();
         // zoom = {x: canvas.width / rect.width,  y: canvas.height / rect.height};
         zoom = {x: rect.width / canvas.width,  y: rect.height / canvas.height};
-        /*
-        const rect = {
-            left: width - zoomedWidth,
-            top: height - zoomedHeight
-        };
-        */
         var screenPosition = {x: 0, y: 0};
 
         // if (e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel') {
@@ -269,54 +228,6 @@ const Board = (props) => {
         // console.log(dataUrl);
     }
 
-    const handleMouseEnter = (event) => {
-        // if (event.defaultPrevented) return;
-        if (props.mouseDown) return;
-
-        if (canvas === null) return; // I'm not sure why it gives me an error when this is line isn't here...
-        const rect = canvas.getBoundingClientRect();
-        // zoom = {x: canvas.width / rect.width,  y: canvas.height / rect.height};
-        zoom = {x: rect.width / canvas.width,  y: rect.height / canvas.height};
-        /*
-        const rect = {
-            left: width - zoomedWidth,
-            top: height - zoomedHeight
-        };
-        */
-        const mouse = {x: round((event.clientX - rect.left) / zoom.x), y: round((event.clientY - rect.top)/ zoom.y)};
-        // const mouse = {x: Math.floor((event.clientX - rect.left) / zoom.x), y: Math.floor((event.clientY - rect.top)/ zoom.y)};
-        //  const mouse = {x: ((event.clientX - rect.left) / zoom.x), y: ((event.clientY - rect.top)/ zoom.y)};
-        // const mouse = {x: Math.floor(event.clientX / zoom.x), y: Math.floor(event.clientY / zoom.y)};
-        // const mouse = {x: Math.floor(event.clientX / 1), y: Math.floor(event.clientY / 1)};
-        var color = 1;
-
-        if (props.mouseDown) {
-            //- props.setTile(mouse, color);
-            // alert("Clicked!");
-            // console.log(mouse);
-            // setSelectedTile();
-        }
-
-        setSelectedTile(mouse);
-        var index = vector2index(mouse, width);
-        var value = props.values[props.map[index]];
-        // var value = index; // props.map[index];
-        // console.log(value);
-    }
-
-    /*
-    const options = {
-        context: "2d"
-    };
-    const rest = {
-        width: width,
-        height: height,
-        onMouseMove: handleMouseEnter
-    };
-    const { context, ...moreConfig } = options;
-    const canvasRef = useCanvas(draw, {context});
-    */
-
     const rest = {
         width: width,
         height: height,
@@ -329,23 +240,6 @@ const Board = (props) => {
     };
 
     /*
-    onClick={handleCanvasClick}
-    onMouseMove={handleMouseEnter}
-    */
-    /*
-    return (
-        <div
-            style={style}
-        >
-            <canvas
-                ref={canvasRef}
-                {...rest}
-            />
-        </div>
-    );
-    */
-
-    /*
     const tooltip = (
         <Tooltip title="Delete">
             <canvas
@@ -356,26 +250,13 @@ const Board = (props) => {
     );
     */
 
-    /*
-    const clickHandlerProps = {
-        onTouchEnd: handleCanvasClick,
-        onClick: handleCanvasClick,
-        onMouseMove: handleMouseEnter
-    }
-    */
     const clickHandlerProps = {
         // onPointerUp: handleCanvasClick,
-        // ...swipeHandlers,
         onTouchEnd: handleCanvasClick,
         onClick: handleCanvasClick, // this will never fire on mobile (trust me I tested it); It doesn't cause any issues as of now though
         // onMouseMove: handleMouseEnter
     }
 
-    /*
-    onTouchEnd={handleCanvasClick}
-    onClick={handleCanvasClick}
-    onMouseMove={handleMouseEnter}
-    */
     /*
     const highligths = (
         <Highlights
