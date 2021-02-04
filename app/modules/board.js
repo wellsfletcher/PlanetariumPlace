@@ -32,7 +32,7 @@ function buffer2rgbabuffer(buffer, colors) {
         appendRbgaPixel(result, k, color);
     }
 
-    console.log(result);
+    // console.log(result);
 
     return result;
 }
