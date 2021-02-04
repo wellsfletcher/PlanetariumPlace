@@ -106,11 +106,14 @@ function CanvasGlobe(props) {
     const [mapRotationOnTouchStart, setMapRotationOnTouchStart] = useState(new THREE.Vector3( 0, 0, 0 ));
     const onMapTouchStart = (event) => {
         // event.preventDefault();
+        console.log("gesture started!");
         console.log(event);
+        /*
         if (event.touches.length > 1) {
-            // console.log("Aborted with weary face.");
+            console.log("Aborted with weary face.");
             return;
         }
+        */
 
         const camera = globeEl.current.camera();
         setMapRotationOnTouchStart(camera.getWorldDirection(new THREE.Vector3()));
@@ -119,6 +122,8 @@ function CanvasGlobe(props) {
         setMapScaleOnTouchStart(mapScale);
     };
     const onZoom = (event) => {
+        // console.log(event);
+        // console.log();
         const altitude = event.altitude;
         setMapScale(altitude);
     };
@@ -131,13 +136,16 @@ function CanvasGlobe(props) {
 
         const camera = globeEl.current.camera();
         const mapRotation = camera.getWorldDirection(new THREE.Vector3());
-        // console.log(camera);
+        // const mapRotation = camera.position;
+        // const mapRotation = camera.rotation.toVector3();
+        // console.log(camera.position);
+        //- console.log(camera);
         var deltaRotation = mapRotation.distanceTo(mapRotationOnTouchStart);
         var deltaScale = mapScaleOnTouchStart - mapScale;
-        // console.log("deltaRotation = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
-        // console.log("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
+        console.log("deltaRotation = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
+        console.log("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
         if (Math.abs(deltaRotation) > MAP_ROTATION_TOLERANCE || Math.abs(deltaScale) > MAP_ROTATION_TOLERANCE) {
-            //- console.log("Click do be aborted.");
+            console.log("Click do be aborted.");
             return;
         }
 
@@ -149,7 +157,22 @@ function CanvasGlobe(props) {
         // temporarily disabled
         props.setTile({x, y}, color);
 
+        /*
+        window.addEventListener(
+            'click',
+            captureClick,
+            true // <-- This registeres this listener for the capture
+                 //     phase instead of the bubbling phase!
+        );
+        */
     };
+    /*
+    function captureClick(e) {
+        e.stopPropagation(); // Stop the click from being propagated.
+        console.log('click captured');
+        window.removeEventListener('click', captureClick, true); // cleanup
+    }
+    */
 
     const clickHandlerProps = {
         onGlobeClick: onGlobeClick,
@@ -202,10 +225,10 @@ function CanvasGlobe(props) {
     // globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe_dark.jpg"
     // globeImageUrl="../../assets/pixel-countries-mid-res.png"
     // onPointerDown={onMapTouchStart}
+    // onTouchStart={onMapTouchStart}
     return (
         <div
-            onTouchStart={onMapTouchStart}
-            onMouseUp={onMapTouchStart}
+            onPointerDown={onMapTouchStart}
         >
             <Globe
                 ref={globeEl}
