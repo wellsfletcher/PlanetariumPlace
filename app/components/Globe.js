@@ -108,7 +108,7 @@ function CanvasGlobe(props) {
         // event.preventDefault();
         console.log(event);
         if (event.touches.length > 1) {
-            console.log("Aborted with weary face.");
+            // console.log("Aborted with weary face.");
             return;
         }
 
@@ -119,8 +119,6 @@ function CanvasGlobe(props) {
         setMapScaleOnTouchStart(mapScale);
     };
     const onZoom = (event) => {
-        // console.log(event);
-        // console.log();
         const altitude = event.altitude;
         setMapScale(altitude);
     };
@@ -133,16 +131,13 @@ function CanvasGlobe(props) {
 
         const camera = globeEl.current.camera();
         const mapRotation = camera.getWorldDirection(new THREE.Vector3());
-        // const mapRotation = camera.position;
-        // const mapRotation = camera.rotation.toVector3();
-        // console.log(camera.position);
-        console.log(camera);
+        // console.log(camera);
         var deltaRotation = mapRotation.distanceTo(mapRotationOnTouchStart);
         var deltaScale = mapScaleOnTouchStart - mapScale;
-        console.log("deltaRotation = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
-        console.log("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
+        // console.log("deltaRotation = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
+        // console.log("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
         if (Math.abs(deltaRotation) > MAP_ROTATION_TOLERANCE || Math.abs(deltaScale) > MAP_ROTATION_TOLERANCE) {
-            console.log("Click do be aborted.");
+            //- console.log("Click do be aborted.");
             return;
         }
 

@@ -7,7 +7,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import { useState, useEffect } from 'react';
 import { useSwipeable, Swipeable } from 'react-swipeable';
-import { usePinch, useGesture } from 'react-use-gesture';
+// import { usePinch, useGesture } from 'react-use-gesture';
 
 import useCanvas from './useCanvas';
 import useSwiping from './useSwiping';
@@ -168,7 +168,7 @@ const Board = (props) => {
         preventDefaultTouchmoveEvent: true
     });
     // const swipeHandlers = useSwipeable({});
-    console.log(swipeHandlers);
+    // console.log(swipeHandlers);
     /*
     const swipeHandlers2 = useGesture({
         // onDrag: state => doSomethingWith(state),
@@ -193,13 +193,14 @@ const Board = (props) => {
     });
     const [mapScaleOnTouchStart, setMapScaleOnTouchStart] = useState(1.0);
     const onMapChange = (transform) => {
-        console.log("transform = ");
-        console.log(transform);
+        // console.log("transform = ");
+        // console.log(transform);
         setMapTransform(transform);
         setMapScale( transform.scale );
     };
     const onMapTouchStart = () => setMapScaleOnTouchStart(mapScale);
 
+    /*
     const swipeHandlers2 = useGesture(state => {
         const {
             dragging,    // is the component currently being dragged
@@ -212,12 +213,7 @@ const Board = (props) => {
         setPinching(pinching || moving || dragging);
         console.log("set pinching to = " + pinching);
     });
-
-    if (isSwiping) {
-        console.log("Currently swiping...");
-    } else {
-        console.log("Not being swiping...");
-    }
+    */
 
     var zoom = {x: 1, y: 1};
     var pan = {x: -100, y: 50};
@@ -227,18 +223,18 @@ const Board = (props) => {
     const handleCanvasClick = (event) => {
         if (event.defaultPrevented) return; // console.log("drag!");
         if (isSwiping || isPinching ) {
-            console.log("Click aborted");
+            //- console.log("Click aborted");
             return;
         }
         if (event.type == 'touchend') {
             var deltaScale = mapScaleOnTouchStart - mapScale;
-            console.log("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
+            // console.log("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
             if (Math.abs(deltaScale) > MAP_SCALE_TOLERANCE) {
-                console.log("Click do be aborted");
+                //- console.log("Click do be aborted");
                 return;
             }
         }
-        console.log(event);
+        // console.log(event);
 
         const rect = canvas.getBoundingClientRect();
         // zoom = {x: canvas.width / rect.width,  y: canvas.height / rect.height};
