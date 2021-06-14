@@ -125,7 +125,7 @@ class Board {
         $historyDict["children"] = array();
         */
 
-        $query = "CALL query_recent($boardId, $since);";
+        $query = "CALL query_recent($boardId, '$since');";
 
         echo "query = $query \n";
 
