@@ -111,6 +111,8 @@ class Board {
     }
 
     function getRecentHistory($boardId, $since) {
+        echo "boardId = $boardId, since = $since \n";
+
         // TODO: check to see if board exists first...
         // echo "Hello. ";
         $boardId = $this->sanitizeInteger($boardId);
