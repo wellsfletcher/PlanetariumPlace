@@ -18,8 +18,7 @@ class Board {
     }
 
     function sanitizeDate($str) {
-        // return $str;
-        return preg_replace("([^0-9/ :\.])", "", $str);
+        return preg_replace("([^0-9/- :\.])", "", $str);
     }
 
     function getWidth($boardId) {
