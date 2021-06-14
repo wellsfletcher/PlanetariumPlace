@@ -127,6 +127,8 @@ class Board {
 
         $query = "CALL query_recent($boardId, $since);";
 
+        echo "query = $query \n";
+
         // prepare query statement
         $stmt = $this->sqlConn->prepare($query);
 

@@ -11,6 +11,9 @@ select count(*) from TileHistory;
 # I'm gonna have to just call the contents of this query from the php most likely... or modify the procedure to only select what is needed
 call query_recent(1, five_seconds_ago());
 
+CALL query_recent("1", "2021-06-14");
+
+
 /*
 delete 
 from TileHistory
