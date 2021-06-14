@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { setTile, setBrushColor, getData, fetchTiles, fetchTileChanges } from "../actions/index";
 import { bindActionCreators } from 'redux';
 
+import useInterval from './hooks/useInterval';
+
 import Board from './Board';
 import Globe from './Globe';
 import PersistentDrawer from './PersistentDrawer';
@@ -19,6 +21,7 @@ function mapDispatchToProps(dispatch) {
     //- getData: () => getData()(dispatch), //  cursed
     // getData: () => getData(dispatch),
     fetchTiles: () => fetchTiles()(dispatch),
+    fetchTileChanges: () => fetchTileChanges()(dispatch),
     // setTile: ({x, y}, color) => dispatch(setTile({x, y, color})),
     setTile: bindActionCreators(({x, y}, color) => setTile({x, y, color}), dispatch),
     // setBrushColor: (color) => dipatch(setBrushColor(color))
@@ -56,6 +59,13 @@ const BoardPage = (props) => {
             // alert("doing something");
         }, []);
         // console.log(props.remoteTiles);
+
+        const TILE_UPDATE_FREQUENCY = 10000;
+        // setInterval(() => {
+        useInterval(() => {
+            console.log("updating async tiles...");
+            // props.fetchTileChanges();
+        }, TILE_UPDATE_FREQUENCY);
 
         const onChangeComplete = (color) => {
             var brushColorInt = hexcolor2int(color);

@@ -116,12 +116,13 @@ class Board {
         $boardId = $this->sanitizeInteger($boardId);
         $since = $this->sanitizeDate($since);
 
+        /*
         // init the json dictionary
         $historyDict = array();
         $historyDict["info"] = null;
         $historyDict["children"] = array();
+        */
 
-        /*
         $query = "CALL query_recent($boardId, $since);";
 
         // prepare query statement
@@ -131,7 +132,6 @@ class Board {
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $historyDict = $result;
-        */
 
         // show canvas data in json format
         $json = json_encode($historyDict);

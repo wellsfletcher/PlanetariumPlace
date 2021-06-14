@@ -3,6 +3,9 @@ import { values as colorValues, hexcolor2colorcode } from '../constants/colors';
 import * as API from '../utils/api';
 
 
+/**
+@colors hex integer array that maps integer color [0, 15] to hex values
+*/
 function buffer2hex(buffer, colors) {
     var result = [];
     const length = buffer.length;
@@ -87,6 +90,27 @@ export function setTile(state, {x, y}, width, color) {
     const boardId = state.boardId;
     const colorCode = hexcolor2colorcode(color);
     API.draw(boardId, {x, y}, colorCode);
+
+    return { ...state, board: {
+        ...state.board,
+        tiles: tiles,
+        tilesRgba: tilesRgba
+    }};
+}
+
+/**
+Sets a tile without making a call to an API.
+*/
+export function setTileLocally(state, {x, y}, width, color) { // should use function chaining
+    var tiles = state.board.tiles.slice();
+    var tilesRgba = state.board.tilesRgba.slice();
+
+    const index = (y * width) + x;
+    tiles[index] = color;
+    setRgbaPixel(tilesRgba, index, color);
+
+    const boardId = state.boardId;
+    const colorCode = hexcolor2colorcode(color);
 
     return { ...state, board: {
         ...state.board,
