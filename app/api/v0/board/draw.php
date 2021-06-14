@@ -8,6 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 // include database and object files
 include_once '../config/database.php';
+include_once '../config/sqlDatabase.php';
 include_once '../objects/board.php';
 
 // this file is located at http://planetarium.place/api/v0/board/draw.php
@@ -15,9 +16,12 @@ include_once '../objects/board.php';
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
+// $sqlDatabase = new SqlDatabase();
+// $sqlDb = $sqlDatabase->getConnection();
 
 // initialize object
 $board = new Board($db);
+// $board = new Board($db, $sqlDb);
 // $board->test();
 
 // get input parameters

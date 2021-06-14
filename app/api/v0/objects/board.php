@@ -2,10 +2,14 @@
 class Board {
     // database connection
     private $conn;
+    // sql database connection
+    private $sqlConn;
 
     // constructor with $db as database connection
+    // public function __construct($db, $sqlDb) {
     public function __construct($db) {
         $this->conn = $db;
+        // $this->$sqlConn = $sqlDb;
     }
 
     function sanitizeInteger($str) {
@@ -68,6 +72,8 @@ class Board {
         if ($isIndexInBounds && $isColorInBounds) {
             $offset = $index;
             $this->conn->rawCommand("BITFIELD", $tilesKey, "SET", "u4", "#$offset", $color);
+
+            $this->appendToTileHistory($boardId, $x, $y, $color);
             http_response_code(201);
         } else {
             http_response_code(404);
@@ -77,6 +83,29 @@ class Board {
         // $json = json_encode($canvas_dict);
         // return $json;
         // http_response_code(201);
+    }
+
+    /*
+    function buildAppendTileQuery($boardId, $index, $color) {
+        $query = "CALL append_tile($boardId, $index, $color);";
+        return $query;
+    }
+    */
+
+    function appendToTileHistory($boardId, $index, $color) {
+        /*
+        $query = "CALL append_tile($boardId, $index, $color);";
+
+        // prepare query statement
+        $stmt = $this->sqlConn->prepare($query);
+
+        // execute the query
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
+        */
     }
 
     function test() {
