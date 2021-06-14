@@ -17,6 +17,10 @@ class Board {
         return intval(filter_var($str, FILTER_SANITIZE_NUMBER_INT));
     }
 
+    function sanitizeDate($str) {
+        return $str;
+    }
+
     function getWidth($boardId) {
         return 1024;
     }
@@ -104,6 +108,34 @@ class Board {
         }
 
         return false;
+    }
+
+    function getRecentHistory($boardId, $since) {
+        // TODO: check to see if board exists first...
+        // echo "Hello. ";
+        $boardId = $this->sanitizeInteger($boardId);
+        $since = $this->sanitizeDate($since);
+
+        // init the json dictionary
+        $historyDict = array();
+        $historyDict["info"] = null;
+        $historyDict["children"] = array();
+
+        /*
+        $query = "CALL query_recent($boardId, $since);";
+
+        // prepare query statement
+        $stmt = $this->sqlConn->prepare($query);
+
+        // execute the query
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $historyDict = $result;
+        */
+
+        // show canvas data in json format
+        $json = json_encode($historyDict);
+        return $json;
     }
 
     function test() {

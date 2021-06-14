@@ -1,4 +1,4 @@
-import { TILES_FETCHED } from "../constants/actionTypes";
+import { TILES_FETCHED, TILE_CHANGES_FETCHED } from "../constants/actionTypes";
 
 
 export function fetchTiles(dispatch) {
@@ -60,4 +60,26 @@ export function draw(boardId, {x, y}, color) { // width?
             })
         }
     );
+}
+
+export function fetchTileChanges(dispatch) { // width?
+    const {boardId, since} = dispatch;
+    console.log("getting history...");
+    console.log({ boardId, since });
+    fetch('https://planetarium.place/api/v0/board/history.php', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                boardId: boardId,
+                since: since
+            })
+        }
+    )
+    .then(res => res.json())
+    .then((data) => {
+        return dispatch({ type: TILE_CHANGES_FETCHED, payload: data });
+    });
 }

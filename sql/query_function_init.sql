@@ -49,7 +49,8 @@ BEGIN
 	select * 
 	from TileHistory 
 	where placement_time >= start_time 
-		and placement_time <= end_time;
+		and placement_time < end_time
+	order by placement_time ASC;
 
 -- End of solution
 END //
@@ -65,6 +66,9 @@ BEGIN
 -- Type solution below
 
 	call query_interval(board_id, start_time, NOW(3));
+    -- is it possible for it to also return the value of NOW(3)?
+	-- or should it perhaps just use the latest time listed in the return query
+	-- or should it perhaps just use the latest time listed in the return query
 
 -- End of solution
 END //

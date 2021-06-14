@@ -160,3 +160,19 @@ export function fetchTiles2() {
             */
     };
 }
+
+export function fetchTileChanges() {
+    // alert("aaaaa");
+    return function(dispatch) { // , getState
+        // const canvas = API.fetchTiles();
+        // return dispatch({ type: TILES_FETCHED, payload: API.fetchTiles() });
+        /*
+        return API.fetchTiles().then((canvas) => {
+            console.log("resolved!");
+            console.log(canvas);
+            return dispatch({ type: TILES_FETCHED, payload: canvas });
+        });
+        */
+        return API.fetchTileChanges(dispatch);
+    }
+}

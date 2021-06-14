@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { connect } from "react-redux";
-import { setTile, setBrushColor, getData, fetchTiles } from "../actions/index";
+import { setTile, setBrushColor, getData, fetchTiles, fetchTileChanges } from "../actions/index";
 import { bindActionCreators } from 'redux';
 
 import Board from './Board';

@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED } from "../constants/actionTypes";
+import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED, TILE_CHANGES_FETCHED } from "../constants/actionTypes";
 import { xy2index } from '../utils/general';
 import * as Board from '../modules/board';
 
@@ -126,7 +126,9 @@ const initialState = {
     boardId: 1,
     // remoteTiles: null,
     board: {
-        // tiles: [],
+        lastUpdated: new Date(),
+        unplayedChanges: {},
+
         tilesRgba: new Uint8ClampedArray(new ArrayBuffer(INITIAL_WIDTH * INITIAL_HEIGHT * 4)),
         tiles: initBoard(INITIAL_WIDTH, INITIAL_HEIGHT),
         // links: initLinks, // maps pixel to relative url string
@@ -158,6 +160,8 @@ function rootReducer(state = initialState, action) {
         // alert("hey");
         // return { ...state, remoteTiles: action.payload };
         return Board.setTiles(state, action.payload);
+    } else if (action.type === TILE_CHANGES_FETCHED) {
+        return state;
     } else if (action.type === SET_MOUSE_DOWN) {
         return { ...state, mouseDown: action.payload };
     } else if (action.type === SET_BRUSH_COLOR) {
