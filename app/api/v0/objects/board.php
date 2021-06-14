@@ -119,7 +119,7 @@ class Board {
         $since = $this->sanitizeDate($since);
 
         $query = "CALL query_recent($boardId, '$since');";
-        echo "query = $query \n";
+        // echo "query = $query \n";
 
         // prepare query statement
         $stmt = $this->sqlConn->prepare($query);
