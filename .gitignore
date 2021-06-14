@@ -2,6 +2,7 @@
 secret.py
 test/
 .idea
+sqlDatabase.php
 
 # npm
 node_modules/
