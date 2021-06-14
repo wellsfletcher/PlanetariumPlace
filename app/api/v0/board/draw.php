@@ -16,12 +16,12 @@ include_once '../objects/board.php';
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
-// $sqlDatabase = new SqlDatabase();
-// $sqlDb = $sqlDatabase->getConnection();
+$sqlDatabase = new SqlDatabase();
+$sqlDb = $sqlDatabase->getConnection();
 
 // initialize object
-$board = new Board($db);
-// $board = new Board($db, $sqlDb);
+// $board = new Board($db);
+$board = new Board($db, $sqlDb);
 // $board->test();
 
 // get input parameters
@@ -37,4 +37,5 @@ $color = $data->color;
 $board->setTile($boardId, $x, $y, $color);
 // echo $json;
 $db->close();
+$sqlDb->close();
 ?>

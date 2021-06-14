@@ -6,10 +6,10 @@ class Board {
     private $sqlConn;
 
     // constructor with $db as database connection
-    // public function __construct($db, $sqlDb) {
-    public function __construct($db) {
+    public function __construct($db, $sqlDb = null) {
+        // public function __construct($db) {
         $this->conn = $db;
-        // $this->$sqlConn = $sqlDb;
+        $this->sqlConn = $sqlDb;
     }
 
     function sanitizeInteger($str) {
@@ -73,7 +73,7 @@ class Board {
             $offset = $index;
             $this->conn->rawCommand("BITFIELD", $tilesKey, "SET", "u4", "#$offset", $color);
 
-            $this->appendToTileHistory($boardId, $x, $y, $color);
+            $this->appendToTileHistory($boardId, $index, $color);
             http_response_code(201);
         } else {
             http_response_code(404);
@@ -93,7 +93,6 @@ class Board {
     */
 
     function appendToTileHistory($boardId, $index, $color) {
-        /*
         $query = "CALL append_tile($boardId, $index, $color);";
 
         // prepare query statement
@@ -105,7 +104,6 @@ class Board {
         }
 
         return false;
-        */
     }
 
     function test() {
