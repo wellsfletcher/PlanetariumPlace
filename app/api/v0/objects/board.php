@@ -135,9 +135,40 @@ class Board {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $historyDict = $result;
 
+        // echo $result;
+        $this->extractHistoryRows($stmt);
+
         // show canvas data in json format
         $json = json_encode($historyDict);
         return $json;
+    }
+
+    /*
+    private
+    */
+    function extractHistoryRows($stmt) {
+        $historyDict = array();
+
+        // fetch() is faster than fetchAll()
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            // extract row
+            // this will make $row['name'] to
+            // just $name only
+            extract($row);
+
+            echo "$placement_date \n";
+
+            $historyItem=array(
+                "id" => $id,
+                "width" => $width,
+                "height" => $width,
+                "placement_date" => $placement_date
+            );
+
+            array_push($historyDict, $historyItem);
+        }
+
+        return $historyDict;
     }
 
     function test() {
