@@ -21,8 +21,8 @@ $board = new Board($db, $sqlDb);
 
 // get input parameters
 $data = json_decode(file_get_contents("php://input"));
-echo file_get_contents("php://input");
-echo "\n";
+// echo file_get_contents("php://input");
+// echo "\n";
 
 $boardId = $data->boardId;
 $since = $data->since;

@@ -18,7 +18,8 @@ class Board {
     }
 
     function sanitizeDate($str) {
-        return $str;
+        // return $str;
+        return preg_replace("([^0-9/ :\.])", "", $str);
     }
 
     function getWidth($boardId) {
@@ -111,22 +112,14 @@ class Board {
     }
 
     function getRecentHistory($boardId, $since) {
-        echo "boardId = $boardId, since = $since \n";
+        // echo "boardId = $boardId, since = $since \n";
 
         // TODO: check to see if board exists first...
         // echo "Hello. ";
         $boardId = $this->sanitizeInteger($boardId);
         $since = $this->sanitizeDate($since);
 
-        /*
-        // init the json dictionary
-        $historyDict = array();
-        $historyDict["info"] = null;
-        $historyDict["children"] = array();
-        */
-
         $query = "CALL query_recent($boardId, '$since');";
-
         echo "query = $query \n";
 
         // prepare query statement
@@ -137,9 +130,6 @@ class Board {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $historyDict = $result;
 
-        // echo $result;
-        $this->extractHistoryRows($stmt);
-
         // show canvas data in json format
         $json = json_encode($historyDict);
         return $json;
@@ -147,7 +137,7 @@ class Board {
 
     /*
     private
-    */
+    *
     function extractHistoryRows($stmt) {
         $historyDict = array();
 
@@ -172,6 +162,7 @@ class Board {
 
         return $historyDict;
     }
+    */
 
     function test() {
         // $this->conn->rawCommand("BITFIELD", "tiles:1", "SET", "u4", "#1", 13);
