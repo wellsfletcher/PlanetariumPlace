@@ -64,7 +64,7 @@ const BoardPage = (props) => {
         }, []);
         // console.log(props.remoteTiles);
 
-        const TILE_UPDATE_FREQUENCY = 10000;
+        const TILE_UPDATE_FREQUENCY = 5000;
         // setInterval(() => {
         useInterval(() => {
             console.log("updating async tiles...");
