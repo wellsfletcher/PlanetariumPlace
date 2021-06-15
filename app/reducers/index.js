@@ -127,7 +127,7 @@ const initialState = {
     // remoteTiles: null,
     board: {
         lastUpdated: new Date(),
-        unplayedChanges: {},
+        unplayedChanges: [],
 
         tilesRgba: new Uint8ClampedArray(new ArrayBuffer(INITIAL_WIDTH * INITIAL_HEIGHT * 4)),
         tiles: initBoard(INITIAL_WIDTH, INITIAL_HEIGHT),
@@ -164,7 +164,17 @@ function rootReducer(state = initialState, action) {
         // return state;
         console.log("tile changes payload =v");
         console.log(action.payload);
-        return {  ...state, unplayedChanges: state.unplayedChanges.concat(action.payload) };
+
+        const board = {
+            ...state.board,
+            lastUpdated: new Date(),
+            unplayedChanges: state.board.unplayedChanges.concat(action.payload)
+        };
+
+        // return {  ...state, board: board };
+        state = {  ...state, board: board };
+
+        return Board.importTiles(state, action.payload);
     } else if (action.type === SET_MOUSE_DOWN) {
         return { ...state, mouseDown: action.payload };
     } else if (action.type === SET_BRUSH_COLOR) {

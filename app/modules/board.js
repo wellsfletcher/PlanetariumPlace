@@ -1,5 +1,5 @@
 import { xy2index, int2rgba } from '../utils/general';
-import { values as colorValues, hexcolor2colorcode } from '../constants/colors';
+import { values as colorValues, hexcolor2colorcode, colorcode2hexcolor } from '../constants/colors';
 import * as API from '../utils/api';
 
 
@@ -79,6 +79,9 @@ export function setTiles(state, buffer) {
     }};
 }
 
+/*
+Takes hex color as input.
+*/
 export function setTile(state, {x, y}, width, color) {
     var tiles = state.board.tiles.slice();
     var tilesRgba = state.board.tilesRgba.slice(); // mayhaps remove slicing?
@@ -101,11 +104,11 @@ export function setTile(state, {x, y}, width, color) {
 /**
 Sets a tile without making a call to an API.
 */
-export function setTileLocally(state, {x, y}, width, color) { // should use function chaining
-    var tiles = state.board.tiles.slice();
-    var tilesRgba = state.board.tilesRgba.slice();
+export function setTileLocally(tiles, tilesRgba, state, index, width, color) { // should use function chaining
+    // var tiles = state.board.tiles.slice();
+    // var tilesRgba = state.board.tilesRgba.slice();
 
-    const index = (y * width) + x;
+    // const index = (y * width) + x;
     tiles[index] = color;
     setRgbaPixel(tilesRgba, index, color);
 
@@ -117,4 +120,31 @@ export function setTileLocally(state, {x, y}, width, color) { // should use func
         tiles: tiles,
         tilesRgba: tilesRgba
     }};
+}
+
+/*
+function parseTileHistory(tileHistory) {
+
+}
+*/
+
+/**
+Takes list of tiles to be set as input.
+{index, color, timestamp}
+*/
+export function importTiles(state, tileChanges) {
+    const width = state.board.width;
+
+    var tiles = state.board.tiles.slice();
+    var tilesRgba = state.board.tilesRgba.slice();
+
+    for (var k = 0; k < tileChanges.length; k++) {
+        var {index, color, timestamp} = tileChanges[k];
+        index = Number(index);
+        color = colorcode2hexcolor(Number(color));
+        state = setTileLocally(tiles, tilesRgba, state, index, width, color);
+        // console.log("set tile " + index + " to " + "color");
+    }
+
+    return state;
 }

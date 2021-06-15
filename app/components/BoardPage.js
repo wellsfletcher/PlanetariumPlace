@@ -34,8 +34,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        // boardId: state.boardId,
-        // lastUpdated: state.board.lastUpdated,
+        boardId: state.boardId,
+        lastUpdated: state.board.lastUpdated,
         // unplayedChanges: state.board.unplayedChanges,
         // articles: state.articles,
         // remoteTiles: state.remoteTiles,
@@ -68,7 +68,7 @@ const BoardPage = (props) => {
         // setInterval(() => {
         useInterval(() => {
             console.log("updating async tiles...");
-            // props.fetchTileChanges(props.boardId, props.lastUpdated);
+            props.fetchTileChanges(props.boardId, props.lastUpdated);
             // props.fetchTileChanges(1, new Date());
             // console.log(unplayedChanges);
         }, TILE_UPDATE_FREQUENCY);

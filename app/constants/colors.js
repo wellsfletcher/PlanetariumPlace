@@ -89,3 +89,7 @@ export function hexcolor2colorcode(hex) {
     // return 5;
     return result;
 }
+
+export function colorcode2hexcolor(code) {
+    return values[code];
+}
