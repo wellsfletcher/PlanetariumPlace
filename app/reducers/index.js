@@ -161,7 +161,10 @@ function rootReducer(state = initialState, action) {
         // return { ...state, remoteTiles: action.payload };
         return Board.setTiles(state, action.payload);
     } else if (action.type === TILE_CHANGES_FETCHED) {
-        return state;
+        // return state;
+        console.log("tile changes payload =v");
+        console.log(action.payload);
+        return {  ...state, unplayedChanges: state.unplayedChanges.concat(action.payload) };
     } else if (action.type === SET_MOUSE_DOWN) {
         return { ...state, mouseDown: action.payload };
     } else if (action.type === SET_BRUSH_COLOR) {

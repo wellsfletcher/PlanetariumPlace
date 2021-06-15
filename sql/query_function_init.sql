@@ -46,10 +46,14 @@ CREATE PROCEDURE query_interval(
 BEGIN
 -- Type solution below
 	
-	select * 
+	select 
+		tile_index as "index",
+        color as "color",
+        placement_time as "timestamp"
 	from TileHistory 
 	where placement_time >= start_time 
 		and placement_time < end_time
+        and TileHistory.board_id = board_id
 	order by placement_time ASC;
 
 -- End of solution

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { setTile } from "../actions/index";
+// import { setTile } from "../actions/index";
 
 import { MapInteractionCSS } from 'react-map-interaction';
 import Tooltip from '@material-ui/core/Tooltip';

@@ -21,7 +21,8 @@ function mapDispatchToProps(dispatch) {
     //- getData: () => getData()(dispatch), //  cursed
     // getData: () => getData(dispatch),
     fetchTiles: () => fetchTiles()(dispatch),
-    fetchTileChanges: () => fetchTileChanges()(dispatch),
+    fetchTileChanges: (lastUpdated, boardId) => fetchTileChanges()(lastUpdated, boardId, dispatch),
+    // fetchTileChanges: bindActionCreators(({x, y}, color) => setTile({x, y, color}), dispatch),
     // setTile: ({x, y}, color) => dispatch(setTile({x, y, color})),
     setTile: bindActionCreators(({x, y}, color) => setTile({x, y, color}), dispatch),
     // setBrushColor: (color) => dipatch(setBrushColor(color))
@@ -33,6 +34,9 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
+        // boardId: state.boardId,
+        // lastUpdated: state.board.lastUpdated,
+        // unplayedChanges: state.board.unplayedChanges,
         // articles: state.articles,
         // remoteTiles: state.remoteTiles,
         tilesRgba: state.board.tilesRgba,
@@ -64,7 +68,9 @@ const BoardPage = (props) => {
         // setInterval(() => {
         useInterval(() => {
             console.log("updating async tiles...");
-            // props.fetchTileChanges();
+            // props.fetchTileChanges(props.boardId, props.lastUpdated);
+            // props.fetchTileChanges(1, new Date());
+            // console.log(unplayedChanges);
         }, TILE_UPDATE_FREQUENCY);
 
         const onChangeComplete = (color) => {

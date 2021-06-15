@@ -1,4 +1,5 @@
 import { TILES_FETCHED, TILE_CHANGES_FETCHED } from "../constants/actionTypes";
+import { date2str } from "../utils/time";
 
 
 export function fetchTiles(dispatch) {
@@ -62,8 +63,9 @@ export function draw(boardId, {x, y}, color) { // width?
     );
 }
 
-export function fetchTileChanges(dispatch) { // width?
-    const {boardId, since} = dispatch;
+export function fetchTileChanges(boardId, lastUpdated, dispatch) { // width?
+    const since = date2str(lastUpdated);
+    // const {boardId, since} = dispatch;
     console.log("getting history...");
     console.log({ boardId, since });
     fetch('https://planetarium.place/api/v0/board/history.php', {

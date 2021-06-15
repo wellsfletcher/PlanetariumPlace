@@ -1,4 +1,5 @@
 import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED } from "../constants/actionTypes";
+import * as Action from "../constants/actionTypes";
 import * as API from "../utils/api";
 
 
@@ -17,6 +18,12 @@ export function setMouseDown(payload) {
 export function setBrushColor(payload) {
     return { type: SET_BRUSH_COLOR, payload };
 };
+
+/*
+export function fetchTileChanges(payload) {
+    return { type: Action.TILE_CHANGES_FETCHED, payload };
+};
+*/
 
 export function getData() {
     // alert("aaaaa");
@@ -163,7 +170,7 @@ export function fetchTiles2() {
 
 export function fetchTileChanges() {
     // alert("aaaaa");
-    return function(dispatch) { // , getState
+    return function(lastUpdated, boardId, dispatch) { // , getState
         // const canvas = API.fetchTiles();
         // return dispatch({ type: TILES_FETCHED, payload: API.fetchTiles() });
         /*
@@ -173,6 +180,6 @@ export function fetchTileChanges() {
             return dispatch({ type: TILES_FETCHED, payload: canvas });
         });
         */
-        return API.fetchTileChanges(dispatch);
+        return API.fetchTileChanges(lastUpdated, boardId, dispatch);
     }
 }
