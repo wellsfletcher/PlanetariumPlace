@@ -162,8 +162,8 @@ function rootReducer(state = initialState, action) {
         return Board.setTiles(state, action.payload);
     } else if (action.type === TILE_CHANGES_FETCHED) {
         // return state;
-        console.log("tile changes payload =v");
-        console.log(action.payload);
+        // console.log("tile changes payload =v");
+        // console.log(action.payload);
 
         const board = {
             ...state.board,
