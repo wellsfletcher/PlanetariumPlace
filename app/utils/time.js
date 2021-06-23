@@ -18,3 +18,20 @@ export function str2date(str) {
     const stamp = parts[0] + "T" + parts[1] + "Z";
     return new Date(stamp);
 }
+
+/**
+ * Get the current time remaining from the given timestamp
+ * @param {number} stopTime A timestamp in ms, should be in the future
+ * @returns {number} Time in ms
+ */
+export function getRemaining(stopTime) {
+    var now = Date.now();
+    return Math.max(0, stopTime - now);
+}
+
+/**
+ * Adds time in milliseconds to the given date.
+*/
+export function addMillis(date, millis) {
+    return new Date(+date.getTime() + millis);
+}

@@ -1,0 +1,4 @@
+
+
+export const TILE_UPDATE_FREQUENCY = 5000;
+export const TILE_UPDATE_OFFSET = 6000;

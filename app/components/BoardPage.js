@@ -1,16 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useState } from 'react';
 
 import { connect } from "react-redux";
-import { setTile, setBrushColor, getData, fetchTiles, fetchTileChanges } from "../actions/index";
+import { setTile, setLocalTile, setBrushColor, getData, fetchTiles, fetchTileChanges, playChange } from "../actions/index";
 import { bindActionCreators } from 'redux';
 
-import useInterval from './hooks/useInterval';
+import { useInterval } from './hooks/useInterval';
+import { useTimeout } from './hooks/useTimeout';
 
 import Board from './Board';
 import Globe from './Globe';
 import PersistentDrawer from './PersistentDrawer';
 import { hexcolor2int } from '../utils/general';
+import * as Time from '../utils/time';
+import * as System from '../constants/system';
+// import * as Board from '../modules/board';
 
 import Fab from '@material-ui/core/Fab';
 import GlobeIcon from '@material-ui/icons/Public';
@@ -25,6 +30,8 @@ function mapDispatchToProps(dispatch) {
     // fetchTileChanges: bindActionCreators(({x, y}, color) => setTile({x, y, color}), dispatch),
     // setTile: ({x, y}, color) => dispatch(setTile({x, y, color})),
     setTile: bindActionCreators(({x, y}, color) => setTile({x, y, color}), dispatch),
+    setLocalTile: bindActionCreators((index, color) => setLocalTile({index, color}), dispatch),
+    playChange: bindActionCreators((change) => playChange({change}), dispatch),
     // setBrushColor: (color) => dipatch(setBrushColor(color))
     // setBrushColor: bindActionCreators((color) => dipatch(setBrushColor(color)), dispatch) // no work
     // setBrushColor: bindActionCreators((color) => setBrushColor(color), dispatch) // works
@@ -36,7 +43,7 @@ const mapStateToProps = (state) => {
     return {
         boardId: state.boardId,
         lastUpdated: state.board.lastUpdated,
-        // unplayedChanges: state.board.unplayedChanges,
+        unplayedChanges: state.board.unplayedChanges,
         // articles: state.articles,
         // remoteTiles: state.remoteTiles,
         tilesRgba: state.board.tilesRgba,
@@ -64,14 +71,65 @@ const BoardPage = (props) => {
         }, []);
         // console.log(props.remoteTiles);
 
-        const TILE_UPDATE_FREQUENCY = 5000;
+        const TILE_UPDATE_FREQUENCY = System.TILE_UPDATE_FREQUENCY;
+        const TILE_UPDATE_OFFSET = System.TILE_UPDATE_OFFSET;
         // setInterval(() => {
         useInterval(() => {
             console.log("updating async tiles...");
             props.fetchTileChanges(props.boardId, props.lastUpdated);
             // props.fetchTileChanges(1, new Date());
-            // console.log(unplayedChanges);
+
+            // play a bunch of actions after some time (the delay is stored in the payload)
+            // this shit needs to get run after tile changes have been fetched
+            /*
+            console.log(props.unplayedChanges);
+            while (!props.unplayedChanges.isEmpty()) {
+                let change = props.unplayedChanges.dequeue();
+                console.log(change);
+                props.playChange(change);
+            }
+            */
         }, TILE_UPDATE_FREQUENCY);
+
+        // put scheduler hook here? or maybe just do it all async elsewhere
+        // could also use useInterval here
+        /*
+        const [changeDelay, setChangeDelay] = useState(null);
+        useTimeout(() => {
+        // useInterval(() => {
+            console.log("playing async tile...");
+            var nextDelay = null;
+
+            // dequeue current unplayed change
+            const change = props.unplayedChanges.dequeue();
+            if (nextChange == undefined) {
+                setChangeDelay(nextDelay); return;
+            }
+            const {index, color, timestamp} = change;
+            // set the tile using that unplayed change
+            props.setLocalTile(index, color);
+            // peek at the next unplayed change to get the delay until it
+            const nextChange = props.unplayedChanges.peek();
+            if (nextChange == undefined) {
+                setChangeDelay(nextDelay); return;
+            }
+            nextDelay = Time.getRemaining(Time.addMillis(Time.str2date(nextChange.timestamp), TILE_UPDATE_OFFSET));
+            // set another timeout with that delay
+            setChangeDelay(nextDelay);
+        // }, changeDelay);
+        }, changeDelay, props.unplayedChanges.queue);
+        // }, changeDelay, props.unplayedChanges);
+        */
+        /*
+        // needs to get called again whenever props.unplayedChanges.queue changes
+        useTimeout(() => {
+            props.playNextChange();
+            // can set delay state here or in above method
+            // if the delay is null, it should not schelue a timeout
+            // (or if the queue is empty)
+        }, changeDelay, props.unplayedChanges.queue);
+        */
+
 
         const onChangeComplete = (color) => {
             var brushColorInt = hexcolor2int(color);

@@ -1,7 +1,11 @@
 import { TILES_FETCHED, TILE_CHANGES_FETCHED } from "../constants/actionTypes";
+// import { playChange } from "../actions/index";
+import * as Actions from '../actions/index';
 import { date2str } from "../utils/time";
 
-
+/**
+This is a redux action.
+*/
 export function fetchTiles(dispatch) {
     var canvas = new Uint8Array(1024 * 512);
     var offset = 0;
@@ -63,11 +67,12 @@ export function draw(boardId, {x, y}, color) { // width?
     );
 }
 
+/*
 export function fetchTileChanges(boardId, lastUpdated, dispatch) { // width?
     const since = date2str(lastUpdated);
     // const {boardId, since} = dispatch;
     console.log("getting history...");
-    console.log({ boardId, since });
+    // console.log({ boardId, since });
     fetch('https://planetarium.place/api/v0/board/history.php', {
             method: 'POST',
             headers: {
@@ -83,5 +88,45 @@ export function fetchTileChanges(boardId, lastUpdated, dispatch) { // width?
     .then(res => res.json())
     .then((data) => {
         return dispatch({ type: TILE_CHANGES_FETCHED, payload: data });
+    });
+}
+*/
+
+/**
+This is a Redux action.
+*/
+export function fetchTileChanges(boardId, lastUpdated, dispatch) { // width?
+    const since = date2str(lastUpdated);
+    // const {boardId, since} = dispatch;
+    console.log("getting history...");
+    // console.log({ boardId, since });
+    fetch('https://planetarium.place/api/v0/board/history.php', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                boardId: boardId,
+                since: since
+            })
+        }
+    )
+    .then(res => res.json())
+    .then(payload => {
+        console.log("We are in the fetch tile changes promise");
+        const unplayedChangesBackingArray = payload;
+        for (var k = 0; k < unplayedChangesBackingArray.length; k++) {
+            let change = unplayedChangesBackingArray[k];
+            console.log(change);
+            dispatch(Actions.playChange( {change} ));
+        }
+        return payload;
+    })
+    .then(payload => {
+        return { type: TILE_CHANGES_FETCHED, payload: payload };
+    })
+    .then(action => {
+        return dispatch(action);
     });
 }

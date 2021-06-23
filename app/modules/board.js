@@ -1,6 +1,7 @@
 import { xy2index, int2rgba } from '../utils/general';
 import { values as colorValues, hexcolor2colorcode, colorcode2hexcolor } from '../constants/colors';
 import * as API from '../utils/api';
+import * as Time from '../utils/time';
 
 
 /**
@@ -104,7 +105,7 @@ export function setTile(state, {x, y}, width, color) {
 /**
 Sets a tile without making a call to an API.
 */
-export function setTileLocally(tiles, tilesRgba, state, index, width, color) { // should use function chaining
+export function setTileLocallyInternal(tiles, tilesRgba, state, index, width, color) { // should use function chaining
     // var tiles = state.board.tiles.slice();
     // var tilesRgba = state.board.tilesRgba.slice();
 
@@ -120,6 +121,17 @@ export function setTileLocally(tiles, tilesRgba, state, index, width, color) { /
         tiles: tiles,
         tilesRgba: tilesRgba
     }};
+}
+
+export function setTileLocally(state, index, width, color) { // should use function chaining
+    var tiles = state.board.tiles.slice();
+    var tilesRgba = state.board.tilesRgba.slice();
+    // const width = state.board.width;
+
+    index = Number(index);
+    color = colorcode2hexcolor(Number(color));
+
+    return setTileLocallyInternal(tiles, tilesRgba, state, index, width, color);
 }
 
 /*
@@ -142,9 +154,36 @@ export function importTiles(state, tileChanges) {
         var {index, color, timestamp} = tileChanges[k];
         index = Number(index);
         color = colorcode2hexcolor(Number(color));
-        state = setTileLocally(tiles, tilesRgba, state, index, width, color);
+        state = setTileLocallyInternal(tiles, tilesRgba, state, index, width, color);
         // console.log("set tile " + index + " to " + "color");
     }
 
     return state;
+}
+
+/**
+Not actually used.
+*/
+export function playChanges(state, unplayedChanges) {
+    // should this pop the change from unplayedChanges
+    // should this also set the delay
+
+    var nextDelay = null;
+
+    // dequeue current unplayed change
+    const change = props.unplayedChanges.dequeue();
+    if (nextChange == undefined) {
+        setChangeDelay(nextDelay); return;
+    }
+    const {index, color, timestamp} = change;
+    // set the tile using that unplayed change
+    props.setLocalTile(index, color);
+    // peek at the next unplayed change to get the delay until it
+    const nextChange = props.unplayedChanges.peek();
+    if (nextChange == undefined) {
+        setChangeDelay(nextDelay); return;
+    }
+    nextDelay = Time.getRemaining(Time.addMillis(Time.str2date(nextChange.timestamp), TILE_UPDATE_OFFSET));
+    // set another timeout with that delay
+    setChangeDelay(nextDelay);
 }

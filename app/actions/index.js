@@ -1,5 +1,6 @@
 import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED } from "../constants/actionTypes";
 import * as Action from "../constants/actionTypes";
+import * as System from '../constants/system';
 import * as API from "../utils/api";
 
 
@@ -9,6 +10,14 @@ export function addArticle(payload) {
 
 export function setTile(payload) {
     return { type: SET_TILE, payload };
+};
+
+export function setLocalTile(payload) {
+    return { type: Action.SET_LOCAL_TILE, payload };
+};
+
+export function playChange(payload) {
+    return { type: Action.PLAY_CHANGE, payload };
 };
 
 export function setMouseDown(payload) {
