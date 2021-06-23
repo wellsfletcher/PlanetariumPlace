@@ -18,6 +18,7 @@ import * as System from '../constants/system';
 // import * as Board from '../modules/board';
 
 import Fab from '@material-ui/core/Fab';
+import Grid from '@material-ui/core/Grid';
 import GlobeIcon from '@material-ui/icons/Public';
 import ViewIcon from '@material-ui/icons/Visibility'; // VisibilityOff
 
@@ -91,46 +92,6 @@ const BoardPage = (props) => {
             */
         }, TILE_UPDATE_FREQUENCY);
 
-        // put scheduler hook here? or maybe just do it all async elsewhere
-        // could also use useInterval here
-        /*
-        const [changeDelay, setChangeDelay] = useState(null);
-        useTimeout(() => {
-        // useInterval(() => {
-            console.log("playing async tile...");
-            var nextDelay = null;
-
-            // dequeue current unplayed change
-            const change = props.unplayedChanges.dequeue();
-            if (nextChange == undefined) {
-                setChangeDelay(nextDelay); return;
-            }
-            const {index, color, timestamp} = change;
-            // set the tile using that unplayed change
-            props.setLocalTile(index, color);
-            // peek at the next unplayed change to get the delay until it
-            const nextChange = props.unplayedChanges.peek();
-            if (nextChange == undefined) {
-                setChangeDelay(nextDelay); return;
-            }
-            nextDelay = Time.getRemaining(Time.addMillis(Time.str2date(nextChange.timestamp), TILE_UPDATE_OFFSET));
-            // set another timeout with that delay
-            setChangeDelay(nextDelay);
-        // }, changeDelay);
-        }, changeDelay, props.unplayedChanges.queue);
-        // }, changeDelay, props.unplayedChanges);
-        */
-        /*
-        // needs to get called again whenever props.unplayedChanges.queue changes
-        useTimeout(() => {
-            props.playNextChange();
-            // can set delay state here or in above method
-            // if the delay is null, it should not schelue a timeout
-            // (or if the queue is empty)
-        }, changeDelay, props.unplayedChanges.queue);
-        */
-
-
         const onChangeComplete = (color) => {
             var brushColorInt = hexcolor2int(color);
             // alert("painting = " + brushColorInt);
@@ -185,6 +146,7 @@ const BoardPage = (props) => {
         */
 
 
+        /*
         const globeFab = <Fab
             color="primary"
             aria-label="view"
@@ -197,6 +159,30 @@ const BoardPage = (props) => {
          >
             <GlobeIcon />
         </Fab>;
+        */
+        const globeFab = <Fab
+            color="primary"
+            aria-label="view"
+            style={{
+                margin: "7px"
+            }}
+            onClick={() => setUseGlobe(!useGlobe)}
+         >
+            <GlobeIcon />
+        </Fab>;
+
+        const flashbackFab = <Fab
+            color="primary"
+            aria-label="view"
+            style={{
+                margin: "7px"
+            }}
+
+            onClick={() => setUseGlobe(!useGlobe)}
+         >
+            <ViewIcon />
+        </Fab>;
+
         /*
         const globeFab = <Fab
             color="primary"
@@ -238,6 +224,30 @@ const BoardPage = (props) => {
         );
         */
 
+        const fabView = (
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="flex-end"
+              width="50%"
+
+              style={{
+                  position: 'absolute',
+                  bottom: "7px", // theme.spacing(2),
+                  right: "7px", // theme.spacing(2),
+                  width: "70px"
+              }}
+            >
+                <Grid item>
+                    {flashbackFab}
+                </Grid>
+                <Grid item>
+                    {globeFab}
+                </Grid>
+            </Grid>
+        );
+
         return (
             <>
                 <div style={style}>
@@ -246,7 +256,7 @@ const BoardPage = (props) => {
                     />
                     {boardViewer}
                 </div>
-                {globeFab}
+                {fabView}
             </>
         );
 }
