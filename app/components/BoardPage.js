@@ -20,7 +20,9 @@ import * as System from '../constants/system';
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
 import GlobeIcon from '@material-ui/icons/Public';
-import ViewIcon from '@material-ui/icons/Visibility'; // VisibilityOff
+import MapIcon from '@material-ui/icons/Map';
+import ViewIcon from '@material-ui/icons/History'; // Visibility, HourglassFullTwoTone, History
+import ViewOffIcon from '@material-ui/icons/FastForward'; // VisibilityOff, HourglassEmpty, Update, FastForward
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -98,6 +100,8 @@ const BoardPage = (props) => {
             props.setBrushColor(brushColorInt);
         };
 
+        const [viewFlashback, setViewFlashback] = React.useState(false);
+
         // var tiles = [];
         const boardProps = {
             tilesRgba: props.tilesRgba,
@@ -107,11 +111,11 @@ const BoardPage = (props) => {
             width: props.width,
             // mouseDown: props.mouseDown,
             brushColor: props.brushColor,
+            viewFlashback: viewFlashback,
 
             setTile: props.setTile
         }
 
-        // var useGlobe = false;
         const [useGlobe, setUseGlobe] = React.useState(true);
         const boardViewer = (!useGlobe) ?
             <Board
@@ -123,43 +127,7 @@ const BoardPage = (props) => {
                 {...boardProps}
             />
         ;
-        /*
-        // var boardStyle = (!useGlobe) ? {} : {display: "none"};
-        var boardStyle = {};
-        var board = (
-            <Board
-                {...boardProps}
-                mouseDown={props.mouseDown}
-                style={boardStyle}
-            />
-        );
-        var globe = (!useGlobe) ?
-            <> </>
-            :
-            <Globe
-                {...boardProps}
 
-            />
-        ;
-        // {board}
-        // {globe}
-        */
-
-
-        /*
-        const globeFab = <Fab
-            color="primary"
-            aria-label="view"
-            style={{
-                position: 'absolute',
-                bottom: "5px", // theme.spacing(2),
-                right: "5px" // theme.spacing(2),
-            }}
-            onClick={() => setUseGlobe(!useGlobe)}
-         >
-            <GlobeIcon />
-        </Fab>;
-        */
         const globeFab = <Fab
             color="primary"
             aria-label="view"
@@ -178,51 +146,10 @@ const BoardPage = (props) => {
                 margin: "7px"
             }}
 
-            onClick={() => setUseGlobe(!useGlobe)}
+            onClick={() => setViewFlashback(!viewFlashback)}
          >
-            <ViewIcon />
+            {(!viewFlashback) ? <ViewIcon /> : <ViewOffIcon />}
         </Fab>;
-
-        /*
-        const globeFab = <Fab
-            color="primary"
-            aria-label="view"
-            style={{
-                margin: "7px"
-            }}
-            onClick={() => setUseGlobe(!useGlobe)}
-         >
-            <GlobeIcon />
-        </Fab>;
-
-        const flashbackFab = <Fab
-            color="primary"
-            aria-label="view"
-            style={{
-                margin: "7px"
-            }}
-
-            onClick={() => setUseGlobe(!useGlobe)}
-         >
-            <ViewIcon />
-        </Fab>;
-
-        const fabView = (
-            <div
-                style={{
-                    width: "45px",
-                    position: 'absolute',
-                    bottom: "10px", // theme.spacing(2),
-                    right: "10px", // theme.spacing(2),
-                    // padding: "20px"
-                    margin: "10px"
-                }}
-            >
-                {flashbackFab}
-                {globeFab}
-            </div>
-        );
-        */
 
         const fabView = (
             <Grid
@@ -230,7 +157,6 @@ const BoardPage = (props) => {
               direction="column"
               justify="center"
               alignItems="flex-end"
-              width="50%"
 
               style={{
                   position: 'absolute',

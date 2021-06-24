@@ -11,8 +11,9 @@ import { useSwipeable, Swipeable } from 'react-swipeable';
 
 import useCanvas from './useCanvas';
 import useSwiping from './useSwiping';
+import usePreloadedImage from './hooks/usePreloadedImage';
 import { int2rgba, vector2index } from '../utils/general';
-import { drawPixel, drawPixelBuffer, drawPixelRgbaBuffer, drawImageData } from '../utils/draw';
+import { drawPixel, drawPixelBuffer, drawPixelRgbaBuffer, drawImageData, paintCanvasBlack, fillCanvasWithImage } from '../utils/draw';
 // import Tooltip from './TrackingTooltip.js';
 
 
@@ -133,7 +134,10 @@ const Board = (props) => {
     var width = props.width;
     var height = tiles.length / width;
 
+    const viewFlashback = props.viewFlashback;
+
     const [selectedTile, setSelectedTile] = React.useState(null); // {x: 0, y: 0}
+    const [flashBackImage, setFlashbackImage] = usePreloadedImage("../../assets/pixel-countries-mid-res.png");
 
     var draw = (ctx, frameCount) => {
         // drawAnimatedCircle(ctx, frameCount);
@@ -142,7 +146,15 @@ const Board = (props) => {
         // but this is the only way to do it in a reacty way methinks
         // unless maybe if lifecycle methods could solve my problems?
         // drawPixelBuffer(ctx, tiles, width);
-        drawPixelRgbaBuffer(ctx, tilesRgba, width);
+
+        // drawPixelRgbaBuffer(ctx, tilesRgba, width);
+        if (!viewFlashback) {
+            drawPixelRgbaBuffer(ctx, tilesRgba, width);
+        } else {
+            // paintCanvasBlack(ctx, width, height);
+            // fillCanvasWithImage(ctx, "../../assets/pixel-countries-mid-res.png", width, height);
+            fillCanvasWithImage(ctx, flashBackImage, width, height);
+        }
     };
 
     const options = {
@@ -189,6 +201,7 @@ const Board = (props) => {
 
     const handleCanvasClick = (event) => {
         if (event.defaultPrevented) return; // console.log("drag!");
+        if (viewFlashback) return;
         if (isSwiping || isPinching ) {
             //- console.log("Click aborted");
             return;

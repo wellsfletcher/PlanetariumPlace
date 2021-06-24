@@ -55,6 +55,46 @@ export function drawPixelRgbaBuffer(ctx, pixels, bufferWidth) {
     return drawUint8ClampedArray(ctx, pixels, bufferWidth, bufferHeight);
 };
 
+export function paintCanvasBlack(ctx, canvasWidth, canvasHeight) {
+    ctx.fillStyle = "blue";
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+};
+
+/**
+Makes async call to load the image
+*/
+export function fillCanvasWithImagePath(ctx, path, canvasWidth, canvasHeight) {
+    var image = new Image();
+    image.src = path;
+    image.onload = function() {
+        var pattern = ctx.createPattern(this, "repeat");
+        ctx.fillStyle = pattern;
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        ctx.fill();
+    };
+};
+
+/**
+Requires image to already be preloaded
+*/
+export function fillCanvasWithImage(ctx, image, canvasWidth, canvasHeight) {
+    var pattern = ctx.createPattern(image, "repeat");
+    ctx.fillStyle = pattern;
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+    ctx.fill();
+};
+
+/*
+export function fillCanvasWithImage(ctx, image, canvasWidth, canvasHeight) {
+    image.onload = function() {
+        var pattern = ctx.createPattern(image, "repeat");
+        ctx.fillStyle = pattern;
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        ctx.fill();
+    }
+};
+*/
+
 export function drawUint8ClampedArray(ctx, buffer, width, height) {
     const imageData = new ImageData(buffer, width, height);
     ctx.putImageData(imageData, 0, 0);

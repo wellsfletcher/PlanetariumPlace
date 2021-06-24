@@ -7,7 +7,8 @@ import Globe from 'react-globe.gl';
 import { int2hexcolor, xy2index } from '../utils/general';
 import useCanvas from './useCanvas';
 import useWindowDimensions from './useWindowDimensions';
-import { drawPixelBuffer, drawPixelRgbaBuffer, drawImageData } from '../utils/draw';
+import usePreloadedImage from './hooks/usePreloadedImage';
+import { drawPixelBuffer, drawPixelRgbaBuffer, drawImageData, paintCanvasBlack, fillCanvasWithImage } from '../utils/draw';
 
 function randInt(min, max) {
     if (max === undefined) {
@@ -52,14 +53,39 @@ function geo2xy(lat, lng, width, height) {
 function CanvasGlobe(props) {
     const globeEl = React.useRef();
 
+    const viewFlashback = props.viewFlashback;
     var tilesRgba = props.tilesRgba;
     var tiles = props.tiles;
     var width = props.width;
     var height = tiles.length / width;
 
+    /*
+    // maybe change this to a custom usePreloadedImage hook
+    const [flashBackImage, setFlashbackImage] = useState(new Image());
+    React.useEffect(() => {
+        // console.log("image loading");
+        flashBackImage.src = "../../assets/pixel-countries-mid-res.png";
+        flashBackImage.onload = () => {
+            console.log("imaged loaded");
+            // console.log(image);
+        };
+        setFlashbackImage(flashBackImage);
+    }, []);
+    */
+    const [flashBackImage, setFlashbackImage] = usePreloadedImage("../../assets/pixel-countries-mid-res.png");
+
     var draw = (ctx, frameCount) => {
         // drawPixelBuffer(ctx, tiles, width);
-        drawPixelRgbaBuffer(ctx, tilesRgba, width);
+        // drawPixelRgbaBuffer(ctx, tilesRgba, width);
+
+        if (!viewFlashback) {
+            drawPixelRgbaBuffer(ctx, tilesRgba, width);
+        } else {
+            // paintCanvasBlack(ctx, width, height);
+            // fillCanvasWithImage(ctx, "../../assets/pixel-countries-mid-res.png", width, height);
+            // console.log(image);
+            fillCanvasWithImage(ctx, flashBackImage, width, height);
+        }
         // console.log("drew");
     }
 
@@ -99,7 +125,7 @@ function CanvasGlobe(props) {
         // globeMaterial.needsUpdate = true;
         //- console.log("globe texture updated");
 
-    }, [props.tiles]); // the props.tiles made it magically start updating the globe; but it still doesn't update on Safari
+    }, [props.viewFlashback, props.tiles]); // the props.tiles made it magically start updating the globe; but it still doesn't update on Safari
 
     const MAP_ROTATION_TOLERANCE = 0.001;
     // const [mapRotation, setMapRotation] = useState(new THREE.Vector3( 0, 0, 0 ));
@@ -133,6 +159,7 @@ function CanvasGlobe(props) {
     const onGlobeClick = ({ lat, lng }, event) => {
         // event.preventDefault(); // this may add a delay to clicks being registered?
         if (event.defaultPrevented) return; // aaaaaaaaaaaaaaaaaaaa
+        if (viewFlashback) return; // may wanna make it so that if you click anywhere it changes the viewFlashback state
         console.log(event.defaultPrevented);
         console.log(event);
 
@@ -226,6 +253,8 @@ function CanvasGlobe(props) {
     // showGraticules={true}
     // globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe_dark.jpg"
     // globeImageUrl="../../assets/pixel-countries-mid-res.png"
+    // globeImageUrl={(viewFlashback) ? "../../assets/pixel-countries-mid-res.png" : ""}
+    // {(viewFlashback) ? globeImageUrl="../../assets/pixel-countries-mid-res.png" : null}
     // onPointerDown={onMapTouchStart}
     // onTouchStart={onMapTouchStart}
     return (
