@@ -25,6 +25,7 @@ var CopyWebpackPluginConfig = new CopyWebpackPlugin(
 );
 module.exports = {
     entry: __dirname + '/app/index.js',
+    mode: 'development',
     module: {
         rules: [
             {

@@ -7,6 +7,7 @@ import { date2str } from "../utils/time";
 This is a redux action.
 */
 export function fetchTiles(dispatch) {
+    var boardId = 1;
     var canvas = new Uint8Array(1024 * 512);
     var offset = 0;
 
@@ -20,7 +21,16 @@ export function fetchTiles(dispatch) {
         offset += responseArray.byteLength * 2;
     }
 
-    return fetch("https://planetarium.place/api/v0/board/tiles.php")
+    return fetch("https://planetarium.place/api/v0/board/tiles.php", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                boardId: boardId
+            })
+        })
         .then(res => {
 
             function next(reader) {

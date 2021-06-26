@@ -17,3 +17,9 @@
     # BITFIELD links:1 SET u8 #(1023 + (1024 * 511)) 0
     BITFIELD tiles:1 SET u4 #524287 1
     BITFIELD links:1 SET u4 #524287 1
+
+# call create_board(2, 1024, 512):
+    # BITFIELD tiles:2 SET u4 #(1023 + (1024 * 511)) 0
+    # BITFIELD links:2 SET u8 #(1023 + (1024 * 511)) 0
+    BITFIELD tiles:2 SET u4 #524287 1
+    BITFIELD links:2 SET u4 #524287 1

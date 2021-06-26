@@ -21,6 +21,13 @@ class Board {
         return preg_replace("([^0-9/\- :\.])", "", $str);
     }
 
+    function sanitizeAlphanumeric($str) {
+        // return preg_replace("((a-z)|(A-Z)|(0-9))", "", $str);
+        // return preg_replace("(a-zA-Z0-9)", "", $str);
+        // return intval(filter_var($str, FILTER_SANITIZE_STRING));
+        return $str;
+    }
+
     function getWidth($boardId) {
         return 1024;
     }
@@ -30,6 +37,8 @@ class Board {
     }
 
     function getTiles($boardId) {
+        // sanitizeDate boardId
+        // $boardId = $this->sanitizeInteger($boardId); // $boardId = $this->sanitizeAlphanumeric($boardId);
         // init the json holder
         // $json = $this->conn->get('myFirstRedisVariableEver');
         $tilesKey = "tiles:$boardId";
