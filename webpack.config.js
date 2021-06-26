@@ -14,6 +14,11 @@ var CopyWebpackPluginConfig = new CopyWebpackPlugin(
                 from: 'app/api',
                 to: 'api',
                 force: true
+            },
+            {
+                from: 'app/assets',
+                to: 'assets',
+                force: true
             }
         ]
     }
@@ -26,6 +31,12 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
+            }, /*{
+                test: /\.css$/,
+                loader: "style-loader!css-loader"
+            },*/ {
+                test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+                loader: 'url-loader?limit=100000'
             }
         ]
     },

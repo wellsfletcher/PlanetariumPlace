@@ -21,6 +21,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
 import ColorPicker from './ColorPicker';
+import VerticalColorPicker from './VerticalColorPicker';
 
 const drawerWidth = 240;
 

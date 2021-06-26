@@ -38,7 +38,7 @@ const styles = (theme) => ({
     alignItems: 'center',
   },
   swatch: {
-    width: 192,
+    width: 48,
   },
   sliderContainer: {
     display: 'flex',
@@ -48,21 +48,21 @@ const styles = (theme) => ({
   },
   slider: {
     width: 'calc(100% - 80px)',
-    marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(3),
+    marginLeft: theme.spacing(0),
+    marginRight: theme.spacing(0),
   },
   colorBar: {
     marginTop: theme.spacing(2),
   },
   colorSquare: {
-    width: 64,
-    height: 64,
+    width: 48, // 64
+    height: 48, // 64
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   button: {
-    marginLeft: theme.spacing(1),
+    marginLeft: theme.spacing(0),
   },
 });
 
@@ -99,7 +99,6 @@ function ColorTool(props) {
 
     return (
       <Grid item xs={12} sm={6} md={4}>
-        <div className={classes.swatch}>
           {hues.map((hue) => {
             const backgroundColor = colors[hue];
 
@@ -128,13 +127,17 @@ function ColorTool(props) {
               </Tooltip>
             );
           })}
-        </div>
       </Grid>
     );
   };
 
   return (
-    <Grid container spacing={5} className={classes.root}>
+    <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="flex-end"
+        className={classes.root}>
       {colorPicker('primary')}
     </Grid>
   );

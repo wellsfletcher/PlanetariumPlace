@@ -12,6 +12,7 @@ import { useSwipeable, Swipeable } from 'react-swipeable';
 import useCanvas from './useCanvas';
 import useSwiping from './useSwiping';
 import usePreloadedImage from './hooks/usePreloadedImage';
+import * as System from '../constants/system';
 import { int2rgba, vector2index } from '../utils/general';
 import { drawPixel, drawPixelBuffer, drawPixelRgbaBuffer, drawImageData, paintCanvasBlack, fillCanvasWithImage } from '../utils/draw';
 // import Tooltip from './TrackingTooltip.js';
@@ -137,7 +138,7 @@ const Board = (props) => {
     const viewFlashback = props.viewFlashback;
 
     const [selectedTile, setSelectedTile] = React.useState(null); // {x: 0, y: 0}
-    const [flashBackImage, setFlashbackImage] = usePreloadedImage("../../assets/pixel-countries-mid-res.png");
+    const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
 
     var draw = (ctx, frameCount) => {
         // drawAnimatedCircle(ctx, frameCount);

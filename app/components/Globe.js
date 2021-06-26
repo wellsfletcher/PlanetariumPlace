@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react';
 import * as THREE from "three";
 import Globe from 'react-globe.gl';
 
-import { int2hexcolor, xy2index } from '../utils/general';
 import useCanvas from './useCanvas';
 import useWindowDimensions from './useWindowDimensions';
 import usePreloadedImage from './hooks/usePreloadedImage';
+import * as System from '../constants/system';
+import { int2hexcolor, xy2index } from '../utils/general';
 import { drawPixelBuffer, drawPixelRgbaBuffer, drawImageData, paintCanvasBlack, fillCanvasWithImage } from '../utils/draw';
 
 function randInt(min, max) {
@@ -72,7 +73,8 @@ function CanvasGlobe(props) {
         setFlashbackImage(flashBackImage);
     }, []);
     */
-    const [flashBackImage, setFlashbackImage] = usePreloadedImage("../../assets/pixel-countries-mid-res.png");
+    console.log(System.FLASHBACK_BOARD_PATH);
+    const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
 
     var draw = (ctx, frameCount) => {
         // drawPixelBuffer(ctx, tiles, width);

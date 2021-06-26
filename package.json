@@ -23,6 +23,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
+    "file-loader": "^6.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-globe.gl": "^2.13.0",
@@ -31,7 +32,8 @@
     "react-router-dom": "^5.2.0",
     "react-swipeable": "^6.0.1",
     "redux": "^4.0.5",
-    "three": "^0.124.0"
+    "three": "^0.124.0",
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
