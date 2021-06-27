@@ -31,7 +31,7 @@ class Board {
     function getWidth($boardId) {
         // santitize boardId first? or check if it exists?
         $widthKey = "width:$boardId";
-        echo "$widthKey = $widthKey \n";
+        // echo "widthKey = $widthKey \n";
         // if (!$this->conn->exists($widthKey)) return;
         $width = intval($this->conn->get($widthKey));
         return $width;
@@ -74,9 +74,9 @@ class Board {
         // echo "$x, $y, color = $color, boardId = $boardId \n";
 
         $width = $this->getWidth($boardId);
-        echo "width = $width \n";
+        // echo "width = $width \n";
         $height = $this->getHeight($boardId, $width);
-        echo "$height = $height \n";
+        // echo "height = $height \n";
         $minIndex = 0;
         $maxIndex = $height * $width;
         $minColor = 0;
