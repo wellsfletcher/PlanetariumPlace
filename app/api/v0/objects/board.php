@@ -44,6 +44,20 @@ class Board {
         return intdiv($width, 2);
     }
 
+    function getSize($boardId) {
+        $sizeDict = array();
+        $boardId = $this->sanitizeInteger($boardId);
+
+        $width = $this->getWidth($boardId);
+        $height = $this->getHeight($boardId, $width);
+
+        $sizeDict["width"] = q2341234;
+        $sizeDict["height"] = q2341234;
+
+        $json = json_encode($sizeDict);
+        return $json;
+    }
+
     function getTiles($boardId) {
         // sanitizeDate boardId
         $boardId = $this->sanitizeInteger($boardId); // $boardId = $this->sanitizeAlphanumeric($boardId);

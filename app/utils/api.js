@@ -11,8 +11,9 @@ export function fetchTiles(boardId, dispatch) {
     var offset = 0;
 
     function handleChunk(responseArray) {
-        console.log("response array = ");
-        console.log(responseArray);
+        // console.log("response array = ");
+        // console.log(responseArray);
+        console.log("byteLength = " + responseArray.byteLength);
         for (var i = 0; i < responseArray.byteLength; i++) {
             canvas[offset + 2 * i] = responseArray[i] >> 4;
             canvas[offset + 2 * i + 1] = responseArray[i] & 15;
