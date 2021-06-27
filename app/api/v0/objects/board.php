@@ -73,7 +73,9 @@ class Board {
         // echo "$x, $y, color = $color, boardId = $boardId \n";
 
         $width = $this->getWidth($boardId);
+        echo "width = $width \n"
         $height = $this->getHeight($boardId, $width);
+        echo "$height = $height \n"
         $minIndex = 0;
         $maxIndex = $height * $width;
         $minColor = 0;
