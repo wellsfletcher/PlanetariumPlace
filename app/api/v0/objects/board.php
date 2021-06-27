@@ -31,6 +31,7 @@ class Board {
     function getWidth($boardId) {
         // santitize boardId first? or check if it exists?
         $widthKey = "width:$boardId";
+        echo "$widthKey = $widthKey \n";
         // if (!$this->conn->exists($widthKey)) return;
         $width = intval($this->conn->get($widthKey));
         return $width;
