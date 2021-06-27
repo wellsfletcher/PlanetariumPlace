@@ -51,8 +51,8 @@ class Board {
         $width = $this->getWidth($boardId);
         $height = $this->getHeight($boardId, $width);
 
-        $sizeDict["width"] = q2341234;
-        $sizeDict["height"] = q2341234;
+        $sizeDict["width"] = $width;
+        $sizeDict["height"] = $height;
 
         $json = json_encode($sizeDict);
         return $json;
