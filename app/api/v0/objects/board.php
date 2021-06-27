@@ -29,11 +29,18 @@ class Board {
     }
 
     function getWidth($boardId) {
-        return 1024;
+        // santitize boardId first? or check if it exists?
+        $widthKey = "width:$boardId";
+        // if (!$this->conn->exists($widthKey)) return;
+        $width = intval($this->conn->get($widthKey));
+        return $width;
     }
 
-    function getHeight($boardId) {
-        return 512;
+    function getHeight($boardId, $width = null) {
+        if ($width == null) {
+            $width = $this->getWidth($boardId);
+        }
+        return intdiv($width, 2);
     }
 
     function getTiles($boardId) {
@@ -66,7 +73,7 @@ class Board {
         // echo "$x, $y, color = $color, boardId = $boardId \n";
 
         $width = $this->getWidth($boardId);
-        $height = $this->getHeight($boardId);
+        $height = $this->getHeight($boardId, $width);
         $minIndex = 0;
         $maxIndex = $height * $width;
         $minColor = 0;

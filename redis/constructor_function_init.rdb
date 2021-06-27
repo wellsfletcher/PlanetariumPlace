@@ -7,4 +7,4 @@
     const max_y = height - 1;
     BITFIELD tiles:board_id SET u4 #(max_x + (width * max_y)) 0
     BITFIELD links:board_id SET u4 #(max_x + (width * max_y)) 0
-    # SET width:board_id width
+    SET width:board_id width
