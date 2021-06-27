@@ -73,7 +73,7 @@ function CanvasGlobe(props) {
         setFlashbackImage(flashBackImage);
     }, []);
     */
-    console.log(System.FLASHBACK_BOARD_PATH);
+    // console.log(System.FLASHBACK_BOARD_PATH); // this in base 64 for some reason...
     const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
 
     var draw = (ctx, frameCount) => {

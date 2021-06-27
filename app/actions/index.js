@@ -17,6 +17,10 @@ export function setLocalTile(payload) {
     return { type: Action.SET_LOCAL_TILE, payload };
 };
 
+export function setBoardId(payload) {
+    return { type: Action.SET_BOARD_ID, payload };
+};
+
 export function playChange(payload) {
     return { type: Action.PLAY_CHANGE, payload };
 };

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { useState } from 'react';
 
 import { connect } from "react-redux";
-import { setTile, setLocalTile, setBrushColor, getData, fetchTiles, fetchTileChanges, playChange } from "../actions/index";
+import { setTile, setLocalTile, setBrushColor, getData, fetchTiles, fetchTileChanges, playChange, setBoardId } from "../actions/index";
 import { bindActionCreators } from 'redux';
 
 import { useInterval } from './hooks/useInterval';
@@ -20,9 +20,10 @@ import * as System from '../constants/system';
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
 import GlobeIcon from '@material-ui/icons/Public';
-import MapIcon from '@material-ui/icons/Map';
+// import MapIcon from '@material-ui/icons/Map';
 import ViewIcon from '@material-ui/icons/History'; // Visibility, HourglassFullTwoTone, History
 import ViewOffIcon from '@material-ui/icons/FastForward'; // VisibilityOff, HourglassEmpty, Update, FastForward
+import AddIcon from '@material-ui/icons/Add';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -35,6 +36,7 @@ function mapDispatchToProps(dispatch) {
     setTile: bindActionCreators(({x, y}, color) => setTile({x, y, color}), dispatch),
     setLocalTile: bindActionCreators((index, color) => setLocalTile({index, color}), dispatch),
     playChange: bindActionCreators((change) => playChange({change}), dispatch),
+    setBoardId: bindActionCreators(setBoardId, dispatch),
     // setBrushColor: (color) => dipatch(setBrushColor(color))
     // setBrushColor: bindActionCreators((color) => dipatch(setBrushColor(color)), dispatch) // no work
     // setBrushColor: bindActionCreators((color) => setBrushColor(color), dispatch) // works
@@ -71,7 +73,8 @@ const BoardPage = (props) => {
             props.fetchTiles();
             // props.getData();
             // alert("doing something");
-        }, []);
+        }, [props.boardId]);
+        // }, []);
         // console.log(props.remoteTiles);
 
         const TILE_UPDATE_FREQUENCY = System.TILE_UPDATE_FREQUENCY;
@@ -116,6 +119,8 @@ const BoardPage = (props) => {
             setTile: props.setTile
         }
 
+        const NUM_BOARD_IDS = 2;
+
         const [useGlobe, setUseGlobe] = React.useState(true);
         const boardViewer = (!useGlobe) ?
             <Board
@@ -150,6 +155,20 @@ const BoardPage = (props) => {
          >
             {(!viewFlashback) ? <ViewIcon /> : <ViewOffIcon />}
         </Fab>;
+
+        /*
+        const boardIdFab = <Fab
+            color="primary"
+            aria-label="view"
+            style={{
+                margin: "7px"
+            }}
+
+            onClick={() => props.setBoardId(1 + (props.boardId % NUM_BOARD_IDS))}
+         >
+            <AddIcon />
+        </Fab>;
+        */
 
         const fabView = (
             <Grid

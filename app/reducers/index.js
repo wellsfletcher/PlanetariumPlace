@@ -197,6 +197,9 @@ function rootReducer(state = initialState, action) {
         const color = change.color;
 
         return Board.setTileLocally(state, index, width, color);
+    } else if (action.type === Action.SET_BOARD_ID) {
+        console.log("boardId = " + action.payload);
+        return { ...state, boardId: action.payload };
     }
     return state;
 }
