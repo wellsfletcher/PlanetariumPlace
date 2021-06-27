@@ -80,9 +80,10 @@ class Board {
         $index = $x + ($width * $y);
 
         // BITFIELD testBitField SET u4 #(x + (width * y)) color
+        $doesKeyExist = $this->conn->exists($tilesKey);
         $isIndexInBounds = $index >= $minIndex && $index < $maxIndex;
         $isColorInBounds = $color >= $minColor && $color < $maxColor;
-        if ($isIndexInBounds && $isColorInBounds) {
+        if ($doesKeyExist && $isIndexInBounds && $isColorInBounds) {
             $offset = $index;
             $this->conn->rawCommand("BITFIELD", $tilesKey, "SET", "u4", "#$offset", $color);
 

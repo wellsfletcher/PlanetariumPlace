@@ -1,5 +1,6 @@
 import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED, TILE_CHANGES_FETCHED } from "../constants/actionTypes";
 import * as Action from "../constants/actionTypes";
+import * as System from "../constants/system";
 import { xy2index } from '../utils/general';
 import * as Board from '../modules/board';
 import Queue from '../utils/Queue';
@@ -125,7 +126,7 @@ const INITIAL_BRUSH_COLOR = 0x00D3DD; // 1752220;
 const initialState = {
     articles: [],
     mouseDown: false,
-    boardId: 1,
+    boardId: System.INITIAL_BOARD_ID,
     // remoteTiles: null,
     board: {
         lastUpdated: new Date(),
