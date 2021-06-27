@@ -2,6 +2,7 @@ import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED }
 import * as Action from "../constants/actionTypes";
 import * as System from '../constants/system';
 import * as API from "../utils/api";
+import store from "../store/index";
 
 
 export function addArticle(payload) {
@@ -46,33 +47,6 @@ export function getData() {
         );
     };
 }
-/*
-export function getData(dispatch) { // , getState
-    alert("bbbbb");
-    return fetch("https://jsonplaceholder.typicode.com/posts")
-        .then(response => response.json())
-        .then(json => {
-            dispatch({ type: "DATA_LOADED", payload: json });
-        }
-    );
-}
-*/
-
-/*
-export function fetchTiles() {
-    // alert("aaaaa");
-    return function(dispatch) { // , getState
-        alert("hhhhhhh");
-        return fetch("https://planetarium.place/api/v0/board/tiles.php")
-            .then(response => response.json())
-            .then(json => {
-                dispatch({ type: TILES_FETCHED, payload: json });
-            }
-        );
-    };
-}
-*/
-
 
 /**
 * Handle a single "chunk" or response data.
@@ -83,7 +57,7 @@ export function fetchTiles() {
 
 export function fetchTiles() {
     // alert("aaaaa");
-    return function(dispatch) { // , getState
+    return function(dispatch, getState) { // , getState
         // const canvas = API.fetchTiles();
         // return dispatch({ type: TILES_FETCHED, payload: API.fetchTiles() });
         /*
@@ -93,11 +67,13 @@ export function fetchTiles() {
             return dispatch({ type: TILES_FETCHED, payload: canvas });
         });
         */
-        return API.fetchTiles(dispatch);
+        const state = store.getState();
+        const boardId = state.boardId;
+        return API.fetchTiles(boardId, dispatch);
     }
 }
 
-export function fetchTiles2() {
+export function fetchTiles2() { // I don't think this is used
     // alert("aaaaa");
     return function(dispatch) { // , getState
         // alert("hhhhhhh");

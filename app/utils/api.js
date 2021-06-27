@@ -6,8 +6,7 @@ import { date2str } from "../utils/time";
 /**
 This is a redux action.
 */
-export function fetchTiles(dispatch) {
-    var boardId = 1;
+export function fetchTiles(boardId, dispatch) {
     var canvas = new Uint8Array(1024 * 512);
     var offset = 0;
 

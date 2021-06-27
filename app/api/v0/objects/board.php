@@ -38,7 +38,7 @@ class Board {
 
     function getTiles($boardId) {
         // sanitizeDate boardId
-        // $boardId = $this->sanitizeInteger($boardId); // $boardId = $this->sanitizeAlphanumeric($boardId);
+        $boardId = $this->sanitizeInteger($boardId); // $boardId = $this->sanitizeAlphanumeric($boardId);
         // init the json holder
         // $json = $this->conn->get('myFirstRedisVariableEver');
         $tilesKey = "tiles:$boardId";
