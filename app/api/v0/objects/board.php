@@ -1,4 +1,10 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
 class Board {
     // database connection
     private $conn;
@@ -29,15 +35,15 @@ class Board {
     }
 
     function getWidth($boardId) {
-        /*
+        
         // santitize boardId first? or check if it exists?
         $widthKey = "width:$boardId";
         // echo "widthKey = $widthKey \n";
         // if (!$this->conn->exists($widthKey)) return;
         $width = intval($this->conn->get($widthKey));
         return $width;
-        */
-        return 1024;
+
+        // return 1024;
     }
 
     function getHeight($boardId, $width = null) {
