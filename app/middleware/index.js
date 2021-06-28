@@ -31,7 +31,7 @@ export function forbiddenWordsMiddleware({ getState, dispatch }) { // { getState
                     return dispatch({ type: "TILE_OUT_OF_BOUNDS" });
                 }
             } else if (action.type === Action.PLAY_CHANGE) {
-                console.log("Going through play_change middleware");
+                // console.log("Going through play_change middleware");
                 const change = action.payload.change;
                 // console.log("change = ");
                 // console.log(change);

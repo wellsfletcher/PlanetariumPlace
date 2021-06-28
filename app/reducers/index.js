@@ -119,9 +119,6 @@ const initMap = (width, height) => { // technically should be an array of lists 
 
 // as of now, the code can run fine with some pretty crazy high resolutions,
 // but the server would probably explode
-const INITIAL_WIDTH = 1024; // 512
-const INITIAL_HEIGHT = 512; // 256
-const INITIAL_BRUSH_COLOR = 0x00D3DD; // 1752220;
 
 const initialState = {
     articles: [],
@@ -133,14 +130,14 @@ const initialState = {
         // unplayedChanges: [],
         unplayedChanges: new Queue(),
 
-        tilesRgba: new Uint8ClampedArray(new ArrayBuffer(INITIAL_WIDTH * INITIAL_HEIGHT * 4)),
-        tiles: initBoard(INITIAL_WIDTH, INITIAL_HEIGHT),
+        tilesRgba: new Uint8ClampedArray(new ArrayBuffer(System.INITIAL_WIDTH * System.INITIAL_HEIGHT * 4)),
+        tiles: initBoard(System.INITIAL_WIDTH, System.INITIAL_HEIGHT),
         // links: initLinks, // maps pixel to relative url string
-        map: initMap(INITIAL_WIDTH, INITIAL_HEIGHT), // new Map(), // initMap(),
+        map: initMap(System.INITIAL_WIDTH, System.INITIAL_HEIGHT), // new Map(), // initMap(),
         values: ["", "canada", "usa", "mexico", "brazil"], // features
-        width: INITIAL_WIDTH
+        width: System.INITIAL_WIDTH
     },
-    brushColor: INITIAL_BRUSH_COLOR
+    brushColor: System.INITIAL_BRUSH_COLOR
 };
 
 /*
@@ -162,7 +159,8 @@ function rootReducer(state = initialState, action) {
     } else if (action.type === TILES_FETCHED) {
         // alert("hey");
         // return { ...state, remoteTiles: action.payload };
-        return Board.setTiles(state, action.payload);
+        state = {  ...state, board: {...state.board, width: action.payload.width} };
+        return Board.setTiles(state, action.payload.canvas);
     } else if (action.type === TILE_CHANGES_FETCHED) {
         const board = {
             ...state.board,
@@ -199,7 +197,7 @@ function rootReducer(state = initialState, action) {
 
         return Board.setTileLocally(state, index, width, color);
     } else if (action.type === Action.SET_BOARD_ID) {
-        console.log("boardId = " + action.payload);
+        // console.log("boardId = " + action.payload);
         return { ...state, boardId: action.payload };
     }
     return state;

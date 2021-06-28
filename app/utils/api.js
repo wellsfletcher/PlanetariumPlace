@@ -1,13 +1,43 @@
 import { TILES_FETCHED, TILE_CHANGES_FETCHED } from "../constants/actionTypes";
 // import { playChange } from "../actions/index";
 import * as Actions from '../actions/index';
+import * as System from '../constants/system';
 import { date2str } from "../utils/time";
+
+
+function fetchBoardSize(boardId) {
+    return fetch('https://planetarium.place/api/v0/board/size.php', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                boardId: boardId
+            })
+        }
+    )
+    .then(res => res.json())
+    .then(payload => {
+        console.log(payload);
+        return payload;
+    });
+}
+
+export function fetchTilesSlow(boardId, dispatch) {
+    return fetchBoardSize(boardId)
+        .then(payload => fetchTilesGivenSize(boardId, payload.width, payload.height, dispatch));
+}
+
+export function fetchTiles(boardId, dispatch) {
+    return fetchTilesGivenSize(boardId, System.INITIAL_WIDTH, System.INITIAL_HEIGHT, dispatch);
+}
 
 /**
 This is a redux action.
 */
-export function fetchTiles(boardId, dispatch) {
-    var canvas = new Uint8Array(1024 * 512);
+export function fetchTilesGivenSize(boardId, width, height, dispatch) {
+    var canvas = new Uint8Array(width * height);
     var offset = 0;
 
     function handleChunk(responseArray) {
@@ -43,7 +73,7 @@ export function fetchTiles(boardId, dispatch) {
                             resolve(canvas);
                         });
                         */
-                        return dispatch({ type: TILES_FETCHED, payload: canvas });
+                        return dispatch({ type: TILES_FETCHED, payload: {canvas, width} });
                     } else {
                         handleChunk(chunk.value);
                         return next(reader);
@@ -108,7 +138,7 @@ This is a Redux action.
 export function fetchTileChanges(boardId, lastUpdated, dispatch) { // width?
     const since = date2str(lastUpdated);
     // const {boardId, since} = dispatch;
-    console.log("getting history...");
+    //- console.log("getting history...");
     // console.log({ boardId, since });
     fetch('https://planetarium.place/api/v0/board/history.php', {
             method: 'POST',
@@ -124,7 +154,7 @@ export function fetchTileChanges(boardId, lastUpdated, dispatch) { // width?
     )
     .then(res => res.json())
     .then(payload => {
-        console.log("We are in the fetch tile changes promise");
+        // console.log("We are in the fetch tile changes promise");
         const unplayedChangesBackingArray = payload;
         for (var k = 0; k < unplayedChangesBackingArray.length; k++) {
             let change = unplayedChangesBackingArray[k];
