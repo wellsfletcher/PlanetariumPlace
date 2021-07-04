@@ -122,13 +122,13 @@ const initMap = (width, height) => { // technically should be an array of lists 
 
 const initialState = {
     articles: [],
-    mouseDown: false,
+    mouseDown: false, // not used
     boardId: System.INITIAL_BOARD_ID,
     // remoteTiles: null,
     board: {
         lastUpdated: new Date(),
         // unplayedChanges: [],
-        unplayedChanges: new Queue(),
+        unplayedChanges: new Queue(), // not used
 
         tilesRgba: new Uint8ClampedArray(new ArrayBuffer(System.INITIAL_WIDTH * System.INITIAL_HEIGHT * 4)),
         tiles: initBoard(System.INITIAL_WIDTH, System.INITIAL_HEIGHT),

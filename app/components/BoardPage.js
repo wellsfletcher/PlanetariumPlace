@@ -12,6 +12,10 @@ import { useTimeout } from './hooks/useTimeout';
 import Board from './Board';
 import Globe from './Globe';
 import PersistentDrawer from './PersistentDrawer';
+import PermanentDrawer from './PermanentDrawer';
+import IconDrawer from './IconDrawer';
+import TabBar from './TabBar';
+import ButtonBar from './ButtonBar';
 import { hexcolor2int } from '../utils/general';
 import * as Time from '../utils/time';
 import * as System from '../constants/system';
@@ -47,8 +51,8 @@ function mapDispatchToProps(dispatch) {
 const mapStateToProps = (state) => {
     return {
         boardId: state.boardId,
-        lastUpdated: state.board.lastUpdated,
-        unplayedChanges: state.board.unplayedChanges,
+        // lastUpdated: state.board.lastUpdated,
+        // unplayedChanges: state.board.unplayedChanges,
         // articles: state.articles,
         // remoteTiles: state.remoteTiles,
         tilesRgba: state.board.tilesRgba,
@@ -56,7 +60,7 @@ const mapStateToProps = (state) => {
         map: state.board.map,
         values: state.board.values,
         width: state.board.width,
-        mouseDown: state.mouseDown,
+        // mouseDown: state.mouseDown,
         brushColor: state.brushColor
     };
 };
@@ -82,7 +86,9 @@ const BoardPage = (props) => {
         // setInterval(() => {
         useInterval(() => {
             console.log("updating async tiles...");
-            props.fetchTileChanges(props.boardId, props.lastUpdated);
+            const placeholderDate = new Date();
+            props.fetchTileChanges(props.boardId, placeholderDate);
+            // props.fetchTileChanges(props.boardId, props.lastUpdated);
             // props.fetchTileChanges(1, new Date());
 
             // play a bunch of actions after some time (the delay is stored in the payload)
@@ -125,7 +131,7 @@ const BoardPage = (props) => {
         const boardViewer = (!useGlobe) ?
             <Board
                 {...boardProps}
-                mouseDown={props.mouseDown}
+            /*{mouseDown={props.mouseDown}*/
             />
             :
             <Globe
@@ -193,12 +199,40 @@ const BoardPage = (props) => {
             </Grid>
         );
 
+        /*
         return (
             <>
                 <div style={style}>
                     <PersistentDrawer
                         onChangeComplete={onChangeComplete}
                     />
+                    {boardViewer}
+                </div>
+                {fabView}
+            </>
+        );
+        */
+        /*
+        return (
+            <>
+                <div style={style}>
+                    {boardViewer}
+                    <TabBar
+                        onChangeComplete={onChangeComplete}
+                    >
+                    </TabBar>
+                </div>
+                {fabView}
+            </>
+        );
+        */
+        return (
+            <>
+                <div style={style}>
+                    <IconDrawer
+                        onChangeComplete={onChangeComplete}
+                    >
+                    </IconDrawer>
                     {boardViewer}
                 </div>
                 {fabView}

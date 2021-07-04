@@ -80,6 +80,7 @@ export function fetchTiles() {
 export function fetchTileChanges() {
     // alert("aaaaa");
     return function(lastUpdated, boardId, dispatch) { // , getState
+        // TODO: access the state here in order to avoid unnecessary rerenders every 5 secs
         // const canvas = API.fetchTiles();
         // return dispatch({ type: TILES_FETCHED, payload: API.fetchTiles() });
         /*
@@ -89,6 +90,8 @@ export function fetchTileChanges() {
             return dispatch({ type: TILES_FETCHED, payload: canvas });
         });
         */
+        const state = store.getState();
+        lastUpdated = state.board.lastUpdated;
         return API.fetchTileChanges(lastUpdated, boardId, dispatch);
     }
 }

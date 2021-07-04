@@ -1,0 +1,121 @@
+/*
+html {
+    scrollbar-face-color: #646464;
+    scrollbar-base-color: #646464;
+    scrollbar-3dlight-color: #646464;
+    scrollbar-highlight-color: #646464;
+    scrollbar-track-color: #000;
+    scrollbar-arrow-color: #000;
+    scrollbar-shadow-color: #646464;
+    scrollbar-dark-shadow-color: #646464;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 3px;
+}
+::-webkit-scrollbar-button {
+    background-color: #666;
+}
+::-webkit-scrollbar-track {
+    background-color: #646464;
+}
+::-webkit-scrollbar-track-piece {
+    background-color: #000;
+}
+::-webkit-scrollbar-thumb {
+    height: 50px;
+    background-color: #666;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-corner {
+    background-color: #646464;
+}
+::-webkit-resizer {
+    background-color: #666;
+}
+*/
+
+/*
+::-webkit-scrollbar {
+   height: 8px;
+   width: 6px;
+}
+::-webkit-scrollbar-track-piece {
+   background: #F0F0F0;
+}
+::-webkit-scrollbar-thumb:vertical,
+::-webkit-scrollbar-thumb:horizontal {
+   background: #E5E5E5;
+   border-radius: 20px;
+}
+*/
+
+/*
+::-webkit-scrollbar {
+  width: 0.4em;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.00);
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,.1);
+  outline: 1px solid slategrey;
+}
+*/
+
+/*
+--scroll-thumb-color: rgba(255,255,255,.24);
+--scroll-thumb-hover-color: rgba(255,255,255,.36);
+--scroll-thumb-active-color: rgba(255,255,255,.48);
+*/
+
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    --scroll-thumb-color: rgba(255,255,255,.24);
+    --scroll-thumb-hover-color: rgba(255,255,255,.36);
+    --scroll-thumb-active-color: rgba(255,255,255,.48);
+    background-color: var(--scroll-thumb-color);
+    background-clip: padding-box;
+    border: 4px solid transparent;
+    border-radius: 16px;
+    transition: all .15s var(--gm2-easing-standard);
+}
+
+::-webkit-scrollbar-track {
+    box-sizing: border-box;
+    background-color: #303030;
+    border: 1px solid transparent;
+    transition: all .15s var(--gm2-easing-standard);
+}
+
+/*
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-thumb-color);
+    background-clip: padding-box;
+    border: 4px solid transparent;
+    border-radius: 16px;
+    transition: all .15s var(--gm2-easing-standard);
+}
+
+::-webkit-scrollbar-track {
+    box-sizing: border-box;
+    background-color: var(--primary-background-color);
+    border: 1px solid transparent;
+    transition: all .15s var(--gm2-easing-standard);
+}
+*/

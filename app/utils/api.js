@@ -164,6 +164,8 @@ export function fetchTileChanges(boardId, lastUpdated, dispatch) { // width?
         return payload;
     })
     .then(payload => {
+        // this sets the last updated date... which should really be found based on a time returned by the API
+        // otherwise there will be small gaps where tiles may not be fetched
         return { type: TILE_CHANGES_FETCHED, payload: payload };
     })
     .then(action => {

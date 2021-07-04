@@ -18,11 +18,26 @@ function mapDispatchToProps(dispatch) {
 
 const theme = createMuiTheme({
     palette: {
-        primary: themeColor,
+        primary: {
+            light: "#7FBDF8", // adfsaf
+            main: "#7FBDF8", // #6EADF7, #7FBDF8
+            dark: "#7FBDF8",
+            contrastText: "#fff"
+        },
+        // primary: themeColor,
+        // primary: "#90caf9", // palette.primary.main
         type: 'dark',
         background: {
-            default: "#00000E"
+            default: "#00000E",
+            // paper: "#424242",
+            darkPaper: "#303030", // "#424242"
+            lightPaper: "#424242", // "#424242"
+        },
+        /*
+        action: {
+            active: "#fff"
         }
+        */
     }
 });
 
@@ -35,18 +50,19 @@ class App extends React.Component {
     }
 
     handleMouseDown() {
-        this.props.setMouseDown(true);
-        document.addEventListener("pointerup", this.handleMouseUp);
+        //- this.props.setMouseDown(true);
+        //- document.addEventListener("pointerup", this.handleMouseUp);
     }
 
     handleMouseUp() {
-        this.props.setMouseDown(false);
-        document.removeEventListener("mouseup", this.handleMouseDown);
+        //- this.props.setMouseDown(false);
+        //- document.removeEventListener("mouseup", this.handleMouseDown);
     }
 
     render() {
         return (
-            <div onPointerDown={this.handleMouseDown}>
+            <div>
+            {/*<div onPointerDown={this.handleMouseDown}>*/}
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
                     <BoardPage />
