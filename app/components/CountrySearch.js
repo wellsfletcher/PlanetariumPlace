@@ -28,17 +28,42 @@ export default function CountrySearch(props) {
     const materialProps = props;
     const classes = useStyles();
 
-    const [filtered, setFiltered] = useState(countries);
+    const filter = (data) => {
+        /*
+        if (data.suggested == true && (queryString == null
+            || data.label.toLowerCase().includes(queryString))) {
+                return data;
+            }
+            */
+        if (data.suggested == true) {
+            return data;
+        }
+    };
+
+    const [filtered, setFiltered] = useState(countries.filter(filter));
     console.count('counter');
+
 
     const onChange = (event) => {
         var queryString = event.target.value;
+        if (queryString == null) {
+            if (data.suggested == true) {
+                return data;
+            }
+        }
+        queryString = queryString.toLowerCase();
+        //- var queryString = event.target.value.toLowerCase();
         // console.log("queryString = " + queryString);
-        const newFilterCountries = countries.filter((data)=>{
-            if (queryString == null
-                    || data.label.toLowerCase().includes(queryString.toLowerCase())
-                /*|| data.code.toLowerCase().includes(queryString.toLowerCase())*/) {
-                return data
+        // const newFilterCountries = countries.filter(filter);
+        const newFilterCountries = countries.filter((data) => {
+            /*
+            if (data.suggested == true && (queryString == null
+                || data.label.toLowerCase().includes(queryString))) {
+                    return data;
+                }
+                */
+            if (data.suggested == true && data.label.toLowerCase().includes(queryString)) {
+                return data;
             }
         });
         setFiltered(newFilterCountries);
@@ -56,6 +81,7 @@ export default function CountrySearch(props) {
                     <CountryCard
                         label={country.label}
                         code={country.code}
+                        country={country}
                     />
                 </ListItem>
             ))}

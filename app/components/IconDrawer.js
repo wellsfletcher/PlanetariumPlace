@@ -20,7 +20,10 @@ import MailIcon from '@material-ui/icons/Mail';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+
 import CountrySearch from './CountrySearch';
+import ColorPicker from './ColorPicker';
+import VerticalColorPicker from './VerticalColorPicker';
 
 import SearchIcon from '@material-ui/icons/Search';
 import BrushIcon from '@material-ui/icons/Brush';
@@ -62,12 +65,26 @@ const useStyles = makeStyles((theme) => ({
     // left: 0, // theme.spacing(2),
     width: theme.spacing(7) + 1,
     // background: theme.palette.background.darkPaper,
+    // position: "absolute",
+    overflowX: 'hidden',
   },
   viewContent: {
       width: `calc(100% - ${theme.spacing(7) + 1}px)`,
+      background: theme.palette.background.darkPaper,
+  },
+  floater: {
+      position: "absolute",
+  },
+  icon: {
+      // position: "fixed",
+      width: theme.spacing(7) + 1, // aaaaaaaaaaaaaaaaaaaa // I hate CSS
   },
   gridContainer: { // nah
       width: theme.spacing(7) + 1,
+  },
+  fullWidth: {
+      width: '100%',
+      backgroundColor: theme.palette.background.darkPaper,
   },
   fullHeight: {
       height: `calc(100% - ${0}px)`
@@ -113,27 +130,101 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const colors = {
+          "white": "#FFFFFF",
+          "lightGray": "#E4E4E4",
+          "gray": "#888888",
+          "black": "#1B1B1B",
+          "pink": "#FFA7D1",
+          "red": "#E50000",
+          "orange": "#E59500",
+          "brown": "#A06A42",
+          "yellow": "#E5D900",
+          "lightGreen": "#94E044",
+          "green": "#02BE01",
+          "cyan": "#00D3DD",
+          "blue": "#0083C7",
+          "indigo": "#0000EA",
+          "magenta": "#CF6EE4",
+          "purple": "#820080"
+      };
+
 export default function MiniDrawer(props) {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+    const classes = useStyles();
+    const theme = useTheme();
+    const [open, setOpen] = React.useState(false);
 
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-  const handleListItemClick = (event, index) => {
-    var nextIndex = index;
-    if (selectedIndex === index) {
-        nextIndex = -1;
-    }
-    setSelectedIndex(nextIndex);
-  };
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const [pageContents, setPageContents] = React.useState(<></>);
+    const handleListItemClick = (event, index) => {
+        var nextIndex = index;
+        if (selectedIndex === index) {
+            nextIndex = -1;
+        } else {
+            const nextPageContents = pageContentsMap.get(nextIndex);
+            if (nextPageContents != null) {
+                setPageContents(nextPageContents);
+            }
+        }
+        setSelectedIndex(nextIndex);
+    };
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+    const handleDrawerOpen = () => {
+        setOpen(true);
+    };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+    const handleDrawerClose = () => {
+        setOpen(false);
+    };
+
+
+    var pageContentsMap = new Map();
+    pageContentsMap.set(0, <CountrySearch/>);
+    pageContentsMap.set(1, null);
+    pageContentsMap.set(2, null);
+    pageContentsMap.set(3,
+        <List>
+            <ListItem key={"pallette-header"}>
+                <ListItemIcon>
+                    <PaletteIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Paintbrush"} />
+            </ListItem>
+            <ListItem key={"hello"}>
+                <ColorPicker
+                    colors={colors}
+                    onChangeComplete={props.onChangeComplete}
+                />
+            </ListItem>
+        </List>
+    );
+    pageContentsMap.set(4,
+        <List className={classes.fullWidth}>
+            <ListItem key={"info-header"}>
+                <ListItemIcon>
+                    <InfoIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Info"} />
+            </ListItem>
+            <ListItem key={"info-description-header"}>
+                <ListItemText primary="Draw on a 3D globe with fellow internet users" />
+            </ListItem>
+            <ListItem>
+                <Typography variant="body2" color="textSecondary" component="p">
+                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                    across all continents except Antarctica
+                </Typography>
+            </ListItem>
+        </List>
+    );
+
+    const handleAdvancedItemClick = (event, clickedItemIndex) => {
+
+        (selectedIndex === clickedItemIndex || (open && pageContentsMap.get(selectedIndex) == null)) ? handleDrawerClose() : handleDrawerOpen();
+        handleListItemClick(event, clickedItemIndex);
+    };
+
+
   // color="transparent" elevation={0}
   return (
     <>
@@ -189,14 +280,14 @@ export default function MiniDrawer(props) {
             className={classes.drawerOpen + ' ' + classes.fullHeight}
         >
             <Grid item className={classes.iconList}>
-            <List component="nav" aria-label="main mailbox folders" disablePadding={true}>
+            <List component="nav" aria-label="main mailbox folders" disablePadding={true}
+                className={classes.floater}
+            >
               <ListItem
                 button
                 selected={selectedIndex === 0}
-                onClick={(event) => {
-                    (selectedIndex === 0 || (open && selectedIndex != 4)) ? handleDrawerClose() : handleDrawerOpen();
-                    handleListItemClick(event, 0);
-                }}
+                onClick={(event) => handleAdvancedItemClick(event, 0)}
+                className={classes.icon}
               >
                 <ListItemIcon>
                   <SearchIcon />
@@ -206,6 +297,7 @@ export default function MiniDrawer(props) {
                 button
                 selected={selectedIndex === 1}
                 onClick={(event) => handleListItemClick(event, 1)}
+                className={classes.icon}
               >
                 <ListItemIcon>
                   <BrushIcon />
@@ -215,6 +307,7 @@ export default function MiniDrawer(props) {
                 button
                 selected={selectedIndex === 2}
                 onClick={(event) => handleListItemClick(event, 2)}
+                className={classes.icon}
               >
                 <ListItemIcon>
                   <PanToolIcon />
@@ -223,7 +316,8 @@ export default function MiniDrawer(props) {
               <ListItem
                 button
                 selected={selectedIndex === 3}
-                onClick={(event) => handleListItemClick(event, 3)}
+                onClick={(event) => handleAdvancedItemClick(event, 3)}
+                className={classes.icon}
               >
                 <ListItemIcon>
                   <PaletteIcon />
@@ -232,10 +326,8 @@ export default function MiniDrawer(props) {
               <ListItem
                 button
                 selected={selectedIndex === 4}
-                onClick={(event) => {
-                    (selectedIndex === 4 || (open && selectedIndex != 0)) ? handleDrawerClose() : handleDrawerOpen();
-                    handleListItemClick(event, 4);
-                }}
+                onClick={(event) => handleAdvancedItemClick(event, 4)}
+                className={classes.icon}
               >
                 <ListItemIcon>
                   <InfoIcon />
@@ -246,7 +338,9 @@ export default function MiniDrawer(props) {
 
 
             <Grid item className={classes.viewContent}>
-                <CountrySearch/>
+                <div>
+                {pageContents}
+                </div>
             </Grid>
         </Grid>
 

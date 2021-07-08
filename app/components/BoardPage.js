@@ -12,22 +12,32 @@ import { useTimeout } from './hooks/useTimeout';
 import Board from './Board';
 import Globe from './Globe';
 import PersistentDrawer from './PersistentDrawer';
+import PersistentSearchDrawer from './PersistentSearchDrawer';
 import PermanentDrawer from './PermanentDrawer';
 import IconDrawer from './IconDrawer';
 import TabBar from './TabBar';
 import ButtonBar from './ButtonBar';
+import VerticalColorPicker from './VerticalColorPicker';
+import Overlay from './Overlay';
 import { hexcolor2int } from '../utils/general';
 import * as Time from '../utils/time';
 import * as System from '../constants/system';
 // import * as Board from '../modules/board';
+// import useWindowDimensions from './useWindowDimensions';
 
 import Fab from '@material-ui/core/Fab';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Grid from '@material-ui/core/Grid';
+/*
 import GlobeIcon from '@material-ui/icons/Public';
-// import MapIcon from '@material-ui/icons/Map';
+import MapIcon from '@material-ui/icons/Map';
 import ViewIcon from '@material-ui/icons/History'; // Visibility, HourglassFullTwoTone, History
 import ViewOffIcon from '@material-ui/icons/FastForward'; // VisibilityOff, HourglassEmpty, Update, FastForward
 import AddIcon from '@material-ui/icons/Add';
+*/
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -110,6 +120,7 @@ const BoardPage = (props) => {
         };
 
         const [viewFlashback, setViewFlashback] = React.useState(false);
+        const [tool, setTool] = React.useState(0);
 
         // var tiles = [];
         const boardProps = {
@@ -139,6 +150,7 @@ const BoardPage = (props) => {
             />
         ;
 
+        /*
         const globeFab = <Fab
             color="primary"
             aria-label="view"
@@ -161,6 +173,74 @@ const BoardPage = (props) => {
          >
             {(!viewFlashback) ? <ViewIcon /> : <ViewOffIcon />}
         </Fab>;
+        */
+
+        /*
+        const globeFab = <ToggleButtonGroup
+            orientation="vertical"
+            color="primary"
+            aria-label="view"
+            style={{
+                marginBottom: "0px"
+            }}
+         >
+            <ToggleButton selected={useGlobe} onClick={() => setUseGlobe(true)}>
+                <GlobeIcon />
+            </ToggleButton>
+            <ToggleButton selected={!useGlobe} onClick={() => setUseGlobe(false)}>
+                <MapIcon />
+            </ToggleButton>
+        </ToggleButtonGroup>;
+
+        const flashbackFab = <ToggleButtonGroup
+            orientation="vertical"
+            color="primary"
+            aria-label="view"
+            style={{
+                marginBottom: "14px"
+            }}
+         >
+            <ToggleButton selected={viewFlashback} onClick={() => setViewFlashback(true)}>
+                <ViewIcon />
+            </ToggleButton>
+            <ToggleButton selected={!viewFlashback} onClick={() => setViewFlashback(false)}>
+                <ViewOffIcon />
+            </ToggleButton>
+        </ToggleButtonGroup>;
+        */
+        /*
+        const globeFab = <ToggleButtonGroup
+            orientation="horizontal"
+            color="primary"
+            aria-label="view"
+            style={{
+                // marginBottom: "0px"
+            }}
+         >
+            <ToggleButton selected={useGlobe} onClick={() => setUseGlobe(true)}>
+                <GlobeIcon />
+            </ToggleButton>
+            <ToggleButton selected={!useGlobe} onClick={() => setUseGlobe(false)}>
+                <MapIcon />
+            </ToggleButton>
+        </ToggleButtonGroup>;
+
+        const flashbackFab = <ToggleButtonGroup
+            orientation="horizontal"
+            color="primary"
+            aria-label="view"
+            style={{
+                // marginBottom: "14px"
+            }}
+         >
+            <ToggleButton selected={viewFlashback} onClick={() => setViewFlashback(true)}>
+                <ViewIcon />
+            </ToggleButton>
+            <ToggleButton selected={!viewFlashback} onClick={() => setViewFlashback(false)}>
+                <ViewOffIcon />
+            </ToggleButton>
+        </ToggleButtonGroup>;
+        */
 
         /*
         const boardIdFab = <Fab
@@ -175,19 +255,24 @@ const BoardPage = (props) => {
             <AddIcon />
         </Fab>;
         */
+        // const { isLandscape } = useWindowDimensions();
 
+        /*
+        // set the spacing property?
         const fabView = (
             <Grid
               container
-              direction="column"
-              justify="center"
+              direction="row"
+              justify="flex-end"
               alignItems="flex-end"
 
               style={{
-                  position: 'absolute',
-                  bottom: "7px", // theme.spacing(2),
-                  right: "7px", // theme.spacing(2),
-                  width: "70px"
+                  // position: 'absolute',
+                  // bottom: "64px", // theme.spacing(2),
+                  // right: "64px", // theme.spacing(2),
+                  // height: "70px"
+                  padding: 24,
+                  gap: 24
               }}
             >
                 <Grid item>
@@ -198,6 +283,7 @@ const BoardPage = (props) => {
                 </Grid>
             </Grid>
         );
+        */
 
         /*
         return (
@@ -226,6 +312,7 @@ const BoardPage = (props) => {
             </>
         );
         */
+        /*
         return (
             <>
                 <div style={style}>
@@ -236,6 +323,26 @@ const BoardPage = (props) => {
                     {boardViewer}
                 </div>
                 {fabView}
+            </>
+        );
+        */
+        return (
+            <>
+                <div style={style}>
+                    <PersistentSearchDrawer
+                        onChangeComplete={onChangeComplete}
+                    >
+                    </PersistentSearchDrawer>
+                    {boardViewer}
+                </div>
+                <Overlay
+                    onChangeComplete={onChangeComplete}
+                    useGlobe={useGlobe} setUseGlobe={setUseGlobe}
+                    viewFlashback={viewFlashback} setViewFlashback={setViewFlashback}
+                    tool={tool} setTool={setTool}
+                >
+
+                </Overlay>
             </>
         );
 }

@@ -13,6 +13,7 @@ import Slider from '@material-ui/core/Slider';
 import { capitalize } from '@material-ui/core/utils';
 
 import blue from '@material-ui/core/colors/blue';
+import useWindowDimensions from './useWindowDimensions';
 
 // {{"demo": "pages/customization/color/ColorTool.js", "hideToolbar": true, "bg": true}}
 
@@ -24,51 +25,56 @@ const styles = (theme) => ({
   radio: {
     padding: 0,
   },
+  verticalSize: {
+      width: 48,
+      height: "6.25vh",
+      // height: 48
+  },
+  horizontalSize: {
+      width: "6.25vw",
+      height: 48,
+  },
   radioIcon: {
-    width: 48,
-    height: 48,
+    // width: "6.25vw",
+    // height: 48,
   },
   radioIconSelected: {
-    width: 48,
-    height: 48,
+    // width: "6.25vw",
+    // height: 48,
     border: '1px solid white',
     color: theme.palette.common.white,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  swatch: {
-    width: 48,
-  },
-  sliderContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-  },
-  slider: {
-    width: 'calc(100% - 80px)',
-    marginLeft: theme.spacing(0),
-    marginRight: theme.spacing(0),
-  },
-  colorBar: {
-    marginTop: theme.spacing(2),
-  },
-  colorSquare: {
-    width: 48, // 64
-    height: 48, // 64
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  button: {
-    marginLeft: theme.spacing(0),
-  },
 });
+
+const defaultColors = {
+          "white": "#FFFFFF",
+          "lightGray": "#E4E4E4",
+          "gray": "#888888",
+          "black": "#1B1B1B",
+          "pink": "#FFA7D1",
+          "red": "#E50000",
+          "orange": "#E59500",
+          "brown": "#A06A42",
+          "yellow": "#E5D900",
+          "lightGreen": "#94E044",
+          "green": "#02BE01",
+          "cyan": "#00D3DD",
+          "blue": "#0083C7",
+          "indigo": "#0000EA",
+          "magenta": "#CF6EE4",
+          "purple": "#820080"
+      };
 
 // still need to create parameters for default color value...
 function ColorTool(props) {
-  const { colors, onChangeComplete, classes } = props; // colors, names
+  const { onChangeComplete, classes } = props; // colors, names
+  var colors = props.colors;
+  if (colors == null) {
+      colors = defaultColors;
+  }
   const theme = useTheme();
   const [state, setState] = React.useState({
     primary: defaults.primary, // the actual selected color
@@ -90,57 +96,113 @@ function ColorTool(props) {
     });
   };
 
+  const { isLandscape } = useWindowDimensions();
+  const alignVertical = (props.vertical == null) ? false : props.vertical;
+  // const alignVertical = isLandscape;
+  // const alignVertical = true;
+
+  const size = (alignVertical) ? classes.verticalSize : classes.horizontalSize;
+
   const colorPicker = (intent) => {
-    /*
-    <Typography component="label" gutterBottom htmlFor={intent} variant="h6">
-      {capitalize(intent)}
-    </Typography>
-    */
+      return (<>
+            {hues.map((hue, k) => {
+              const backgroundColor = colors[hue];
 
-    return (
-      <Grid item xs={12} sm={6} md={4}>
-          {hues.map((hue) => {
-            const backgroundColor = colors[hue];
-
-            return (
-              <Tooltip placement="right" title={hue} key={hue}>
-                <Radio
-                  className={classes.radio}
-                  color="default"
-                  checked={state[intent] === backgroundColor}
-                  onChange={handleChangeHue(intent)}
-                  value={hue}
-                  name={intent}
-                  aria-labelledby={`tooltip-${intent}-${hue}`}
-                  icon={
-                    <div className={classes.radioIcon} style={{ backgroundColor }} />
-                  }
-                  checkedIcon={
-                    <div
-                      className={classes.radioIconSelected}
-                      style={{ backgroundColor }}
-                    >
-                      <CheckIcon style={{ fontSize: 30 }} />
-                    </div>
-                  }
-                />
-              </Tooltip>
-            );
-          })}
-      </Grid>
+              return (
+                <Grid item key={"color-picker-item-" + k}>
+                <Tooltip placement="right" title={hue} key={hue}>
+                  <Radio
+                    className={classes.radio + " " + size}
+                    color="default"
+                    checked={state[intent] === backgroundColor}
+                    onChange={handleChangeHue(intent)}
+                    value={hue}
+                    name={intent}
+                    aria-labelledby={`tooltip-${intent}-${hue}`}
+                    icon={
+                      <div className={classes.radioIcon + " " + size} style={{ backgroundColor }} />
+                    }
+                    checkedIcon={
+                      <div
+                        className={classes.radioIconSelected + " " + size}
+                        style={{ backgroundColor }}
+                      >
+                        <CheckIcon style={{ fontSize: 30 }} />
+                      </div>
+                    }
+                  />
+                </Tooltip>
+                </Grid>
+              );
+            })}
+        </>
     );
   };
 
-  return (
-    <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="flex-end"
-        className={classes.root}>
-      {colorPicker('primary')}
-    </Grid>
-  );
+    /*
+    const picker = (
+        <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="flex-end"
+            className={classes.root}
+        >
+            {colorPicker('primary')}
+        </Grid>
+    );
+    */
+    const picker = (alignVertical) ?
+        <Grid
+            container
+            direction="column"
+            justify="flex-end"
+            alignItems="flex-end"
+            wrap="nowrap"
+        >
+            {colorPicker('primary')}
+        </Grid>
+    :
+        <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="flex-end"
+            wrap="nowrap"
+        >
+            {colorPicker('primary')}
+        </Grid>;
+
+    return picker;
+    /*
+    return (
+        (alignVertical) ?
+            <div
+                style={{
+                    position: 'fixed',
+                    top: "0px", // theme.spacing(2),
+                    right: "0px", // theme.spacing(2),
+                    width: "48px",
+                    height: "100vw"
+                }}
+            >
+                {picker}
+            </div>
+        :
+            <div
+                style={{
+                    position: 'fixed',
+                    bottom: "0px", // theme.spacing(2),
+                    left: "0px", // theme.spacing(2),
+                    width: "100vw",
+                    height: "48px"
+                }}
+            >
+                {picker}
+            </div>
+
+    );
+    */
 }
 
 ColorTool.propTypes = {

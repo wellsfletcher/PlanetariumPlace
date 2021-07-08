@@ -10,7 +10,9 @@ function getWindowDimensions() {
   */
   return {
     windowWidth: width,
-    windowHeight: height
+    windowHeight: height,
+    isLandscape: width >= height,
+    isPortrait: height > width
   };
 }
 

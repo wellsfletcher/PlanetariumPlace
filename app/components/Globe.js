@@ -136,8 +136,8 @@ function CanvasGlobe(props) {
     const [mapRotationOnTouchStart, setMapRotationOnTouchStart] = useState(new THREE.Vector3( 0, 0, 0 ));
     const onMapTouchStart = (event) => {
         // event.preventDefault();
-        console.log("gesture started!");
-        console.log(event);
+        // console.log("gesture started!");
+        // console.log(event);
         /*
         if (event.touches.length > 1) {
             console.log("Aborted with weary face.");
@@ -162,8 +162,8 @@ function CanvasGlobe(props) {
         // event.preventDefault(); // this may add a delay to clicks being registered?
         if (event.defaultPrevented) return; // aaaaaaaaaaaaaaaaaaaa
         if (viewFlashback) return; // may wanna make it so that if you click anywhere it changes the viewFlashback state
-        console.log(event.defaultPrevented);
-        console.log(event);
+        //- console.log(event.defaultPrevented);
+        // console.log(event);
 
         const camera = globeEl.current.camera();
         const mapRotation = camera.getWorldDirection(new THREE.Vector3());

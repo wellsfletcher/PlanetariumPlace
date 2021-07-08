@@ -57,16 +57,15 @@ export default function MediaCard(props) {
             {props.label}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+            {props.label} has a country code of {props.code} and a calling code of +{props.country.phone}.
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Buy
+        <Button size="small" color="primary" disabled>
+          Find
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" target="_blank" href={"https://en.wikipedia.org/w/index.php?search=" + props.label.replace(/ /g, '')}>
           Learn More
         </Button>
       </CardActions>
