@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import * as THREE from "three";
 import Globe from 'react-globe.gl';
@@ -10,6 +10,10 @@ import usePreloadedImage from './hooks/usePreloadedImage';
 import * as System from '../constants/system';
 import { int2hexcolor, xy2index } from '../utils/general';
 import { drawPixelBuffer, drawPixelRgbaBuffer, drawImageData, paintCanvasBlack, fillCanvasWithImage } from '../utils/draw';
+
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 function randInt(min, max) {
     if (max === undefined) {
@@ -212,27 +216,76 @@ function CanvasGlobe(props) {
         }
     };
 
-    /*
+    const filter = d => {
+        // console.log("activeCountry = " + props.activeCountry);
+        return d.properties.ADMIN != undefined
+            && props.activeCountry != undefined
+            // && d.properties.ADMIN.toLowerCase() === props.activeCountry.toLowerCase();
+            && (props.activeCountry.toLowerCase().includes(d.properties.ADMIN.toLowerCase())
+            || d.properties.ADMIN.toLowerCase().includes(props.activeCountry.toLowerCase())
+            );
+    };
+
     const [countries, setCountries] = React.useState({ features: []});
     React.useEffect(() => {
         // load data
         // fetch('../datasets/ne_110m_admin_0_countries.geojson').then(res => res.json()).then(setCountries);
         fetch('/assets/ne_110m_admin_0_countries.geojson').then(res => res.json()).then(setCountries);
     }, []);
+    const [activeCountry, setActiveCountry] = React.useState([]);
+    React.useEffect(() => {
+        setActiveCountry(countries.features.filter(filter));
+    }, [props.activeCountry]);
+
+    // GDP per capita (avoiding countries with small pop)
+    const getVal = feat => feat.properties.GDP_MD_EST / Math.max(1e5, feat.properties.POP_EST);
+    const maxVal = useMemo(
+      () => Math.max(...countries.features.map(getVal)),
+      [countries]
+    );
+
+    const colorScale = (value, maxValue) => {
+        const phase = 0;
+        const center = 200; // 128;
+        const width = 55; // 127;
+        var frequency = Math.PI*2 / maxValue;
+        var i = value;
+        var red = Math.sin(frequency*i+2+phase) * width + center;
+        var green = Math.sin(frequency*i+0+phase) * width + center;
+        var blue = Math.sin(frequency*i+4+phase) * width + center;
+        // return 'rgba(0, 100, 0, 0.15)';
+        return 'rgba(' + red + ', ' + green + ', ' + blue + ', 0.8)';
+    };
+
+    /*
+    const label = (<Tooltip title="Delete">
+      <IconButton>
+        <DeleteIcon />
+      </IconButton>
+    </Tooltip>);
+    */
+
     // this adds a considerable amount of load time
     // and it blocks clicks :(
     // god damn it of course the polygons block clicks
     const countryProps = {
-        polygonsData: countries.features,
-        polygonAltitude: .008,
-        polygonCapColor: () => 'rgba(100, 100, 100, 0)',
-        polygonSideColor: () => 'rgba(0, 0, 0, 0)',
+        // polygonsData: countries.features,
+        // polygonsData: countries.features.filter(filter),
+        polygonsData: activeCountry,
+        polygonAltitude: .2, // .008,
+        // polygonCapColor: () => 'rgba(100, 50, 100, .5)',
+        // polygonCapColor: d => colorScale(getVal(d), maxVal),
+        polygonCapColor: () => '#00D3DD', //'#888888',
+        // polygonSideColor: () => 'rgba(0, 0, 0, 1.0)',
+        polygonSideColor: () => '#1B1B1B',
         polygonLabel: ({ properties: d }) => `
             <b>${d.ADMIN}</b> <br />
         `,
+        // polygonLabel: label,
+        polygonsTransitionDuration: 300
     };
-    */
-    const countryProps = {};
+
+    //- const countryProps = {};
 
     const rest = {
         width: width,

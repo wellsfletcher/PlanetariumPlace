@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRef, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -23,6 +24,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import ColorPicker from './ColorPicker';
 import VerticalColorPicker from './VerticalColorPicker';
 import CountrySearch from './CountrySearch';
+import useWindowDimensions from './useWindowDimensions';
 
 const drawerWidth = 320;
 
@@ -101,6 +103,17 @@ export default function PersistentDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  const { windowHeight, windowWidth } = useWindowDimensions();
+  /*
+  const containerRef = useRef(null);
+  const [containerHeight, setContainerHeight] = useState(69);
+  // const containerHeight = containerRef.current.clientHeight;
+  useEffect(() => {
+      setContainerHeight(containerRef.current.clientHeight);
+  }, [windowHeight]);
+  console.log("containerHeight = " + containerHeight);
+  */
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -185,7 +198,10 @@ export default function PersistentDrawer(props) {
         <Divider />
 
 
-        <CountrySearch />
+        <CountrySearch
+            containerHeight={windowHeight - 64 - 1}
+            setActiveCountry={props.setActiveCountry} 
+        />
 
 
       </Drawer>

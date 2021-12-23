@@ -28,6 +28,9 @@ export function playChange(payload) {
 export function setMouseDown(payload) {
     return { type: SET_MOUSE_DOWN, payload };
 };
+export function setActiveCountry(payload) {
+    return { type: Action.SET_ACTIVE_COUNTRY, payload };
+};
 
 export function setBrushColor(payload) {
     return { type: SET_BRUSH_COLOR, payload };

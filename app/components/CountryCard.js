@@ -62,7 +62,7 @@ export default function MediaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" disabled>
+        <Button size="small" color="primary" onClick={() => props.setActiveCountry(props.label)}>
           Find
         </Button>
         <Button size="small" color="primary" target="_blank" href={"https://en.wikipedia.org/w/index.php?search=" + props.label.replace(/ /g, '')}>

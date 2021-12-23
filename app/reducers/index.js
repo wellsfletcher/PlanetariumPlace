@@ -135,6 +135,7 @@ const initialState = {
         // links: initLinks, // maps pixel to relative url string
         map: initMap(System.INITIAL_WIDTH, System.INITIAL_HEIGHT), // new Map(), // initMap(),
         values: ["", "canada", "usa", "mexico", "brazil"], // features
+        activeCountry: "",
         width: System.INITIAL_WIDTH
     },
     brushColor: System.INITIAL_BRUSH_COLOR
@@ -174,6 +175,10 @@ function rootReducer(state = initialState, action) {
         // return Board.importTiles(state, action.payload);
     } else if (action.type === SET_MOUSE_DOWN) {
         return { ...state, mouseDown: action.payload };
+    } else if (action.type === Action.SET_ACTIVE_COUNTRY) {
+        // console.log("activeCountry = " + action.payload);
+        // console.log("activeCountry2 = " + state.board.activeCountry);
+        return { ...state, board: {...state.board, activeCountry: action.payload} };
     } else if (action.type === SET_BRUSH_COLOR) {
         // const brushColor = (); // assuming the payload hex color is a hex string
         return { ...state, brushColor: action.payload };

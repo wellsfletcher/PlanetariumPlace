@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { useState } from 'react';
 
 import { connect } from "react-redux";
-import { setTile, setLocalTile, setBrushColor, getData, fetchTiles, fetchTileChanges, playChange, setBoardId } from "../actions/index";
+import { setTile, setLocalTile, setBrushColor, getData, fetchTiles, fetchTileChanges, playChange, setBoardId, setActiveCountry} from "../actions/index";
 import { bindActionCreators } from 'redux';
 
 import { useInterval } from './hooks/useInterval';
@@ -51,6 +51,7 @@ function mapDispatchToProps(dispatch) {
     setLocalTile: bindActionCreators((index, color) => setLocalTile({index, color}), dispatch),
     playChange: bindActionCreators((change) => playChange({change}), dispatch),
     setBoardId: bindActionCreators(setBoardId, dispatch),
+    setActiveCountry: bindActionCreators(setActiveCountry, dispatch),
     // setBrushColor: (color) => dipatch(setBrushColor(color))
     // setBrushColor: bindActionCreators((color) => dipatch(setBrushColor(color)), dispatch) // no work
     // setBrushColor: bindActionCreators((color) => setBrushColor(color), dispatch) // works
@@ -71,6 +72,7 @@ const mapStateToProps = (state) => {
         values: state.board.values,
         width: state.board.width,
         // mouseDown: state.mouseDown,
+        activeCountry: state.board.activeCountry,
         brushColor: state.brushColor
     };
 };
@@ -80,7 +82,8 @@ const BoardPage = (props) => {
         const style = { // may wanna move this elsewhere and delet the div
             position: "absolute",
             width: "100%",
-            height: "100%"
+            height: "100%",
+            overflow: "hidden"
         };
 
         React.useEffect(() => {
@@ -131,6 +134,7 @@ const BoardPage = (props) => {
             width: props.width,
             // mouseDown: props.mouseDown,
             brushColor: props.brushColor,
+            activeCountry: props.activeCountry,
             viewFlashback: viewFlashback,
 
             setTile: props.setTile
@@ -331,6 +335,7 @@ const BoardPage = (props) => {
                 <div style={style}>
                     <PersistentSearchDrawer
                         onChangeComplete={onChangeComplete}
+                        setActiveCountry={props.setActiveCountry}
                     >
                     </PersistentSearchDrawer>
                     {boardViewer}
