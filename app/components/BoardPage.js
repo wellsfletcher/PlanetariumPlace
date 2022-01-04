@@ -59,26 +59,51 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const mapStateToProps = (state) => {
+import { useSelector } from 'react-redux';
+const mapStateToProps = (state) => { // this will be placed with a bunch of selectors
     return {
+        // boardId: state.boardId,
         boardId: state.boardId,
         // lastUpdated: state.board.lastUpdated,
         // unplayedChanges: state.board.unplayedChanges,
         // articles: state.articles,
         // remoteTiles: state.remoteTiles,
-        tilesRgba: state.board.tilesRgba,
+
+
+        /*
+        // tilesRgba: state.board.tilesRgba,
         tiles: state.board.tiles,
+        tilesRgba: state.board.tilesRgba,
         map: state.board.map,
         values: state.board.values,
         width: state.board.width,
         // mouseDown: state.mouseDown,
         activeCountry: state.board.activeCountry,
         brushColor: state.brushColor
+        */
     };
 };
 
 // export default class BoardPage extends React.Component {
 const BoardPage = (props) => {
+    // console.log("something is happening right now");
+    const tiles = useSelector(state => {
+        // console.log(state);
+        // console.log(state.board);
+        return state.board.tiles;
+    });
+    const tilesRgba = useSelector(state => state.board.tilesRgba);
+    const map = useSelector(state => state.board.map);
+    const values = useSelector(state => state.board.values);
+    const width = useSelector(state => state.board.width);
+    const activeCountry = useSelector(state => state.board.activeCountry);
+    const brushColor = useSelector(state => state.brushColor);
+
+    // console.log(tiles);
+
+    props = { tiles, tilesRgba, map, values, width, activeCountry, brushColor, ...props };
+    // console.log("cool beans");
+
         const style = { // may wanna move this elsewhere and delet the div
             position: "absolute",
             width: "100%",

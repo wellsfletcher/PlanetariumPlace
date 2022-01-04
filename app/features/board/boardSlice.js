@@ -1,9 +1,9 @@
-import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED, TILE_CHANGES_FETCHED } from "../constants/actionTypes";
-import * as Action from "../constants/actionTypes";
-import * as System from "../constants/system";
-import { xy2index } from '../utils/general';
-import * as Board from '../modules/board';
-import Queue from '../utils/Queue';
+import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED, TILE_CHANGES_FETCHED } from "../../constants/actionTypes";
+import * as Action from "../../constants/actionTypes";
+import * as System from "../../constants/system";
+import { xy2index } from '../../utils/general';
+import * as Board from '../../modules/board';
+import Queue from '../../utils/Queue';
 
 
 const initBoard = (width, height) => {
@@ -148,6 +148,8 @@ function rootReducer(state = initialState, action) {
 */
 function rootReducer(state = initialState, action) {
     // console.log({action, state});
+    state = {board: state};
+    var result = state;
     if (action.type === ADD_ARTICLE) {
         // state.articles.push(action.payload); // needs to be immutable
         /*
@@ -155,14 +157,14 @@ function rootReducer(state = initialState, action) {
             articles: state.articles.concat(action.payload)
         });
         */
-        return { ...state, articles: state.articles.concat(action.payload) };
+        result = { ...state, articles: state.articles.concat(action.payload) };
     } else if (action.type === "DATA_LOADED") {
-        return { ...state, articles: state.articles.concat(action.payload) };
+        result = { ...state, articles: state.articles.concat(action.payload) };
     } else if (action.type === TILES_FETCHED) {
         // alert("hey");
         // return { ...state, remoteTiles: action.payload };
         state = {  ...state, board: {...state.board, width: action.payload.width} };
-        return Board.setTiles(state, action.payload.canvas);
+        result = Board.setTiles(state, action.payload.canvas);
     } else if (action.type === TILE_CHANGES_FETCHED) {
         const board = {
             ...state.board,
@@ -170,43 +172,44 @@ function rootReducer(state = initialState, action) {
             unplayedChanges: state.board.unplayedChanges.concat(action.payload)
         };
 
-        return {  ...state, board: board };
+        result = {  ...state, board: board };
         // state = {  ...state, board: board };
 
         // return Board.importTiles(state, action.payload);
     } else if (action.type === SET_MOUSE_DOWN) {
-        return { ...state, mouseDown: action.payload };
+        result = { ...state, mouseDown: action.payload };
     } else if (action.type === Action.SET_ACTIVE_COUNTRY) {
         // console.log("activeCountry = " + action.payload);
         // console.log("activeCountry2 = " + state.board.activeCountry);
-        return { ...state, board: {...state.board, activeCountry: action.payload} };
+        result = { ...state, board: {...state.board, activeCountry: action.payload} };
     } else if (action.type === SET_BRUSH_COLOR) {
         // const brushColor = (); // assuming the payload hex color is a hex string
-        return { ...state, brushColor: action.payload };
+        result = { ...state, brushColor: action.payload };
     } else if (action.type === Action.SET_LOCAL_TILE) {
         const index = action.payload.index;
         const width = state.board.width;
         const color = action.payload.color;
 
-        return Board.setTileLocally(state, index, width, color);
+        result = Board.setTileLocally(state, index, width, color);
     } else if (action.type === Action.SET_TILE) {
         const {x, y} = action.payload;
         const width = state.board.width;
         const color = action.payload.color;
 
-        return Board.setTile(state, {x, y}, width, color);
+        result = Board.setTile(state, {x, y}, width, color);
     } else if (action.type === Action.PLAY_CHANGE) {
         const change = action.payload.change;
         const index = change.index;
         const width = state.board.width;
         const color = change.color;
 
-        return Board.setTileLocally(state, index, width, color);
+        result = Board.setTileLocally(state, index, width, color);
     } else if (action.type === Action.SET_BOARD_ID) {
         // console.log("boardId = " + action.payload);
-        return { ...state, boardId: action.payload };
+        result = { ...state, boardId: action.payload };
     }
-    return state;
+    // return state;
+    return result.board;
 }
 
 export default rootReducer;
