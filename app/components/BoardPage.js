@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { useState } from 'react';
 
 import { connect } from "react-redux";
-import { setTile, setLocalTile, setBrushColor, getData, fetchTiles, fetchTileChanges, playChange, setBoardId, setActiveCountry} from "../actions/index";
+import { fetchTiles, fetchTileChanges} from "../actions/index"; // these should get moved
+import { actions } from "../reducers/index";
 import { bindActionCreators } from 'redux';
 
 import { useInterval } from './hooks/useInterval';
@@ -47,15 +48,15 @@ function mapDispatchToProps(dispatch) {
     fetchTileChanges: (lastUpdated, boardId) => fetchTileChanges()(lastUpdated, boardId, dispatch),
     // fetchTileChanges: bindActionCreators(({x, y}, color) => setTile({x, y, color}), dispatch),
     // setTile: ({x, y}, color) => dispatch(setTile({x, y, color})),
-    setTile: bindActionCreators(({x, y}, color) => setTile({x, y, color}), dispatch),
-    setLocalTile: bindActionCreators((index, color) => setLocalTile({index, color}), dispatch),
-    playChange: bindActionCreators((change) => playChange({change}), dispatch),
-    setBoardId: bindActionCreators(setBoardId, dispatch),
-    setActiveCountry: bindActionCreators(setActiveCountry, dispatch),
+    setTile: bindActionCreators(({x, y}, color) => actions.setTile({x, y, color}), dispatch),
+    setLocalTile: bindActionCreators((index, color) => actions.setLocalTile({index, color}), dispatch),
+    playChange: bindActionCreators((change) => actions.playChange({change}), dispatch),
+    setBoardId: bindActionCreators(actions.setBoardId, dispatch),
+    setActiveCountry: bindActionCreators(actions.setActiveCountry, dispatch),
     // setBrushColor: (color) => dipatch(setBrushColor(color))
     // setBrushColor: bindActionCreators((color) => dipatch(setBrushColor(color)), dispatch) // no work
     // setBrushColor: bindActionCreators((color) => setBrushColor(color), dispatch) // works
-    setBrushColor: bindActionCreators(setBrushColor, dispatch)
+    setBrushColor: bindActionCreators(actions.setBrushColor, dispatch)
   };
 }
 

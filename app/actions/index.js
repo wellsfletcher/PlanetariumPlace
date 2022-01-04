@@ -5,43 +5,6 @@ import * as API from "../utils/api";
 import store from "../store/index";
 
 
-export function addArticle(payload) {
-    return { type: ADD_ARTICLE, payload };
-};
-
-export function setTile(payload) {
-    return { type: SET_TILE, payload };
-};
-
-export function setLocalTile(payload) {
-    return { type: Action.SET_LOCAL_TILE, payload };
-};
-
-export function setBoardId(payload) {
-    return { type: Action.SET_BOARD_ID, payload };
-};
-
-export function playChange(payload) {
-    return { type: Action.PLAY_CHANGE, payload };
-};
-
-export function setMouseDown(payload) {
-    return { type: SET_MOUSE_DOWN, payload };
-};
-export function setActiveCountry(payload) {
-    return { type: Action.SET_ACTIVE_COUNTRY, payload };
-};
-
-export function setBrushColor(payload) {
-    return { type: SET_BRUSH_COLOR, payload };
-};
-
-/*
-export function fetchTileChanges(payload) {
-    return { type: Action.TILE_CHANGES_FETCHED, payload };
-};
-*/
-
 export function getData() {
     // alert("aaaaa");
     return function(dispatch) { // , getState

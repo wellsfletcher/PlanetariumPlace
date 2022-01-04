@@ -5,6 +5,9 @@ import { xy2index } from '../utils/general';
 import * as Board from '../modules/board';
 import Queue from '../utils/Queue';
 
+import {
+  createSlice
+} from '@reduxjs/toolkit'
 
 const initBoard = (width, height) => {
     var result = [];
@@ -141,72 +144,67 @@ const initialState = {
     brushColor: System.INITIAL_BRUSH_COLOR
 };
 
-/*
-function rootReducer(state = initialState, action) {
-  return state;
-};
-*/
-function rootReducer(state = initialState, action) {
-    // console.log({action, state});
-    if (action.type === ADD_ARTICLE) {
-        // state.articles.push(action.payload); // needs to be immutable
+const rootSlice = createSlice({
+    name: 'root',
+    initialState,
+    reducers: {
         /*
-        return Object.assign({}, state, {
-            articles: state.articles.concat(action.payload)
-        });
+        addArticle(state, action) {
+            return { ...state, articles: state.articles.concat(action.payload) };
+        },
         */
-        return { ...state, articles: state.articles.concat(action.payload) };
-    } else if (action.type === "DATA_LOADED") {
-        return { ...state, articles: state.articles.concat(action.payload) };
-    } else if (action.type === TILES_FETCHED) {
-        // alert("hey");
-        // return { ...state, remoteTiles: action.payload };
-        state = {  ...state, board: {...state.board, width: action.payload.width} };
-        return Board.setTiles(state, action.payload.canvas);
-    } else if (action.type === TILE_CHANGES_FETCHED) {
-        const board = {
-            ...state.board,
-            lastUpdated: new Date(),
-            unplayedChanges: state.board.unplayedChanges.concat(action.payload)
-        };
+        tilesFetched(state, action) {
+            state = {  ...state, board: {...state.board, width: action.payload.width} };
+            return Board.setTiles(state, action.payload.canvas);
+        },
+        tileChangesFetched(state, action) {
+            const board = {
+                ...state.board,
+                lastUpdated: new Date(),
+                unplayedChanges: state.board.unplayedChanges.concat(action.payload)
+            };
 
-        return {  ...state, board: board };
-        // state = {  ...state, board: board };
+            return {  ...state, board: board };
+        },
+        setMouseDown(state, action) {
+            return { ...state, mouseDown: action.payload };
+        },
+        setActiveCountry(state, action) {
+            return { ...state, board: {...state.board, activeCountry: action.payload} };
+        },
+        setBrushColor(state, action) {
+            return { ...state, brushColor: action.payload };
+        },
+        setLocalTile(state, action) {
+            const index = action.payload.index;
+            const width = state.board.width;
+            const color = action.payload.color;
 
-        // return Board.importTiles(state, action.payload);
-    } else if (action.type === SET_MOUSE_DOWN) {
-        return { ...state, mouseDown: action.payload };
-    } else if (action.type === Action.SET_ACTIVE_COUNTRY) {
-        // console.log("activeCountry = " + action.payload);
-        // console.log("activeCountry2 = " + state.board.activeCountry);
-        return { ...state, board: {...state.board, activeCountry: action.payload} };
-    } else if (action.type === SET_BRUSH_COLOR) {
-        // const brushColor = (); // assuming the payload hex color is a hex string
-        return { ...state, brushColor: action.payload };
-    } else if (action.type === Action.SET_LOCAL_TILE) {
-        const index = action.payload.index;
-        const width = state.board.width;
-        const color = action.payload.color;
+            return Board.setTileLocally(state, index, width, color);
+        },
+        setTile(state, action) {
+            const {x, y} = action.payload;
+            const width = state.board.width;
+            const color = action.payload.color;
 
-        return Board.setTileLocally(state, index, width, color);
-    } else if (action.type === Action.SET_TILE) {
-        const {x, y} = action.payload;
-        const width = state.board.width;
-        const color = action.payload.color;
+            return Board.setTile(state, {x, y}, width, color);
+        },
+        playChange(state, action) {
+            const change = action.payload.change;
+            const index = change.index;
+            const width = state.board.width;
+            const color = change.color;
 
-        return Board.setTile(state, {x, y}, width, color);
-    } else if (action.type === Action.PLAY_CHANGE) {
-        const change = action.payload.change;
-        const index = change.index;
-        const width = state.board.width;
-        const color = change.color;
-
-        return Board.setTileLocally(state, index, width, color);
-    } else if (action.type === Action.SET_BOARD_ID) {
-        // console.log("boardId = " + action.payload);
-        return { ...state, boardId: action.payload };
+            return Board.setTileLocally(state, index, width, color);
+        },
+        setBoardId(state, action) {
+            return { ...state, boardId: action.payload };
+        }
     }
-    return state;
-}
+});
 
-export default rootReducer;
+export const actions = rootSlice.actions;
+export const rootReducer = rootSlice.reducer;
+
+// export default rootSlice.reducer;
+// export default rootReducer;
