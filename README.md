@@ -34,6 +34,10 @@ To become a contributor, email me at wellsfletcher@gatech.edu and include your G
 4. When working on an issue, include the issue number in your commit messages. Make sure to proceed it with a "#" symbol. A nicely formatted commit message may look like "#11 - added alert for when the password is too short". GitHub will automatically convert the issue number in the commit message into a hyperlink to the issue. This makes it easier to track progress on issues and keep the repository organized
 5. Create a pull request for the issue
 
+### Enabling Redux DevTools
+
+Redux DevTools is a browser extension that is quite useful for debugging Redux React applications. Instructions can be found here https://github.com/reduxjs/redux-devtools and the Chrome extension can be found here https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
+
 ## Documentation
 
 Most of the program contents are located under the `app/components/` folder. I may reorganize some files soon.
