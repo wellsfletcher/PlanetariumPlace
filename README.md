@@ -1,6 +1,6 @@
-# Planetarium Place
+# Planetarium.place
 Multiplayer drawing application on 3D globe.
-Check it out at <https://planetarium.place/>.
+Check it out at <https://planetarium.place>. Also, I recently created a subreddit for the website here <https://www.reddit.com/r/planetariumplace/>.
 
 ## Contributing
 
