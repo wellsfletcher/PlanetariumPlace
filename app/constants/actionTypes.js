@@ -1,6 +1,6 @@
 
 
-/*
+
 export const ADD_ARTICLE = "root/addArticle";
 
 export const SET_MOUSE_DOWN = "root/setMouseDown";
@@ -10,7 +10,7 @@ export const SET_LOCAL_TILE = "root/setLocalTile";
 export const SET_BOARD_ID = "root/setBoardId";
 export const PLAY_CHANGE = "root/playChange";
 export const SET_BRUSH_COLOR = "root/setBrushColor";
-*/
+
 export const FETCH_BOARD = "root/FETCH_BOARD";
 // export const FETCH_BOARD_CHANGES = "FETCH_BOARD_CHANGES";
 
