@@ -202,7 +202,7 @@ const Board = (props) => {
 
     const handleCanvasClick = (event) => {
         if (event.defaultPrevented) return; // console.log("drag!");
-        if (viewFlashback) return;
+        //-- if (viewFlashback) return;
         if (isSwiping || isPinching ) {
             //- console.log("Click aborted");
             return;
@@ -235,6 +235,13 @@ const Board = (props) => {
 
         const mouse = {x: round((screenPosition.x - rect.left) / zoom.x), y: round((screenPosition.y - rect.top)/ zoom.y)};
         var color = props.brushColor;
+
+        // exit if in view flashback mode
+        if (viewFlashback) {
+            props.setViewFlashback(false);
+            return;
+        }
+
         props.setTile(mouse, color);
         // alert("Clicked!");
 

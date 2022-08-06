@@ -59,6 +59,7 @@ function CanvasGlobe(props) {
     const globeEl = React.useRef();
 
     const viewFlashback = props.viewFlashback;
+    // const setViewFlashback = props.setViewFlashback;
     var tilesRgba = props.tilesRgba;
     var tiles = props.tiles;
     var width = props.width;
@@ -165,7 +166,7 @@ function CanvasGlobe(props) {
     const onGlobeClick = ({ lat, lng }, event) => {
         // event.preventDefault(); // this may add a delay to clicks being registered?
         if (event.defaultPrevented) return; // aaaaaaaaaaaaaaaaaaaa
-        if (viewFlashback) return; // may wanna make it so that if you click anywhere it changes the viewFlashback state
+        //-- if (viewFlashback) return; // may wanna make it so that if you click anywhere it changes the viewFlashback state
         //- console.log(event.defaultPrevented);
         // console.log(event);
 
@@ -188,6 +189,12 @@ function CanvasGlobe(props) {
         const {x, y} = geo2xy(lat, lng, width, height);
         // console.log({x, y});
         var color = props.brushColor;
+
+        // exit if in view flashback mode
+        if (viewFlashback) {
+            props.setViewFlashback(false);
+            return;
+        }
 
         // temporarily disabled
         props.setTile({x, y}, color);
