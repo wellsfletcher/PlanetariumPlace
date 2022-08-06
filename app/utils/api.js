@@ -4,6 +4,7 @@ import * as Actions from '../actions/index';
 import * as System from '../constants/system';
 import { date2str } from "../utils/time";
 
+import { actions } from "../reducers/index";
 
 function fetchBoardSize(boardId) {
     return fetch('https://planetarium.place/api/v0/board/size.php', {
@@ -159,7 +160,8 @@ export function fetchTileChanges(boardId, lastUpdated, dispatch) { // width?
         for (var k = 0; k < unplayedChangesBackingArray.length; k++) {
             let change = unplayedChangesBackingArray[k];
             console.log(change);
-            dispatch(Actions.playChange( {change} ));
+            //- dispatch(Actions.playChange( {change} ));
+            dispatch(actions.playChange( {change} ));
         }
         return payload;
     })

@@ -59,6 +59,7 @@ function CanvasGlobe(props) {
     const globeEl = React.useRef();
 
     const viewFlashback = props.viewFlashback;
+    // const setViewFlashback = props.setViewFlashback;
     var tilesRgba = props.tilesRgba;
     var tiles = props.tiles;
     var width = props.width;
@@ -122,7 +123,7 @@ function CanvasGlobe(props) {
         var dataUrl = canvas.toDataURL("image/png"); // for someone reason this line of codes makes everything work on safari :(
         // var context = canvas.getContext("2d");
         // var dafdasdf = canvas.getImageData(10, 10, 50, 50);
-        // console.log(dataUrl);
+        console.log(dataUrl);
 
         globeMaterial.emissive = new THREE.Color(0xffffff);
         // globeMaterial.emissive = new THREE.Color(0x111111);
@@ -165,7 +166,7 @@ function CanvasGlobe(props) {
     const onGlobeClick = ({ lat, lng }, event) => {
         // event.preventDefault(); // this may add a delay to clicks being registered?
         if (event.defaultPrevented) return; // aaaaaaaaaaaaaaaaaaaa
-        if (viewFlashback) return; // may wanna make it so that if you click anywhere it changes the viewFlashback state
+        //-- if (viewFlashback) return; // may wanna make it so that if you click anywhere it changes the viewFlashback state
         //- console.log(event.defaultPrevented);
         // console.log(event);
 
@@ -188,6 +189,12 @@ function CanvasGlobe(props) {
         const {x, y} = geo2xy(lat, lng, width, height);
         // console.log({x, y});
         var color = props.brushColor;
+
+        // exit if in view flashback mode
+        if (viewFlashback) {
+            props.setViewFlashback(false);
+            return;
+        }
 
         // temporarily disabled
         props.setTile({x, y}, color);
@@ -275,7 +282,7 @@ function CanvasGlobe(props) {
         polygonAltitude: .2, // .008,
         // polygonCapColor: () => 'rgba(100, 50, 100, .5)',
         // polygonCapColor: d => colorScale(getVal(d), maxVal),
-        polygonCapColor: () => '#00D3DD', //'#888888',
+        polygonCapColor: () => '#E5D900', //'#888888', // E5D900 // 00D3DD
         // polygonSideColor: () => 'rgba(0, 0, 0, 1.0)',
         polygonSideColor: () => '#1B1B1B',
         polygonLabel: ({ properties: d }) => `

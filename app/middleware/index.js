@@ -24,6 +24,7 @@ export function forbiddenWordsMiddleware({ getState, dispatch }) { // { getState
             } else if (action.type === SET_TILE) {
                 var {x, y} = action.payload;
                 const state = getState();
+                // console.log(state.board);
                 const tiles = state.board.tiles;
                 const index = (action.payload.y * state.board.width) + action.payload.x;
                 if (mod(index, tiles.length) != index) {

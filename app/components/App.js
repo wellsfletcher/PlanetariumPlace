@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { connect } from "react-redux";
 import { setMouseDown } from "../actions/index";
+import { actions } from "../reducers/index";
 
 import BoardPage from './BoardPage';
 
@@ -12,7 +13,7 @@ import themeColor from '@material-ui/core/colors/indigo';
 
 function mapDispatchToProps(dispatch) {
   return {
-    setMouseDown: (mouseDown) => dispatch(setMouseDown(mouseDown))
+    setMouseDown: (mouseDown) => dispatch(actions.setMouseDown(mouseDown)) // might not be doing correctly
   };
 }
 

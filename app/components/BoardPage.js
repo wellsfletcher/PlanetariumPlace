@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { useState } from 'react';
 
 import { connect } from "react-redux";
-import { setTile, setLocalTile, setBrushColor, getData, fetchTiles, fetchTileChanges, playChange, setBoardId, setActiveCountry} from "../actions/index";
+import { fetchTiles, fetchTileChanges} from "../actions/index"; // these should get moved
+import { actions } from "../reducers/index";
 import { bindActionCreators } from 'redux';
 
 import { useInterval } from './hooks/useInterval';
@@ -47,38 +48,63 @@ function mapDispatchToProps(dispatch) {
     fetchTileChanges: (lastUpdated, boardId) => fetchTileChanges()(lastUpdated, boardId, dispatch),
     // fetchTileChanges: bindActionCreators(({x, y}, color) => setTile({x, y, color}), dispatch),
     // setTile: ({x, y}, color) => dispatch(setTile({x, y, color})),
-    setTile: bindActionCreators(({x, y}, color) => setTile({x, y, color}), dispatch),
-    setLocalTile: bindActionCreators((index, color) => setLocalTile({index, color}), dispatch),
-    playChange: bindActionCreators((change) => playChange({change}), dispatch),
-    setBoardId: bindActionCreators(setBoardId, dispatch),
-    setActiveCountry: bindActionCreators(setActiveCountry, dispatch),
+    setTile: bindActionCreators(({x, y}, color) => actions.setTile({x, y, color}), dispatch),
+    setLocalTile: bindActionCreators((index, color) => actions.setLocalTile({index, color}), dispatch),
+    playChange: bindActionCreators((change) => actions.playChange({change}), dispatch),
+    setBoardId: bindActionCreators(actions.setBoardId, dispatch),
+    setActiveCountry: bindActionCreators(actions.setActiveCountry, dispatch),
     // setBrushColor: (color) => dipatch(setBrushColor(color))
     // setBrushColor: bindActionCreators((color) => dipatch(setBrushColor(color)), dispatch) // no work
     // setBrushColor: bindActionCreators((color) => setBrushColor(color), dispatch) // works
-    setBrushColor: bindActionCreators(setBrushColor, dispatch)
+    setBrushColor: bindActionCreators(actions.setBrushColor, dispatch)
   };
 }
 
-const mapStateToProps = (state) => {
+import { useSelector } from 'react-redux';
+const mapStateToProps = (state) => { // this will be placed with a bunch of selectors
     return {
+        // boardId: state.boardId,
         boardId: state.boardId,
         // lastUpdated: state.board.lastUpdated,
         // unplayedChanges: state.board.unplayedChanges,
         // articles: state.articles,
         // remoteTiles: state.remoteTiles,
-        tilesRgba: state.board.tilesRgba,
+
+
+        /*
+        // tilesRgba: state.board.tilesRgba,
         tiles: state.board.tiles,
+        tilesRgba: state.board.tilesRgba,
         map: state.board.map,
         values: state.board.values,
         width: state.board.width,
         // mouseDown: state.mouseDown,
         activeCountry: state.board.activeCountry,
         brushColor: state.brushColor
+        */
     };
 };
 
 // export default class BoardPage extends React.Component {
 const BoardPage = (props) => {
+    // console.log("something is happening right now");
+    const tiles = useSelector(state => {
+        // console.log(state);
+        // console.log(state.board);
+        return state.board.tiles;
+    });
+    const tilesRgba = useSelector(state => state.board.tilesRgba);
+    const map = useSelector(state => state.board.map);
+    const values = useSelector(state => state.board.values);
+    const width = useSelector(state => state.board.width);
+    const activeCountry = useSelector(state => state.board.activeCountry);
+    const brushColor = useSelector(state => state.brushColor);
+
+    // console.log(tiles);
+
+    props = { tiles, tilesRgba, map, values, width, activeCountry, brushColor, ...props };
+    // console.log("cool beans");
+
         const style = { // may wanna move this elsewhere and delet the div
             position: "absolute",
             width: "100%",
@@ -136,6 +162,7 @@ const BoardPage = (props) => {
             brushColor: props.brushColor,
             activeCountry: props.activeCountry,
             viewFlashback: viewFlashback,
+            setViewFlashback: setViewFlashback,
 
             setTile: props.setTile
         }
@@ -154,182 +181,6 @@ const BoardPage = (props) => {
             />
         ;
 
-        /*
-        const globeFab = <Fab
-            color="primary"
-            aria-label="view"
-            style={{
-                margin: "7px"
-            }}
-            onClick={() => setUseGlobe(!useGlobe)}
-         >
-            <GlobeIcon />
-        </Fab>;
-
-        const flashbackFab = <Fab
-            color="primary"
-            aria-label="view"
-            style={{
-                margin: "7px"
-            }}
-
-            onClick={() => setViewFlashback(!viewFlashback)}
-         >
-            {(!viewFlashback) ? <ViewIcon /> : <ViewOffIcon />}
-        </Fab>;
-        */
-
-        /*
-        const globeFab = <ToggleButtonGroup
-            orientation="vertical"
-            color="primary"
-            aria-label="view"
-            style={{
-                marginBottom: "0px"
-            }}
-         >
-            <ToggleButton selected={useGlobe} onClick={() => setUseGlobe(true)}>
-                <GlobeIcon />
-            </ToggleButton>
-            <ToggleButton selected={!useGlobe} onClick={() => setUseGlobe(false)}>
-                <MapIcon />
-            </ToggleButton>
-        </ToggleButtonGroup>;
-
-        const flashbackFab = <ToggleButtonGroup
-            orientation="vertical"
-            color="primary"
-            aria-label="view"
-            style={{
-                marginBottom: "14px"
-            }}
-         >
-            <ToggleButton selected={viewFlashback} onClick={() => setViewFlashback(true)}>
-                <ViewIcon />
-            </ToggleButton>
-            <ToggleButton selected={!viewFlashback} onClick={() => setViewFlashback(false)}>
-                <ViewOffIcon />
-            </ToggleButton>
-        </ToggleButtonGroup>;
-        */
-        /*
-        const globeFab = <ToggleButtonGroup
-            orientation="horizontal"
-            color="primary"
-            aria-label="view"
-            style={{
-                // marginBottom: "0px"
-            }}
-         >
-            <ToggleButton selected={useGlobe} onClick={() => setUseGlobe(true)}>
-                <GlobeIcon />
-            </ToggleButton>
-            <ToggleButton selected={!useGlobe} onClick={() => setUseGlobe(false)}>
-                <MapIcon />
-            </ToggleButton>
-        </ToggleButtonGroup>;
-
-        const flashbackFab = <ToggleButtonGroup
-            orientation="horizontal"
-            color="primary"
-            aria-label="view"
-            style={{
-                // marginBottom: "14px"
-            }}
-         >
-            <ToggleButton selected={viewFlashback} onClick={() => setViewFlashback(true)}>
-                <ViewIcon />
-            </ToggleButton>
-            <ToggleButton selected={!viewFlashback} onClick={() => setViewFlashback(false)}>
-                <ViewOffIcon />
-            </ToggleButton>
-        </ToggleButtonGroup>;
-        */
-
-        /*
-        const boardIdFab = <Fab
-            color="primary"
-            aria-label="view"
-            style={{
-                margin: "7px"
-            }}
-
-            onClick={() => props.setBoardId(1 + (props.boardId % NUM_BOARD_IDS))}
-         >
-            <AddIcon />
-        </Fab>;
-        */
-        // const { isLandscape } = useWindowDimensions();
-
-        /*
-        // set the spacing property?
-        const fabView = (
-            <Grid
-              container
-              direction="row"
-              justify="flex-end"
-              alignItems="flex-end"
-
-              style={{
-                  // position: 'absolute',
-                  // bottom: "64px", // theme.spacing(2),
-                  // right: "64px", // theme.spacing(2),
-                  // height: "70px"
-                  padding: 24,
-                  gap: 24
-              }}
-            >
-                <Grid item>
-                    {flashbackFab}
-                </Grid>
-                <Grid item>
-                    {globeFab}
-                </Grid>
-            </Grid>
-        );
-        */
-
-        /*
-        return (
-            <>
-                <div style={style}>
-                    <PersistentDrawer
-                        onChangeComplete={onChangeComplete}
-                    />
-                    {boardViewer}
-                </div>
-                {fabView}
-            </>
-        );
-        */
-        /*
-        return (
-            <>
-                <div style={style}>
-                    {boardViewer}
-                    <TabBar
-                        onChangeComplete={onChangeComplete}
-                    >
-                    </TabBar>
-                </div>
-                {fabView}
-            </>
-        );
-        */
-        /*
-        return (
-            <>
-                <div style={style}>
-                    <IconDrawer
-                        onChangeComplete={onChangeComplete}
-                    >
-                    </IconDrawer>
-                    {boardViewer}
-                </div>
-                {fabView}
-            </>
-        );
-        */
         return (
             <>
                 <div style={style}>

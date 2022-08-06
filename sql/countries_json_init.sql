@@ -1,0 +1,286 @@
+use PlaceDB;
+
+SET @geojson = '{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "featurecla": "Admin-0 country",
+        "scalerank": 1,
+        "LABELRANK": 6,
+        "SOVEREIGNT": "Fiji",
+        "SOV_A3": "FJI",
+        "ADM0_DIF": 0,
+        "LEVEL": 2,
+        "TYPE": "Sovereign country",
+        "ADMIN": "Fiji",
+        "ADM0_A3": "FJI",
+        "GEOU_DIF": 0,
+        "GEOUNIT": "Fiji",
+        "GU_A3": "FJI",
+        "SU_DIF": 0,
+        "SUBUNIT": "Fiji",
+        "SU_A3": "FJI",
+        "BRK_DIFF": 0,
+        "NAME": "Fiji",
+        "NAME_LONG": "Fiji",
+        "BRK_A3": "FJI",
+        "BRK_NAME": "Fiji",
+        "BRK_GROUP": null,
+        "ABBREV": "Fiji",
+        "POSTAL": "FJ",
+        "FORMAL_EN": "Republic of Fiji",
+        "FORMAL_FR": null,
+        "NAME_CIAWF": "Fiji",
+        "NOTE_ADM0": null,
+        "NOTE_BRK": null,
+        "NAME_SORT": "Fiji",
+        "NAME_ALT": null,
+        "MAPCOLOR7": 5,
+        "MAPCOLOR8": 1,
+        "MAPCOLOR9": 2,
+        "MAPCOLOR13": 2,
+        "POP_EST": 889953,
+        "POP_RANK": 11,
+        "POP_YEAR": 2019,
+        "GDP_MD": 5496,
+        "GDP_YEAR": 2019,
+        "ECONOMY": "6. Developing region",
+        "INCOME_GRP": "4. Lower middle income",
+        "FIPS_10": "FJ",
+        "ISO_A2": "FJ",
+        "ISO_A2_EH": "FJ",
+        "ISO_A3": "FJI",
+        "ISO_A3_EH": "FJI",
+        "ISO_N3": 242,
+        "ISO_N3_EH": 242,
+        "UN_A3": 242,
+        "WB_A2": "FJ",
+        "WB_A3": "FJI",
+        "WOE_ID": 23424813,
+        "WOE_ID_EH": 23424813,
+        "WOE_NOTE": "Exact WOE match as country",
+        "ADM0_A3_IS": "FJI",
+        "ADM0_A3_US": "FJI",
+        "ADM0_A3_FR": "FJI",
+        "ADM0_A3_RU": "FJI",
+        "ADM0_A3_ES": "FJI",
+        "ADM0_A3_CN": "FJI",
+        "ADM0_A3_TW": "FJI",
+        "ADM0_A3_IN": "FJI",
+        "ADM0_A3_NP": "FJI",
+        "ADM0_A3_PK": "FJI",
+        "ADM0_A3_DE": "FJI",
+        "ADM0_A3_GB": "FJI",
+        "ADM0_A3_BR": "FJI",
+        "ADM0_A3_IL": "FJI",
+        "ADM0_A3_PS": "FJI",
+        "ADM0_A3_SA": "FJI",
+        "ADM0_A3_EG": "FJI",
+        "ADM0_A3_MA": "FJI",
+        "ADM0_A3_PT": "FJI",
+        "ADM0_A3_AR": "FJI",
+        "ADM0_A3_JP": "FJI",
+        "ADM0_A3_KO": "FJI",
+        "ADM0_A3_VN": "FJI",
+        "ADM0_A3_TR": "FJI",
+        "ADM0_A3_ID": "FJI",
+        "ADM0_A3_PL": "FJI",
+        "ADM0_A3_GR": "FJI",
+        "ADM0_A3_IT": "FJI",
+        "ADM0_A3_NL": "FJI",
+        "ADM0_A3_SE": "FJI",
+        "ADM0_A3_BD": "FJI",
+        "ADM0_A3_UA": "FJI",
+        "ADM0_A3_UN": -99,
+        "ADM0_A3_WB": -99,
+        "CONTINENT": "Oceania",
+        "REGION_UN": "Oceania",
+        "SUBREGION": "Melanesia",
+        "REGION_WB": "East Asia & Pacific",
+        "NAME_LEN": 4,
+        "LONG_LEN": 4,
+        "ABBREV_LEN": 4,
+        "TINY": -99,
+        "HOMEPART": 1,
+        "MIN_ZOOM": 0,
+        "MIN_LABEL": 3,
+        "MAX_LABEL": 8,
+        "NE_ID": 1159320625,
+        "WIKIDATAID": "Q712",
+        "NAME_AR": "فيجي",
+        "NAME_BN": "ফিজি",
+        "NAME_DE": "Fidschi",
+        "NAME_EN": "Fiji",
+        "NAME_ES": "Fiyi",
+        "NAME_FA": "فیجی",
+        "NAME_FR": "Fidji",
+        "NAME_EL": "Φίτζι",
+        "NAME_HE": "פיג\'י",
+        "NAME_HI": "फ़िजी",
+        "NAME_HU": "Fidzsi-szigetek",
+        "NAME_ID": "Fiji",
+        "NAME_IT": "Figi",
+        "NAME_JA": "フィジー",
+        "NAME_KO": "피지",
+        "NAME_NL": "Fiji",
+        "NAME_PL": "Fidżi",
+        "NAME_PT": "Fiji",
+        "NAME_RU": "Фиджи",
+        "NAME_SV": "Fiji",
+        "NAME_TR": "Fiji",
+        "NAME_UK": "Фіджі",
+        "NAME_UR": "فجی",
+        "NAME_VI": "Fiji",
+        "NAME_ZH": "斐济",
+        "NAME_ZHT": "斐濟",
+        "FCLASS_ISO": null,
+        "FCLASS_US": null,
+        "FCLASS_FR": null,
+        "FCLASS_RU": null,
+        "FCLASS_ES": null,
+        "FCLASS_CN": null,
+        "FCLASS_TW": null,
+        "FCLASS_IN": null,
+        "FCLASS_NP": null,
+        "FCLASS_PK": null,
+        "FCLASS_DE": null,
+        "FCLASS_GB": null,
+        "FCLASS_BR": null,
+        "FCLASS_IL": null,
+        "FCLASS_PS": null,
+        "FCLASS_SA": null,
+        "FCLASS_EG": null,
+        "FCLASS_MA": null,
+        "FCLASS_PT": null,
+        "FCLASS_AR": null,
+        "FCLASS_JP": null,
+        "FCLASS_KO": null,
+        "FCLASS_VN": null,
+        "FCLASS_TR": null,
+        "FCLASS_ID": null,
+        "FCLASS_PL": null,
+        "FCLASS_GR": null,
+        "FCLASS_IT": null,
+        "FCLASS_NL": null,
+        "FCLASS_SE": null,
+        "FCLASS_BD": null,
+        "FCLASS_UA": null
+      },
+      "bbox": [
+        -180,
+        -18.28799,
+        180,
+        -16.020882
+      ],
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                180,
+                -16.067133
+              ],
+              [
+                180,
+                -16.555217
+              ],
+              [
+                179.364143,
+                -16.801354
+              ],
+              [
+                178.725059,
+                -17.012042
+              ],
+              [
+                178.596839,
+                -16.63915
+              ],
+              [
+                179.096609,
+                -16.433984
+              ],
+              [
+                179.413509,
+                -16.379054
+              ],
+              [
+                180,
+                -16.067133
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                178.12557,
+                -17.50481
+              ],
+              [
+                178.3736,
+                -17.33992
+              ],
+              [
+                178.71806,
+                -17.62846
+              ],
+              [
+                178.55271,
+                -18.15059
+              ],
+              [
+                177.93266,
+                -18.28799
+              ],
+              [
+                177.38146,
+                -18.16432
+              ],
+              [
+                177.28504,
+                -17.72465
+              ],
+              [
+                177.67087,
+                -17.38114
+              ],
+              [
+                178.12557,
+                -17.50481
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                -179.79332,
+                -16.020882
+              ],
+              [
+                -179.917369,
+                -16.501783
+              ],
+              [
+                -180,
+                -16.555217
+              ],
+              [
+                -180,
+                -16.067133
+              ],
+              [
+                -179.79332,
+                -16.020882
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
+';
+

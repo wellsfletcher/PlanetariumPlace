@@ -62,7 +62,15 @@ export default function MediaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={() => props.setActiveCountry(props.label)}>
+        <Button size="small" color="primary" onClick={() => {
+                var nextCountry = props.label;
+                /*
+                if (props.activeCountry === props.label) {
+                    nextCountry = "noCountrySelected";
+                }
+                */
+                props.setActiveCountry(nextCountry)
+            }}>
           Find
         </Button>
         <Button size="small" color="primary" target="_blank" href={"https://en.wikipedia.org/w/index.php?search=" + props.label.replace(/ /g, '')}>
