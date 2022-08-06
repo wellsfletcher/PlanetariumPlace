@@ -162,6 +162,7 @@ const BoardPage = (props) => {
             brushColor: props.brushColor,
             activeCountry: props.activeCountry,
             viewFlashback: viewFlashback,
+            setViewFlashback: setViewFlashback,
 
             setTile: props.setTile
         }
