@@ -4,6 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import IconButton from '@material-ui/core/IconButton';
+import RedditIcon from '@material-ui/icons/Reddit';
+import GithubIcon from '@material-ui/icons/Github';
 
 import GlobeIcon from '@material-ui/icons/Public';
 import MapIcon from '@material-ui/icons/Map';
@@ -133,6 +136,14 @@ export default function Overlay(props) {
     </Fab>;
     */
 
+    /*
+            <Grid item>
+                <IconButton target="_blank" href="github.com/wellsfletcher/planetariumplace">
+                    <GithubIcon/>
+                </IconButton>
+            </Grid>
+    */
+
     // set the spacing property?
     const fabView = (
         <Grid
@@ -150,6 +161,12 @@ export default function Overlay(props) {
               gap: 24
           }}
         >
+            <Grid item>
+                <IconButton target="_blank" href="https://reddit.com/r/planetariumplace">
+                    <RedditIcon/>
+                </IconButton>
+            </Grid>
+
             <Grid item>
                 {flashbackFab}
             </Grid>

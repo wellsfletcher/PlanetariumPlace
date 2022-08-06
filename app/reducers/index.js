@@ -124,7 +124,7 @@ const initMap = (width, height) => { // technically should be an array of lists 
 // but the server would probably explode
 
 const initialState = {
-    articles: [],
+    articles: [], // remove this
     mouseDown: false, // not used
     boardId: System.INITIAL_BOARD_ID,
     // remoteTiles: null,
