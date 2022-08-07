@@ -10,6 +10,7 @@ import GithubIcon from '@material-ui/icons/Github';
 
 import GlobeIcon from '@material-ui/icons/Public';
 import MapIcon from '@material-ui/icons/Map';
+// import DownloadIcon from '@mui/icons-material/Download';
 import ViewIcon from '@material-ui/icons/GridOff'; // History, Visibility, HourglassFullTwoTone, History
 import ViewOffIcon from '@material-ui/icons/GridOn'; // FastForward, VisibilityOff, HourglassEmpty, Update, FastForward
 import AddIcon from '@material-ui/icons/Add';
@@ -121,6 +122,12 @@ export default function Overlay(props) {
             <ColorizeIcon />
         </ToggleButton>
     </ToggleButtonGroup>;
+
+    /*
+    const downloadButton = <IconButton target="_blank" href="https://reddit.com/r/planetariumplace">
+        <DownloadIcon/>
+    </IconButton>
+    */
 
     /*
     const boardIdFab = <Fab
