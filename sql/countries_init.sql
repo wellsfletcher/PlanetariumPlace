@@ -908,12 +908,24 @@ UPDATE country1 SET Label = "St. Helena" WHERE Label = "Saint Helena";
 -- South Sudan
 -- Vatican City
 
+
+
+
 DROP TABLE IF EXISTS country;
 create table country as
 select *
 from country1 as A
 join country3 as B
 using(Label);
+
+
+/*
+DROP TABLE IF EXISTS country;
+create table country as
+select *
+from country1;
+*/
+
 /*
 	on A.Label = B.Label
 using(A.Label)
