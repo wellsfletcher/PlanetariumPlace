@@ -1,8 +1,6 @@
 
 
 
-export const ADD_ARTICLE = "root/addArticle";
-
 export const SET_MOUSE_DOWN = "root/setMouseDown";
 
 export const SET_TILE = "root/setTile";

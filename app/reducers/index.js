@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED, TILE_CHANGES_FETCHED } from "../constants/actionTypes";
+import { SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED, TILE_CHANGES_FETCHED } from "../constants/actionTypes";
 import * as Action from "../constants/actionTypes";
 import * as System from "../constants/system";
 import { xy2index } from '../utils/general';
@@ -10,6 +10,7 @@ import {
 } from '@reduxjs/toolkit'
 
 const initBoard = (width, height) => {
+    // instead of making the board initially all black, we make it in a checkerboard pattern for debugging purposes
     var result = [];
     var index = 0;
     const BACKGROUND_COLOR = 0x1B1B1B;
@@ -40,62 +41,8 @@ const initBoard = (width, height) => {
         }
     }
 
-    const DEADZONE_DEGREE_HEIGHT = 10;
-    // const DEADZONE_HEIGHT = 14; // 14 or 13 // 8
-    const DEADZONE_HEIGHT = Math.round((height / 180) * DEADZONE_DEGREE_HEIGHT); // optionally round up
-    // add the deadzone
-    const deadzones = [
-        {
-            x: {min: 0, max: width},
-            y: {min: 0, max: DEADZONE_HEIGHT}
-        }, {
-            x: {min: 0, max: width},
-            y: {min: height - DEADZONE_HEIGHT, max: height}
-        }
-    ];
-    /*
-    const deadzones = [
-        {
-            x: 0,
-            y: 0,
-            width: width,
-            height: DEADZONE_HEIGHT
-        }
-    ];
-    */
-    for (var deadzone of deadzones) {
-        for (var y = deadzone.y.min; y < deadzone.y.max; y++) {
-            for (var x = deadzone.x.min; x < deadzone.x.max; x++) {
-                const index = xy2index(x, y, width);
-                /*
-                var yBorder = 0;
-                if (Math.abs((width / 2) - deadzone.y.min) < Math.abs((width / 2) - deadzone.y.max)) {
-                    yBorder = deadzone.y.min; // + Math.sign(Math.abs((width / 2) - deadzone.y.min));
-                    // console.log("aaaaaa");
-                } else {
-                    yBorder = deadzone.y.max; // + Math.sign(Math.abs((width / 2) - deadzone.y.max));
-                }
-                var color = result[xy2index(x, yBorder, width)]
-                */
-                var color = BACKGROUND_COLOR;
-                result[index] = color; // 0; // BACKGROUND_COLOR;
-                // console.log(index);
-            }
-        }
-    }
-
     return result;
 };
-
-/*
-const initMap = () => {
-    var result = new Map();
-
-    result.set(5, 1);
-
-    return result;
-};
-*/
 
 const initMap = (width, height) => { // technically should be an array of lists of boardIds
     var result = [];
@@ -148,11 +95,6 @@ const rootSlice = createSlice({
     name: 'root',
     initialState,
     reducers: {
-        /*
-        addArticle(state, action) {
-            return { ...state, articles: state.articles.concat(action.payload) };
-        },
-        */
         tilesFetched(state, action) {
             state = {  ...state, board: {...state.board, width: action.payload.width} };
             return Board.setTiles(state, action.payload.canvas);
