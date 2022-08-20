@@ -8,7 +8,7 @@ import * as Time from '../utils/time';
 export function forbiddenWordsMiddleware({ getState, dispatch }) { // { getState, dispatch }
     return function(next) {
         return function(action) {
-            if (action.type === SET_TILE) {
+            if (action.type === SET_TILE) { // this should be changed
                 var {x, y} = action.payload;
                 const state = getState();
                 // console.log(state.board);

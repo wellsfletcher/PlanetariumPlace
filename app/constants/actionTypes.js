@@ -1,6 +1,8 @@
 
 
 
+// this file should eventually become obsolete
+
 export const SET_MOUSE_DOWN = "root/setMouseDown";
 
 export const SET_TILE = "root/setTile";
