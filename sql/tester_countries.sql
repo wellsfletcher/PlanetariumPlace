@@ -68,3 +68,15 @@ join country2 as B
 
 
 -- DROP TABLE IF EXISTS territory;
+
+select * from us_state_simp;
+
+select * from us_state_simp
+JOIN state ON state.name = us_state_simp.name;
+
+select state.*, us_state_simp.pop_est, us_state_simp.gdp_md from state
+JOIN us_state_simp ON state.name = us_state_simp.name;
+
+
+
+
