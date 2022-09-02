@@ -19,18 +19,16 @@ include_once '../objects/country.php';
 $sqlDatabase = new SqlDatabase();
 $sqlDb = $sqlDatabase->getConnection();
 
-/*
 $data = json_decode(file_get_contents("php://input"));
 // echo file_get_contents("php://input");
 // echo "\n";
 
 $wikidataid = $data->wikidataid;
-*/
 
 $country = new Country($sqlDb);
 
-// $json = $country->getTerritoryGeometry($wikidataid);
-$json = $country->getTerritoryGeometry("Q40");
+$json = $country->getTerritoryGeometry($wikidataid);
+// $json = $country->getTerritoryGeometry("Q40");
 echo $json;
 
 // $db->close();
