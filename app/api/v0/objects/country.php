@@ -117,7 +117,7 @@ class Country {
     }
 
     function getTerritoryGeojsonFromName($name_long) {
-        $wikidataid = $this->sanitizeAlphanumeric($name_long);
+        $name_long = $this->sanitizeAlphanumeric($name_long);
 
         $query = "call get_territory_geometry_from_name('$name_long');";
 

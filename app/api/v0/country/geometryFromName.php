@@ -23,7 +23,7 @@ $data = json_decode(file_get_contents("php://input"));
 // echo file_get_contents("php://input");
 // echo "\n";
 
-$wikidataid = $data->name_long;
+$name_long = $data->name_long;
 
 $country = new Country($sqlDb);
 
