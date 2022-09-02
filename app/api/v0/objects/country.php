@@ -103,7 +103,7 @@ class Country {
                 ),
                 'geometry' => array(
                     'type' => $res['geometry_type'],
-                    'coordinates' => $res['geometry_coordinates'],
+                    'coordinates' => json_decode($res['geometry_coordinates']),
                 )
                 // '__id' => $res['wikidataid'] // __id
             );
