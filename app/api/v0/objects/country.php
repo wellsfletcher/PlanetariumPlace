@@ -7,14 +7,14 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 class Country {
     // database connection
-    private $conn;
+    // private $conn;
     // sql database connection
     private $sqlConn;
 
     // constructor with $db as database connection
-    public function __construct($db, $sqlDb = null) {
+    public function __construct($sqlDb = null) {
         // public function __construct($db) {
-        $this->conn = $db;
+        // $this->conn = $db;
         $this->sqlConn = $sqlDb;
     }
 

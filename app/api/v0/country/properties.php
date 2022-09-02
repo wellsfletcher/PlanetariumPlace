@@ -14,37 +14,16 @@ include_once '../objects/country.php';
 // this file is located at http://planetarium.place/api/v0/board/tiles.php
 
 // instantiate database and product object
-$database = new Database(); // I don't think we even need this
-$db = $database->getConnection();
+// $database = new Database(); // I don't think we even need this
+// $db = $database->getConnection();
 $sqlDatabase = new SqlDatabase();
 $sqlDb = $sqlDatabase->getConnection();
 
-echo "Stuff is happening!";
-
-/*
-// fetch data input data
-$boardId = 1;
-$data = json_decode(file_get_contents("php://input"));
-$boardId = $data->boardId;
-if (isset($data) && isset($data->boardId)) {
-    $boardId = $data->boardId;
-}
-*/
-
-/*
-// initialize object
-$board = new Board($db);
-
-// query canvas
-$json = $board->getSize($boardId);
-echo $json;
-*/
-
-$country = new Country($db, $sqlDb);
+$country = new Country($sqlDb);
 
 $json = $country->getCountries();
 echo $json;
 
-$db->close();
+// $db->close();
 // $sqlDb->close();
 ?>
