@@ -81,10 +81,16 @@ class Country {
         while($res = $stmt->fetch(PDO::FETCH_ASSOC)){
             $msg[] = array(
                 'type' => 'Feature',
+                'bbox' => $res['bbox'],
+                'properties' => array(
+                    'name_long' => $res['name_long'],
+                    'wikidataid' => $res['wikidataid'],
+                ),
                 'geometry' => array(
                     'type' => $res['geometry_type'],
                     'coordinates' => $res['geometry_coordinates'],
                 )
+                // '__id' => $res['wikidataid'] // __id
             );
         }
 
