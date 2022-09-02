@@ -11,6 +11,7 @@ BEGIN
 	
 	select 
 		name_long, 
+        wikidataid,
         bbox, 
         geometry_type, 
         geometry_coordinates 

@@ -63,6 +63,38 @@ class Country {
         return $json;
     }
 
+    function getTerritoryGeojson($wikidataid) {
+        $wikidataid = $this->sanitizeAlphanumeric($wikidataid);
+
+        $query = "call get_territory_geometry('$wikidataid');";
+
+        // prepare query statement
+        $stmt = $this->sqlConn->prepare($query);
+
+        // execute the query
+        $stmt->execute();
+        /*
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        */
+        $msg = array(); // should this be here?
+        // while ($res = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+        while($res = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $msg[] = array(
+                'type' => 'Feature',
+                'geometry' => array(
+                    'type' => $res['geometry_type'],
+                    'coordinates' => $res['geometry_coordinates'],
+                )
+            );
+        }
+
+        $historyDict = $msg;
+
+        // show canvas data in json format
+        $json = json_encode($historyDict);
+        return $json;
+    }
+
     function getCountries() {
         /*
         // $this->sqlConn->

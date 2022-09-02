@@ -27,7 +27,7 @@ $wikidataid = $data->wikidataid;
 
 $country = new Country($sqlDb);
 
-$json = $country->getTerritoryGeometry($wikidataid);
+$json = $country->getTerritoryGeojson($wikidataid);
 // $json = $country->getTerritoryGeometry("Q40");
 echo $json;
 
