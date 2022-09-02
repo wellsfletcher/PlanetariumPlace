@@ -14,7 +14,7 @@ import Input from '@material-ui/core/Input';
 import SearchIcon from '@material-ui/icons/Search';
 import SearchBar from './SearchBar';
 import CountryCard from './CountryCard';
-import { countries } from '../constants/countries';
+// import { countries } from '../constants/countries';
 
 var Infinite = require('react-infinite');
 
@@ -43,6 +43,27 @@ export default function CountrySearch(props) {
     const containerHeight = props.containerHeight;
     console.log("containerHeight = " + containerHeight);
 
+    const [filtered, setFiltered] = useState([]);
+
+    const [countries, setCountries] = React.useState([]); // React.useState({ features: []});
+    React.useEffect(() => {
+        const url = "https://planetarium.place/api/v0/country/properties.php";
+        // load data
+        // fetch('../datasets/ne_110m_admin_0_countries.geojson').then(res => res.json()).then(setCountries);
+
+        // fetch(url).then(res => res.json()).then(setCountries);
+        fetch(url).then(res => res.json()).then(res => {
+            setCountries(res);
+            setFiltered(res);
+        });
+        // .then(() => {console.log(countries); setFiltered([{"name_long":"Antarctica","adm0_a3":"ATA","wikidataid":"Q51","pop_est":"4490","gdp_md":"898.00","price":"543.652532134"}])});
+        // .then(() => {console.log(countries); setFiltered(countries)});
+        // .then(onChange(null));
+        // .then(setFiltered(countries.filter((data) => filter(data, ""))));
+        // fetch(url).then(res => {console.log(res); return res.json();}).then(setCountries);
+        // fetch(url).then(res => res.json()).then(setFiltered);
+    }, []);
+
     const filter = (data, queryString) => {
         /*
         if (data.suggested == true && (queryString == null
@@ -50,17 +71,27 @@ export default function CountrySearch(props) {
                 return data;
             }
             */
+        // console.log(data);
+        if (data.name_long.toLowerCase().includes(queryString)) {
+            return data;
+        }
+        /*
         if (data.label.toLowerCase().includes(queryString)) {
             return data;
         }
+        */
     };
 
-    const [filtered, setFiltered] = useState(countries.filter((data) => filter(data, "")));
+    // const [filtered, setFiltered] = useState(countries.filter((data) => filter(data, "")));
     console.count('counter');
 
 
-    const onChange = (event) => {
+    var onChange = (event) => {
+        if (event == null) {
+            // setFiltered(countries);
+        }
         var queryString = event.target.value;
+        // what the heck is this little chunk
         if (queryString == null) {
             if (data.suggested == true) {
                 return data;
@@ -85,11 +116,11 @@ export default function CountrySearch(props) {
         */
         const comparator = (a, b) => {
             // give priority to countries that start with query string
-            const aStartsWithQS = a.label.toLowerCase().startsWith(queryString);
-            const bStartsWithQS = b.label.toLowerCase().startsWith(queryString);
+            const aStartsWithQS = a.name_long.toLowerCase().startsWith(queryString);
+            const bStartsWithQS = b.name_long.toLowerCase().startsWith(queryString);
             // const comparison = a.label.localeCompare(b.label);
             if (aStartsWithQS && bStartsWithQS || (!aStartsWithQS && !aStartsWithQS)) { // || (!aStartsWithQS && !aStartsWithQS)
-                return a.label.localeCompare(b.label);
+                return a.name_long.localeCompare(b.name_long);
             } else if (aStartsWithQS) {
                 return -1;
             } else if (bStartsWithQS) {
@@ -112,10 +143,10 @@ export default function CountrySearch(props) {
 
             <Infinite containerHeight={containerHeight - 16 - 35 - 16} elementHeight={302.707}>
             {filtered.map((country) => (
-                <ListItem key={`country-${country.label}`}>
+                <ListItem key={`country-${country.name_long}-${country.adm0_a3}`}>
                     <CountryCard
-                        label={country.label}
-                        code={country.code}
+                        label={country.name_long}
+                        code={country.iso_a2}
                         country={country}
                         setActiveCountry={props.setActiveCountry}
                     />
