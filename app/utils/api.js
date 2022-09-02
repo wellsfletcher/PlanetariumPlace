@@ -6,7 +6,26 @@ import { date2str } from "../utils/time";
 
 import { actions } from "../reducers/index";
 
-function fetchTerritoryGeometry(wikidataid) {
+function fetchTerritoryGeojsonFromName(name_long) {
+    return fetch('https://planetarium.place/api/v0/country/geometry.php', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name_long: name_long
+            })
+        }
+    )
+    .then(res => res.json())
+    .then(payload => {
+        console.log(payload);
+        return payload;
+    });
+}
+
+function fetchTerritoryGeojson(wikidataid) {
     return fetch('https://planetarium.place/api/v0/country/geometry.php', {
             method: 'POST',
             headers: {
