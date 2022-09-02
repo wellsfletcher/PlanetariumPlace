@@ -160,7 +160,8 @@ select * from territory;
 
 DROP VIEW IF EXISTS territory_view;
 create view territory_view as
-select name_long, adm0_a3, iso_a2, wikidataid, pop_est, gdp_md, price from territory;
+select name_long, adm0_a3, iso_a2, wikidataid, pop_est, gdp_md, price from territory
+ORDER BY name_long;
 select * from territory_view;
 
 update country set iso_a2 = "FR" where name = "France";

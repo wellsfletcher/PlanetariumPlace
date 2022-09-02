@@ -6,8 +6,8 @@ import { date2str } from "../utils/time";
 
 import { actions } from "../reducers/index";
 
-function fetchTerritoryGeojsonFromName(name_long) {
-    return fetch('https://planetarium.place/api/v0/country/geometry.php', {
+export function fetchTerritoryGeojsonFromName(name_long) {
+    return fetch('https://planetarium.place/api/v0/country/geometryFromName.php', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -25,7 +25,7 @@ function fetchTerritoryGeojsonFromName(name_long) {
     });
 }
 
-function fetchTerritoryGeojson(wikidataid) {
+export function fetchTerritoryGeojson(wikidataid) {
     return fetch('https://planetarium.place/api/v0/country/geometry.php', {
             method: 'POST',
             headers: {
