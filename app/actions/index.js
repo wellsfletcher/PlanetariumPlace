@@ -1,10 +1,11 @@
-import { ADD_ARTICLE, SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED } from "../constants/actionTypes";
+import { SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED } from "../constants/actionTypes";
 import * as Action from "../constants/actionTypes";
 import * as System from '../constants/system';
 import * as API from "../utils/api";
 import store from "../store/index";
 
 
+// remove?
 export function getData() {
     // alert("aaaaa");
     return function(dispatch) { // , getState

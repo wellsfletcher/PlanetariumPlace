@@ -9,6 +9,7 @@ use PlaceDB;
 -- use OPENJSON to split the different JSON nodes into separate columns
 select @geojson;
 
+/*
 SELECT *
  FROM
    JSON_TABLE(
@@ -21,7 +22,8 @@ SELECT *
        bx INT EXISTS PATH "$.b"
 	 )
    ) AS countries5;
-   
+*/
+
 /*
 SELECT
 	*

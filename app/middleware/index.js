@@ -1,27 +1,14 @@
-import { ADD_ARTICLE, SET_TILE } from "../constants/actionTypes";
+import { SET_TILE } from "../constants/actionTypes";
 import * as Action from "../constants/actionTypes";
 import * as System from '../constants/system';
 
 import { mod } from '../utils/general';
 import * as Time from '../utils/time';
 
-
-const forbiddenWords = ["spam", "money"];
-
 export function forbiddenWordsMiddleware({ getState, dispatch }) { // { getState, dispatch }
     return function(next) {
         return function(action) {
-            // do your stuff
-            if (action.type === ADD_ARTICLE) {
-                const title = action.payload.title;
-                const foundWord = forbiddenWords.filter(word =>
-                    title.includes(word)
-                );
-
-                if (foundWord.length || title === "") {
-                    return dispatch({ type: "FOUND_BAD_WORD" });
-                }
-            } else if (action.type === SET_TILE) {
+            if (action.type === SET_TILE) { // this should be changed
                 var {x, y} = action.payload;
                 const state = getState();
                 // console.log(state.board);
