@@ -35,8 +35,9 @@ class Country {
     }
 
     function getCountries() {
+        /*
         // $this->sqlConn->
-        $result = mysqli_query($this->sqlConn, "SELECT * FROM territory_view");
+        $result = mysqli_query($this->sqlConn, "SELECT * FROM territory_view;");
         $rows = array();
 
         while ($row = mysqli_fetch_assoc($result)) { // mysql_fetch_row
@@ -44,6 +45,20 @@ class Country {
         }
 
         return json_encode($rows);
+        */
+        $query = "SELECT * FROM territory_view;";
+
+        // prepare query statement
+        $stmt = $this->sqlConn->prepare($query);
+
+        // execute the query
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $historyDict = $result;
+
+        // show canvas data in json format
+        $json = json_encode($historyDict);
+        return $json;
     }
 
     function test() {
