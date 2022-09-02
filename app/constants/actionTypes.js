@@ -1,7 +1,7 @@
 
 
 
-export const ADD_ARTICLE = "root/addArticle";
+// this file should eventually become obsolete
 
 export const SET_MOUSE_DOWN = "root/setMouseDown";
 

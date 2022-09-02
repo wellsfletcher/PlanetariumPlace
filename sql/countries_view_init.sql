@@ -15,6 +15,7 @@ select * from country_view;
 
 -- set @maxWorth = 6;
 
+/*
 DROP VIEW IF EXISTS territory_view; -- (Worth * / max(Worth)) as Price
 create view territory_view as 
 select 
@@ -35,3 +36,8 @@ where A.IsIndependent = "Yes";
 
 select * from territory_view;
 select SUM(Price) from territory_view;
+*/
+
+
+
+

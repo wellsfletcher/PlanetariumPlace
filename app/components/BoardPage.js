@@ -12,12 +12,8 @@ import { useTimeout } from './hooks/useTimeout';
 
 import Board from './Board';
 import Globe from './Globe';
-import PersistentDrawer from './PersistentDrawer';
 import PersistentSearchDrawer from './PersistentSearchDrawer';
-import PermanentDrawer from './PermanentDrawer';
-import IconDrawer from './IconDrawer';
 import TabBar from './TabBar';
-import ButtonBar from './ButtonBar';
 import VerticalColorPicker from './VerticalColorPicker';
 import Overlay from './Overlay';
 import { hexcolor2int } from '../utils/general';
