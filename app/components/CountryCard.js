@@ -36,6 +36,7 @@ export default function MediaCard(props) {
   const classes = useStyles();
 
   const flag = countryToFlag(props.code);
+  // "https://en.wikipedia.org/w/index.php?search=" + props.label.replace(/ /g, '')
 
   return (
     <Card className={classes.root}>
@@ -57,7 +58,7 @@ export default function MediaCard(props) {
             {props.label}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.label} has a country code of {props.code} and a calling code of +{props.country.phone}.
+            {props.label} has a gross domestic product of {parseInt(props.country.gdp_md).toLocaleString('en-US')} and a population of about {parseInt(props.country.pop_est).toLocaleString('en-US')}.
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -71,10 +72,10 @@ export default function MediaCard(props) {
                 */
                 props.setActiveCountry(nextCountry)
             }}>
-          Find
+          Show
         </Button>
-        <Button size="small" color="primary" target="_blank" href={"https://en.wikipedia.org/w/index.php?search=" + props.label.replace(/ /g, '')}>
-          Learn More
+        <Button size="small" color="primary" target="_blank" href={"https://www.wikidata.org/wiki/" + props.country.wikidataid}>
+          Open Wiki
         </Button>
       </CardActions>
     </Card>

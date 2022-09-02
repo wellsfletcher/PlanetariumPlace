@@ -135,15 +135,19 @@ EXECUTE stmt;
 DROP VIEW IF EXISTS territory;
 create view territory as
 select *,
-	1000 * (
+	gdp_md / pop_est as gdpc,
+	600 * (
 		-- 0.99 * ((pop_est * gdp_md) / (select max(pop_est * gdp_md) from all_territory_view))
 		-- 0.99 * ((pop_est + gdp_md) / (select max(pop_est + gdp_md) from all_territory_view))
 		-- 0.25 * ((pop_est + gdp_md) / (select max(pop_est + gdp_md) from all_territory_view))
         -- 0.125 * ((pop_est) / (select max(pop_est) from all_territory_view))
         -- + 0.125 * ((gdp_md) / (select max(gdp_md) from all_territory_view))
         0.25 * (
-			0.3 * ((pop_est) / (select max(pop_est) from all_territory_view))
-            + 0.7 * ((gdp_md) / (select max(gdp_md) from all_territory_view))
+			0.5 * ((pop_est) / (select max(pop_est) from all_territory_view))
+			-- + 0.5 * ((gdp_md) / (select max(gdp_md) from all_territory_view))
+			+ 0.5 * ((gdp_md / pop_est) / (select max(gdp_md / pop_est) from all_territory_view))
+            -- + 0.5 * (gdp_md / greatest(1e5, pop_est) / (select max(gdp_md / greatest(1e5, pop_est)) from all_territory_view))
+            -- + 0.5 * (greatest(1e5, gdp_md / pop_est) / (select max(greatest(1e5,gdp_md / pop_est)) from all_territory_view))
         )
 	    + 0.745 * (area / (select max(area) from all_territory_view))
         -- + 0.745 * (area * sqrt(sqrt(greatest(abs(label_y), 1))) / (select max(area * sqrt(sqrt(greatest(abs(label_y), 1)))) from all_territory_view))
@@ -151,7 +155,24 @@ select *,
     ) as price
 from all_territory_view;
 
+select sum(price), avg(price) from territory;
 select * from territory;
-select sum(price) from territory;
 
+DROP VIEW IF EXISTS territory_view;
+create view territory_view as
+select name_long, adm0_a3, iso_a2, wikidataid, pop_est, gdp_md, price from territory
+ORDER BY name_long;
+select * from territory_view;
+
+update country set iso_a2 = "FR" where name = "France";
+update country set iso_a2 = "XK" where name = "Kosovo";
+update country set iso_a2 = "CY" where name = "N. Cyprus";
+update country set iso_a2 = "NO" where name = "Norway";
+update country set iso_a2 = "SO" where name = "Somaliland"; -- SO or XS
+-- select sum(gdp_md) from territory where iso_a2 = "US" and name != "US";
+
+SELECT name_long, COUNT(*)
+FROM territory_view
+GROUP BY name_long
+HAVING COUNT(*) > 1;
 
