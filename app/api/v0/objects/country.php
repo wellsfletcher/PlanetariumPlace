@@ -119,7 +119,7 @@ class Country {
     function getTerritoryGeojsonFromName($name_long) {
         $wikidataid = $this->sanitizeAlphanumeric($name_long);
 
-        $query = "call get_territory_geometry('$name_long');";
+        $query = "call get_territory_geometry_from_name('$name_long');";
 
         // prepare query statement
         $stmt = $this->sqlConn->prepare($query);
