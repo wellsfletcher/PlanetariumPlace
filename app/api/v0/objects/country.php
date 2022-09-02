@@ -78,10 +78,25 @@ class Country {
         */
         $msg = array(); // should this be here?
         // while ($res = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
-        while($res = $stmt->fetch(PDO::FETCH_ASSOC)){
+        while ($res = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            /*
             $msg[] = array(
                 'type' => 'Feature',
                 'bbox' => $res['bbox'],
+                'properties' => array(
+                    'name_long' => $res['name_long'],
+                    'wikidataid' => $res['wikidataid'],
+                ),
+                'geometry' => array(
+                    'type' => $res['geometry_type'],
+                    'coordinates' => $res['geometry_coordinates'],
+                )
+                // '__id' => $res['wikidataid'] // __id
+            );
+            */
+            $msg[] = array(
+                'type' => 'Feature',
+                'bbox' => json_decode($res['bbox']),
                 'properties' => array(
                     'name_long' => $res['name_long'],
                     'wikidataid' => $res['wikidataid'],
