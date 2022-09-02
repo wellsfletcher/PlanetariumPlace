@@ -36,10 +36,10 @@ class Country {
 
     function getCountries() {
         // $this->sqlConn->
-        $result = mysql_query($this->sqlConn, "SELECT * FROM territory_view");
+        $result = mysqli_query($this->sqlConn, "SELECT * FROM territory_view");
         $rows = array();
 
-        while ($row = mysql_fetch_row($result)) {
+        while ($row = mysqli_fetch_assoc($result)) { // mysql_fetch_row
             $rows[] = $row;
         }
 
