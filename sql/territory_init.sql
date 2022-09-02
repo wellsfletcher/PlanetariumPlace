@@ -151,7 +151,11 @@ select *,
     ) as price
 from all_territory_view;
 
-select * from territory;
 select sum(price) from territory;
+select * from territory;
 
+DROP VIEW IF EXISTS territory_view;
+create view territory_view as
+select name_long, adm0_a3, wikidataid, pop_est, gdp_md, price from territory;
+select * from territory_view;
 

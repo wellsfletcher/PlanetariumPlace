@@ -8,13 +8,18 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 // include database and object files
 include_once '../config/database.php';
+include_once '../config/sqlDatabase.php';
 include_once '../objects/country.php';
 
 // this file is located at http://planetarium.place/api/v0/board/tiles.php
 
 // instantiate database and product object
-$database = new Database();
+$database = new Database(); // I don't think we even need this
 $db = $database->getConnection();
+$sqlDatabase = new SqlDatabase();
+$sqlDb = $sqlDatabase->getConnection();
+
+echo "Stuff is happening!";
 
 /*
 // fetch data input data
@@ -33,6 +38,13 @@ $board = new Board($db);
 // query canvas
 $json = $board->getSize($boardId);
 echo $json;
-$db->close();
 */
+
+$country = new Country($db, $sqlDb);
+
+$json = $country->getCountries();
+echo $json;
+
+$db->close();
+// $sqlDb->close();
 ?>

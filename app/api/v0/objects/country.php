@@ -34,6 +34,18 @@ class Country {
         return $str;
     }
 
+    function getCountries() {
+        // $this->sqlConn->
+        $result = mysql_query($this->sqlConn, "SELECT * FROM territory_view");
+        $rows = array();
+
+        while ($row = mysql_fetch_row($result)) {
+            $rows[] = $row;
+        }
+
+        return json_encode($rows);
+    }
+
     function test() {
         // $this->conn->rawCommand("BITFIELD", "tiles:1", "SET", "u4", "#1", 13);
     }
