@@ -170,5 +170,8 @@ update country set iso_a2 = "NO" where name = "Norway";
 update country set iso_a2 = "SO" where name = "Somaliland"; -- SO or XS
 -- select sum(gdp_md) from territory where iso_a2 = "US" and name != "US";
 
-
+SELECT name_long, COUNT(*)
+FROM territory_view
+GROUP BY name_long
+HAVING COUNT(*) > 1;
 

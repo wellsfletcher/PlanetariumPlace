@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo } from 'react';
 
 import * as THREE from "three";
 import Globe from 'react-globe.gl';
+import * as API from '../utils/api';
 
 import useCanvas from './useCanvas';
 import useWindowDimensions from './useWindowDimensions';
@@ -242,6 +243,8 @@ function CanvasGlobe(props) {
     const [activeCountry, setActiveCountry] = React.useState([]);
     React.useEffect(() => {
         setActiveCountry(countries.features.filter(filter));
+        console.log(JSON.stringify(activeCountry));
+        console.log(props.activeCountry);
     }, [props.activeCountry]);
 
     // GDP per capita (avoiding countries with small pop)
@@ -272,6 +275,13 @@ function CanvasGlobe(props) {
     </Tooltip>);
     */
 
+    // you don't need the properties attribute for this to work
+    // nor the bounding box or feature type
+    // apparently you need some sort of ID for this to work
+    // but I am still going to make the endpoint include bbox, geometry_type, geometry_coordinates
+        // and maybe name and some kind of ID
+    // const testCountry = [[[21.02004,40.842727],[20.99999,40.580004],[20.674997,40.435],[20.615,40.110007],[20.150016,39.624998],[19.98,39.694993],[19.960002,39.915006],[19.406082,40.250773],[19.319059,40.72723],[19.40355,41.409566],[19.540027,41.719986],[19.371769,41.877548],[19.371768,41.877551],[19.304486,42.195745],[19.738051,42.688247],[19.801613,42.500093],[20.0707,42.58863],[20.283755,42.32026],[20.52295,42.21787],[20.590247,41.855409],[20.590247,41.855404],[20.463175,41.515089],[20.605182,41.086226],[21.02004,40.842727]]];
+    // const testCountry = [{"type":"Feature","bbox":[19.304486,39.624998,21.02004,42.688247],"geometry":{"type":"Polygon","coordinates":[[[21.02004,40.842727],[20.99999,40.580004],[20.674997,40.435],[20.615,40.110007],[20.150016,39.624998],[19.98,39.694993],[19.960002,39.915006],[19.406082,40.250773],[19.319059,40.72723],[19.40355,41.409566],[19.540027,41.719986],[19.371769,41.877548],[19.371768,41.877551],[19.304486,42.195745],[19.738051,42.688247],[19.801613,42.500093],[20.0707,42.58863],[20.283755,42.32026],[20.52295,42.21787],[20.590247,41.855409],[20.590247,41.855404],[20.463175,41.515089],[20.605182,41.086226],[21.02004,40.842727]]]},"__id":"437616899"}];
     // this adds a considerable amount of load time
     // and it blocks clicks :(
     // god damn it of course the polygons block clicks
@@ -279,15 +289,18 @@ function CanvasGlobe(props) {
         // polygonsData: countries.features,
         // polygonsData: countries.features.filter(filter),
         polygonsData: activeCountry,
+        // polygonsData: testCountry,
         polygonAltitude: .2, // .008,
         // polygonCapColor: () => 'rgba(100, 50, 100, .5)',
         // polygonCapColor: d => colorScale(getVal(d), maxVal),
         polygonCapColor: () => '#E5D900', //'#888888', // E5D900 // 00D3DD
         // polygonSideColor: () => 'rgba(0, 0, 0, 1.0)',
         polygonSideColor: () => '#1B1B1B',
+        /*
         polygonLabel: ({ properties: d }) => `
             <b>${d.ADMIN}</b> <br />
         `,
+        */
         // polygonLabel: label,
         polygonsTransitionDuration: 300
     };

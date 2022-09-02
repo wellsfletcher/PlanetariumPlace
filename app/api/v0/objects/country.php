@@ -29,9 +29,38 @@ class Country {
 
     function sanitizeAlphanumeric($str) {
         // return preg_replace("((a-z)|(A-Z)|(0-9))", "", $str);
-        // return preg_replace("(a-zA-Z0-9)", "", $str);
+        //- return preg_replace("(a-zA-Z0-9)", "", $str);
         // return intval(filter_var($str, FILTER_SANITIZE_STRING));
         return $str;
+    }
+
+    function getTerritoryGeometry($wikidataid) {
+        /*
+        // $this->sqlConn->
+        $result = mysqli_query($this->sqlConn, "SELECT * FROM territory_view;");
+        $rows = array();
+
+        while ($row = mysqli_fetch_assoc($result)) { // mysql_fetch_row
+            $rows[] = $row;
+        }
+
+        return json_encode($rows);
+        */
+        $wikidataid = $this->sanitizeAlphanumeric($wikidataid);
+
+        $query = "call get_territory_geometry('$wikidataid');";
+
+        // prepare query statement
+        $stmt = $this->sqlConn->prepare($query);
+
+        // execute the query
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $historyDict = $result;
+
+        // show canvas data in json format
+        $json = json_encode($historyDict);
+        return $json;
     }
 
     function getCountries() {

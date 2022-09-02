@@ -6,6 +6,25 @@ import { date2str } from "../utils/time";
 
 import { actions } from "../reducers/index";
 
+function fetchTerritoryGeometry(wikidataid) {
+    return fetch('https://planetarium.place/api/v0/country/geometry.php', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                wikidataid: wikidataid
+            })
+        }
+    )
+    .then(res => res.json())
+    .then(payload => {
+        console.log(payload);
+        return payload;
+    });
+}
+
 function fetchBoardSize(boardId) {
     return fetch('https://planetarium.place/api/v0/board/size.php', {
             method: 'POST',
