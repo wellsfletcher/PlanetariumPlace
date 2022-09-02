@@ -7,32 +7,30 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 // include database and object files
-include_once '../config/database.php';
+// include_once '../config/database.php';
+include_once '../config/sqlDatabase.php';
 include_once '../objects/country.php';
 
 // this file is located at http://planetarium.place/api/v0/board/tiles.php
 
 // instantiate database and product object
-$database = new Database();
-$db = $database->getConnection();
+// $database = new Database(); // I don't think we even need this
+// $db = $database->getConnection();
+$sqlDatabase = new SqlDatabase();
+$sqlDb = $sqlDatabase->getConnection();
 
-/*
-// fetch data input data
-$boardId = 1;
 $data = json_decode(file_get_contents("php://input"));
-$boardId = $data->boardId;
-if (isset($data) && isset($data->boardId)) {
-    $boardId = $data->boardId;
-}
-*/
+// echo file_get_contents("php://input");
+// echo "\n";
 
-/*
-// initialize object
-$board = new Board($db);
+$wikidataid = $data->wikidataid;
 
-// query canvas
-$json = $board->getSize($boardId);
+$country = new Country($sqlDb);
+
+$json = $country->getTerritoryGeojson($wikidataid);
+// $json = $country->getTerritoryGeometry("Q40");
 echo $json;
-$db->close();
-*/
+
+// $db->close();
+// $sqlDb->close();
 ?>

@@ -1,5 +1,8 @@
 
 
+select name_long, bbox, geometry_type, geometry_coordinates from territory
+where name_long = ""; -- name_long
+
 
 select * from country1;
 select * from country2;
