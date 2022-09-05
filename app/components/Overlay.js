@@ -79,11 +79,12 @@ export default function Overlay(props) {
         style={{
             // marginBottom: "0px"
         }}
+        value={useGlobe}
      >
-        <ToggleButton selected={useGlobe} onClick={() => setUseGlobe(true)}>
+        <ToggleButton value={true} onClick={() => setUseGlobe(true)}>
             <GlobeIcon />
         </ToggleButton>
-        <ToggleButton selected={!useGlobe} onClick={() => setUseGlobe(false)}>
+        <ToggleButton value={false} onClick={() => setUseGlobe(false)}>
             <MapIcon />
         </ToggleButton>
     </ToggleButtonGroup>;
@@ -95,15 +96,17 @@ export default function Overlay(props) {
         style={{
             // marginBottom: "14px"
         }}
+        value={viewFlashback}
      >
-        <ToggleButton selected={viewFlashback} onClick={() => setViewFlashback(true)}>
+        <ToggleButton value={true} onClick={() => setViewFlashback(true)}>
             <ViewIcon />
         </ToggleButton>
-        <ToggleButton selected={!viewFlashback} onClick={() => setViewFlashback(false)}>
+        <ToggleButton value={false} onClick={() => setViewFlashback(false)}>
             <ViewOffIcon />
         </ToggleButton>
     </ToggleButtonGroup>;
 
+    /*
     const toolFab = <ToggleButtonGroup
         orientation="horizontal"
         color="primary"
@@ -122,6 +125,7 @@ export default function Overlay(props) {
             <ColorizeIcon />
         </ToggleButton>
     </ToggleButtonGroup>;
+    */
 
     /*
     const downloadButton = <IconButton target="_blank" href="https://reddit.com/r/planetariumplace">

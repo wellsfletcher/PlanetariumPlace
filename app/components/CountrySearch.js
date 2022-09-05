@@ -131,7 +131,7 @@ export default function CountrySearch(props) {
             }
         };
 
-        const newFilterCountries = countries.filter((data) => filter(data, queryString)).sort(comparator);
+        const newFilterCountries = countries.filter((data) => filter(data, queryString)); // .sort(comparator);
         setFiltered(newFilterCountries);
     };
 

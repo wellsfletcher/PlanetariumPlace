@@ -121,10 +121,9 @@ function CanvasGlobe(props) {
         // texture.needsUpdate = true;
 
         // console.log("globe texture updating...");
-        var dataUrl = canvas.toDataURL("image/png"); // for someone reason this line of codes makes everything work on safari :(
-        // var context = canvas.getContext("2d");
-        // var dafdasdf = canvas.getImageData(10, 10, 50, 50);
-        console.log(dataUrl);
+        // uncomment these lines if you want to be able to download the canvas
+        //- var dataUrl = canvas.toDataURL("image/png"); // for someone reason this line of codes makes everything work on safari :(
+        // console.log(dataUrl);
 
         globeMaterial.emissive = new THREE.Color(0xffffff);
         // globeMaterial.emissive = new THREE.Color(0x111111);
@@ -158,8 +157,6 @@ function CanvasGlobe(props) {
         setMapScaleOnTouchStart(mapScale);
     };
     const onZoom = (event) => {
-        // console.log(event);
-        // console.log();
         const altitude = event.altitude;
         setMapScale(altitude);
     };
@@ -167,9 +164,6 @@ function CanvasGlobe(props) {
     const onGlobeClick = ({ lat, lng }, event) => {
         // event.preventDefault(); // this may add a delay to clicks being registered?
         if (event.defaultPrevented) return; // aaaaaaaaaaaaaaaaaaaa
-        //-- if (viewFlashback) return; // may wanna make it so that if you click anywhere it changes the viewFlashback state
-        //- console.log(event.defaultPrevented);
-        // console.log(event);
 
         const camera = globeEl.current.camera();
         const mapRotation = camera.getWorldDirection(new THREE.Vector3());
@@ -179,8 +173,8 @@ function CanvasGlobe(props) {
         //- console.log(camera);
         var deltaRotation = mapRotation.distanceTo(mapRotationOnTouchStart);
         var deltaScale = mapScaleOnTouchStart - mapScale;
-        console.log("deltaRotation = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
-        console.log("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
+        // console.log("deltaRotation = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
+        // console.log("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
         if (Math.abs(deltaRotation) > MAP_ROTATION_TOLERANCE || Math.abs(deltaScale) > MAP_ROTATION_TOLERANCE) {
             console.log("Click do be aborted.");
             return;
