@@ -224,6 +224,7 @@ function CanvasGlobe(props) {
         }
     };
 
+    /*
     const filter = d => {
         // console.log("activeCountry = " + props.activeCountry);
         return d.properties.ADMIN != undefined
@@ -233,6 +234,7 @@ function CanvasGlobe(props) {
             || d.properties.ADMIN.toLowerCase().includes(props.activeCountry.toLowerCase())
             );
     };
+    */
 
     const [countries, setCountries] = React.useState({ features: []});
     /*
@@ -252,6 +254,7 @@ function CanvasGlobe(props) {
         //- fetch('/assets/ne_110m_admin_0_countries.geojson').then(res => res.json()).then(setCountries);
         // API.fetchTerritoryGeojsonFromName(props.activeCountry).then(res => res.json()).then(setCountries);
         if (props.activeCountry == null || props.activeCountry == "") {
+            setActiveCountry([]); // or []
             return;
         }
         API.fetchTerritoryGeojsonFromName(props.activeCountry).then(res => {

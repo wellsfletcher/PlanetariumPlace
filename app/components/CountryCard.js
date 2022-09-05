@@ -32,11 +32,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MediaCard(props) {
+/**
+ * Country card
+ * @param {*} props {code, country}
+*/
+export default function MediaCard({label, code, country, activeCountry, setActiveCountry}) {
   const classes = useStyles();
 
-  const flag = countryToFlag(props.code);
-  // "https://en.wikipedia.org/w/index.php?search=" + props.label.replace(/ /g, '')
+
+  const flag = countryToFlag(code);
+  // "https://en.wikipedia.org/w/index.php?search=" + label.replace(/ /g, '')
+
+  // var activeCountryIsNull = activeCountry == null || activeCountry == "";
+  var isActiveCountry = activeCountry == label;
 
   return (
     <Card className={classes.root}>
@@ -50,32 +58,32 @@ export default function MediaCard(props) {
         <CardMedia
           className={classes.media}
           image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
-          title={props.label}
+          title={label}
         />
         */}
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {props.label}
+            {label}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.label} has a gross domestic product of {parseInt(props.country.gdp_md).toLocaleString('en-US')} and a population of about {parseInt(props.country.pop_est).toLocaleString('en-US')}.
+            {label} has a gross domestic product of {parseInt(country.gdp_md).toLocaleString('en-US')} and a population of about {parseInt(country.pop_est).toLocaleString('en-US')}.
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary" onClick={() => {
-                var nextCountry = props.label;
-                /*
-                if (props.activeCountry === props.label) {
-                    nextCountry = "noCountrySelected";
+                var nextCountry = label;
+
+                if (isActiveCountry) {
+                    nextCountry = "";
                 }
-                */
-                props.setActiveCountry(nextCountry)
+
+                setActiveCountry(nextCountry);
             }}>
-          Show
+          {isActiveCountry ? "Hide" : "Show"}
         </Button>
-        <Button size="small" color="primary" target="_blank" href={"https://www.wikidata.org/wiki/" + props.country.wikidataid}>
-          Open Wiki
+        <Button size="small" color="primary" target="_blank" href={"https://www.wikidata.org/wiki/" + country.wikidataid}>
+          View Stats
         </Button>
       </CardActions>
     </Card>

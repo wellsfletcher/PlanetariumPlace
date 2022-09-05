@@ -99,7 +99,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PersistentDrawer(props) {
+/**
+ * Sidebar drawer used in the app
+*/
+export default function PersistentDrawer(props) { // technically it doesn't use a lot of the props it is given
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -200,7 +203,8 @@ export default function PersistentDrawer(props) {
 
         <CountrySearch
             containerHeight={windowHeight - 64 - 1}
-            setActiveCountry={props.setActiveCountry} 
+            activeCountry={props.activeCountry}
+            setActiveCountry={props.setActiveCountry}
         />
 
 

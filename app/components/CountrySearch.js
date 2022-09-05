@@ -25,7 +25,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
+/**
+ * Search menu for countries
+ * @param {*} props {containerHeight, setActiveCountry, activeCountry}
+ */
 export default function CountrySearch(props) {
     const materialProps = props;
     const classes = useStyles();
@@ -148,6 +151,7 @@ export default function CountrySearch(props) {
                         label={country.name_long}
                         code={country.iso_a2}
                         country={country}
+                        activeCountry={props.activeCountry}
                         setActiveCountry={props.setActiveCountry}
                     />
                 </ListItem>

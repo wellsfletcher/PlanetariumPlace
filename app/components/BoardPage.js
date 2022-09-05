@@ -182,6 +182,7 @@ const BoardPage = (props) => {
                 <div style={style}>
                     <PersistentSearchDrawer
                         onChangeComplete={onChangeComplete}
+                        activeCountry={activeCountry}
                         setActiveCountry={props.setActiveCountry}
                     >
                     </PersistentSearchDrawer>
