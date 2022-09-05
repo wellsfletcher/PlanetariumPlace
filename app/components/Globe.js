@@ -122,7 +122,7 @@ function CanvasGlobe(props) {
 
         // console.log("globe texture updating...");
         // uncomment these lines if you want to be able to download the canvas
-        //- var dataUrl = canvas.toDataURL("image/png"); // for someone reason this line of codes makes everything work on safari :(
+        var dataUrl = canvas.toDataURL("image/png"); // for someone reason this line of codes makes everything work on safari :(
         // console.log(dataUrl);
 
         globeMaterial.emissive = new THREE.Color(0xffffff);
