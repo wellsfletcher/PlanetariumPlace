@@ -6,7 +6,7 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import IconButton from '@material-ui/core/IconButton';
 import RedditIcon from '@material-ui/icons/Reddit';
-import GithubIcon from '@material-ui/icons/Github';
+// import GithubIcon from '@material-ui/icons/Github';
 
 import GlobeIcon from '@material-ui/icons/Public';
 import MapIcon from '@material-ui/icons/Map';
