@@ -121,8 +121,10 @@ function CanvasGlobe(props) {
         // texture.needsUpdate = true;
 
         // console.log("globe texture updating...");
-        // uncomment these lines if you want to be able to download the canvas
-        var dataUrl = canvas.toDataURL("image/png"); // for someone reason this line of codes makes everything work on safari :(
+        // for someone reason this line of codes makes everything work on safari :(
+        // (as of September 5, 2022 this is still the case lol)
+        var dataUrl = canvas.toDataURL("image/png");
+        // uncomment this lines if you want to be able to download the canvas
         // console.log(dataUrl);
 
         globeMaterial.emissive = new THREE.Color(0xffffff);
@@ -323,14 +325,28 @@ function CanvasGlobe(props) {
         // polygonCapColor: () => 'rgba(100, 50, 100, .5)',
         // polygonCapColor: d => colorScale(getVal(d), maxVal),
         polygonCapColor: () => '#E5D900', //'#888888', // E5D900 // 00D3DD
-        // polygonSideColor: () => 'rgba(0, 0, 0, 1.0)',
+        // polygonCapColor: () => 'rgba(0, 0, 0, 0.0)',
+        //- polygonSideColor: () => 'rgba(27, 27, 27, 0.8)',
         polygonSideColor: () => '#1B1B1B',
         polygonLabel: ({ properties: d }) => `
             <b>${d.name_long}</b> <br />
         `,
+        // polygonStrokeColor: () => '#E50000',
+        // polygonCapCurvatureResolution: 0,
         // polygonLabel: label,
-        polygonsTransitionDuration: 300
+        polygonsTransitionDuration: 0
     };
+
+    /*
+    const cp = {
+        polygonAltitude: 0, // .008,
+        polygonCapColor: () => 'rgba(0, 0, 0, 0.0)',
+        polygonSideColor: () => 'rgba(0, 0, 0, 0.0)',
+        polygonStrokeColor: () => '#E50000',
+        // polygonCapCurvatureResolution: 0,
+        polygonsTransitionDuration: 0
+    }
+    */
 
     //- const countryProps = {};
 
