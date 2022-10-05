@@ -119,24 +119,25 @@ const BoardPage = (props) => {
         const TILE_UPDATE_FREQUENCY = System.TILE_UPDATE_FREQUENCY;
         const TILE_UPDATE_OFFSET = System.TILE_UPDATE_OFFSET;
         // setInterval(() => {
-        useInterval(() => {
-            console.log("updating async tiles...");
-            const placeholderDate = new Date();
-            props.fetchTileChanges(props.boardId, placeholderDate);
-            // props.fetchTileChanges(props.boardId, props.lastUpdated);
-            // props.fetchTileChanges(1, new Date());
 
-            // play a bunch of actions after some time (the delay is stored in the payload)
-            // this shit needs to get run after tile changes have been fetched
-            /*
-            console.log(props.unplayedChanges);
-            while (!props.unplayedChanges.isEmpty()) {
-                let change = props.unplayedChanges.dequeue();
-                console.log(change);
-                props.playChange(change);
-            }
-            */
-        }, TILE_UPDATE_FREQUENCY);
+        // useInterval(() => {
+        //     console.log("updating async tiles...");
+        //     const placeholderDate = new Date();
+        //     props.fetchTileChanges(props.boardId, placeholderDate);
+        //     // props.fetchTileChanges(props.boardId, props.lastUpdated);
+        //     // props.fetchTileChanges(1, new Date());
+        //
+        //     // play a bunch of actions after some time (the delay is stored in the payload)
+        //     // this shit needs to get run after tile changes have been fetched
+        //     /*
+        //     console.log(props.unplayedChanges);
+        //     while (!props.unplayedChanges.isEmpty()) {
+        //         let change = props.unplayedChanges.dequeue();
+        //         console.log(change);
+        //         props.playChange(change);
+        //     }
+        //     */
+        // }, TILE_UPDATE_FREQUENCY);
 
         const onChangeComplete = (color) => {
             var brushColorInt = hexcolor2int(color);
