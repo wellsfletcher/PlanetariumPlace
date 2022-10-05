@@ -71,7 +71,7 @@ export default function MediaCard({label, code, country, activeCountry, setActiv
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={() => {
+        <Button disabled size="small" color="primary" onClick={() => {
                 var nextCountry = label;
 
                 if (isActiveCountry) {

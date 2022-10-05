@@ -253,6 +253,7 @@ function CanvasGlobe(props) {
             setActiveCountry([]); // or []
             return;
         }
+        /*
         API.fetchTerritoryGeojsonFromName(props.activeCountry).then(res => {
             console.log("fetched country = ");
             console.log(res);
@@ -263,7 +264,9 @@ function CanvasGlobe(props) {
             // setActiveCountry(countries.features.filter(filter)); // you probably don't need to filter this anymore // unless maybe you want to cache stuff
             //- setActiveCountry(res.filter(filter));
             setActiveCountry(res);
-        })/*.then(setCountries)
+        })
+        */
+        /*.then(setCountries)
         .then(() => setActiveCountry(countries.features.filter(filter)));*/
 
         // API.fetchTerritoryGeojsonFromName(props.activeCountry).then(res => res.json()).then(setCountries);

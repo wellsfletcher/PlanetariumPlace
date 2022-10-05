@@ -15,6 +15,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import SearchBar from './SearchBar';
 import CountryCard from './CountryCard';
 // import { countries } from '../constants/countries';
+import Typography from '@material-ui/core/Typography';
 
 var Infinite = require('react-infinite');
 
@@ -50,7 +51,9 @@ export default function CountrySearch(props) {
 
     const [countries, setCountries] = React.useState([]); // React.useState({ features: []});
     React.useEffect(() => {
+        /*
         const url = "https://planetarium.place/api/v0/country/properties.php";
+        console.log("Reloading all countries");
         // load data
         // fetch('../datasets/ne_110m_admin_0_countries.geojson').then(res => res.json()).then(setCountries);
 
@@ -59,6 +62,7 @@ export default function CountrySearch(props) {
             setCountries(res);
             setFiltered(res);
         });
+        */
         // .then(() => {console.log(countries); setFiltered([{"name_long":"Antarctica","adm0_a3":"ATA","wikidataid":"Q51","pop_est":"4490","gdp_md":"898.00","price":"543.652532134"}])});
         // .then(() => {console.log(countries); setFiltered(countries)});
         // .then(onChange(null));
@@ -137,13 +141,17 @@ export default function CountrySearch(props) {
 
     // 318.71
     // 16 total padding around list, 35 search bar height, 16 padding around search bar
+  // return <Typography> This feature has been temporarily disabled for performance reasons. </Typography>;
   return (
     <>
         <List className={classes.root}>
             <ListItem>
               <SearchBar onChange={onChange}/>
             </ListItem>
-
+            <ListItem>
+              <Typography> This feature has been temporarily disabled for performance reasons. </Typography>
+            </ListItem>
+            {/*
             <Infinite containerHeight={containerHeight - 16 - 35 - 16} elementHeight={302.707}>
             {filtered.map((country) => (
                 <ListItem key={`country-${country.name_long}-${country.adm0_a3}`}>
@@ -157,6 +165,7 @@ export default function CountrySearch(props) {
                 </ListItem>
             ))}
             </Infinite>
+            */}
         </List>
         </>
   );
