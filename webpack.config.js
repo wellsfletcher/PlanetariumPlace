@@ -26,7 +26,8 @@ var CopyWebpackPluginConfig = new CopyWebpackPlugin(
 );
 module.exports = {
     entry: __dirname + '/app/index.js',
-    mode: 'development',
+    //- mode: 'development',
+    // devtool: 'inline-source-map',
     module: {
         rules: [
             {

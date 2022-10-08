@@ -96,6 +96,7 @@ const BoardPage = (props) => {
     const activeCountry = useSelector(state => state.board.activeCountry);
     const brushColor = useSelector(state => state.brushColor);
 
+    // console.log(process.env.NODE_ENV);
     // console.log(tiles);
 
     props = { tiles, tilesRgba, map, values, width, activeCountry, brushColor, ...props };

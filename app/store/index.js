@@ -47,7 +47,9 @@ const store = configureStore({
     */
     // middleware: [forbiddenWordsMiddleware, thunk]
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false, immutableCheck: false}).concat(forbiddenWordsMiddleware),
-    devTools: {
+    // devTools: false,
+    // process.env.NODE_ENV // process.env.NODE_ENV !== 'production'
+    devTools: (process.env.NODE_ENV === 'production') ? false : {
         stateSanitizer
     }
 });
