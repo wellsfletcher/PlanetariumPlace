@@ -6,6 +6,8 @@ import thunk from "redux-thunk";
 import { rootReducer } from "../reducers/index";
 // import boardReducer from "../features/board/boardSlice";
 
+// import { } from "../actions/index";
+
 
 // const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -37,7 +39,7 @@ const stateSanitizer = (state) => {
     return result;
 };
 
-const store = configureStore({
+const storeOptions = {
     reducer: rootReducer,
     /*
     reducer: {
@@ -50,7 +52,25 @@ const store = configureStore({
     devTools: {
         stateSanitizer
     }
-});
+};
+console.log("storeOptions = ");
+console.log(storeOptions);
+const store = configureStore(storeOptions);
+
+// const store = configureStore({
+//     reducer: rootReducer,
+//     /*
+//     reducer: {
+//         root: rootReducer,
+//         board: boardReducer
+//     },
+//     */
+//     // middleware: [forbiddenWordsMiddleware, thunk]
+//     middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false, immutableCheck: false}).concat(forbiddenWordsMiddleware),
+//     devTools: {
+//         stateSanitizer
+//     }
+// });
 
 
-export default store
+export default store;

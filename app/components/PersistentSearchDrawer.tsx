@@ -62,8 +62,11 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
   },
   drawerPaper: {
-    width: drawerWidth,
-    background: theme.palette.background.darkPaper,
+      width: drawerWidth,
+      // TS bug
+      // background: theme.palette.background.darkPaper,
+      // background: theme.paletteBackground.darkPaper,
+      // background: undefined
   },
   drawerHeader: {
     display: 'flex',
@@ -99,7 +102,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PersistentDrawer(props) {
+interface PersistentDrawerProps {
+    onChangeComplete: (color: any) => void,
+    setActiveCountry: any
+}
+
+export default function PersistentDrawer(props: PersistentDrawerProps) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);

@@ -15,6 +15,10 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
+interface PrimarySearchAppBarProps {
+  onChange: (event: any) => any | undefined
+}
+
 const useStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
@@ -64,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PrimarySearchAppBar(props) {
+export default function PrimarySearchAppBar(props: PrimarySearchAppBarProps) {
   const classes = useStyles();
 
   return (

@@ -29,11 +29,23 @@ module.exports = {
     mode: 'development',
     module: {
         rules: [
+            /*{
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader'
+            },*/
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
-            }, /*{
+            },
+            {
+                test: /\.tsx$/,
+                // test: /\.tsx?$/,
+                exclude: /node_modules/,
+                loader: 'ts-loader'
+            },
+            /*{
                 test: /\.css$/,
                 loader: "style-loader!css-loader"
             },*/ {
@@ -41,6 +53,9 @@ module.exports = {
                 loader: 'url-loader?limit=100000'
             }
         ]
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
     },
     output: {
         filename: 'transformed.js',

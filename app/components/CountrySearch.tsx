@@ -18,15 +18,24 @@ import CountryCard from './CountryCard';
 
 var Infinite = require('react-infinite');
 
+// @ts-ignore
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
-    backgroundColor: theme.palette.background.darkPaper,
+      width: '100%',
+      // commenting out bc TS bug
+      // backgroundColor: theme.palette.background.darkPaper,
+      // backgroundColor: undefined
+      // backgroundColor: theme.paletteBackground.darkPaper,
+      // backgroundColor: "#303030"
   },
 }));
 
+interface CountrySearchProps {
+    containerHeight: number,
+    setActiveCountry: any
+}
 
-export default function CountrySearch(props) {
+export default function CountrySearch(props: CountrySearchProps) {
     const materialProps = props;
     const classes = useStyles();
 
@@ -93,9 +102,11 @@ export default function CountrySearch(props) {
         var queryString = event.target.value;
         // what the heck is this little chunk
         if (queryString == null) {
+            /* Commenting out because TypeScript identified it as a bug
             if (data.suggested == true) {
                 return data;
             }
+             */
         }
         queryString = queryString.toLowerCase();
         //- var queryString = event.target.value.toLowerCase();

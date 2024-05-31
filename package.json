@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "tsc": "tsc",
+    "postinstall": "npm run tsc",
+    "dev": "ts-node-dev — respawn — pretty — transpile-only index.ts",
+    "start2": "webpack serve --config webpack.config.js"
   },
   "keywords": [
     "place",
@@ -25,6 +29,11 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.58",
     "@reduxjs/toolkit": "^1.7.1",
+    "@types/jest": "^29.5.12",
+    "@types/material-ui": "^0.21.17",
+    "@types/node": "^20.12.12",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "file-loader": "^6.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -35,12 +44,15 @@
     "react-router-dom": "^5.2.0",
     "react-swipeable": "^6.0.1",
     "three": "^0.124.0",
+    "ts-loader": "^8.2.0",
+    "typescript": "^5.4.5",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
+    "@webpack-cli/serve": "^2.0.5",
     "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^6.3.1",
     "html-webpack-plugin": "^4.5.0",

@@ -22,6 +22,9 @@ import * as System from '../constants/system';
 // import * as Board from '../modules/board';
 // import useWindowDimensions from './useWindowDimensions';
 
+//- import { CSSProperties } from "react";
+
+
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -81,6 +84,32 @@ const mapStateToProps = (state) => { // this will be placed with a bunch of sele
     };
 };
 
+// interface BoardProps {
+//     tilesRgba: any,
+//     tiles: any,
+//     map: any,
+//     values: any,
+//     width: number,
+//     // mouseDown: any,
+//     brushColor: any,
+//     activeCountry: any,
+//     viewFlashback: any,
+//     setViewFlashback: any,
+//     setTile: any
+// }
+//
+// interface BoardPageProps extends BoardProps {
+//     fetchTiles: any,
+//     fetchTileChanges: any,
+//     // setLocalTile: any,
+//     // playChange: any,
+//     // setBoardId: any,
+//     setActiveCountry: any,
+//     setBrushColor: any,
+//
+//     boardId: number,
+// }
+
 // export default class BoardPage extends React.Component {
 const BoardPage = (props) => {
     // console.log("something is happening right now");
@@ -101,7 +130,8 @@ const BoardPage = (props) => {
     props = { tiles, tilesRgba, map, values, width, activeCountry, brushColor, ...props };
     // console.log("cool beans");
 
-        const style = { // may wanna move this elsewhere and delet the div
+        // const style: CSSProperties = { // may wanna move this elsewhere and delet the div
+        const style = {
             position: "absolute",
             width: "100%",
             height: "100%",

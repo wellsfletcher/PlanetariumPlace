@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { connect } from "react-redux";
-import { setMouseDown } from "../actions/index";
+// Commented out bc of TS bug
+// import { setMouseDown } from "../actions/index";
+// import { } from "../actions/index";
 import { actions } from "../reducers/index";
 
 import BoardPage from './BoardPage';
@@ -11,13 +13,46 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import themeColor from '@material-ui/core/colors/indigo';
 
+// console.log("setMouseDown = ");
+// console.log(setMouseDown);
+
+// setMouseDown = undefined;
+
 function mapDispatchToProps(dispatch) {
   return {
     setMouseDown: (mouseDown) => dispatch(actions.setMouseDown(mouseDown)) // might not be doing correctly
   };
 }
 
+// declare module '@material-ui/core/styles' { // @material-ui/core/styles
+//     interface TypeBackground {
+//         darkPaper: string;
+//         lightPaper?: string;
+//     }
+// }
+
+//-
+// declare module '@material-ui/core/styles' {
+//     interface Theme {
+//         paletteBackground: {
+//             darkPaper: string;
+//             lightPaper: string;
+//         };
+//     }
+//     // allow configuration using `createTheme`
+//     interface ThemeOptions {
+//         paletteBackground?: {
+//             darkPaper?: string;
+//             lightPaper?: string;
+//         };
+//     }
+// }
+
 const theme = createMuiTheme({
+    paletteBackground: {
+        darkPaper: "#303030",
+        lightPaper: "#424242"
+    },
     palette: {
         primary: {
             light: "#7FBDF8", // adfsaf
@@ -25,14 +60,20 @@ const theme = createMuiTheme({
             dark: "#7FBDF8",
             contrastText: "#fff"
         },
+        // customBackground: {
+        //     darkPaper: "#303030",
+        //     lightPaper: "#424242"
+        // },
         // primary: themeColor,
         // primary: "#90caf9", // palette.primary.main
         type: 'dark',
         background: {
             default: "#00000E",
             // paper: "#424242",
-            darkPaper: "#303030", // "#424242"
-            lightPaper: "#424242", // "#424242"
+            // Commented out because of TS bug
+            // darkPaper: "#303030", // "#424242"
+            // Commented out because of TS bug
+            // lightPaper: "#424242", // "#424242"
         },
         /*
         action: {
