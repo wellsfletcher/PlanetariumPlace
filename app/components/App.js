@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { connect } from "react-redux";
 // Commented out bc of TS bug
-// import { setMouseDown } from "../actions/index";
+import { setMouseDown } from "../actions/index";
 // import { } from "../actions/index";
-import { actions } from "../reducers/index";
+import { actions } from "../reducers";
 
 import BoardPage from './BoardPage';
 

@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { connect } from "react-redux";
 import { fetchTiles, fetchTileChanges} from "../actions/index"; // these should get moved
-import { actions } from "../reducers/index";
+import { actions } from "../reducers";
 import { bindActionCreators } from 'redux';
 
 import { useInterval } from './hooks/useInterval';

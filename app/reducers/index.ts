@@ -1,7 +1,7 @@
 import { SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED, TILE_CHANGES_FETCHED } from "../constants/actionTypes";
 import * as Action from "../constants/actionTypes";
 import * as System from "../constants/system";
-import { xy2index } from '../utils/general';
+import {XOR, xy2index} from '../utils/general';
 import * as Board from '../modules/board';
 import Queue from '../utils/Queue';
 
@@ -9,7 +9,7 @@ import {
   createSlice
 } from '@reduxjs/toolkit'
 
-const initBoard = (width, height) => {
+const initBoard = (width: number, height: number): number[] => {
     // instead of making the board initially all black, we make it in a checkerboard pattern for debugging purposes
     var result = [];
     var index = 0;
@@ -19,7 +19,9 @@ const initBoard = (width, height) => {
             // var color = 0;
             var color = BACKGROUND_COLOR;
 
-            if ((1 * (x + y)) % 16 == 0  ^  (1 * (x - y)) % 16 == 0 ) {
+            // changed because of TS error
+            // if ((1 * (x + y)) % 16 == 0  ^  (1 * (x - y)) % 16 == 0 ) {
+            if (XOR((1 * (x + y)) % 16 == 0, (1 * (x - y)) % 16 == 0)) {
                 // color = 1;
                 // color = 1752220;
                 color = 0xCF6EE4;
@@ -44,14 +46,16 @@ const initBoard = (width, height) => {
     return result;
 };
 
-const initMap = (width, height) => { // technically should be an array of lists of boardIds
+const initMap = (width: number, height: number): number[] => { // technically should be an array of lists of boardIds
     var result = [];
     var index = 0;
     for (var y = 0; y < height; y++) {
         for (var x = 0; x < width; x++) {
             var value = 0;
 
-            if ((1 * (x + y)) % 16 == 0  ^  (1 * (x - y)) % 16 == 0 ) {
+            // changed because of TS error
+            // if ((1 * (x + y)) % 16 == 0  ^  (1 * (x - y)) % 16 == 0 ) {
+            if (XOR((1 * (x + y)) % 16 == 0, (1 * (x - y)) % 16 == 0)) {
                 if ((1 * (x + y)) % 16 == 0) {
                     value = 1;
                 } else {

@@ -2,11 +2,11 @@ import { TILES_FETCHED, TILE_CHANGES_FETCHED } from "../constants/actionTypes";
 // import { playChange } from "../actions/index";
 import * as Actions from '../actions/index';
 import * as System from '../constants/system';
-import { date2str } from "../utils/time";
+import { date2str } from "./time";
 
-import { actions } from "../reducers/index";
+import { actions } from "../reducers";
 
-export function fetchTerritoryGeojsonFromName(name_long) {
+export function fetchTerritoryGeojsonFromName(name_long: any): Promise<any> {
     return fetch('https://planetarium.place/api/v0/country/geometryFromName.php', {
             method: 'POST',
             headers: {
@@ -25,7 +25,7 @@ export function fetchTerritoryGeojsonFromName(name_long) {
     });
 }
 
-export function fetchTerritoryGeojson(wikidataid) {
+export function fetchTerritoryGeojson(wikidataid: any): Promise<any> {
     return fetch('https://planetarium.place/api/v0/country/geometry.php', {
             method: 'POST',
             headers: {
@@ -44,7 +44,7 @@ export function fetchTerritoryGeojson(wikidataid) {
     });
 }
 
-function fetchBoardSize(boardId) {
+function fetchBoardSize(boardId: number): Promise<any> {
     return fetch('https://planetarium.place/api/v0/board/size.php', {
             method: 'POST',
             headers: {
@@ -63,7 +63,7 @@ function fetchBoardSize(boardId) {
     });
 }
 
-export function fetchTilesSlow(boardId, dispatch) {
+export function fetchTilesSlow(boardId: number, dispatch): Promise<any> {
     return fetchBoardSize(boardId)
         .then(payload => fetchTilesGivenSize(boardId, payload.width, payload.height, dispatch));
 }
@@ -75,7 +75,7 @@ export function fetchTiles(boardId, dispatch) {
 /**
 This is a redux action.
 */
-export function fetchTilesGivenSize(boardId, width, height, dispatch) {
+export function fetchTilesGivenSize(boardId: number, width: number, height: number, dispatch: any): Promise<any> {
     var canvas = new Uint8Array(width * height);
     var offset = 0;
 
@@ -127,7 +127,7 @@ export function fetchTilesGivenSize(boardId, width, height, dispatch) {
 /*
 @color is colorCode with value from [0–15]
 */
-export function draw(boardId, {x, y}, color) { // width?
+export function draw(boardId: number, {x, y}, color: number): void { // width?
     console.log("setting tile...");
     console.log({ boardId, x, y, color });
     fetch('https://planetarium.place/api/v0/board/draw.php', {
@@ -174,7 +174,7 @@ export function fetchTileChanges(boardId, lastUpdated, dispatch) { // width?
 /**
 This is a Redux action.
 */
-export function fetchTileChanges(boardId, lastUpdated, dispatch) { // width?
+export function fetchTileChanges(boardId: number, lastUpdated: any, dispatch: any): void { // width?
     const since = date2str(lastUpdated);
     // const {boardId, since} = dispatch;
     //- console.log("getting history...");

@@ -1,7 +1,7 @@
-import { int2rgba, vector2index } from '../utils/general';
+import { int2rgba, vector2index } from './general';
 
 
-export function drawPixel(ctx, x, y) {
+export function drawPixel(ctx: any, x: number, y: number) {
     var r = 255;
     var g = 100;
     var b = 100;
@@ -15,7 +15,7 @@ export function drawPixel(ctx, x, y) {
     ctx.putImageData(id, x, y);
 };
 
-export function drawPixelBuffer(ctx, pixels, bufferWidth, hasAlpha=false) {
+export function drawPixelBuffer(ctx: any, pixels: any, bufferWidth: number, hasAlpha: boolean = false): any {
     var width = bufferWidth;
     var height = pixels.length / width; // floor?
 
@@ -50,12 +50,12 @@ export function drawPixelBuffer(ctx, pixels, bufferWidth, hasAlpha=false) {
     return imageData;
 };
 
-export function drawPixelRgbaBuffer(ctx, pixels, bufferWidth) {
+export function drawPixelRgbaBuffer(ctx: any, pixels: any, bufferWidth: number): any {
     var bufferHeight = (pixels.length / 4) / bufferWidth;
     return drawUint8ClampedArray(ctx, pixels, bufferWidth, bufferHeight);
 };
 
-export function paintCanvasBlack(ctx, canvasWidth, canvasHeight) {
+export function paintCanvasBlack(ctx: any, canvasWidth: number, canvasHeight: number) {
     ctx.fillStyle = "blue";
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 };
@@ -63,7 +63,7 @@ export function paintCanvasBlack(ctx, canvasWidth, canvasHeight) {
 /**
 Makes async call to load the image
 */
-export function fillCanvasWithImagePath(ctx, path, canvasWidth, canvasHeight) {
+export function fillCanvasWithImagePath(ctx: any, path: string, canvasWidth: number, canvasHeight: number) {
     var image = new Image();
     image.src = path;
     image.onload = function() {
@@ -77,7 +77,7 @@ export function fillCanvasWithImagePath(ctx, path, canvasWidth, canvasHeight) {
 /**
 Requires image to already be preloaded
 */
-export function fillCanvasWithImage(ctx, image, canvasWidth, canvasHeight) {
+export function fillCanvasWithImage(ctx: any, image: any, canvasWidth: number, canvasHeight: number) {
     var pattern = ctx.createPattern(image, "repeat");
     ctx.fillStyle = pattern;
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
@@ -95,13 +95,13 @@ export function fillCanvasWithImage(ctx, image, canvasWidth, canvasHeight) {
 };
 */
 
-export function drawUint8ClampedArray(ctx, buffer, width, height) {
+export function drawUint8ClampedArray(ctx: any, buffer: any, width: number, height: number): any {
     const imageData = new ImageData(buffer, width, height);
     ctx.putImageData(imageData, 0, 0);
     return imageData;
 };
 
-export function drawImageData(ctx, imageData) {
+export function drawImageData(ctx: any, imageData: any) {
     ctx.putImageData(imageData, 0, 0);
 };
 

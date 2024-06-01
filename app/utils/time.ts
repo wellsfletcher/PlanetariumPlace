@@ -1,6 +1,6 @@
 
 
-export function date2str(date) {
+export function date2str(date: Date): string {
     const offset = date.getTimezoneOffset();
     const offsetDate = new Date(date.getTime() - (offset*60*1000));
 
@@ -13,7 +13,7 @@ export function date2str(date) {
 Takes a very specific string format as its argument.
 YYYY-MM-DD HH:MM:SS.mmm
 */
-export function str2date(str) {
+export function str2date(str: string): Date {
     const parts = str.split(' ');
     const stamp = parts[0] + "T" + parts[1] + "Z";
     return new Date(stamp);
@@ -24,7 +24,7 @@ export function str2date(str) {
  * @param {number} stopTime A timestamp in ms, should be in the future
  * @returns {number} Time in ms
  */
-export function getRemaining(stopTime) {
+export function getRemaining(stopTime: number): number {
     var now = Date.now();
     return Math.max(0, stopTime - now);
 }
@@ -32,6 +32,7 @@ export function getRemaining(stopTime) {
 /**
  * Adds time in milliseconds to the given date.
 */
-export function addMillis(date, millis) {
+export function addMillis(date: Date, millis: number): Date {
+    // TODO: why is there an extra plus sign here?
     return new Date(+date.getTime() + millis);
 }

@@ -7,7 +7,7 @@ import * as Time from '../utils/time';
 /**
 @colors hex integer array that maps integer color [0, 15] to hex values
 */
-function buffer2hex(buffer, colors) {
+function buffer2hex(buffer: number[], colors: number[]): number[] {
     var result = [];
     const length = buffer.length;
     // console.log(buffer);
@@ -23,7 +23,7 @@ function buffer2hex(buffer, colors) {
     return result;
 }
 
-function buffer2rgbabuffer(buffer, colors) {
+function buffer2rgbabuffer(buffer: number[], colors: number[]): Uint8ClampedArray {
     const length = buffer.length;
     var result = new Uint8ClampedArray(new ArrayBuffer(length * 4));
 
@@ -41,7 +41,7 @@ function buffer2rgbabuffer(buffer, colors) {
     return result;
 }
 
-export function appendRbgaPixel(pixelsRgba, size, hexColor) {
+export function appendRbgaPixel(pixelsRgba: Uint8ClampedArray, size: number, hexColor: number): void {
     /*
     var rgba = int2rgba(hexColor);
     pixelsRgba[size + 0] = rgba.r;
@@ -55,7 +55,7 @@ export function appendRbgaPixel(pixelsRgba, size, hexColor) {
 /**
 @param originalIndex the index before being multiplied by 4
  */
-export function setRgbaPixel(pixelsRgba, originalIndex, hexColor) {
+export function setRgbaPixel(pixelsRgba: Uint8ClampedArray, originalIndex: number, hexColor: number) {
     var index = originalIndex * 4;
     var {r, g, b, a} = int2rgba(hexColor);
     pixelsRgba[index + 0] = r;
@@ -66,9 +66,11 @@ export function setRgbaPixel(pixelsRgba, originalIndex, hexColor) {
 }
 
 /**
-@buffer is Uint8Array
+@buffer is Uint8Array (wait shouldn't it actually be Uint8ClampedArray) (wait what is it really?)
+ I don't think it's Uint8Array
+ TODO: figure out the proper type of the buffer arg
 */
-export function setTiles(state, buffer) {
+export function setTiles(state: any, buffer: number[]): any {
     const tiles = buffer2hex(buffer, colorValues);
     const tilesRgba = buffer2rgbabuffer(buffer, colorValues);
     // console.log(state.board.tiles);
@@ -83,7 +85,7 @@ export function setTiles(state, buffer) {
 /*
 Takes hex color as input.
 */
-export function setTile(state, {x, y}, width, color) {
+export function setTile(state: any, {x, y}, width: number, color: number): any {
     var tiles = state.board.tiles.slice();
     var tilesRgba = state.board.tilesRgba.slice(); // mayhaps remove slicing?
 
@@ -105,7 +107,7 @@ export function setTile(state, {x, y}, width, color) {
 /**
 Sets a tile without making a call to an API.
 */
-export function setTileLocallyInternal(tiles, tilesRgba, state, index, width, color) { // should use function chaining
+export function setTileLocallyInternal(tiles: number[], tilesRgba: Uint8ClampedArray, state: any, index: number, width: number, color: number): any { // should use function chaining
     // var tiles = state.board.tiles.slice();
     // var tilesRgba = state.board.tilesRgba.slice();
 
@@ -123,7 +125,7 @@ export function setTileLocallyInternal(tiles, tilesRgba, state, index, width, co
     }};
 }
 
-export function setTileLocally(state, index, width, color) { // should use function chaining
+export function setTileLocally(state: any, index: number, width: number, color: number): any { // should use function chaining
     var tiles = state.board.tiles.slice();
     var tilesRgba = state.board.tilesRgba.slice();
     // const width = state.board.width;
@@ -144,7 +146,7 @@ function parseTileHistory(tileHistory) {
 Takes list of tiles to be set as input.
 {index, color, timestamp}
 */
-export function importTiles(state, tileChanges) {
+export function importTiles(state: any, tileChanges: any): any {
     const width = state.board.width;
 
     var tiles = state.board.tiles.slice();
@@ -164,26 +166,26 @@ export function importTiles(state, tileChanges) {
 /**
 Not actually used.
 */
-export function playChanges(state, unplayedChanges) {
-    // should this pop the change from unplayedChanges
-    // should this also set the delay
-
-    var nextDelay = null;
-
-    // dequeue current unplayed change
-    const change = props.unplayedChanges.dequeue();
-    if (nextChange == undefined) {
-        setChangeDelay(nextDelay); return;
-    }
-    const {index, color, timestamp} = change;
-    // set the tile using that unplayed change
-    props.setLocalTile(index, color);
-    // peek at the next unplayed change to get the delay until it
-    const nextChange = props.unplayedChanges.peek();
-    if (nextChange == undefined) {
-        setChangeDelay(nextDelay); return;
-    }
-    nextDelay = Time.getRemaining(Time.addMillis(Time.str2date(nextChange.timestamp), TILE_UPDATE_OFFSET));
-    // set another timeout with that delay
-    setChangeDelay(nextDelay);
-}
+// export function playChanges(state: any, unplayedChanges: any): any {
+//     // should this pop the change from unplayedChanges
+//     // should this also set the delay
+//
+//     var nextDelay = null;
+//
+//     // dequeue current unplayed change
+//     const change = props.unplayedChanges.dequeue();
+//     if (nextChange == undefined) {
+//         setChangeDelay(nextDelay); return;
+//     }
+//     const {index, color, timestamp} = change;
+//     // set the tile using that unplayed change
+//     props.setLocalTile(index, color);
+//     // peek at the next unplayed change to get the delay until it
+//     const nextChange = props.unplayedChanges.peek();
+//     if (nextChange == undefined) {
+//         setChangeDelay(nextDelay); return;
+//     }
+//     nextDelay = Time.getRemaining(Time.addMillis(Time.str2date(nextChange.timestamp), TILE_UPDATE_OFFSET));
+//     // set another timeout with that delay
+//     setChangeDelay(nextDelay);
+// }

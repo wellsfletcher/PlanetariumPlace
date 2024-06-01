@@ -3,7 +3,7 @@ import { forbiddenWordsMiddleware } from "../middleware";
 import thunk from "redux-thunk";
 
 // import rootReducer from "../reducers/index";
-import { rootReducer } from "../reducers/index";
+import { rootReducer } from "../reducers";
 // import boardReducer from "../features/board/boardSlice";
 
 // import { } from "../actions/index";
