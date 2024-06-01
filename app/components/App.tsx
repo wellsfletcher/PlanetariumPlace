@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { connect } from "react-redux";
 // Commented out bc of TS bug
-import { setMouseDown } from "../actions/index";
+//- import { setMouseDown } from "../actions";
 // import { } from "../actions/index";
 import { actions } from "../reducers";
 
@@ -31,22 +31,21 @@ function mapDispatchToProps(dispatch) {
 //     }
 // }
 
-//-
-// declare module '@material-ui/core/styles' {
-//     interface Theme {
-//         paletteBackground: {
-//             darkPaper: string;
-//             lightPaper: string;
-//         };
-//     }
-//     // allow configuration using `createTheme`
-//     interface ThemeOptions {
-//         paletteBackground?: {
-//             darkPaper?: string;
-//             lightPaper?: string;
-//         };
-//     }
-// }
+declare module '@material-ui/core/styles' {
+    interface Theme {
+        paletteBackground: {
+            darkPaper: string;
+            lightPaper: string;
+        };
+    }
+    // allow configuration using `createTheme`
+    interface ThemeOptions {
+        paletteBackground?: {
+            darkPaper?: string;
+            lightPaper?: string;
+        };
+    }
+}
 
 const theme = createMuiTheme({
     paletteBackground: {

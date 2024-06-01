@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {CSSProperties} from 'react';
 import ReactDOM from 'react-dom';
 import { useState } from 'react';
 
 import { connect } from "react-redux";
-import { fetchTiles, fetchTileChanges} from "../actions/index"; // these should get moved
+import { fetchTiles, fetchTileChanges} from "../actions"; // these should get moved
 import { actions } from "../reducers";
 import { bindActionCreators } from 'redux';
 
@@ -84,34 +84,34 @@ const mapStateToProps = (state) => { // this will be placed with a bunch of sele
     };
 };
 
-// interface BoardProps {
-//     tilesRgba: any,
-//     tiles: any,
-//     map: any,
-//     values: any,
-//     width: number,
-//     // mouseDown: any,
-//     brushColor: any,
-//     activeCountry: any,
-//     viewFlashback: any,
-//     setViewFlashback: any,
-//     setTile: any
-// }
-//
-// interface BoardPageProps extends BoardProps {
-//     fetchTiles: any,
-//     fetchTileChanges: any,
-//     // setLocalTile: any,
-//     // playChange: any,
-//     // setBoardId: any,
-//     setActiveCountry: any,
-//     setBrushColor: any,
-//
-//     boardId: number,
-// }
+// TODO: simplify this code so we don't need the extra type definition (and just like use State instead or something)
+interface BoardProps {
+    tilesRgba: Uint8ClampedArray,
+    tiles: number[],
+    map: number[],
+    values: string[],
+    activeCountry: string,
+    width: number,
+    // mouseDown: any,
+    brushColor: number,
+    viewFlashback: boolean,
+    setViewFlashback: (value: boolean) => void,
+    setTile: ({x, y}, color: number) => void,
+}
+
+interface BoardPageProps extends BoardProps {
+    fetchTiles: any,
+    fetchTileChanges: any,
+    // setLocalTile: any,
+    // playChange: any,
+    // setBoardId: any,
+    setActiveCountry: any,
+    setBrushColor: any,
+    boardId: number,
+}
 
 // export default class BoardPage extends React.Component {
-const BoardPage = (props) => {
+const BoardPage = (props: BoardPageProps) => {
     // console.log("something is happening right now");
     const tiles = useSelector(state => {
         // console.log(state);
@@ -131,7 +131,7 @@ const BoardPage = (props) => {
     // console.log("cool beans");
 
         // const style: CSSProperties = { // may wanna move this elsewhere and delet the div
-        const style = {
+        const style: CSSProperties = {
             position: "absolute",
             width: "100%",
             height: "100%",

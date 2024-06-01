@@ -2,7 +2,8 @@ import { SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED } from "../con
 import * as Action from "../constants/actionTypes";
 import * as System from '../constants/system';
 import * as API from "../utils/api";
-import store from "../store/index";
+import store from "../store";
+import {State} from "../reducers";
 
 
 // remove?
@@ -28,7 +29,7 @@ export function getData() {
 
 export function fetchTiles() {
     // alert("aaaaa");
-    return function(dispatch, getState) { // , getState
+    return function(dispatch, getState?) { // , getState
         // const canvas = API.fetchTiles();
         // return dispatch({ type: TILES_FETCHED, payload: API.fetchTiles() });
         /*
@@ -38,7 +39,7 @@ export function fetchTiles() {
             return dispatch({ type: TILES_FETCHED, payload: canvas });
         });
         */
-        const state = store.getState();
+        const state: State = store.getState();
         const boardId = state.boardId;
         return API.fetchTiles(boardId, dispatch);
     }
@@ -57,7 +58,7 @@ export function fetchTileChanges() {
             return dispatch({ type: TILES_FETCHED, payload: canvas });
         });
         */
-        const state = store.getState();
+        const state: State = store.getState();
         lastUpdated = state.board.lastUpdated;
         return API.fetchTileChanges(lastUpdated, boardId, dispatch);
     }

@@ -77,19 +77,43 @@ export const values = [
     0x820080
 ];
 
-export function hexcolor2colorcode(hex) {
-    // TODO: make this O(1)
-    var result = 0;
-    for (var k = 0; k < values.length; k++) {
-        var currentHex = values[k];
-        if (currentHex == hex) {
-            result = k;
-        }
-    }
-    // return 5;
-    return result;
+// TODO: make this get generated dynamically
+export const inverseValues = {
+    0x1B1B1B: 0,
+    0x888888: 1,
+    0xE4E4E4: 2,
+    0xFFFFFF: 3,
+    0xFFA7D1: 4,
+    0xE50000: 5,
+    0xE59500: 6,
+    0xA06A42: 7,
+    0xE5D900: 8,
+    0x94E044: 9,
+    0x02BE01: 10,
+    0x00D3DD: 11,
+    0x0083C7: 12,
+    0x0000EA: 13,
+    0xCF6EE4: 14,
+    0x820080: 15
+};
+
+// export function hexcolor2colorcode(hex: number): number {
+//     // TODO: make this O(1)
+//     var result = 0;
+//     for (var k = 0; k < values.length; k++) {
+//         var currentHex = values[k];
+//         if (currentHex == hex) {
+//             result = k;
+//         }
+//     }
+//     // return 5;
+//     return result;
+// }
+
+export function hexcolor2colorcode(hex: number): number {
+    return inverseValues[hex];
 }
 
-export function colorcode2hexcolor(code) {
+export function colorcode2hexcolor(code: number): number {
     return values[code];
 }

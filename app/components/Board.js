@@ -6,7 +6,8 @@ import { MapInteractionCSS } from 'react-map-interaction';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import { useState, useEffect } from 'react';
-import { useSwipeable, Swipeable } from 'react-swipeable';
+// import { useSwipeable, Swipeable } from 'react-swipeable';
+import { useSwipeable } from 'react-swipeable';
 // import { usePinch, useGesture } from 'react-use-gesture';
 
 import useCanvas from './useCanvas';
@@ -105,6 +106,7 @@ const Highlights = (props) => {
         width: width,
         height: height,
         style: {
+            // Commenting out bc ts error
             imageRendering: "pixelated",
             /*
             imageRendering: "-moz-crisp-edges",
@@ -167,13 +169,23 @@ const Board = (props) => {
 
     // const isSwiping = useSwiping();
     // const isSwiping = false;
+
+    // refactored bc TS error
+    // const [isSwiping, setSwiping] = useState(false);
+    // const [isPinching, setPinching] = useState(false);
+    // const swipeHandlers = useSwipeable({
+    //     onSwiped: (eventData) => setSwiping(false),
+    //     onSwiping: (eventData) => setSwiping(true),
+    // }, {
+    //     preventDefaultTouchmoveEvent: true
+    // });
+
     const [isSwiping, setSwiping] = useState(false);
     const [isPinching, setPinching] = useState(false);
     const swipeHandlers = useSwipeable({
         onSwiped: (eventData) => setSwiping(false),
         onSwiping: (eventData) => setSwiping(true),
-    }, {
-        preventDefaultTouchmoveEvent: true
+        //----- preventDefaultTouchmoveEvent: true // I'm pretty sure this property is supposed to be true
     });
 
     const INITIAL_SCALE = 1.0;
@@ -257,6 +269,7 @@ const Board = (props) => {
         // onMouseDown: handleCanvasClick, // onClick // onMouseDown
         // onMouseMove: handleMouseEnter, // this can be on the outside div or on the canvas itself // actually it can't or it'll be called when it shouldn't
         style: {
+            // commenting out bc ts error
             imageRendering: "pixelated", // crisp-edges // pixelated
             cursor: "crosshair"
         }

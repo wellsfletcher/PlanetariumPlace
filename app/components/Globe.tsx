@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {MutableRefObject} from 'react';
 import { useState, useEffect, useMemo } from 'react';
 
 import * as THREE from "three";
-import Globe from 'react-globe.gl';
+import Globe, {GlobeMethods} from 'react-globe.gl';
 import * as API from '../utils/api';
 
 import useCanvas from './useCanvas';
@@ -16,8 +16,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 
-// function randInt(min: number, max: any | undefined): number {
-function randInt(min, max) {
+function randInt(min: number, max?: any): number {
+// function randInt(min, max) {
     if (max === undefined) {
         max = min;
         min = 0;
@@ -25,7 +25,7 @@ function randInt(min, max) {
     return Math.random() * (max - min) + min | 0;
 }
 
-function drawRandomDot(ctx) {
+function drawRandomDot(ctx: any) {
     ctx.fillStyle = `#${randInt(0x1000000).toString(16).padStart(6, '0')}`;
     ctx.beginPath();
 
@@ -41,7 +41,7 @@ Converts the given latitude and longitude to be in terms of x, y texture coordin
 @width the width in pixels of the texture
 @height the height in pixels of the texture
  */
-function geo2xy(lat, lng, width, height) {
+function geo2xy(lat: number, lng: number, width: number, height: number): any {
     // note y needs to start from the top of the globe
     const MIN_LNG = -180;
     const MAX_LNG = 180;
@@ -57,8 +57,19 @@ function geo2xy(lat, lng, width, height) {
     return {x: Math.floor(x), y: Math.floor(y)};
 }
 
-function CanvasGlobe(props) {
-    const globeEl = React.useRef();
+export interface CanvasGlobeProps {
+    viewFlashback: boolean,
+    tilesRgba: Uint8ClampedArray,
+    tiles: number[],
+    width: number,
+    brushColor: number,
+    setViewFlashback: (value: boolean) => void,
+    setTile: ({x, y}, color: number) => void,
+    activeCountry: string
+}
+
+function CanvasGlobe(props: CanvasGlobeProps) {
+    const globeEl: MutableRefObject<GlobeMethods> = React.useRef();
 
     const viewFlashback = props.viewFlashback;
     // const setViewFlashback = props.setViewFlashback;
@@ -107,7 +118,11 @@ function CanvasGlobe(props) {
     // console.log("globe rendered");
 
     React.useEffect(() => {
-        const globeMaterial = globeEl.current.globeMaterial();
+        // if (globeEl.current == null) {
+        //     return;
+        // }
+
+        let globeMaterial = globeEl.current.globeMaterial();
         // const camera = globeEl.current.camera();
         // console.log(camera);
 
@@ -342,7 +357,8 @@ function CanvasGlobe(props) {
         width: width,
         height: height,
         style: {
-            imageRendering: "pixelated",
+            // Commented out bc of TS error
+            // imageRendering: "pixelated",
             cursor: "crosshair",
             display: "none"
         }

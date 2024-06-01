@@ -1,6 +1,6 @@
 import { TILES_FETCHED, TILE_CHANGES_FETCHED } from "../constants/actionTypes";
 // import { playChange } from "../actions/index";
-import * as Actions from '../actions/index';
+import * as Actions from '../actions';
 import * as System from '../constants/system';
 import { date2str } from "./time";
 

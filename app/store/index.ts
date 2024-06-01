@@ -3,7 +3,7 @@ import { forbiddenWordsMiddleware } from "../middleware";
 import thunk from "redux-thunk";
 
 // import rootReducer from "../reducers/index";
-import { rootReducer } from "../reducers";
+import {rootReducer, State} from "../reducers";
 // import boardReducer from "../features/board/boardSlice";
 
 // import { } from "../actions/index";
@@ -27,8 +27,9 @@ const store = createStore(
 import { configureStore } from '@reduxjs/toolkit';
 
 // const stateSanitizer = (state) => {state.board ? { ...state, board: '<<LONG_BLOB>>' } : state};
-const stateSanitizer = (state) => {
-    var result = state;
+// TODO: figure out why you can't set the type of this parameter to state
+const stateSanitizer = (state: any) => {
+    var result: any = state;
     if (state.board) {
         const {tilesRgba, tiles, map, ...includedProps} = state.board;
         const board = {...includedProps, tilesRgba: "{OMITTED}", tiles: "[OMITTED]", map: "[OMITTED]"};
@@ -53,8 +54,7 @@ const storeOptions = {
         stateSanitizer
     }
 };
-console.log("storeOptions = ");
-console.log(storeOptions);
+
 const store = configureStore(storeOptions);
 
 // const store = configureStore({
