@@ -150,7 +150,7 @@ const BoardPage = (props: BoardPageProps) => {
         const TILE_UPDATE_OFFSET = System.TILE_UPDATE_OFFSET;
         // setInterval(() => {
         useInterval(() => {
-            console.log("updating async tiles...");
+            console.debug("updating async tiles...");
             const placeholderDate = new Date();
             props.fetchTileChanges(props.boardId, placeholderDate);
             // props.fetchTileChanges(props.boardId, props.lastUpdated);

@@ -169,8 +169,8 @@ const rootSlice = createSlice({
     }
 });
 
-console.log("rootSlice.reducer = ");
-console.log(rootSlice.reducer);
+// console.log("rootSlice.reducer = ");
+// console.log(rootSlice.reducer);
 
 export const actions = rootSlice.actions;
 export const rootReducer = rootSlice.reducer;

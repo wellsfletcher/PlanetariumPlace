@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
+    "buildprod": "webpack --config webpack.production.js",
     "start": "webpack-dev-server",
     "tsc": "tsc",
     "postinstall": "npm run tsc",
     "dev": "ts-node-dev — respawn — pretty — transpile-only index.ts",
     "start2": "webpack serve --config webpack.config.js",
+    "start3": "webpack-dev-server --config webpack.config.js",
+    "start4": "webpack-dev-server --config webpack.development.js",
+    "startprod": "webpack-dev-server --config webpack.production.js",
     "test": "jest"
   },
   "keywords": [
@@ -45,7 +49,8 @@
     "react-swipeable": "^6.0.1",
     "three": "^0.124.0",
     "ts-loader": "^8.2.0",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "webpack-merge": "^5.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

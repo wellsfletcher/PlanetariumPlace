@@ -50,7 +50,7 @@ export default function CountrySearch(props: CountrySearchProps) {
     console.log("containerHeight = " + containerHeight);
     */
     const containerHeight = props.containerHeight;
-    console.log("containerHeight = " + containerHeight);
+    console.debug("containerHeight = " + containerHeight);
 
     const [filtered, setFiltered] = useState([]);
 
@@ -92,7 +92,8 @@ export default function CountrySearch(props: CountrySearchProps) {
     };
 
     // const [filtered, setFiltered] = useState(countries.filter((data) => filter(data, "")));
-    console.count('counter');
+    // removed during optimization improvements
+    //- console.count('counter');
 
 
     var onChange = (event) => {

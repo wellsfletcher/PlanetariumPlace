@@ -197,10 +197,10 @@ function CanvasGlobe(props: CanvasGlobeProps) {
         //- console.log(camera);
         var deltaRotation = mapRotation.distanceTo(mapRotationOnTouchStart);
         var deltaScale = mapScaleOnTouchStart - mapScale;
-        console.log("deltaRotation = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
-        console.log("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
+        console.debug("deltaRotation = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
+        console.debug("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
         if (Math.abs(deltaRotation) > MAP_ROTATION_TOLERANCE || Math.abs(deltaScale) > MAP_ROTATION_TOLERANCE) {
-            console.log("Click do be aborted.");
+            console.debug("Click do be aborted.");
             return;
         }
 

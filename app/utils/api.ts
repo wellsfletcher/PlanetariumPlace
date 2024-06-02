@@ -20,7 +20,7 @@ export function fetchTerritoryGeojsonFromName(name_long: any): Promise<any> {
     )
     .then(res => res.json())
     .then(payload => {
-        console.log(payload);
+        console.debug(payload);
         return payload;
     });
 }
@@ -39,7 +39,7 @@ export function fetchTerritoryGeojson(wikidataid: any): Promise<any> {
     )
     .then(res => res.json())
     .then(payload => {
-        console.log(payload);
+        console.debug(payload);
         return payload;
     });
 }
@@ -58,7 +58,7 @@ function fetchBoardSize(boardId: number): Promise<any> {
     )
     .then(res => res.json())
     .then(payload => {
-        console.log(payload);
+        console.debug(payload);
         return payload;
     });
 }
@@ -105,7 +105,8 @@ export function fetchTilesGivenSize(boardId: number, width: number, height: numb
             function next(reader) {
                 reader.read().then(function(chunk) {
                     if (chunk.done) {
-                        console.log(canvas);
+                        // removed during optimization improvements
+                        //- console.log(canvas);
                         // return canvas;
                         /*
                         return new Promise((resolve, reject) => {
@@ -128,8 +129,8 @@ export function fetchTilesGivenSize(boardId: number, width: number, height: numb
 @color is colorCode with value from [0–15]
 */
 export function draw(boardId: number, {x, y}, color: number): void { // width?
-    console.log("setting tile...");
-    console.log({ boardId, x, y, color });
+    console.debug("setting tile...");
+    console.debug({ boardId, x, y, color });
     fetch('https://planetarium.place/api/v0/board/draw.php', {
             method: 'POST',
             headers: {
@@ -197,7 +198,7 @@ export function fetchTileChanges(boardId: number, lastUpdated: any, dispatch: an
         const unplayedChangesBackingArray = payload;
         for (var k = 0; k < unplayedChangesBackingArray.length; k++) {
             let change = unplayedChangesBackingArray[k];
-            console.log(change);
+            console.debug(change); // this should probably at least day what it is for it to be useful
             //- dispatch(Actions.playChange( {change} ));
             dispatch(actions.playChange( {change} ));
         }

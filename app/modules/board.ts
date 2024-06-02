@@ -28,7 +28,7 @@ function buffer2rgbabuffer(buffer: number[], colors: number[]): Uint8ClampedArra
     const length = buffer.length;
     var result = new Uint8ClampedArray(new ArrayBuffer(length * 4));
 
-    console.log("Converting to RGBA buffer.");
+    console.debug("Converting to RGBA buffer.");
 
     for (var k = 0; k < length; k++) {
         const colorCode = buffer[k];
