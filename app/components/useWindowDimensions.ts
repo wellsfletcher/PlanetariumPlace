@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 
-function getWindowDimensions() {
+interface WindowDimensions {
+  windowWidth: number,
+  windowHeight: number,
+  isLandscape: boolean,
+  isPortrait: boolean
+}
+
+function getWindowDimensions(): WindowDimensions {
   const { innerWidth: width, innerHeight: height } = window;
   /*
   return {
@@ -17,7 +24,7 @@ function getWindowDimensions() {
 }
 
 export default function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+  const [windowDimensions, setWindowDimensions] = useState<WindowDimensions>(getWindowDimensions());
 
   useEffect(() => {
     function handleResize() {
@@ -26,7 +33,7 @@ export default function useWindowDimensions() {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, []); // TODO: investigate if this value should change when you resize the window (probably not honestly)
 
   return windowDimensions;
 }

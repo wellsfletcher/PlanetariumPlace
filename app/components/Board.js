@@ -131,6 +131,7 @@ const Highlights = (props) => {
     );
 }
 
+// I have to update my dependencies (I think react in particular) to be able to convert this file to TS
 const Board = (props) => {
     var tilesRgba = props.tilesRgba;
     var tiles = props.tiles;

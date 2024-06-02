@@ -16,7 +16,7 @@ function getWindowDimensions() {
 
 export default function useSwiping() {
   // const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-  const [isSwiping, setSwiping] = useState(false);
+  const [isSwiping, setSwiping] = useState<boolean>(false);
 
   useEffect(() => {
     /*

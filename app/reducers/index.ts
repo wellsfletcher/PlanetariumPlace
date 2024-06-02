@@ -84,7 +84,7 @@ export interface State {
 
 export interface BoardState {
     lastUpdated: Date,
-    unplayedChanges: Queue,
+    //- unplayedChanges: typeof Queue, // TODO: investigate why typeof is needed here
     tilesRgba: Uint8ClampedArray,
     tiles: number[],
     map: number[],
@@ -101,7 +101,7 @@ const initialState: State = {
     board: {
         lastUpdated: new Date(),
         // unplayedChanges: [],
-        unplayedChanges: new Queue(), // not used
+        //- unplayedChanges: new Queue(), // not used
 
         tilesRgba: new Uint8ClampedArray(new ArrayBuffer(System.INITIAL_WIDTH * System.INITIAL_HEIGHT * 4)),
         tiles: initBoard(System.INITIAL_WIDTH, System.INITIAL_HEIGHT),
@@ -126,7 +126,8 @@ const rootSlice = createSlice({
             const board = {
                 ...state.board,
                 lastUpdated: new Date(),
-                unplayedChanges: state.board.unplayedChanges.concat(action.payload)
+                // removed bc of TS error
+                //- unplayedChanges: state.board.unplayedChanges.concat(action.payload)
             };
 
             return {  ...state, board: board };

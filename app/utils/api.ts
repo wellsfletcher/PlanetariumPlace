@@ -82,7 +82,7 @@ export function fetchTilesGivenSize(boardId: number, width: number, height: numb
     function handleChunk(responseArray) {
         // console.log("response array = ");
         // console.log(responseArray);
-        console.log("byteLength = " + responseArray.byteLength);
+        console.debug("byteLength = " + responseArray.byteLength);
         for (var i = 0; i < responseArray.byteLength; i++) {
             canvas[offset + 2 * i] = responseArray[i] >> 4;
             canvas[offset + 2 * i + 1] = responseArray[i] & 15;

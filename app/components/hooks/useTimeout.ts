@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 
-export function useTimeout(callback, delay, valueArray = []) {
+/**
+ * This isn't actually used anywhere in my code
+ * @param callback
+ * @param delay
+ * @param valueArray
+ */
+export function useTimeout(callback, delay: number, valueArray = []): void {
     /*
     const savedCallback = useRef();
 

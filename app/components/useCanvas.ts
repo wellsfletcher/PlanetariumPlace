@@ -3,14 +3,14 @@ import { useRef, useEffect } from 'react';
 
 const useCanvas = (draw, options={}) => {
 
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
 
-    const canvas = canvasRef.current;
+    const canvas: HTMLCanvasElement = canvasRef.current;
     const context = canvas.getContext('2d');
     let frameCount = 0;
-    let animationFrameId;
+    let animationFrameId; // TODO: is this just always undefined? investigate this
 
     const render = () => {
       frameCount++;

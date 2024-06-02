@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropsWithChildren} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
@@ -22,6 +22,7 @@ import ColorizeIcon from '@material-ui/icons/Colorize';
 
 import VerticalColorPicker from './VerticalColorPicker';
 import useWindowDimensions from './useWindowDimensions';
+import {GridDirection, GridItemsAlignment, GridJustification} from "@material-ui/core/Grid/Grid";
 
 
 
@@ -47,7 +48,25 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function Overlay(props) {
+interface OverlayProps {
+    // children: any,
+    onChangeComplete: any,
+    useGlobe: boolean,
+    setUseGlobe: any,
+    viewFlashback: any,
+    setViewFlashback: any,
+    tool: any,
+    setTool: any,
+    // rest: any
+}
+
+interface Alignment {
+    direction: GridDirection,
+    justify: GridJustification,
+    alignItems: GridItemsAlignment
+}
+
+export default function Overlay(props: PropsWithChildren<OverlayProps>) {
     const classes = useStyles();
     const {children, onChangeComplete,
         useGlobe, setUseGlobe,
@@ -58,19 +77,19 @@ export default function Overlay(props) {
 
     const { isLandscape } = useWindowDimensions();
 
-    const verticalAlignment = {
+    const verticalAlignment: Alignment = {
         direction: "row",
         justify: "flex-end",
         alignItems: "flex-end",
     };
 
-    const horizontalAlignment = {
+    const horizontalAlignment: Alignment = {
         direction: "column",
         justify: "flex-end",
         alignItems: "flex-end",
     };
 
-    const alignment = (isLandscape) ? verticalAlignment : horizontalAlignment;
+    const alignment: Alignment = (isLandscape) ? verticalAlignment : horizontalAlignment;
 
     const globeFab = <ToggleButtonGroup
         orientation="horizontal"
@@ -79,15 +98,17 @@ export default function Overlay(props) {
         style={{
             // marginBottom: "0px"
         }}
-     >
-        <ToggleButton selected={useGlobe} onClick={() => setUseGlobe(true)}>
+        value={"" + useGlobe}
+    >
+        <ToggleButton value="true" onClick={() => setUseGlobe(true)}>
             <GlobeIcon />
         </ToggleButton>
-        <ToggleButton selected={!useGlobe} onClick={() => setUseGlobe(false)}>
+        <ToggleButton value="false" onClick={() => setUseGlobe(false)}>
             <MapIcon />
         </ToggleButton>
     </ToggleButtonGroup>;
 
+    // TODO: make this not use true/false strings for values of this component
     const flashbackFab = <ToggleButtonGroup
         orientation="horizontal"
         color="primary"
@@ -95,11 +116,12 @@ export default function Overlay(props) {
         style={{
             // marginBottom: "14px"
         }}
-     >
-        <ToggleButton selected={viewFlashback} onClick={() => setViewFlashback(true)}>
+        value={"" + viewFlashback}
+    >
+        <ToggleButton value="true" onClick={() => setViewFlashback(true)}>
             <ViewIcon />
         </ToggleButton>
-        <ToggleButton selected={!viewFlashback} onClick={() => setViewFlashback(false)}>
+        <ToggleButton value="false" onClick={() => setViewFlashback(false)}>
             <ViewOffIcon />
         </ToggleButton>
     </ToggleButtonGroup>;
@@ -158,6 +180,7 @@ export default function Overlay(props) {
           direction="row"
           justify="flex-start"
           alignItems="flex-start"
+          // component="div" // added bc of TS error
 
           style={{
               // position: 'absolute',

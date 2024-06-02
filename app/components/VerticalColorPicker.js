@@ -205,8 +205,10 @@ function ColorTool(props) {
     */
 }
 
-ColorTool.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// Commented bc TS error
+// TODO: figure out how to add the "vertical" property to this, so it can be uncommneted
+// ColorTool.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default withStyles(styles)(ColorTool);

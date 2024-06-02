@@ -136,11 +136,13 @@ function CanvasGlobe(props: CanvasGlobeProps) {
         // globeMaterial.map = texture;
         // texture.needsUpdate = true;
 
+        // I should no longer need to ever print this stuff to the console, since I can just right click on the canvas and download it nowadays
         // console.log("globe texture updating...");
-        var dataUrl = canvas.toDataURL("image/png"); // for someone reason this line of codes makes everything work on safari :(
+        // this line of code longer causes everything to explode on safari!
+        //- dataUrl = canvas.toDataURL("image/png"); // for someone reason this line of codes makes everything work on safari :(
         // var context = canvas.getContext("2d");
         // var dafdasdf = canvas.getImageData(10, 10, 50, 50);
-        console.log(dataUrl);
+        //- console.log(dataUrl);
 
         globeMaterial.emissive = new THREE.Color(0xffffff);
         // globeMaterial.emissive = new THREE.Color(0x111111);

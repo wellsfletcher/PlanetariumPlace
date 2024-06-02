@@ -1,5 +1,7 @@
 /*
 
+TODO: deprecate this queue, because I don't think it is used for anything or is needed.
+
 Queue.js
 
 A function to represent a queue
