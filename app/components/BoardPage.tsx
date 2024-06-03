@@ -60,6 +60,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 import { useSelector } from 'react-redux';
+// import {useAppSelector} from "./hooks/redux";
 const mapStateToProps = (state) => { // this will be placed with a bunch of selectors
     return {
         // boardId: state.boardId,
@@ -113,7 +114,7 @@ interface BoardPageProps extends BoardProps {
 // export default class BoardPage extends React.Component {
 const BoardPage = (props: BoardPageProps) => {
     // console.log("something is happening right now");
-    const tiles = useSelector(state => {
+    const tiles = useSelector(state => { // const tiles = useAppSelector(state => { // causes issues
         // console.log(state);
         // console.log(state.board);
         return state.board.tiles;
