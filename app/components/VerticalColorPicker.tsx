@@ -68,8 +68,16 @@ const defaultColors = {
           "purple": "#820080"
       };
 
+// TODO: look into whether this file was originally typescript? bc I feel like it was but I changed it?
+interface ColorToolProps {
+    onChangeComplete: (color: string) => void,
+    classes: any,
+    colors?: any,
+    vertical: boolean
+}
+
 // still need to create parameters for default color value...
-function ColorTool(props) {
+function ColorTool(props: ColorToolProps) {
   const { onChangeComplete, classes } = props; // colors, names
   var colors = props.colors;
   if (colors == null) {

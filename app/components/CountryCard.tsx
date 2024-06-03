@@ -32,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// interface CountryCardProps {
+//
+// }
+
 export default function MediaCard(props) {
   const classes = useStyles();
 

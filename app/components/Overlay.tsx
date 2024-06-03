@@ -50,10 +50,10 @@ const useStyles = makeStyles((theme) => ({
 
 interface OverlayProps {
     // children: any,
-    onChangeComplete: any,
+    onChangeComplete: (color: string) => void,
     useGlobe: boolean,
     setUseGlobe: any,
-    viewFlashback: any,
+    viewFlashback: boolean,
     setViewFlashback: any,
     tool: any,
     setTool: any,
