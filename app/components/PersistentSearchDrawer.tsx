@@ -24,7 +24,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import ColorPicker from './ColorPicker';
 import VerticalColorPicker from './VerticalColorPicker';
 import CountrySearch from './CountrySearch';
-import useWindowDimensions from './useWindowDimensions';
+import useWindowDimensions from './hooks/useWindowDimensions';
 
 const drawerWidth = 320;
 

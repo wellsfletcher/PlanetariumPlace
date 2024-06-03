@@ -21,7 +21,7 @@ import PaletteIcon from '@material-ui/icons/Palette';
 import ColorizeIcon from '@material-ui/icons/Colorize';
 
 import VerticalColorPicker from './VerticalColorPicker';
-import useWindowDimensions from './useWindowDimensions';
+import useWindowDimensions from './hooks/useWindowDimensions';
 import {GridDirection, GridItemsAlignment, GridJustification} from "@material-ui/core/Grid/Grid";
 
 

@@ -10,8 +10,8 @@ import { useState, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
 // import { usePinch, useGesture } from 'react-use-gesture';
 
-import useCanvas from './useCanvas';
-import useSwiping from './useSwiping';
+import useCanvas from './hooks/useCanvas';
+import useSwiping from './hooks/useSwiping';
 import usePreloadedImage from './hooks/usePreloadedImage';
 import * as System from '../constants/system';
 import { int2rgba, vector2index } from '../utils/general';

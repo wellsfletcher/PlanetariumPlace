@@ -13,7 +13,7 @@ import Slider from '@material-ui/core/Slider';
 import { capitalize } from '@material-ui/core/utils';
 
 import blue from '@material-ui/core/colors/blue';
-import useWindowDimensions from './useWindowDimensions';
+import useWindowDimensions from './hooks/useWindowDimensions';
 
 // {{"demo": "pages/customization/color/ColorTool.js", "hideToolbar": true, "bg": true}}
 

@@ -5,8 +5,8 @@ import * as THREE from "three";
 import Globe, {GlobeMethods} from 'react-globe.gl';
 import * as API from '../utils/api';
 
-import useCanvas from './useCanvas';
-import useWindowDimensions from './useWindowDimensions';
+import useCanvas from './hooks/useCanvas';
+import useWindowDimensions from './hooks/useWindowDimensions';
 import usePreloadedImage from './hooks/usePreloadedImage';
 import * as System from '../constants/system';
 import { int2hexcolor, xy2index } from '../utils/general';
