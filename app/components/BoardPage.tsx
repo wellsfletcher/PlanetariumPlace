@@ -60,6 +60,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 import { useSelector } from 'react-redux';
+import {useAppSelector} from "./hooks/redux";
 // import {useAppSelector} from "./hooks/redux";
 const mapStateToProps = (state) => { // this will be placed with a bunch of selectors
     return {
@@ -112,19 +113,19 @@ interface BoardPageProps extends BoardProps {
 }
 
 // export default class BoardPage extends React.Component {
-const BoardPage = (props: BoardPageProps) => {
+const BoardPage = (props: any) => {
     // console.log("something is happening right now");
-    const tiles = useSelector(state => { // const tiles = useAppSelector(state => { // causes issues
+    const tiles = useAppSelector(state => { // const tiles = useAppSelector(state => { // causes issues
         // console.log(state);
         // console.log(state.board);
         return state.board.tiles;
     });
-    const tilesRgba = useSelector(state => state.board.tilesRgba);
-    const map = useSelector(state => state.board.map);
-    const values = useSelector(state => state.board.values);
-    const width = useSelector(state => state.board.width);
-    const activeCountry = useSelector(state => state.board.activeCountry);
-    const brushColor = useSelector(state => state.brushColor);
+    const tilesRgba = useAppSelector(state => state.board.tilesRgba);
+    const map = useAppSelector(state => state.board.map);
+    const values = useAppSelector(state => state.board.values);
+    const width = useAppSelector(state => state.board.width);
+    const activeCountry = useAppSelector(state => state.board.activeCountry);
+    const brushColor = useAppSelector(state => state.brushColor);
 
     // console.log(tiles);
 

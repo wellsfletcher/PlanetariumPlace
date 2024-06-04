@@ -46,6 +46,11 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'ts-loader'
             },
+            {
+                test: /\.mjs$/,
+                include: /node_modules/,
+                type: 'javascript/auto',
+            },
             /*{
                 test: /\.css$/,
                 loader: "style-loader!css-loader"
@@ -56,7 +61,7 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
+        extensions: ['.tsx', '.ts', '.js', ".mjs"],
     },
     output: {
         filename: 'transformed.js',

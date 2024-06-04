@@ -3,7 +3,7 @@ import * as Action from "../constants/actionTypes";
 import * as System from '../constants/system';
 import * as API from "../utils/api";
 import store from "../store";
-import {State} from "../reducers";
+import {BaseState} from "../reducers";
 
 
 // remove?
@@ -39,7 +39,7 @@ export function fetchTiles() {
             return dispatch({ type: TILES_FETCHED, payload: canvas });
         });
         */
-        const state: State = store.getState();
+        const state: BaseState = store.getState();
         const boardId = state.boardId;
         return API.fetchTiles(boardId, dispatch);
     }
@@ -58,7 +58,7 @@ export function fetchTileChanges() {
             return dispatch({ type: TILES_FETCHED, payload: canvas });
         });
         */
-        const state: State = store.getState();
+        const state: BaseState = store.getState();
         lastUpdated = state.board.lastUpdated;
         return API.fetchTileChanges(lastUpdated, boardId, dispatch);
     }

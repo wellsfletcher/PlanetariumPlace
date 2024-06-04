@@ -3,7 +3,7 @@ import { forbiddenWordsMiddleware } from "../middleware";
 import thunk from "redux-thunk";
 
 // import rootReducer from "../reducers/index";
-import {rootReducer, State} from "../reducers";
+import {rootReducer, BaseState} from "../reducers";
 // import boardReducer from "../features/board/boardSlice";
 
 // import { } from "../actions/index";
@@ -73,6 +73,6 @@ const store = configureStore(storeOptions);
 // });
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+// export type AppDispatch = typeof store.dispatch;
 
 export default store;

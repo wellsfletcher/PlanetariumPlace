@@ -8,6 +8,7 @@ import Queue from '../utils/Queue';
 import {
   createSlice
 } from '@reduxjs/toolkit'
+import {RootState} from "../store";
 
 const initBoard = (width: number, height: number): number[] => {
     // instead of making the board initially all black, we make it in a checkerboard pattern for debugging purposes
@@ -74,7 +75,7 @@ const initMap = (width: number, height: number): number[] => { // technically sh
 // as of now, the code can run fine with some pretty crazy high resolutions,
 // but the server would probably explode
 
-export interface State {
+export interface BaseState {
     articles: any[],
     mouseDown: boolean,
     boardId: number,
@@ -93,7 +94,7 @@ export interface BoardState {
     width: number,
 }
 
-const initialState: State = {
+const initialState: BaseState = {
     articles: [], // remove this
     mouseDown: false, // not used
     boardId: System.INITIAL_BOARD_ID,
@@ -118,11 +119,11 @@ const rootSlice = createSlice({
     name: 'root',
     initialState,
     reducers: {
-        tilesFetched(state: State, action) {
+        tilesFetched(state: BaseState, action) {
             state = {  ...state, board: {...state.board, width: action.payload.width} };
             return Board.setTiles(state, action.payload.canvas);
         },
-        tileChangesFetched(state: State, action) {
+        tileChangesFetched(state: BaseState, action) {
             const board = {
                 ...state.board,
                 lastUpdated: new Date(),
@@ -132,30 +133,30 @@ const rootSlice = createSlice({
 
             return {  ...state, board: board };
         },
-        setMouseDown(state: State, action) {
+        setMouseDown(state: BaseState, action) {
             return { ...state, mouseDown: action.payload };
         },
-        setActiveCountry(state: State, action) {
+        setActiveCountry(state: BaseState, action) {
             return { ...state, board: {...state.board, activeCountry: action.payload} };
         },
-        setBrushColor(state: State, action) {
+        setBrushColor(state: BaseState, action) {
             return { ...state, brushColor: action.payload };
         },
-        setLocalTile(state: State, action) {
+        setLocalTile(state: BaseState, action) {
             const index = action.payload.index;
             const width = state.board.width;
             const color = action.payload.color;
 
             return Board.setTileLocally(state, index, width, color);
         },
-        setTile(state: State, action) {
+        setTile(state: BaseState, action) {
             const {x, y} = action.payload;
             const width = state.board.width;
             const color = action.payload.color;
 
             return Board.setTile(state, {x, y}, width, color);
         },
-        playChange(state: State, action) {
+        playChange(state: BaseState, action) {
             const change = action.payload.change;
             const index = change.index;
             const width = state.board.width;
@@ -163,7 +164,7 @@ const rootSlice = createSlice({
 
             return Board.setTileLocally(state, index, width, color);
         },
-        setBoardId(state: State, action) {
+        setBoardId(state: BaseState, action) {
             return { ...state, boardId: action.payload };
         }
     }

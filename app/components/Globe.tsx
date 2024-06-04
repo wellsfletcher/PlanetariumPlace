@@ -117,41 +117,56 @@ function CanvasGlobe(props: CanvasGlobeProps) {
 
     // console.log("globe rendered");
 
-    React.useEffect(() => {
-        // if (globeEl.current == null) {
-        //     return;
-        // }
+    // ------ define globe material ------ //
+    let globeMaterial = new THREE.MeshPhongMaterial();
 
-        let globeMaterial = globeEl.current.globeMaterial();
-        // const camera = globeEl.current.camera();
-        // console.log(camera);
+    const canvas = canvasRef.current;
+    const texture = new THREE.CanvasTexture(canvas);
+    // pixelate the texture
+    texture.magFilter = THREE.NearestFilter;
+    texture.minFilter = THREE.LinearMipMapLinearFilter;
 
-        const canvas = canvasRef.current;
-        const texture = new THREE.CanvasTexture(canvas);
-        // pixelate the texture
-        texture.magFilter = THREE.NearestFilter;
-        texture.minFilter = THREE.LinearMipMapLinearFilter;
+    globeMaterial.emissive = new THREE.Color(0xffffff);
+    // globeMaterial.emissive = new THREE.Color(0x111111);
+    globeMaterial.emissiveMap = texture;
+    texture.needsUpdate = true;
+    // ------ define globe material ------ //
 
-        // globeMaterial.bumpScale = 10;
-        // globeMaterial.map = texture;
-        // texture.needsUpdate = true;
-
-        // I should no longer need to ever print this stuff to the console, since I can just right click on the canvas and download it nowadays
-        // console.log("globe texture updating...");
-        // this line of code longer causes everything to explode on safari!
-        //- dataUrl = canvas.toDataURL("image/png"); // for someone reason this line of codes makes everything work on safari :(
-        // var context = canvas.getContext("2d");
-        // var dafdasdf = canvas.getImageData(10, 10, 50, 50);
-        //- console.log(dataUrl);
-
-        globeMaterial.emissive = new THREE.Color(0xffffff);
-        // globeMaterial.emissive = new THREE.Color(0x111111);
-        globeMaterial.emissiveMap = texture;
-        texture.needsUpdate = true;
-        // globeMaterial.needsUpdate = true;
-        //- console.log("globe texture updated");
-
-    }, [props.viewFlashback, props.tiles]); // the props.tiles made it magically start updating the globe; but it still doesn't update on Safari
+    // React.useEffect(() => {
+    //     // if (globeEl.current == null) {
+    //     //     return;
+    //     // }
+    //
+    //     let globeMaterial = globeEl.current.globeMaterial();
+    //     // const camera = globeEl.current.camera();
+    //     // console.log(camera);
+    //
+    //     const canvas = canvasRef.current;
+    //     const texture = new THREE.CanvasTexture(canvas);
+    //     // pixelate the texture
+    //     texture.magFilter = THREE.NearestFilter;
+    //     texture.minFilter = THREE.LinearMipMapLinearFilter;
+    //
+    //     // globeMaterial.bumpScale = 10;
+    //     // globeMaterial.map = texture;
+    //     // texture.needsUpdate = true;
+    //
+    //     // I should no longer need to ever print this stuff to the console, since I can just right click on the canvas and download it nowadays
+    //     // console.log("globe texture updating...");
+    //     // this line of code longer causes everything to explode on safari!
+    //     //- dataUrl = canvas.toDataURL("image/png"); // for someone reason this line of codes makes everything work on safari :(
+    //     // var context = canvas.getContext("2d");
+    //     // var dafdasdf = canvas.getImageData(10, 10, 50, 50);
+    //     //- console.log(dataUrl);
+    //
+    //     globeMaterial.emissive = new THREE.Color(0xffffff);
+    //     // globeMaterial.emissive = new THREE.Color(0x111111);
+    //     globeMaterial.emissiveMap = texture;
+    //     texture.needsUpdate = true;
+    //     // globeMaterial.needsUpdate = true;
+    //     //- console.log("globe texture updated");
+    //
+    // }, [props.viewFlashback, props.tiles]); // the props.tiles made it magically start updating the globe; but it still doesn't update on Safari
 
     const MAP_ROTATION_TOLERANCE = 0.001;
     // const [mapRotation, setMapRotation] = useState(new THREE.Vector3( 0, 0, 0 ));
@@ -336,6 +351,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
     // and it blocks clicks :(
     // god damn it of course the polygons block clicks
     const countryProps = {
+        globeMaterial: globeMaterial,
         // polygonsData: countries.features,
         // polygonsData: countries.features.filter(filter),
         polygonsData: activeCountry,

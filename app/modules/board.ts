@@ -2,7 +2,7 @@ import { xy2index, int2rgba } from '../utils/general';
 import { values as colorValues, hexcolor2colorcode, colorcode2hexcolor } from '../constants/colors';
 import * as API from '../utils/api';
 import * as Time from '../utils/time';
-import {State} from "../reducers";
+import {BaseState} from "../reducers";
 
 
 /**
@@ -71,7 +71,7 @@ export function setRgbaPixel(pixelsRgba: Uint8ClampedArray, originalIndex: numbe
  I don't think it's Uint8Array
  TODO: figure out the proper type of the buffer arg
 */
-export function setTiles(state: State, buffer: number[]): any {
+export function setTiles(state: BaseState, buffer: number[]): any {
     const tiles = buffer2hex(buffer, colorValues);
     const tilesRgba = buffer2rgbabuffer(buffer, colorValues);
     // console.log(state.board.tiles);
@@ -86,7 +86,7 @@ export function setTiles(state: State, buffer: number[]): any {
 /*
 Takes hex color as input.
 */
-export function setTile(state: State, {x, y}, width: number, color: number): any {
+export function setTile(state: BaseState, {x, y}, width: number, color: number): any {
     var tiles = state.board.tiles.slice();
     var tilesRgba = state.board.tilesRgba.slice(); // mayhaps remove slicing?
 
@@ -126,7 +126,7 @@ export function setTileLocallyInternal(tiles: number[], tilesRgba: Uint8ClampedA
     }};
 }
 
-export function setTileLocally(state: State, index: number, width: number, color: number): any { // should use function chaining
+export function setTileLocally(state: BaseState, index: number, width: number, color: number): any { // should use function chaining
     var tiles = state.board.tiles.slice();
     var tilesRgba = state.board.tilesRgba.slice();
     // const width = state.board.width;
