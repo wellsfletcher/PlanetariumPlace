@@ -38,13 +38,21 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader'
+                use: [
+                    {
+                        loader: 'babel-loader'
+                    }
+                ]
             },
             {
                 test: /\.(tsx|ts)$/,
                 // test: /\.tsx?$/,
                 exclude: /node_modules/,
-                loader: 'ts-loader'
+                use: [
+                    {
+                        loader: 'ts-loader'
+                    }
+                ]
             },
             {
                 test: /\.mjs$/,
@@ -56,7 +64,14 @@ module.exports = {
                 loader: "style-loader!css-loader"
             },*/ {
                 test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
-                loader: 'url-loader?limit=100000'
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 100000
+                        }
+                    }
+                ]
             }
         ]
     },

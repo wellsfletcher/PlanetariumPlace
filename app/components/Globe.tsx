@@ -1,8 +1,8 @@
 import React, {MutableRefObject} from 'react';
 import { useState, useEffect, useMemo } from 'react';
 
-// import * as THREE from "three";
-import * as THREE from "three/build/three.module.js";
+import * as THREE from "three";
+// import * as THREE from "three/build/three.module.js";
 import Globe, {GlobeMethods} from 'react-globe.gl';
 import * as API from '../utils/api';
 
