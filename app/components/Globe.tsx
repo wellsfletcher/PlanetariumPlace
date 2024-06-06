@@ -1,7 +1,8 @@
 import React, {MutableRefObject} from 'react';
 import { useState, useEffect, useMemo } from 'react';
 
-import * as THREE from "three";
+// import * as THREE from "three";
+import * as THREE from "three/build/three.module.js";
 import Globe, {GlobeMethods} from 'react-globe.gl';
 import * as API from '../utils/api';
 
@@ -15,6 +16,11 @@ import { drawPixelBuffer, drawPixelRgbaBuffer, drawImageData, paintCanvasBlack, 
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
+
+// THREE.WebGLRenderer._useLegacyLights = true;
+// THREE.WebGLRendererParameters;
+// THREE.ColorManagement.enabled = false;
+// renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
 function randInt(min: number, max?: any): number {
 // function randInt(min, max) {
@@ -117,19 +123,129 @@ function CanvasGlobe(props: CanvasGlobeProps) {
 
     // console.log("globe rendered");
 
+    // // ------ define globe material ------ //
+    // let globeMaterial = new THREE.MeshPhongMaterial();
+    //
+    // const canvas = canvasRef.current;
+    // const texture = new THREE.CanvasTexture(canvas);
+    // // pixelate the texture
+    // texture.magFilter = THREE.NearestFilter;
+    // texture.minFilter = THREE.LinearMipMapLinearFilter;
+    //
+    // globeMaterial.emissive = new THREE.Color(0xffffff);
+    // // globeMaterial.emissive = new THREE.Color(0x111111);
+    // globeMaterial.emissiveMap = texture;
+    // // it should only be marked for update when tiles change, so I probably still need to use useEffect
+    // //- texture.needsUpdate = true;
+    // // React.useEffect(() => {
+    // //     texture.needsUpdate = true;
+    // // }, [props.viewFlashback, props.tiles]);
+    // // ------ define globe material ------ //
+
+    // // ------ define globe material ------ //
+    // // THREE.ColorManagement.enabled = false;
+    // let globeMaterial = new THREE.MeshPhongMaterial();
+    //
+    // const canvas = canvasRef.current;
+    // const texture = new THREE.CanvasTexture(canvas);
+    // // pixelate the texture
+    // // texture.colorSpace = THREE.LinearSRGBColorSpace; // this actually makes a visible impact // NoColorSpace
+    // texture.magFilter = THREE.NearestFilter;
+    // texture.minFilter = THREE.LinearMipMapLinearFilter;
+    //
+    // const t = "#ffffff";
+    // // globeMaterial.emissive = new THREE.Color(0xffffff); // "#ffffff"
+    // globeMaterial.emissive = new THREE.Color(0xffffff);
+    // // globeMaterial.emissive = new THREE.Color(0x111111);
+    // // globeMaterial.emissiveIntensity = 1000;
+    // // globeEl.current.renderer()._useLegacyLights = true;
+    // if (globeEl.current != null) {
+    //     console.log("Setting globeEl.current properties...");
+    //     // globeEl.current.renderer().outputColorSpace = THREE.LinearSRGBColorSpace; // LinearSRGBColorSpace
+    // }
+    // globeMaterial.emissiveMap = texture;
+    // // globeMaterial.emissiveMap.colorSpace = THREE.SRGBColorSpace;
+    // // globeMaterial.map = texture;
+    // // it should only be marked for update when tiles change, so I probably still need to use useEffect
+    // //- texture.needsUpdate = true;
+    // // const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6 * Math.PI);
+    // // React.useEffect(() => {
+    // //     texture.needsUpdate = true;
+    // // }, [props.viewFlashback, props.tiles]);
+    // // ------ define globe material ------ //
+
     // ------ define globe material ------ //
+    // THREE.ColorManagement.enabled = false;
     let globeMaterial = new THREE.MeshPhongMaterial();
+    // let globeMaterial = new THREE.MeshBasicMaterial(); // works almost perfect
+    // let globeMaterial = new THREE.MeshStandardMaterial();
+    // let globeMaterial = new THREE.MeshLambertMaterial();
 
     const canvas = canvasRef.current;
     const texture = new THREE.CanvasTexture(canvas);
     // pixelate the texture
+    texture.colorSpace = THREE.SRGBColorSpace; // this actually makes a visible impact // NoColorSpace
     texture.magFilter = THREE.NearestFilter;
     texture.minFilter = THREE.LinearMipMapLinearFilter;
 
-    globeMaterial.emissive = new THREE.Color(0xffffff);
+    const t = "#ffffff";
+    // globeMaterial.emissive = new THREE.Color(0xffffff); // "#ffffff"
+    // globeMaterial.emissive = new THREE.Color(0xffffff);
     // globeMaterial.emissive = new THREE.Color(0x111111);
-    globeMaterial.emissiveMap = texture;
-    texture.needsUpdate = true;
+    // globeMaterial.emissiveIntensity = 0.5;
+    // globeEl.current.renderer()._useLegacyLights = true;
+    // globeMaterial.emissiveMap = texture;
+    if (globeEl.current != null) {
+        console.log("Setting globeEl.current properties...");
+        // globeEl.current.renderer().outputColorSpace = THREE.SRGBColorSpace; // LinearSRGBColorSpace
+        // globeEl.current.renderer().outputColorSpace = THREE.SRGBColorSpace;
+        // globeEl.current.renderer().colorSpace = THREE.SRGBColorSpace;
+    }
+    // globeMaterial.emissiveMap = texture;
+    // globeMaterial.specular = new THREE.Color('red'); // this is the thing that doesn't show up when you use MeshBasicMaterial
+    // globeMaterial.specular = new THREE.Color('dimgrey'); // grey // dimgrey // 0x888888 // 0x1B1B1B // 0x606060
+    // globeMaterial.specular = new THREE.Color('dimgrey');
+    globeMaterial.specular = new THREE.Color('white');
+    // globeMaterial.specularMap = texture;
+    // globeMaterial.map = null;
+    // globeMaterial.color = new THREE.Color(0x000000);
+    // globeMaterial.color = null;
+    globeMaterial.map = texture;
+    // globeMaterial.emissiveMap.colorSpace = THREE.SRGBColorSpace;
+    // globeMaterial.map = texture;
+    // it should only be marked for update when tiles change, so I probably still need to use useEffect
+    //- texture.needsUpdate = true;
+    // const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6 * Math.PI);
+    useEffect(() => {
+        // const directionalLight = globeEl.current.lights().find(obj3d => obj3d.type === 'DirectionalLight');
+        // directionalLight && directionalLight.position.set(1, 1, 1); // change light position to see the specularMap's effect
+        // globeEl.current.scene().add(new THREE.AmbientLight(0xcccccc, 1.5 * Math.PI));
+
+        const ambientLight = globeEl.current.lights().find(obj3d => obj3d.type === 'AmbientLight');
+        // directionalLight && directionalLight.intensity = 0;
+        // ambientLight.intensity = 0;
+        ambientLight.intensity = 1.65 * Math.PI;
+        // ambientLight.intensity = 5.0;
+        // ambientLight.intensity = 1;
+
+        const directionalLight = globeEl.current.lights().find(obj3d => obj3d.type === 'DirectionalLight');
+        // directionalLight && directionalLight.intensity = 0;
+        directionalLight.intensity = 0.03 * Math.PI;
+        // directionalLight.intensity = 0;
+        // directionalLight.color = new THREE.Color('white');
+
+        // const light = new THREE.AmbientLight(0xffffff, 1 * Math.PI);
+        // globeEl.current.scene().add(light);
+
+        // const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6 * Math.PI);
+        // globeEl.current.scene().add(directionalLight);
+        // directionalLight.position.set(0, -10, 0);
+        // directionalLight.position.set(1, 1, 1);
+    }, []);
+    // React.useEffect(() => {
+    //     texture.needsUpdate = true;
+    // }, [props.viewFlashback, props.tiles]);
+    console.log(globeMaterial);
     // ------ define globe material ------ //
 
     // React.useEffect(() => {
@@ -352,6 +468,8 @@ function CanvasGlobe(props: CanvasGlobeProps) {
     // god damn it of course the polygons block clicks
     const countryProps = {
         globeMaterial: globeMaterial,
+        // rendererConfig: {useLegacyLights: true, _useLegacyLights: true},
+        // rendererConfig: {outputColorSpace: THREE.LinearSRGBColorSpace},
         // polygonsData: countries.features,
         // polygonsData: countries.features.filter(filter),
         polygonsData: activeCountry,

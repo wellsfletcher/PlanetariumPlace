@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+//- import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'; // Switch isn't a thing anymore apparently
 import {connect, ConnectedProps} from "react-redux";
 // Commented out bc of TS bug
 //- import { setMouseDown } from "../actions";
