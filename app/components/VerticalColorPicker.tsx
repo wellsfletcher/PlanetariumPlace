@@ -164,7 +164,7 @@ function ColorTool(props: ColorToolProps) {
         <Grid
             container
             direction="column"
-            justify="flex-end"
+            justifyContent="flex-end"
             alignItems="flex-end"
             wrap="nowrap"
         >
@@ -174,7 +174,7 @@ function ColorTool(props: ColorToolProps) {
         <Grid
             container
             direction="row"
-            justify="flex-start"
+            justifyContent="flex-start"
             alignItems="flex-end"
             wrap="nowrap"
         >

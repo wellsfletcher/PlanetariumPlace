@@ -62,7 +62,7 @@ interface OverlayProps {
 
 interface Alignment {
     direction: GridDirection,
-    justify: GridJustification,
+    justifyContent: GridJustification,
     alignItems: GridItemsAlignment
 }
 
@@ -79,13 +79,13 @@ export default function Overlay(props: PropsWithChildren<OverlayProps>) {
 
     const verticalAlignment: Alignment = {
         direction: "row",
-        justify: "flex-end",
+        justifyContent: "flex-end",
         alignItems: "flex-end",
     };
 
     const horizontalAlignment: Alignment = {
         direction: "column",
-        justify: "flex-end",
+        justifyContent: "flex-end",
         alignItems: "flex-end",
     };
 
@@ -178,7 +178,7 @@ export default function Overlay(props: PropsWithChildren<OverlayProps>) {
         <Grid
           container
           direction="row"
-          justify="flex-start"
+          justifyContent="flex-start"
           alignItems="flex-start"
           // component="div" // added bc of TS error
 

@@ -2,6 +2,10 @@ import React, {MutableRefObject} from 'react';
 import { useState, useEffect, useMemo } from 'react';
 
 import * as THREE from "three";
+// I think it would have to be like this to fix that one warning
+// TODO: investigate fixing this multiple instances of three.js imports error further
+// import * as THREE from "https://unpkg.com/three/build/three.module.js"; // "https://unpkg.com/three/build/three.module.js";
+// <script src="https://unpkg.com/three/build/three.module.js"></script>
 // import * as THREE from "three/build/three.module.js";
 import Globe, {GlobeMethods} from 'react-globe.gl';
 import * as API from '../utils/api';
@@ -272,7 +276,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
 
         globeMaterial.specular = new THREE.Color('white');
         globeMaterial.map = texture;
-        console.log(globeMaterial);
+        // console.log(globeMaterial);
 
         const ambientLight = globeEl.current.lights().find(obj3d => obj3d.type === 'AmbientLight');
         ambientLight.intensity = 1.65 * Math.PI;
