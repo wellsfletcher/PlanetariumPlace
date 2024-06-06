@@ -47,7 +47,7 @@ export function fetchTiles() {
 
 export function fetchTileChanges() {
     // alert("aaaaa");
-    return function(lastUpdated, boardId, dispatch) { // , getState
+    return function(lastUpdated: Date, boardId: number, dispatch: any) { // , getState
         // TODO: access the state here in order to avoid unnecessary rerenders every 5 secs
         // const canvas = API.fetchTiles();
         // return dispatch({ type: TILES_FETCHED, payload: API.fetchTiles() });
@@ -61,5 +61,7 @@ export function fetchTileChanges() {
         const state: BaseState = store.getState();
         lastUpdated = state.board.lastUpdated;
         return API.fetchTileChanges(lastUpdated, boardId, dispatch);
+        // return API.fetchTileChangesFixed(lastUpdated, boardId, dispatch);
+        // return API.fetchTileChanges(lastUpdated, boardId, dispatch);
     }
 }

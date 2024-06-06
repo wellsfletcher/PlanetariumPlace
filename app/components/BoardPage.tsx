@@ -44,7 +44,7 @@ function mapDispatchToProps(dispatch) {
     //- getData: () => getData()(dispatch), //  cursed
     // getData: () => getData(dispatch),
     fetchTiles: () => fetchTiles()(dispatch),
-    fetchTileChanges: (lastUpdated, boardId) => fetchTileChanges()(lastUpdated, boardId, dispatch),
+    fetchTileChanges: (lastUpdated: Date, boardId: number) => fetchTileChanges()(lastUpdated, boardId, dispatch),
     // fetchTileChanges: bindActionCreators(({x, y}, color) => setTile({x, y, color}), dispatch),
     // setTile: ({x, y}, color) => dispatch(setTile({x, y, color})),
     setTile: bindActionCreators(({x, y}, color) => actions.setTile({x, y, color}), dispatch),
@@ -154,7 +154,8 @@ const BoardPage = (props: any) => {
         useInterval(() => {
             console.debug("updating async tiles...");
             const placeholderDate = new Date();
-            props.fetchTileChanges(props.boardId, placeholderDate);
+            //- props.fetchTileChanges(props.boardId, placeholderDate);
+            props.fetchTileChanges(placeholderDate, props.boardId); // wait this would be the current time right? it should be props.lastUpdated right? nah it looks all good in the console
             // props.fetchTileChanges(props.boardId, props.lastUpdated);
             // props.fetchTileChanges(1, new Date());
 

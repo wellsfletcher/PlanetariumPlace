@@ -172,14 +172,24 @@ export function fetchTileChanges(boardId, lastUpdated, dispatch) { // width?
 }
 */
 
+// // TODO: make this function not exist
+// export function fetchTileChangesFixed(lastUpdated: Date, boardId: number, dispatch: any): void {
+//     // return fetchTileChanges(boardId, lastUpdated, dispatch);
+// }
+
 /**
 This is a Redux action.
 */
-export function fetchTileChanges(boardId: number, lastUpdated: any, dispatch: any): void { // width?
+export function fetchTileChanges(lastUpdated: Date, boardId: number, dispatch: any): void { // width?
     const since = date2str(lastUpdated);
     // const {boardId, since} = dispatch;
     //- console.log("getting history...");
     // console.log({ boardId, since });
+        console.debug("params:");
+        console.debug(JSON.stringify({
+            boardId: boardId,
+            since: since
+        }));
     fetch('https://planetarium.place/api/v0/board/history.php', {
             method: 'POST',
             headers: {
@@ -196,9 +206,11 @@ export function fetchTileChanges(boardId: number, lastUpdated: any, dispatch: an
     .then(payload => {
         // console.log("We are in the fetch tile changes promise");
         const unplayedChangesBackingArray = payload;
+        console.debug("Did we get any changes?");
         for (var k = 0; k < unplayedChangesBackingArray.length; k++) {
             let change = unplayedChangesBackingArray[k];
             console.debug(change); // this should probably at least day what it is for it to be useful
+            console.debug("we got some changes!!!");
             //- dispatch(Actions.playChange( {change} ));
             dispatch(actions.playChange( {change} ));
         }
