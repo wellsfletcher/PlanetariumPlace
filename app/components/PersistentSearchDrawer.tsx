@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
       width: drawerWidth,
       // TS bug
       // background: theme.palette.background.darkPaper,
-      // background: theme.paletteBackground.darkPaper,
+      background: theme.paletteBackground.darkPaper,
       // background: undefined
   },
   drawerHeader: {

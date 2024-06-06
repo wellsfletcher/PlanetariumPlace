@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
       // commenting out bc TS bug
       // backgroundColor: theme.palette.background.darkPaper,
       // backgroundColor: undefined
-      // backgroundColor: theme.paletteBackground.darkPaper,
+      backgroundColor: theme.paletteBackground.darkPaper,
       // backgroundColor: "#303030"
   },
 }));
