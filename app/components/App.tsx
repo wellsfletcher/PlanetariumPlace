@@ -13,13 +13,14 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import themeColor from '@material-ui/core/colors/indigo';
 import * as System from "../constants/system";
+import {AppDispatch} from "../store";
 
 // console.log("setMouseDown = ");
 // console.log(setMouseDown);
 
 // setMouseDown = undefined;
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: AppDispatch) {
   return {
     setMouseDown: (mouseDown) => dispatch(actions.setMouseDown(mouseDown)) // might not be doing correctly
   };

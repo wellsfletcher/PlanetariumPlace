@@ -39,7 +39,7 @@ import ViewOffIcon from '@material-ui/icons/FastForward'; // VisibilityOff, Hour
 import AddIcon from '@material-ui/icons/Add';
 */
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: AppDispatch) {
   return {
     //- getData: () => getData()(dispatch), //  cursed
     // getData: () => getData(dispatch),
@@ -61,6 +61,7 @@ function mapDispatchToProps(dispatch) {
 
 import { useSelector } from 'react-redux';
 import {useAppSelector} from "./hooks/redux";
+import {AppDispatch} from "../store";
 // import {useAppSelector} from "./hooks/redux";
 const mapStateToProps = (state) => { // this will be placed with a bunch of selectors
     return {

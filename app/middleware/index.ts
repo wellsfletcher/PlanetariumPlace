@@ -5,8 +5,14 @@ import * as System from '../constants/system';
 import { mod } from '../utils/general';
 import * as Time from '../utils/time';
 import {BaseState} from "../reducers";
+import {AppDispatch, RootState} from "../store";
 
-export function forbiddenWordsMiddleware({ getState, dispatch }) { // { getState, dispatch }
+interface MiddlewareInput {
+    getState: () => RootState,
+    dispatch: AppDispatch
+}
+
+export function forbiddenWordsMiddleware({ getState, dispatch }: MiddlewareInput) { // { getState, dispatch }
     return function(next) {
         return function(action) {
             if (action.type === SET_TILE) { // this should be changed

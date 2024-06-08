@@ -5,6 +5,7 @@ import * as System from '../constants/system';
 import { date2str } from "./time";
 
 import { actions } from "../reducers";
+import {AppDispatch} from "../store";
 
 export function fetchTerritoryGeojsonFromName(name_long: any): Promise<any> {
     return fetch('https://planetarium.place/api/v0/country/geometryFromName.php', {
@@ -63,19 +64,19 @@ function fetchBoardSize(boardId: number): Promise<any> {
     });
 }
 
-export function fetchTilesSlow(boardId: number, dispatch): Promise<any> {
+export function fetchTilesSlow(boardId: number, dispatch: AppDispatch): Promise<any> {
     return fetchBoardSize(boardId)
         .then(payload => fetchTilesGivenSize(boardId, payload.width, payload.height, dispatch));
 }
 
-export function fetchTiles(boardId, dispatch) {
+export function fetchTiles(boardId, dispatch: AppDispatch) {
     return fetchTilesGivenSize(boardId, System.INITIAL_WIDTH, System.INITIAL_HEIGHT, dispatch);
 }
 
 /**
 This is a redux action.
 */
-export function fetchTilesGivenSize(boardId: number, width: number, height: number, dispatch: any): Promise<any> {
+export function fetchTilesGivenSize(boardId: number, width: number, height: number, dispatch: AppDispatch): Promise<any> {
     var canvas = new Uint8Array(width * height);
     var offset = 0;
 
@@ -180,7 +181,7 @@ export function fetchTileChanges(boardId, lastUpdated, dispatch) { // width?
 /**
 This is a Redux action.
 */
-export function fetchTileChanges(lastUpdated: Date, boardId: number, dispatch: any): void { // width?
+export function fetchTileChanges(lastUpdated: Date, boardId: number, dispatch: AppDispatch): void { // width?
     const since = date2str(lastUpdated);
     // const {boardId, since} = dispatch;
     //- console.log("getting history...");

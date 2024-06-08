@@ -2,14 +2,14 @@ import { SET_TILE, SET_MOUSE_DOWN, SET_BRUSH_COLOR, TILES_FETCHED } from "../con
 import * as Action from "../constants/actionTypes";
 import * as System from '../constants/system';
 import * as API from "../utils/api";
-import store from "../store";
+import store, {AppDispatch} from "../store";
 import {BaseState} from "../reducers";
 
 
 // remove?
 export function getData() {
     // alert("aaaaa");
-    return function(dispatch) { // , getState
+    return function(dispatch: AppDispatch) { // , getState
         // alert("bbbbb");
         return fetch("https://jsonplaceholder.typicode.com/posts")
             .then(response => response.json())
@@ -29,7 +29,7 @@ export function getData() {
 
 export function fetchTiles() {
     // alert("aaaaa");
-    return function(dispatch, getState?) { // , getState
+    return function(dispatch: AppDispatch, getState?) { // , getState
         // const canvas = API.fetchTiles();
         // return dispatch({ type: TILES_FETCHED, payload: API.fetchTiles() });
         /*
@@ -47,7 +47,7 @@ export function fetchTiles() {
 
 export function fetchTileChanges() {
     // alert("aaaaa");
-    return function(lastUpdated: Date, boardId: number, dispatch: any) { // , getState
+    return function(lastUpdated: Date, boardId: number, dispatch: AppDispatch) { // , getState
         // TODO: access the state here in order to avoid unnecessary rerenders every 5 secs
         // const canvas = API.fetchTiles();
         // return dispatch({ type: TILES_FETCHED, payload: API.fetchTiles() });
