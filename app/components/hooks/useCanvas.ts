@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 
 
-const useCanvas = (draw, options={}) => {
+const useCanvas = (draw: (ctx: CanvasRenderingContext2D, frameCount: number) => void) => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 

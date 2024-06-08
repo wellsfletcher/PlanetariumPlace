@@ -1,7 +1,7 @@
 import { int2rgba, vector2index } from './general';
 
 
-export function drawPixel(ctx: any, x: number, y: number) {
+export function drawPixel(ctx: CanvasRenderingContext2D, x: number, y: number) {
     var r = 255;
     var g = 100;
     var b = 100;
@@ -15,7 +15,7 @@ export function drawPixel(ctx: any, x: number, y: number) {
     ctx.putImageData(id, x, y);
 };
 
-export function drawPixelBuffer(ctx: any, pixels: any, bufferWidth: number, hasAlpha: boolean = false): any {
+export function drawPixelBuffer(ctx: CanvasRenderingContext2D, pixels: any, bufferWidth: number, hasAlpha: boolean = false): ImageData {
     var width = bufferWidth;
     var height = pixels.length / width; // floor?
 
@@ -50,12 +50,12 @@ export function drawPixelBuffer(ctx: any, pixels: any, bufferWidth: number, hasA
     return imageData;
 };
 
-export function drawPixelRgbaBuffer(ctx: any, pixels: any, bufferWidth: number): any {
+export function drawPixelRgbaBuffer(ctx: CanvasRenderingContext2D, pixels: any, bufferWidth: number): ImageData {
     var bufferHeight = (pixels.length / 4) / bufferWidth;
     return drawUint8ClampedArray(ctx, pixels, bufferWidth, bufferHeight);
 };
 
-export function paintCanvasBlack(ctx: any, canvasWidth: number, canvasHeight: number) {
+export function paintCanvasBlack(ctx: CanvasRenderingContext2D, canvasWidth: number, canvasHeight: number) {
     ctx.fillStyle = "blue";
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 };
@@ -63,21 +63,23 @@ export function paintCanvasBlack(ctx: any, canvasWidth: number, canvasHeight: nu
 /**
 Makes async call to load the image
 */
-export function fillCanvasWithImagePath(ctx: any, path: string, canvasWidth: number, canvasHeight: number) {
-    var image = new Image();
-    image.src = path;
-    image.onload = function() {
-        var pattern = ctx.createPattern(this, "repeat");
-        ctx.fillStyle = pattern;
-        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-        ctx.fill();
-    };
-};
+// export function fillCanvasWithImagePath(ctx: any, path: string, canvasWidth: number, canvasHeight: number) {
+//     // TODO: figure out why this passing "this" as a parameter any why I can't set the type of ctx without causing error
+//     // TODO: does this function even get used? I think it doesn't?
+//     var image = new Image();
+//     image.src = path;
+//     image.onload = function() {
+//         var pattern = ctx.createPattern(this, "repeat");
+//         ctx.fillStyle = pattern;
+//         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+//         ctx.fill();
+//     };
+// };
 
 /**
 Requires image to already be preloaded
 */
-export function fillCanvasWithImage(ctx: any, image: any, canvasWidth: number, canvasHeight: number) {
+export function fillCanvasWithImage(ctx: CanvasRenderingContext2D, image: CanvasImageSource, canvasWidth: number, canvasHeight: number) {
     var pattern = ctx.createPattern(image, "repeat");
     ctx.fillStyle = pattern;
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
@@ -95,13 +97,13 @@ export function fillCanvasWithImage(ctx, image, canvasWidth, canvasHeight) {
 };
 */
 
-export function drawUint8ClampedArray(ctx: any, buffer: any, width: number, height: number): any {
+export function drawUint8ClampedArray(ctx: CanvasRenderingContext2D, buffer: any, width: number, height: number): ImageData {
     const imageData = new ImageData(buffer, width, height);
     ctx.putImageData(imageData, 0, 0);
     return imageData;
 };
 
-export function drawImageData(ctx: any, imageData: any) {
+export function drawImageData(ctx: CanvasRenderingContext2D, imageData: ImageData) {
     ctx.putImageData(imageData, 0, 0);
 };
 

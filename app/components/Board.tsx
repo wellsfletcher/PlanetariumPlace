@@ -16,6 +16,8 @@ import usePreloadedImage from './hooks/usePreloadedImage';
 import * as System from '../constants/system';
 import { int2rgba, vector2index } from '../utils/general';
 import { drawPixel, drawPixelBuffer, drawPixelRgbaBuffer, drawImageData, paintCanvasBlack, fillCanvasWithImage } from '../utils/draw';
+import {CanvasGlobeProps} from "./Globe";
+import useFancyCanvas from "./hooks/useFancyCanvas";
 // import Tooltip from './TrackingTooltip.js';
 
 
@@ -27,7 +29,7 @@ function mapDispatchToProps(dispatch) {
 }
 */
 
-function round(num) {
+function round(num: number) {
     // 0.375 seems to work for y
     // .40625
     return Math.floor(num + 0.0);
@@ -77,7 +79,7 @@ const Highlights = (props) => {
 
     const [mapCache, setMapCache] = React.useState(new Map());
 
-    var draw = (ctx, frameCount) => {
+    var draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
         if (selectedTile == null) return;
         // drawPixelBuffer(ctx, map, width);
         var index = vector2index(selectedTile, width);
@@ -95,11 +97,12 @@ const Highlights = (props) => {
         }
     };
 
-    const options = {
-        context: "2d"
-    };
-    const { context, ...moreConfig } = options;
-    const canvasRef = useCanvas(draw, {context});
+    // const options = {
+    //     context: "2d"
+    // };
+    // const { context, ...moreConfig } = options;
+    const canvasRef = useCanvas(draw);
+
     const canvas = canvasRef.current;
 
     const rest = {
@@ -107,7 +110,7 @@ const Highlights = (props) => {
         height: height,
         style: {
             // Commenting out bc ts error
-            imageRendering: "pixelated",
+            imageRendering:  "pixelated" as "pixelated",
             /*
             imageRendering: "-moz-crisp-edges",
             imageRendering: "-webkit-crisp-edges",
@@ -132,7 +135,7 @@ const Highlights = (props) => {
 }
 
 // I have to update my dependencies (I think react in particular) to be able to convert this file to TS
-const Board = (props) => {
+const Board = (props: CanvasGlobeProps) => {
     var tilesRgba = props.tilesRgba;
     var tiles = props.tiles;
     var width = props.width;
@@ -141,31 +144,58 @@ const Board = (props) => {
     const viewFlashback = props.viewFlashback;
 
     const [selectedTile, setSelectedTile] = React.useState(null); // {x: 0, y: 0}
+
+    // // ------ old canvas code start ------ //
+    // const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
+    //
+    // var draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+    //     // drawAnimatedCircle(ctx, frameCount);
+    //     // drawPixel(ctx, 69, 42);
+    //     // has redraw the pixel buffer every time when I do it like this
+    //     // but this is the only way to do it in a reacty way methinks
+    //     // unless maybe if lifecycle methods could solve my problems?
+    //     // drawPixelBuffer(ctx, tiles, width);
+    //
+    //     // drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    //     if (!viewFlashback) {
+    //         drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    //     } else {
+    //         // paintCanvasBlack(ctx, width, height);
+    //         // fillCanvasWithImage(ctx, "../../assets/pixel-countries-mid-res.png", width, height);
+    //         fillCanvasWithImage(ctx, flashBackImage, width, height);
+    //     }
+    // };
+    //
+    //
+    // // const options = {
+    // //     context: "2d"
+    // // };
+    // // const { context, ...moreConfig } = options;
+    // const canvasRef = useCanvas(draw);
+    // // ------ old canvas code end ------ //
+
+
+    // ------ new canvas code start ------ //
     const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
 
-    var draw = (ctx, frameCount) => {
-        // drawAnimatedCircle(ctx, frameCount);
-        // drawPixel(ctx, 69, 42);
-        // has redraw the pixel buffer every time when I do it like this
-        // but this is the only way to do it in a reacty way methinks
-        // unless maybe if lifecycle methods could solve my problems?
-        // drawPixelBuffer(ctx, tiles, width);
+    const drawBoard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+        drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    }
+    const drawFlashback = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+        fillCanvasWithImage(ctx, flashBackImage, width, height);
+    }
 
-        // drawPixelRgbaBuffer(ctx, tilesRgba, width);
-        if (!viewFlashback) {
-            drawPixelRgbaBuffer(ctx, tilesRgba, width);
-        } else {
-            // paintCanvasBlack(ctx, width, height);
-            // fillCanvasWithImage(ctx, "../../assets/pixel-countries-mid-res.png", width, height);
-            fillCanvasWithImage(ctx, flashBackImage, width, height);
-        }
-    };
+    let layers = [];
+    if (viewFlashback) {
+        layers = [drawFlashback];
+    } else {
+        layers = [drawBoard];
+    }
 
-    const options = {
-        context: "2d"
-    };
-    const { context, ...moreConfig } = options;
-    const canvasRef = useCanvas(draw, {context});
+    const canvasRef = useFancyCanvas(layers);
+    // ------ new canvas code end ------ //
+
+
     const canvas = canvasRef.current;
 
     // const isSwiping = useSwiping();
@@ -271,7 +301,7 @@ const Board = (props) => {
         // onMouseMove: handleMouseEnter, // this can be on the outside div or on the canvas itself // actually it can't or it'll be called when it shouldn't
         style: {
             // commenting out bc ts error
-            imageRendering: "pixelated", // crisp-edges // pixelated
+            imageRendering: "pixelated" as "pixelated", // crisp-edges // pixelated // tf is this bs
             cursor: "crosshair"
         }
     };

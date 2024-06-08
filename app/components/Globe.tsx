@@ -20,6 +20,8 @@ import { drawPixelBuffer, drawPixelRgbaBuffer, drawImageData, paintCanvasBlack, 
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
+import useLayeredCanvas from "./hooks/useLayeredCanvas";
+import useFancyCanvas from "./hooks/useFancyCanvas";
 
 // THREE.WebGLRenderer._useLegacyLights = true;
 // THREE.WebGLRendererParameters;
@@ -35,7 +37,7 @@ function randInt(min: number, max?: any): number {
     return Math.random() * (max - min) + min | 0;
 }
 
-function drawRandomDot(ctx: any) {
+function drawRandomDot(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = `#${randInt(0x1000000).toString(16).padStart(6, '0')}`;
     ctx.beginPath();
 
@@ -67,6 +69,7 @@ function geo2xy(lat: number, lng: number, width: number, height: number): any {
     return {x: Math.floor(x), y: Math.floor(y)};
 }
 
+// TODO: rename this and move it somewhere else
 export interface CanvasGlobeProps {
     viewFlashback: boolean,
     tilesRgba: Uint8ClampedArray,
@@ -104,28 +107,80 @@ function CanvasGlobe(props: CanvasGlobeProps) {
     }, []);
     */
     // console.log(System.FLASHBACK_BOARD_PATH); // this in base 64 for some reason...
+
+
+    // // ------ old canvas code start ------ //
+    // const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
+    //
+    // var draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+    //     // drawPixelBuffer(ctx, tiles, width);
+    //     // drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    //
+    //     if (!viewFlashback) {
+    //         drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    //     } else {
+    //         // paintCanvasBlack(ctx, width, height);
+    //         // fillCanvasWithImage(ctx, "../../assets/pixel-countries-mid-res.png", width, height);
+    //         // console.log(image);
+    //         fillCanvasWithImage(ctx, flashBackImage, width, height);
+    //     }
+    //     // console.log("drew");
+    // }
+    //
+    // // const options = {
+    // //     context: "2d"
+    // // };
+    // // const { context, ...moreConfig } = options;
+    // const canvasRef = useCanvas(draw);
+    // // ------ old canvas code end ------ //
+
+
+    // ------ new canvas code start ------ //
     const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
 
-    var draw = (ctx, frameCount) => {
-        // drawPixelBuffer(ctx, tiles, width);
-        // drawPixelRgbaBuffer(ctx, tilesRgba, width);
-
-        if (!viewFlashback) {
-            drawPixelRgbaBuffer(ctx, tilesRgba, width);
-        } else {
-            // paintCanvasBlack(ctx, width, height);
-            // fillCanvasWithImage(ctx, "../../assets/pixel-countries-mid-res.png", width, height);
-            // console.log(image);
-            fillCanvasWithImage(ctx, flashBackImage, width, height);
-        }
-        // console.log("drew");
+    const drawBoard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+        drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    }
+    const drawFlashback = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+        fillCanvasWithImage(ctx, flashBackImage, width, height);
     }
 
-    const options = {
-        context: "2d"
-    };
-    const { context, ...moreConfig } = options;
-    const canvasRef = useCanvas(draw, {context});
+    let layers = [];
+    if (viewFlashback) {
+        layers = [drawFlashback];
+    } else {
+        layers = [drawBoard];
+    }
+
+    // const options = {
+    //     context: "2d"
+    // };
+    // const { context, ...moreConfig } = options;
+    const canvasRef = useFancyCanvas(layers);
+    // ------ new canvas code end ------ //
+
+
+
+    // ------ new canvas code start ------ //
+
+    // const { canvasRefs, baseCanvasRef } = useLayeredCanvas([
+    //     {
+    //         drawFunction: (ctx, frameCount) => {
+    //             drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    //         },
+    //         enabled: !viewFlashback
+    //     },
+    //     {
+    //         drawFunction: (ctx, frameCount) => {
+    //             fillCanvasWithImage(ctx, flashBackImage, width, height);
+    //         },
+    //         enabled: viewFlashback
+    //     }
+    // ]);
+
+    // ------ new canvas code end ------ //
+
+
 
     // console.log("globe rendered");
 
@@ -539,7 +594,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
         height: height,
         style: {
             // Commented out bc of TS error
-            // imageRendering: "pixelated",
+            //- imageRendering: "pixelated",
             cursor: "crosshair",
             display: "none"
         }

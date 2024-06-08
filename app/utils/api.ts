@@ -190,6 +190,7 @@ export function fetchTileChanges(lastUpdated: Date, boardId: number, dispatch: a
             boardId: boardId,
             since: since
         }));
+    // TODO: make this handle failures gracefully, in case the user is temporarily disconnected from the wifi
     fetch('https://planetarium.place/api/v0/board/history.php', {
             method: 'POST',
             headers: {
