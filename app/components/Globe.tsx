@@ -1,5 +1,4 @@
-import React, {MutableRefObject} from 'react';
-import { useState, useEffect, useMemo } from 'react';
+import React, {MutableRefObject, useEffect, useState} from 'react';
 
 import * as THREE from "three";
 // I think it would have to be like this to fix that one warning
@@ -9,19 +8,12 @@ import * as THREE from "three";
 // import * as THREE from "three/build/three.module.js";
 import Globe, {GlobeMethods} from 'react-globe.gl';
 import * as API from '../utils/api';
-
-import useCanvas from './hooks/useCanvas';
-import useWindowDimensions from './hooks/useWindowDimensions';
 import usePreloadedImage from './hooks/usePreloadedImage';
 import * as System from '../constants/system';
-import { int2hexcolor, xy2index } from '../utils/general';
-import { drawPixelBuffer, drawPixelRgbaBuffer, drawImageData, paintCanvasBlack, fillCanvasWithImage } from '../utils/draw';
-
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import useLayeredCanvas from "./hooks/useLayeredCanvas";
+import {drawPixelRgbaBuffer, fillCanvasWithImage} from '../utils/draw';
 import useFancyCanvas from "./hooks/useFancyCanvas";
+import {Baseboard} from "../constants/Baseboard";
+import {COLORING_BASEBOARD_PATH} from "../constants/system";
 
 // THREE.WebGLRenderer._useLegacyLights = true;
 // THREE.WebGLRendererParameters;
@@ -77,6 +69,8 @@ export interface CanvasGlobeProps {
     width: number,
     brushColor: number,
     setViewFlashback: (value: boolean) => void,
+    activeBaseboard: Baseboard,
+    setActiveBaseboard: (value: Baseboard) => void,
     setTile: ({x, y}, color: number) => void,
     activeCountry: string
 }
@@ -87,6 +81,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
     const globeEl: MutableRefObject<GlobeMethods> = React.useRef();
 
     const viewFlashback = props.viewFlashback;
+    const activeBaseboard = props.activeBaseboard;
     // const setViewFlashback = props.setViewFlashback;
     var tilesRgba = props.tilesRgba;
     var tiles = props.tiles;
@@ -137,6 +132,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
 
     // ------ new canvas code start ------ //
     const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
+    const [coloringBaseboardImage, setColoringBaseboardImage] = usePreloadedImage(System.COLORING_BASEBOARD_PATH);
 
     const drawBoard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
         drawPixelRgbaBuffer(ctx, tilesRgba, width);
@@ -144,10 +140,15 @@ function CanvasGlobe(props: CanvasGlobeProps) {
     const drawFlashback = (ctx: CanvasRenderingContext2D, frameCount: number) => {
         fillCanvasWithImage(ctx, flashBackImage, width, height);
     }
+    const drawColoringBaseboard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+        fillCanvasWithImage(ctx, coloringBaseboardImage, width, height);
+    }
 
     let layers = [];
-    if (viewFlashback) {
+    if (activeBaseboard == Baseboard.FLASHBACK) {
         layers = [drawFlashback];
+    } else if (activeBaseboard == Baseboard.COLORING) {
+        layers = [drawColoringBaseboard];
     } else {
         layers = [drawBoard];
     }
@@ -338,7 +339,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
 
         const directionalLight = globeEl.current.lights().find(obj3d => obj3d.type === 'DirectionalLight');
         directionalLight.intensity = 0.03 * Math.PI;
-    }, [props.viewFlashback, props.tiles]);
+    }, [props.viewFlashback, props.tiles, props.activeBaseboard]);
     // React.useEffect(() => {
     //     texture.needsUpdate = true;
     // }, [props.viewFlashback, props.tiles]);
@@ -443,6 +444,11 @@ function CanvasGlobe(props: CanvasGlobeProps) {
         // exit if in view flashback mode
         if (viewFlashback) {
             props.setViewFlashback(false);
+            return;
+        }
+
+        if (activeBaseboard != Baseboard.INTERACTIVE) {
+            props.setActiveBaseboard(Baseboard.INTERACTIVE);
             return;
         }
 

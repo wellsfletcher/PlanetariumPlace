@@ -62,6 +62,7 @@ function mapDispatchToProps(dispatch: AppDispatch) {
 import { useSelector } from 'react-redux';
 import {useAppSelector} from "./hooks/redux";
 import {AppDispatch} from "../store";
+import {Baseboard} from "../constants/Baseboard";
 // import {useAppSelector} from "./hooks/redux";
 const mapStateToProps = (state) => { // this will be placed with a bunch of selectors
     return {
@@ -99,6 +100,8 @@ interface BoardProps {
     brushColor: number,
     viewFlashback: boolean,
     setViewFlashback: (value: boolean) => void,
+    activeBaseboard: Baseboard,
+    setActiveBaseboard: (value: Baseboard) => void,
     setTile: ({x, y}, color: number) => void,
 }
 
@@ -179,10 +182,11 @@ const BoardPage = (props: any) => {
         };
 
         const [viewFlashback, setViewFlashback] = React.useState(false);
+        const [activeBaseboard, setActiveBaseboard] = React.useState(Baseboard.INTERACTIVE);
         const [tool, setTool] = React.useState(0);
 
         // var tiles = [];
-        const boardProps = {
+        const boardProps: BoardProps = {
             tilesRgba: props.tilesRgba,
             tiles: props.tiles,
             map: props.map,
@@ -193,6 +197,8 @@ const BoardPage = (props: any) => {
             activeCountry: props.activeCountry,
             viewFlashback: viewFlashback,
             setViewFlashback: setViewFlashback,
+            activeBaseboard: activeBaseboard,
+            setActiveBaseboard: setActiveBaseboard,
 
             setTile: props.setTile
         }
@@ -225,6 +231,7 @@ const BoardPage = (props: any) => {
                     onChangeComplete={onChangeComplete}
                     useGlobe={useGlobe} setUseGlobe={setUseGlobe}
                     viewFlashback={viewFlashback} setViewFlashback={setViewFlashback}
+                    activeBaseboard={activeBaseboard} setActiveBaseboard={setActiveBaseboard}
                     tool={tool} setTool={setTool}
                 >
 

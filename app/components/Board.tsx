@@ -18,6 +18,7 @@ import { int2rgba, vector2index } from '../utils/general';
 import { drawPixel, drawPixelBuffer, drawPixelRgbaBuffer, drawImageData, paintCanvasBlack, fillCanvasWithImage } from '../utils/draw';
 import {CanvasGlobeProps} from "./Globe";
 import useFancyCanvas from "./hooks/useFancyCanvas";
+import {Baseboard} from "../constants/Baseboard";
 // import Tooltip from './TrackingTooltip.js';
 
 
@@ -142,6 +143,7 @@ const Board = (props: CanvasGlobeProps) => {
     var height = tiles.length / width;
 
     const viewFlashback = props.viewFlashback;
+    const activeBaseboard = props.activeBaseboard;
 
     const [selectedTile, setSelectedTile] = React.useState(null); // {x: 0, y: 0}
 
@@ -177,6 +179,7 @@ const Board = (props: CanvasGlobeProps) => {
 
     // ------ new canvas code start ------ //
     const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
+    const [coloringBaseboardImage, setColoringBaseboardImage] = usePreloadedImage(System.COLORING_BASEBOARD_PATH);
 
     const drawBoard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
         drawPixelRgbaBuffer(ctx, tilesRgba, width);
@@ -184,10 +187,15 @@ const Board = (props: CanvasGlobeProps) => {
     const drawFlashback = (ctx: CanvasRenderingContext2D, frameCount: number) => {
         fillCanvasWithImage(ctx, flashBackImage, width, height);
     }
+    const drawColoringBaseboard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+        fillCanvasWithImage(ctx, coloringBaseboardImage, width, height);
+    }
 
     let layers = [];
-    if (viewFlashback) {
+    if (activeBaseboard == Baseboard.FLASHBACK) {
         layers = [drawFlashback];
+    } else if (activeBaseboard == Baseboard.COLORING) {
+        layers = [drawColoringBaseboard];
     } else {
         layers = [drawBoard];
     }
@@ -282,6 +290,11 @@ const Board = (props: CanvasGlobeProps) => {
         // exit if in view flashback mode
         if (viewFlashback) {
             props.setViewFlashback(false);
+            return;
+        }
+
+        if (activeBaseboard != Baseboard.INTERACTIVE) {
+            props.setActiveBaseboard(Baseboard.INTERACTIVE);
             return;
         }
 

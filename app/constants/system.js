@@ -10,5 +10,8 @@ export const TILE_UPDATE_OFFSET = 6000;
 // export const FLASHBACK_BOARD_PATH = "../../assets/pixel-countries-mid-res.png";
 // export const FLASHBACK_BOARD_PATH = "../assets/pixel-countries-mid-res.png";
 // export const FLASHBACK_BOARD_PATH = process.env.PUBLIC_URL + "/assets/pixel-countries-mid-res.png";
+// TODO: rename this to FLASHBACK_BASEBOARD
 import FLASHBACK_BOARD from '../assets/pixel-countries-mid-res.png';
 export const FLASHBACK_BOARD_PATH = FLASHBACK_BOARD;
+import COLORING_BASEBOARD from '../assets/COLORING.png';
+export const COLORING_BASEBOARD_PATH = COLORING_BASEBOARD;

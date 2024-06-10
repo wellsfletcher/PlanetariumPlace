@@ -13,6 +13,7 @@ import MapIcon from '@material-ui/icons/Map';
 // import DownloadIcon from '@mui/icons-material/Download';
 import ViewIcon from '@material-ui/icons/GridOff'; // History, Visibility, HourglassFullTwoTone, History
 import ViewOffIcon from '@material-ui/icons/GridOn'; // FastForward, VisibilityOff, HourglassEmpty, Update, FastForward
+import ColoringBaseboardIcon from '@material-ui/icons/FormatPaint'; // FastForward, VisibilityOff, HourglassEmpty, Update, FastForward
 import AddIcon from '@material-ui/icons/Add';
 
 import BrushIcon from '@material-ui/icons/Brush';
@@ -23,6 +24,8 @@ import ColorizeIcon from '@material-ui/icons/Colorize';
 import VerticalColorPicker from './VerticalColorPicker';
 import useWindowDimensions from './hooks/useWindowDimensions';
 import {GridDirection, GridItemsAlignment, GridJustification} from "@material-ui/core/Grid/Grid";
+import {Baseboard} from "../constants/Baseboard";
+import Tooltip from "@material-ui/core/Tooltip";
 
 
 
@@ -55,6 +58,8 @@ interface OverlayProps {
     setUseGlobe: any,
     viewFlashback: boolean,
     setViewFlashback: any,
+    activeBaseboard: Baseboard,
+    setActiveBaseboard: (value: Baseboard) => void,
     tool: any,
     setTool: any,
     // rest: any
@@ -71,6 +76,7 @@ export default function Overlay(props: PropsWithChildren<OverlayProps>) {
     const {children, onChangeComplete,
         useGlobe, setUseGlobe,
         viewFlashback, setViewFlashback,
+        activeBaseboard, setActiveBaseboard,
         tool, setTool,
         ...rest} = props; // {...rest}
     // const style = {};
@@ -101,14 +107,35 @@ export default function Overlay(props: PropsWithChildren<OverlayProps>) {
         value={"" + useGlobe}
     >
         <ToggleButton value="true" onClick={() => setUseGlobe(true)}>
-            <GlobeIcon />
+            <Tooltip title="3D Mode">
+                <GlobeIcon />
+            </Tooltip>
         </ToggleButton>
         <ToggleButton value="false" onClick={() => setUseGlobe(false)}>
-            <MapIcon />
+            <Tooltip title="2D Mode">
+                <MapIcon />
+            </Tooltip>
         </ToggleButton>
     </ToggleButtonGroup>;
 
     // TODO: make this not use true/false strings for values of this component
+    // TODO: rename this to baseboardFab
+    // const flashbackFab = <ToggleButtonGroup
+    //     orientation="horizontal"
+    //     color="primary"
+    //     aria-label="view"
+    //     style={{
+    //         // marginBottom: "14px"
+    //     }}
+    //     value={"" + viewFlashback}
+    // >
+    //     <ToggleButton value="true" onClick={() => setViewFlashback(true)}>
+    //         <ViewIcon />
+    //     </ToggleButton>
+    //     <ToggleButton value="false" onClick={() => setViewFlashback(false)}>
+    //         <ViewOffIcon />
+    //     </ToggleButton>
+    // </ToggleButtonGroup>;
     const flashbackFab = <ToggleButtonGroup
         orientation="horizontal"
         color="primary"
@@ -116,13 +143,22 @@ export default function Overlay(props: PropsWithChildren<OverlayProps>) {
         style={{
             // marginBottom: "14px"
         }}
-        value={"" + viewFlashback}
+        value={activeBaseboard}
     >
-        <ToggleButton value="true" onClick={() => setViewFlashback(true)}>
-            <ViewIcon />
+        <ToggleButton value={Baseboard.FLASHBACK} onClick={() => setActiveBaseboard(Baseboard.FLASHBACK)}>
+            <Tooltip title="Initial Map">
+                <ViewIcon />
+            </Tooltip>
         </ToggleButton>
-        <ToggleButton value="false" onClick={() => setViewFlashback(false)}>
-            <ViewOffIcon />
+        <ToggleButton value={Baseboard.COLORING} onClick={() => setActiveBaseboard(Baseboard.COLORING)}>
+            <Tooltip title="Color-Coded Map">
+                <ColoringBaseboardIcon />
+            </Tooltip>
+        </ToggleButton>
+        <ToggleButton value={Baseboard.INTERACTIVE} onClick={() => setActiveBaseboard(Baseboard.INTERACTIVE)}>
+            <Tooltip title="Interactive">
+                <ViewOffIcon />
+            </Tooltip>
         </ToggleButton>
     </ToggleButtonGroup>;
 
