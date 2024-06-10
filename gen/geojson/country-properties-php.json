@@ -1,0 +1,2055 @@
+
+[
+  {
+    "name_long": "Afghanistan",
+    "adm0_a3": "AFG",
+    "iso_a2": "AF",
+    "wikidataid": "Q889",
+    "pop_est": "38041754",
+    "gdp_md": "19291.00",
+    "price": "22.4628258750000"
+  },
+  {
+    "name_long": "Alabama",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q173",
+    "pop_est": "4849377",
+    "gdp_md": "197534.50",
+    "price": "22.0778696940000"
+  },
+  {
+    "name_long": "Alaska",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q797",
+    "pop_est": "736732",
+    "gdp_md": "58066.75",
+    "price": "71.8873762650000"
+  },
+  {
+    "name_long": "Albania",
+    "adm0_a3": "ALB",
+    "iso_a2": "AL",
+    "wikidataid": "Q222",
+    "pop_est": "2854191",
+    "gdp_md": "15279.00",
+    "price": "5.9437511220000"
+  },
+  {
+    "name_long": "Algeria",
+    "adm0_a3": "DZA",
+    "iso_a2": "DZ",
+    "wikidataid": "Q262",
+    "pop_est": "43053054",
+    "gdp_md": "171091.00",
+    "price": "68.1189044340000"
+  },
+  {
+    "name_long": "Angola",
+    "adm0_a3": "AGO",
+    "iso_a2": "AO",
+    "wikidataid": "Q916",
+    "pop_est": "31825295",
+    "gdp_md": "88815.00",
+    "price": "38.7608176620000"
+  },
+  {
+    "name_long": "Antarctica",
+    "adm0_a3": "ATA",
+    "iso_a2": "AQ",
+    "wikidataid": "Q51",
+    "pop_est": "4490",
+    "gdp_md": "898.00",
+    "price": "401.1872163960000"
+  },
+  {
+    "name_long": "Argentina",
+    "adm0_a3": "ARG",
+    "iso_a2": "AR",
+    "wikidataid": "Q414",
+    "pop_est": "44938712",
+    "gdp_md": "445445.00",
+    "price": "82.6645795170000"
+  },
+  {
+    "name_long": "Arizona",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q816",
+    "pop_est": "2966369",
+    "gdp_md": "281558.75",
+    "price": "46.5492334950000"
+  },
+  {
+    "name_long": "Arkansas",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1612",
+    "pop_est": "6731484",
+    "gdp_md": "121064.75",
+    "price": "13.7373893910000"
+  },
+  {
+    "name_long": "Armenia",
+    "adm0_a3": "ARM",
+    "iso_a2": "AM",
+    "wikidataid": "Q399",
+    "pop_est": "2957731",
+    "gdp_md": "13672.00",
+    "price": "5.6477525220000"
+  },
+  {
+    "name_long": "Australia",
+    "adm0_a3": "AUS",
+    "iso_a2": "AU",
+    "wikidataid": "Q408",
+    "pop_est": "25364307",
+    "gdp_md": "1396567.00",
+    "price": "228.4079627850000"
+  },
+  {
+    "name_long": "Austria",
+    "adm0_a3": "AUT",
+    "iso_a2": "AT",
+    "wikidataid": "Q40",
+    "pop_est": "8877067",
+    "gdp_md": "445075.00",
+    "price": "24.5185069470000"
+  },
+  {
+    "name_long": "Azerbaijan",
+    "adm0_a3": "AZE",
+    "iso_a2": "AZ",
+    "wikidataid": "Q227",
+    "pop_est": "10023318",
+    "gdp_md": "48047.00",
+    "price": "7.7393963520000"
+  },
+  {
+    "name_long": "Bahamas",
+    "adm0_a3": "BHS",
+    "iso_a2": "BS",
+    "wikidataid": "Q778",
+    "pop_est": "389482",
+    "gdp_md": "13578.00",
+    "price": "16.5063995340000"
+  },
+  {
+    "name_long": "Bangladesh",
+    "adm0_a3": "BGD",
+    "iso_a2": "BD",
+    "wikidataid": "Q902",
+    "pop_est": "163046161",
+    "gdp_md": "302571.00",
+    "price": "15.9852296070000"
+  },
+  {
+    "name_long": "Belarus",
+    "adm0_a3": "BLR",
+    "iso_a2": "BY",
+    "wikidataid": "Q184",
+    "pop_est": "9466856",
+    "gdp_md": "63080.00",
+    "price": "11.5012017720000"
+  },
+  {
+    "name_long": "Belgium",
+    "adm0_a3": "BEL",
+    "iso_a2": "BE",
+    "wikidataid": "Q31",
+    "pop_est": "11484055",
+    "gdp_md": "533097.00",
+    "price": "21.8169412080000"
+  },
+  {
+    "name_long": "Belize",
+    "adm0_a3": "BLZ",
+    "iso_a2": "BZ",
+    "wikidataid": "Q242",
+    "pop_est": "390353",
+    "gdp_md": "1879.00",
+    "price": "5.4101025840000"
+  },
+  {
+    "name_long": "Benin",
+    "adm0_a3": "BEN",
+    "iso_a2": "BJ",
+    "wikidataid": "Q962",
+    "pop_est": "11801151",
+    "gdp_md": "14390.00",
+    "price": "7.1928769950000"
+  },
+  {
+    "name_long": "Bhutan",
+    "adm0_a3": "BTN",
+    "iso_a2": "BT",
+    "wikidataid": "Q917",
+    "pop_est": "763092",
+    "gdp_md": "2530.00",
+    "price": "5.3257811640000"
+  },
+  {
+    "name_long": "Bolivia",
+    "adm0_a3": "BOL",
+    "iso_a2": "BO",
+    "wikidataid": "Q750",
+    "pop_est": "11513100",
+    "gdp_md": "40895.00",
+    "price": "33.7037298810000"
+  },
+  {
+    "name_long": "Bosnia and Herzegovina",
+    "adm0_a3": "BIH",
+    "iso_a2": "BA",
+    "wikidataid": "Q225",
+    "pop_est": "3301000",
+    "gdp_md": "20164.00",
+    "price": "6.8017867020000"
+  },
+  {
+    "name_long": "Botswana",
+    "adm0_a3": "BWA",
+    "iso_a2": "BW",
+    "wikidataid": "Q963",
+    "pop_est": "2303697",
+    "gdp_md": "18340.00",
+    "price": "21.7809258330000"
+  },
+  {
+    "name_long": "Brazil",
+    "adm0_a3": "BRA",
+    "iso_a2": "BR",
+    "wikidataid": "Q155",
+    "pop_est": "211049527",
+    "gdp_md": "1839758.00",
+    "price": "243.1356629100000"
+  },
+  {
+    "name_long": "Brunei Darussalam",
+    "adm0_a3": "BRN",
+    "iso_a2": "BN",
+    "wikidataid": "Q921",
+    "pop_est": "433285",
+    "gdp_md": "13469.00",
+    "price": "14.9641972950000"
+  },
+  {
+    "name_long": "Bulgaria",
+    "adm0_a3": "BGR",
+    "iso_a2": "BG",
+    "wikidataid": "Q219",
+    "pop_est": "6975761",
+    "gdp_md": "68558.00",
+    "price": "9.9654742170000"
+  },
+  {
+    "name_long": "Burkina Faso",
+    "adm0_a3": "BFA",
+    "iso_a2": "BF",
+    "wikidataid": "Q965",
+    "pop_est": "20321378",
+    "gdp_md": "15990.00",
+    "price": "11.5853816940000"
+  },
+  {
+    "name_long": "Burundi",
+    "adm0_a3": "BDI",
+    "iso_a2": "BI",
+    "wikidataid": "Q967",
+    "pop_est": "11530580",
+    "gdp_md": "3012.00",
+    "price": "4.4126681880000"
+  },
+  {
+    "name_long": "California",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q99",
+    "pop_est": "38802500",
+    "gdp_md": "2324995.50",
+    "price": "38.3625522390000"
+  },
+  {
+    "name_long": "Cambodia",
+    "adm0_a3": "KHM",
+    "iso_a2": "KH",
+    "wikidataid": "Q424",
+    "pop_est": "16486542",
+    "gdp_md": "27089.00",
+    "price": "9.3322592850000"
+  },
+  {
+    "name_long": "Cameroon",
+    "adm0_a3": "CMR",
+    "iso_a2": "CM",
+    "wikidataid": "Q1009",
+    "pop_est": "25876380",
+    "gdp_md": "39007.00",
+    "price": "17.1624267360000"
+  },
+  {
+    "name_long": "Canada",
+    "adm0_a3": "CAN",
+    "iso_a2": "CA",
+    "wikidataid": "Q16",
+    "pop_est": "37589262",
+    "gdp_md": "1736425.00",
+    "price": "286.0559665050000"
+  },
+  {
+    "name_long": "Central African Republic",
+    "adm0_a3": "CAF",
+    "iso_a2": "CF",
+    "wikidataid": "Q929",
+    "pop_est": "4745185",
+    "gdp_md": "2220.00",
+    "price": "19.9223435010000"
+  },
+  {
+    "name_long": "Chad",
+    "adm0_a3": "TCD",
+    "iso_a2": "TD",
+    "wikidataid": "Q657",
+    "pop_est": "15946876",
+    "gdp_md": "11314.00",
+    "price": "37.7875204470000"
+  },
+  {
+    "name_long": "Chile",
+    "adm0_a3": "CHL",
+    "iso_a2": "CL",
+    "wikidataid": "Q298",
+    "pop_est": "18952038",
+    "gdp_md": "282318.00",
+    "price": "31.1171895090000"
+  },
+  {
+    "name_long": "China",
+    "adm0_a3": "CHN",
+    "iso_a2": "CN",
+    "wikidataid": "Q148",
+    "pop_est": "1397715000",
+    "gdp_md": "14342903.00",
+    "price": "330.2917992960000"
+  },
+  {
+    "name_long": "Colombia",
+    "adm0_a3": "COL",
+    "iso_a2": "CO",
+    "wikidataid": "Q739",
+    "pop_est": "50339443",
+    "gdp_md": "323615.00",
+    "price": "38.6638455810000"
+  },
+  {
+    "name_long": "Colorado",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1261",
+    "pop_est": "5355866",
+    "gdp_md": "305366.75",
+    "price": "31.7985613980000"
+  },
+  {
+    "name_long": "Connecticut",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q779",
+    "pop_est": "3596677",
+    "gdp_md": "250763.75",
+    "price": "29.6720396070000"
+  },
+  {
+    "name_long": "Costa Rica",
+    "adm0_a3": "CRI",
+    "iso_a2": "CR",
+    "wikidataid": "Q800",
+    "pop_est": "5047561",
+    "gdp_md": "61801.00",
+    "price": "9.2895928770000"
+  },
+  {
+    "name_long": "Côte d'Ivoire",
+    "adm0_a3": "CIV",
+    "iso_a2": "CI",
+    "wikidataid": "Q1008",
+    "pop_est": "25716544",
+    "gdp_md": "58539.00",
+    "price": "13.9807426350000"
+  },
+  {
+    "name_long": "Croatia",
+    "adm0_a3": "HRV",
+    "iso_a2": "HR",
+    "wikidataid": "Q224",
+    "pop_est": "4067500",
+    "gdp_md": "60752.00",
+    "price": "10.3356733770000"
+  },
+  {
+    "name_long": "Cuba",
+    "adm0_a3": "CUB",
+    "iso_a2": "CU",
+    "wikidataid": "Q241",
+    "pop_est": "11333483",
+    "gdp_md": "100023.00",
+    "price": "9.9592970160000"
+  },
+  {
+    "name_long": "Cyprus",
+    "adm0_a3": "CYP",
+    "iso_a2": "CY",
+    "wikidataid": "Q229",
+    "pop_est": "1198575",
+    "gdp_md": "24948.00",
+    "price": "11.0341213200000"
+  },
+  {
+    "name_long": "Czech Republic",
+    "adm0_a3": "CZE",
+    "iso_a2": "CZ",
+    "wikidataid": "Q213",
+    "pop_est": "10669709",
+    "gdp_md": "250680.00",
+    "price": "14.5204420020000"
+  },
+  {
+    "name_long": "Delaware",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1393",
+    "pop_est": "935614",
+    "gdp_md": "65484.75",
+    "price": "29.4366092640000"
+  },
+  {
+    "name_long": "Dem. Rep. Korea",
+    "adm0_a3": "PRK",
+    "iso_a2": "KP",
+    "wikidataid": "Q423",
+    "pop_est": "25666161",
+    "gdp_md": "40000.00",
+    "price": "8.2746065520000"
+  },
+  {
+    "name_long": "Democratic Republic of the Congo",
+    "adm0_a3": "COD",
+    "iso_a2": "CD",
+    "wikidataid": "Q974",
+    "pop_est": "86790567",
+    "gdp_md": "50400.00",
+    "price": "69.5012134950000"
+  },
+  {
+    "name_long": "Denmark",
+    "adm0_a3": "DNK",
+    "iso_a2": "DK",
+    "wikidataid": "Q35",
+    "pop_est": "5818553",
+    "gdp_md": "350104.00",
+    "price": "27.0007976010000"
+  },
+  {
+    "name_long": "District of Columbia",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q61",
+    "pop_est": "658893",
+    "gdp_md": "116539.25",
+    "price": "69.3658540380000"
+  },
+  {
+    "name_long": "Djibouti",
+    "adm0_a3": "DJI",
+    "iso_a2": "DJ",
+    "wikidataid": "Q977",
+    "pop_est": "973560",
+    "gdp_md": "3324.00",
+    "price": "4.9126738620000"
+  },
+  {
+    "name_long": "Dominican Republic",
+    "adm0_a3": "DOM",
+    "iso_a2": "DO",
+    "wikidataid": "Q786",
+    "pop_est": "10738958",
+    "gdp_md": "88941.00",
+    "price": "7.9577029020000"
+  },
+  {
+    "name_long": "Ecuador",
+    "adm0_a3": "ECU",
+    "iso_a2": "EC",
+    "wikidataid": "Q736",
+    "pop_est": "17373662",
+    "gdp_md": "107435.00",
+    "price": "12.9023593890000"
+  },
+  {
+    "name_long": "Egypt",
+    "adm0_a3": "EGY",
+    "iso_a2": "EG",
+    "wikidataid": "Q79",
+    "pop_est": "100388073",
+    "gdp_md": "303092.00",
+    "price": "35.9011256040000"
+  },
+  {
+    "name_long": "El Salvador",
+    "adm0_a3": "SLV",
+    "iso_a2": "SV",
+    "wikidataid": "Q792",
+    "pop_est": "6453553",
+    "gdp_md": "27022.00",
+    "price": "5.4703094730000"
+  },
+  {
+    "name_long": "Equatorial Guinea",
+    "adm0_a3": "GNQ",
+    "iso_a2": "GQ",
+    "wikidataid": "Q983",
+    "pop_est": "1355986",
+    "gdp_md": "11026.00",
+    "price": "6.8413552320000"
+  },
+  {
+    "name_long": "Eritrea",
+    "adm0_a3": "ERI",
+    "iso_a2": "ER",
+    "wikidataid": "Q986",
+    "pop_est": "6081196",
+    "gdp_md": "2065.00",
+    "price": "6.6144674850000"
+  },
+  {
+    "name_long": "Estonia",
+    "adm0_a3": "EST",
+    "iso_a2": "EE",
+    "wikidataid": "Q191",
+    "pop_est": "1326590",
+    "gdp_md": "31471.00",
+    "price": "13.1407581030000"
+  },
+  {
+    "name_long": "Ethiopia",
+    "adm0_a3": "ETH",
+    "iso_a2": "ET",
+    "wikidataid": "Q115",
+    "pop_est": "112078730",
+    "gdp_md": "95912.00",
+    "price": "39.3653174280000"
+  },
+  {
+    "name_long": "Falkland Islands / Malvinas",
+    "adm0_a3": "FLK",
+    "iso_a2": "FK",
+    "wikidataid": "Q9648",
+    "pop_est": "3398",
+    "gdp_md": "282.00",
+    "price": "34.5521892240000"
+  },
+  {
+    "name_long": "Fiji",
+    "adm0_a3": "FJI",
+    "iso_a2": "FJ",
+    "wikidataid": "Q712",
+    "pop_est": "889953",
+    "gdp_md": "5496.00",
+    "price": "5.8746522630000"
+  },
+  {
+    "name_long": "Finland",
+    "adm0_a3": "FIN",
+    "iso_a2": "FI",
+    "wikidataid": "Q33",
+    "pop_est": "5520314",
+    "gdp_md": "269296.00",
+    "price": "30.5444927070000"
+  },
+  {
+    "name_long": "Florida",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q812",
+    "pop_est": "19893297",
+    "gdp_md": "835578.50",
+    "price": "23.7118365510000"
+  },
+  {
+    "name_long": "France",
+    "adm0_a3": "FRA",
+    "iso_a2": "FR",
+    "wikidataid": "Q142",
+    "pop_est": "67059887",
+    "gdp_md": "2715518.00",
+    "price": "38.7855977550000"
+  },
+  {
+    "name_long": "French Southern and Antarctic Lands",
+    "adm0_a3": "ATF",
+    "iso_a2": "TF",
+    "wikidataid": "Q129003",
+    "pop_est": "140",
+    "gdp_md": "16.00",
+    "price": "46.1622228330000"
+  },
+  {
+    "name_long": "Gabon",
+    "adm0_a3": "GAB",
+    "iso_a2": "GA",
+    "wikidataid": "Q1000",
+    "pop_est": "2172579",
+    "gdp_md": "16874.00",
+    "price": "13.1771608680000"
+  },
+  {
+    "name_long": "Georgia",
+    "adm0_a3": "GEO",
+    "iso_a2": "GE",
+    "wikidataid": "Q230",
+    "pop_est": "3720382",
+    "gdp_md": "17477.00",
+    "price": "6.7814067750000"
+  },
+  {
+    "name_long": "Georgia",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1428",
+    "pop_est": "10097343",
+    "gdp_md": "471879.50",
+    "price": "25.0946242140000"
+  },
+  {
+    "name_long": "Germany",
+    "adm0_a3": "DEU",
+    "iso_a2": "DE",
+    "wikidataid": "Q183",
+    "pop_est": "83132799",
+    "gdp_md": "3861123.00",
+    "price": "34.2818789040000"
+  },
+  {
+    "name_long": "Ghana",
+    "adm0_a3": "GHA",
+    "iso_a2": "GH",
+    "wikidataid": "Q117",
+    "pop_est": "30417856",
+    "gdp_md": "66983.00",
+    "price": "11.9147317020000"
+  },
+  {
+    "name_long": "Greece",
+    "adm0_a3": "GRC",
+    "iso_a2": "GR",
+    "wikidataid": "Q41",
+    "pop_est": "10716322",
+    "gdp_md": "209852.00",
+    "price": "14.4012579330000"
+  },
+  {
+    "name_long": "Greenland",
+    "adm0_a3": "GRL",
+    "iso_a2": "GL",
+    "wikidataid": "Q223",
+    "pop_est": "56225",
+    "gdp_md": "3051.00",
+    "price": "81.1914027720000"
+  },
+  {
+    "name_long": "Guatemala",
+    "adm0_a3": "GTM",
+    "iso_a2": "GT",
+    "wikidataid": "Q774",
+    "pop_est": "16604026",
+    "gdp_md": "76710.00",
+    "price": "8.5238480850000"
+  },
+  {
+    "name_long": "Guinea",
+    "adm0_a3": "GIN",
+    "iso_a2": "GN",
+    "wikidataid": "Q1006",
+    "pop_est": "12771246",
+    "gdp_md": "12296.00",
+    "price": "10.3984322910000"
+  },
+  {
+    "name_long": "Guinea-Bissau",
+    "adm0_a3": "GNB",
+    "iso_a2": "GW",
+    "wikidataid": "Q1007",
+    "pop_est": "1920922",
+    "gdp_md": "1339.00",
+    "price": "4.3234315590000"
+  },
+  {
+    "name_long": "Guyana",
+    "adm0_a3": "GUY",
+    "iso_a2": "GY",
+    "wikidataid": "Q734",
+    "pop_est": "782766",
+    "gdp_md": "5173.00",
+    "price": "11.0848773960000"
+  },
+  {
+    "name_long": "Haiti",
+    "adm0_a3": "HTI",
+    "iso_a2": "HT",
+    "wikidataid": "Q790",
+    "pop_est": "11263077",
+    "gdp_md": "14332.00",
+    "price": "4.8374809230000"
+  },
+  {
+    "name_long": "Hawaii",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q782",
+    "pop_est": "1419561",
+    "gdp_md": "76424.75",
+    "price": "23.6952644340000"
+  },
+  {
+    "name_long": "Honduras",
+    "adm0_a3": "HND",
+    "iso_a2": "HN",
+    "wikidataid": "Q783",
+    "pop_est": "9746117",
+    "gdp_md": "25095.00",
+    "price": "7.5043076970000"
+  },
+  {
+    "name_long": "Hungary",
+    "adm0_a3": "HUN",
+    "iso_a2": "HU",
+    "wikidataid": "Q28",
+    "pop_est": "9769949",
+    "gdp_md": "163469.00",
+    "price": "12.2346232680000"
+  },
+  {
+    "name_long": "Iceland",
+    "adm0_a3": "ISL",
+    "iso_a2": "IS",
+    "wikidataid": "Q189",
+    "pop_est": "361313",
+    "gdp_md": "24188.00",
+    "price": "30.9541090470000"
+  },
+  {
+    "name_long": "Idaho",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1221",
+    "pop_est": "1634464",
+    "gdp_md": "63364.00",
+    "price": "23.3177774010000"
+  },
+  {
+    "name_long": "Illinois",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1204",
+    "pop_est": "12880580",
+    "gdp_md": "742027.75",
+    "price": "29.2546966530000"
+  },
+  {
+    "name_long": "India",
+    "adm0_a3": "IND",
+    "iso_a2": "IN",
+    "wikidataid": "Q668",
+    "pop_est": "1366417754",
+    "gdp_md": "2868929.00",
+    "price": "160.3024665990000"
+  },
+  {
+    "name_long": "Indiana",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1415",
+    "pop_est": "6596855",
+    "gdp_md": "324289.00",
+    "price": "24.2797141140000"
+  },
+  {
+    "name_long": "Indonesia",
+    "adm0_a3": "IDN",
+    "iso_a2": "ID",
+    "wikidataid": "Q252",
+    "pop_est": "270625568",
+    "gdp_md": "1119190.00",
+    "price": "67.3263312870000"
+  },
+  {
+    "name_long": "Iowa",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1546",
+    "pop_est": "3107126",
+    "gdp_md": "170715.00",
+    "price": "27.5817810930000"
+  },
+  {
+    "name_long": "Iran",
+    "adm0_a3": "IRN",
+    "iso_a2": "IR",
+    "wikidataid": "Q794",
+    "pop_est": "82913906",
+    "gdp_md": "453996.00",
+    "price": "52.2500558910000"
+  },
+  {
+    "name_long": "Iraq",
+    "adm0_a3": "IRQ",
+    "iso_a2": "IQ",
+    "wikidataid": "Q796",
+    "pop_est": "39309783",
+    "gdp_md": "234094.00",
+    "price": "18.8965553310000"
+  },
+  {
+    "name_long": "Ireland",
+    "adm0_a3": "IRL",
+    "iso_a2": "IE",
+    "wikidataid": "Q27",
+    "pop_est": "4941444",
+    "gdp_md": "388698.00",
+    "price": "34.3008645510000"
+  },
+  {
+    "name_long": "Israel",
+    "adm0_a3": "ISR",
+    "iso_a2": "IL",
+    "wikidataid": "Q801",
+    "pop_est": "9053300",
+    "gdp_md": "394652.00",
+    "price": "20.4421952400000"
+  },
+  {
+    "name_long": "Italy",
+    "adm0_a3": "ITA",
+    "iso_a2": "IT",
+    "wikidataid": "Q38",
+    "pop_est": "60297396",
+    "gdp_md": "2003576.00",
+    "price": "27.0038574210000"
+  },
+  {
+    "name_long": "Jamaica",
+    "adm0_a3": "JAM",
+    "iso_a2": "JM",
+    "wikidataid": "Q766",
+    "pop_est": "2948279",
+    "gdp_md": "16458.00",
+    "price": "5.5816986540000"
+  },
+  {
+    "name_long": "Japan",
+    "adm0_a3": "JPN",
+    "iso_a2": "JP",
+    "wikidataid": "Q17",
+    "pop_est": "126264931",
+    "gdp_md": "5081769.00",
+    "price": "35.5463585910000"
+  },
+  {
+    "name_long": "Jordan",
+    "adm0_a3": "JOR",
+    "iso_a2": "JO",
+    "wikidataid": "Q810",
+    "pop_est": "10101694",
+    "gdp_md": "44502.00",
+    "price": "7.5484137450000"
+  },
+  {
+    "name_long": "Kansas",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1558",
+    "pop_est": "2904021",
+    "gdp_md": "146562.00",
+    "price": "27.6751963200000"
+  },
+  {
+    "name_long": "Kazakhstan",
+    "adm0_a3": "KAZ",
+    "iso_a2": "KZ",
+    "wikidataid": "Q232",
+    "pop_est": "18513930",
+    "gdp_md": "181665.00",
+    "price": "79.5230271270000"
+  },
+  {
+    "name_long": "Kentucky",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1603",
+    "pop_est": "4413457",
+    "gdp_md": "188518.00",
+    "price": "22.0025509470000"
+  },
+  {
+    "name_long": "Kenya",
+    "adm0_a3": "KEN",
+    "iso_a2": "KE",
+    "wikidataid": "Q114",
+    "pop_est": "52573973",
+    "gdp_md": "95503.00",
+    "price": "22.1729525940000"
+  },
+  {
+    "name_long": "Kingdom of eSwatini",
+    "adm0_a3": "SWZ",
+    "iso_a2": "SZ",
+    "wikidataid": "Q1050",
+    "pop_est": "1148130",
+    "gdp_md": "4471.00",
+    "price": "5.0011588350000"
+  },
+  {
+    "name_long": "Kosovo",
+    "adm0_a3": "KOS",
+    "iso_a2": "XK",
+    "wikidataid": "Q1246",
+    "pop_est": "1794248",
+    "gdp_md": "7926.00",
+    "price": "5.0489346840000"
+  },
+  {
+    "name_long": "Kuwait",
+    "adm0_a3": "KWT",
+    "iso_a2": "KW",
+    "wikidataid": "Q817",
+    "pop_est": "4207083",
+    "gdp_md": "134628.00",
+    "price": "15.6656644920000"
+  },
+  {
+    "name_long": "Kyrgyzstan",
+    "adm0_a3": "KGZ",
+    "iso_a2": "KG",
+    "wikidataid": "Q813",
+    "pop_est": "6456900",
+    "gdp_md": "8454.00",
+    "price": "9.0028819200000"
+  },
+  {
+    "name_long": "Lao PDR",
+    "adm0_a3": "LAO",
+    "iso_a2": "LA",
+    "wikidataid": "Q819",
+    "pop_est": "7169455",
+    "gdp_md": "18173.00",
+    "price": "10.4026385130000"
+  },
+  {
+    "name_long": "Latvia",
+    "adm0_a3": "LVA",
+    "iso_a2": "LV",
+    "wikidataid": "Q211",
+    "pop_est": "1912789",
+    "gdp_md": "34102.00",
+    "price": "11.4680666130000"
+  },
+  {
+    "name_long": "Lebanon",
+    "adm0_a3": "LBN",
+    "iso_a2": "LB",
+    "wikidataid": "Q822",
+    "pop_est": "6855713",
+    "gdp_md": "51991.00",
+    "price": "6.4782188520000"
+  },
+  {
+    "name_long": "Lesotho",
+    "adm0_a3": "LSO",
+    "iso_a2": "LS",
+    "wikidataid": "Q1013",
+    "pop_est": "2125268",
+    "gdp_md": "2376.00",
+    "price": "4.2603651390000"
+  },
+  {
+    "name_long": "Liberia",
+    "adm0_a3": "LBR",
+    "iso_a2": "LR",
+    "wikidataid": "Q1014",
+    "pop_est": "4937374",
+    "gdp_md": "3070.00",
+    "price": "6.1029506400000"
+  },
+  {
+    "name_long": "Libya",
+    "adm0_a3": "LBY",
+    "iso_a2": "LY",
+    "wikidataid": "Q1016",
+    "pop_est": "6777452",
+    "gdp_md": "52091.00",
+    "price": "49.4963011830000"
+  },
+  {
+    "name_long": "Lithuania",
+    "adm0_a3": "LTU",
+    "iso_a2": "LT",
+    "wikidataid": "Q37",
+    "pop_est": "2786844",
+    "gdp_md": "54627.00",
+    "price": "12.1778572080000"
+  },
+  {
+    "name_long": "Louisiana",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1588",
+    "pop_est": "4649676",
+    "gdp_md": "245790.75",
+    "price": "26.2339518060000"
+  },
+  {
+    "name_long": "Luxembourg",
+    "adm0_a3": "LUX",
+    "iso_a2": "LU",
+    "wikidataid": "Q32",
+    "pop_est": "619896",
+    "gdp_md": "71104.00",
+    "price": "46.1105104080000"
+  },
+  {
+    "name_long": "Madagascar",
+    "adm0_a3": "MDG",
+    "iso_a2": "MG",
+    "wikidataid": "Q1019",
+    "pop_est": "26969307",
+    "gdp_md": "14114.00",
+    "price": "20.2519462350000"
+  },
+  {
+    "name_long": "Maine",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q724",
+    "pop_est": "1330089",
+    "gdp_md": "55029.00",
+    "price": "20.7842768790000"
+  },
+  {
+    "name_long": "Malawi",
+    "adm0_a3": "MWI",
+    "iso_a2": "MW",
+    "wikidataid": "Q1020",
+    "pop_est": "18628747",
+    "gdp_md": "7666.00",
+    "price": "7.1017531950000"
+  },
+  {
+    "name_long": "Malaysia",
+    "adm0_a3": "MYS",
+    "iso_a2": "MY",
+    "wikidataid": "Q833",
+    "pop_est": "31949777",
+    "gdp_md": "364681.00",
+    "price": "17.9660966940000"
+  },
+  {
+    "name_long": "Mali",
+    "adm0_a3": "MLI",
+    "iso_a2": "ML",
+    "wikidataid": "Q912",
+    "pop_est": "19658031",
+    "gdp_md": "17279.00",
+    "price": "37.0923145140000"
+  },
+  {
+    "name_long": "Maryland",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1391",
+    "pop_est": "5976407",
+    "gdp_md": "350262.50",
+    "price": "25.9615168440000"
+  },
+  {
+    "name_long": "Massachusetts",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q771",
+    "pop_est": "6745408",
+    "gdp_md": "456273.00",
+    "price": "29.2876844430000"
+  },
+  {
+    "name_long": "Mauritania",
+    "adm0_a3": "MRT",
+    "iso_a2": "MR",
+    "wikidataid": "Q1025",
+    "pop_est": "4525696",
+    "gdp_md": "7600.00",
+    "price": "31.7517421140000"
+  },
+  {
+    "name_long": "Mexico",
+    "adm0_a3": "MEX",
+    "iso_a2": "MX",
+    "wikidataid": "Q96",
+    "pop_est": "127575529",
+    "gdp_md": "1268870.00",
+    "price": "65.6998435230000"
+  },
+  {
+    "name_long": "Michigan",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1166",
+    "pop_est": "9909877",
+    "gdp_md": "447221.25",
+    "price": "27.0409615770000"
+  },
+  {
+    "name_long": "Minnesota",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1527",
+    "pop_est": "5457173",
+    "gdp_md": "320381.25",
+    "price": "31.2288185610000"
+  },
+  {
+    "name_long": "Mississippi",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1494",
+    "pop_est": "2994079",
+    "gdp_md": "104937.50",
+    "price": "19.5749551500000"
+  },
+  {
+    "name_long": "Missouri",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1581",
+    "pop_est": "6063589",
+    "gdp_md": "283280.25",
+    "price": "25.6350504060000"
+  },
+  {
+    "name_long": "Moldova",
+    "adm0_a3": "MDA",
+    "iso_a2": "MD",
+    "wikidataid": "Q217",
+    "pop_est": "2657637",
+    "gdp_md": "11968.00",
+    "price": "5.6826718320000"
+  },
+  {
+    "name_long": "Mongolia",
+    "adm0_a3": "MNG",
+    "iso_a2": "MN",
+    "wikidataid": "Q711",
+    "pop_est": "3225167",
+    "gdp_md": "13996.00",
+    "price": "45.4768597380000"
+  },
+  {
+    "name_long": "Montana",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1212",
+    "pop_est": "1023579",
+    "gdp_md": "44672.25",
+    "price": "29.4397553820000"
+  },
+  {
+    "name_long": "Montenegro",
+    "adm0_a3": "MNE",
+    "iso_a2": "ME",
+    "wikidataid": "Q236",
+    "pop_est": "622137",
+    "gdp_md": "5542.00",
+    "price": "6.7283628300000"
+  },
+  {
+    "name_long": "Morocco",
+    "adm0_a3": "MAR",
+    "iso_a2": "MA",
+    "wikidataid": "Q1028",
+    "pop_est": "36471769",
+    "gdp_md": "119700.00",
+    "price": "21.8343827280000"
+  },
+  {
+    "name_long": "Mozambique",
+    "adm0_a3": "MOZ",
+    "iso_a2": "MZ",
+    "wikidataid": "Q1029",
+    "pop_est": "30366036",
+    "gdp_md": "15291.00",
+    "price": "26.3077626480000"
+  },
+  {
+    "name_long": "Myanmar",
+    "adm0_a3": "MMR",
+    "iso_a2": "MM",
+    "wikidataid": "Q836",
+    "pop_est": "54045420",
+    "gdp_md": "76085.00",
+    "price": "24.4241182800000"
+  },
+  {
+    "name_long": "Namibia",
+    "adm0_a3": "NAM",
+    "iso_a2": "NA",
+    "wikidataid": "Q1030",
+    "pop_est": "2494530",
+    "gdp_md": "12366.00",
+    "price": "26.8405850130000"
+  },
+  {
+    "name_long": "Nebraska",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1553",
+    "pop_est": "1881503",
+    "gdp_md": "110663.25",
+    "price": "30.4406618400000"
+  },
+  {
+    "name_long": "Nepal",
+    "adm0_a3": "NPL",
+    "iso_a2": "NP",
+    "wikidataid": "Q837",
+    "pop_est": "28608710",
+    "gdp_md": "30641.00",
+    "price": "8.9228597610000"
+  },
+  {
+    "name_long": "Netherlands",
+    "adm0_a3": "NLD",
+    "iso_a2": "NL",
+    "wikidataid": "Q55",
+    "pop_est": "17332850",
+    "gdp_md": "907050.00",
+    "price": "24.6046528980000"
+  },
+  {
+    "name_long": "Nevada",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1227",
+    "pop_est": "2839099",
+    "gdp_md": "134052.25",
+    "price": "28.4316989820000"
+  },
+  {
+    "name_long": "New Caledonia",
+    "adm0_a3": "NCL",
+    "iso_a2": "NC",
+    "wikidataid": "Q33788",
+    "pop_est": "287800",
+    "gdp_md": "10770.00",
+    "price": "17.6633823900000"
+  },
+  {
+    "name_long": "New Hampshire",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q759",
+    "pop_est": "1326813",
+    "gdp_md": "70345.25",
+    "price": "23.5908364530000"
+  },
+  {
+    "name_long": "New Jersey",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1408",
+    "pop_est": "8938175",
+    "gdp_md": "545374.25",
+    "price": "26.8781693910000"
+  },
+  {
+    "name_long": "New Mexico",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1522",
+    "pop_est": "2085572",
+    "gdp_md": "94791.50",
+    "price": "28.4798827740000"
+  },
+  {
+    "name_long": "New York",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1384",
+    "pop_est": "19746227",
+    "gdp_md": "1385776.25",
+    "price": "33.9889265970000"
+  },
+  {
+    "name_long": "New Zealand",
+    "adm0_a3": "NZL",
+    "iso_a2": "NZ",
+    "wikidataid": "Q664",
+    "pop_est": "4917000",
+    "gdp_md": "206928.00",
+    "price": "26.3677990590000"
+  },
+  {
+    "name_long": "Nicaragua",
+    "adm0_a3": "NIC",
+    "iso_a2": "NI",
+    "wikidataid": "Q811",
+    "pop_est": "6545502",
+    "gdp_md": "12520.00",
+    "price": "7.5026508330000"
+  },
+  {
+    "name_long": "Niger",
+    "adm0_a3": "NER",
+    "iso_a2": "NE",
+    "wikidataid": "Q1032",
+    "pop_est": "23310715",
+    "gdp_md": "12911.00",
+    "price": "35.7612897090000"
+  },
+  {
+    "name_long": "Nigeria",
+    "adm0_a3": "NGA",
+    "iso_a2": "NG",
+    "wikidataid": "Q1033",
+    "pop_est": "200963599",
+    "gdp_md": "448120.00",
+    "price": "38.6185240140000"
+  },
+  {
+    "name_long": "North Carolina",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1454",
+    "pop_est": "9943964",
+    "gdp_md": "474355.25",
+    "price": "24.8176564590000"
+  },
+  {
+    "name_long": "North Dakota",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1207",
+    "pop_est": "739482",
+    "gdp_md": "58230.00",
+    "price": "37.3636170930000"
+  },
+  {
+    "name_long": "North Macedonia",
+    "adm0_a3": "MKD",
+    "iso_a2": "MK",
+    "wikidataid": "Q221",
+    "pop_est": "2083459",
+    "gdp_md": "12547.00",
+    "price": "6.0310146390000"
+  },
+  {
+    "name_long": "Northern Cyprus",
+    "adm0_a3": "CYN",
+    "iso_a2": "CY",
+    "wikidataid": "Q23681",
+    "pop_est": "326000",
+    "gdp_md": "3600.00",
+    "price": "7.2584869710000"
+  },
+  {
+    "name_long": "Norway",
+    "adm0_a3": "NOR",
+    "iso_a2": "NO",
+    "wikidataid": "Q20",
+    "pop_est": "5347896",
+    "gdp_md": "403336.00",
+    "price": "41.9897640000000"
+  },
+  {
+    "name_long": "Ohio",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1397",
+    "pop_est": "11594163",
+    "gdp_md": "588827.75",
+    "price": "25.7340287220000"
+  },
+  {
+    "name_long": "Oklahoma",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1649",
+    "pop_est": "3878051",
+    "gdp_md": "190170.50",
+    "price": "26.3658398250000"
+  },
+  {
+    "name_long": "Oman",
+    "adm0_a3": "OMN",
+    "iso_a2": "OM",
+    "wikidataid": "Q842",
+    "pop_est": "4974986",
+    "gdp_md": "76331.00",
+    "price": "17.2062562770000"
+  },
+  {
+    "name_long": "Oregon",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q824",
+    "pop_est": "3970239",
+    "gdp_md": "203328.00",
+    "price": "29.0519349630000"
+  },
+  {
+    "name_long": "Pakistan",
+    "adm0_a3": "PAK",
+    "iso_a2": "PK",
+    "wikidataid": "Q843",
+    "pop_est": "216565318",
+    "gdp_md": "278221.00",
+    "price": "38.2169772120000"
+  },
+  {
+    "name_long": "Palestine",
+    "adm0_a3": "PSX",
+    "iso_a2": "PS",
+    "wikidataid": "Q23792",
+    "pop_est": "4685306",
+    "gdp_md": "16276.00",
+    "price": "4.6871627760000"
+  },
+  {
+    "name_long": "Panama",
+    "adm0_a3": "PAN",
+    "iso_a2": "PA",
+    "wikidataid": "Q804",
+    "pop_est": "4246439",
+    "gdp_md": "66800.00",
+    "price": "11.1228315690000"
+  },
+  {
+    "name_long": "Papua New Guinea",
+    "adm0_a3": "PNG",
+    "iso_a2": "PG",
+    "wikidataid": "Q691",
+    "pop_est": "8776109",
+    "gdp_md": "24829.00",
+    "price": "16.8522367260000"
+  },
+  {
+    "name_long": "Paraguay",
+    "adm0_a3": "PRY",
+    "iso_a2": "PY",
+    "wikidataid": "Q733",
+    "pop_est": "7044636",
+    "gdp_md": "38145.00",
+    "price": "16.0301309460000"
+  },
+  {
+    "name_long": "Pennsylvania",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1400",
+    "pop_est": "12787209",
+    "gdp_md": "672413.25",
+    "price": "26.5523135610000"
+  },
+  {
+    "name_long": "Peru",
+    "adm0_a3": "PER",
+    "iso_a2": "PE",
+    "wikidataid": "Q419",
+    "pop_est": "32510453",
+    "gdp_md": "226848.00",
+    "price": "42.0833112930000"
+  },
+  {
+    "name_long": "Philippines",
+    "adm0_a3": "PHL",
+    "iso_a2": "PH",
+    "wikidataid": "Q928",
+    "pop_est": "108116615",
+    "gdp_md": "376795.00",
+    "price": "17.8564455570000"
+  },
+  {
+    "name_long": "Poland",
+    "adm0_a3": "POL",
+    "iso_a2": "PL",
+    "wikidataid": "Q36",
+    "pop_est": "37970874",
+    "gdp_md": "595858.00",
+    "price": "19.0864926450000"
+  },
+  {
+    "name_long": "Portugal",
+    "adm0_a3": "PRT",
+    "iso_a2": "PT",
+    "wikidataid": "Q45",
+    "pop_est": "10269417",
+    "gdp_md": "238785.00",
+    "price": "14.7347320440000"
+  },
+  {
+    "name_long": "Puerto Rico",
+    "adm0_a3": "PRI",
+    "iso_a2": "PR",
+    "wikidataid": "Q1183",
+    "pop_est": "3193694",
+    "gdp_md": "104988.00",
+    "price": "15.7433346480000"
+  },
+  {
+    "name_long": "Qatar",
+    "adm0_a3": "QAT",
+    "iso_a2": "QA",
+    "wikidataid": "Q846",
+    "pop_est": "2832067",
+    "gdp_md": "175837.00",
+    "price": "26.7346661790000"
+  },
+  {
+    "name_long": "Republic of Korea",
+    "adm0_a3": "KOR",
+    "iso_a2": "KR",
+    "wikidataid": "Q884",
+    "pop_est": "51709098",
+    "gdp_md": "1646739.00",
+    "price": "20.3318470650000"
+  },
+  {
+    "name_long": "Republic of the Congo",
+    "adm0_a3": "COG",
+    "iso_a2": "CG",
+    "wikidataid": "Q971",
+    "pop_est": "5380508",
+    "gdp_md": "12267.00",
+    "price": "13.1538401340000"
+  },
+  {
+    "name_long": "Rhode Island",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1387",
+    "pop_est": "1055173",
+    "gdp_md": "55098.25",
+    "price": "22.7068133730000"
+  },
+  {
+    "name_long": "Romania",
+    "adm0_a3": "ROU",
+    "iso_a2": "RO",
+    "wikidataid": "Q218",
+    "pop_est": "19356544",
+    "gdp_md": "250077.00",
+    "price": "15.1634443800000"
+  },
+  {
+    "name_long": "Russian Federation",
+    "adm0_a3": "RUS",
+    "iso_a2": "RU",
+    "wikidataid": "Q159",
+    "pop_est": "144373535",
+    "gdp_md": "1699876.00",
+    "price": "462.1622475750000"
+  },
+  {
+    "name_long": "Rwanda",
+    "adm0_a3": "RWA",
+    "iso_a2": "RW",
+    "wikidataid": "Q1037",
+    "pop_est": "12626950",
+    "gdp_md": "10354.00",
+    "price": "4.6048361880000"
+  },
+  {
+    "name_long": "Saudi Arabia",
+    "adm0_a3": "SAU",
+    "iso_a2": "SA",
+    "wikidataid": "Q851",
+    "pop_est": "34268528",
+    "gdp_md": "792966.00",
+    "price": "64.3331492040000"
+  },
+  {
+    "name_long": "Senegal",
+    "adm0_a3": "SEN",
+    "iso_a2": "SN",
+    "wikidataid": "Q1041",
+    "pop_est": "16296364",
+    "gdp_md": "23578.00",
+    "price": "9.5696251140000"
+  },
+  {
+    "name_long": "Serbia",
+    "adm0_a3": "SRB",
+    "iso_a2": "RS",
+    "wikidataid": "Q403",
+    "pop_est": "6944975",
+    "gdp_md": "51475.00",
+    "price": "8.1648731160000"
+  },
+  {
+    "name_long": "Sierra Leone",
+    "adm0_a3": "SLE",
+    "iso_a2": "SL",
+    "wikidataid": "Q1044",
+    "pop_est": "7813215",
+    "gdp_md": "4121.00",
+    "price": "5.6320277850000"
+  },
+  {
+    "name_long": "Slovakia",
+    "adm0_a3": "SVK",
+    "iso_a2": "SK",
+    "wikidataid": "Q214",
+    "pop_est": "5454073",
+    "gdp_md": "105079.00",
+    "price": "11.7566512530000"
+  },
+  {
+    "name_long": "Slovenia",
+    "adm0_a3": "SVN",
+    "iso_a2": "SI",
+    "wikidataid": "Q215",
+    "pop_est": "2087946",
+    "gdp_md": "54174.00",
+    "price": "13.3454297070000"
+  },
+  {
+    "name_long": "Solomon Islands",
+    "adm0_a3": "SLB",
+    "iso_a2": "SB",
+    "wikidataid": "Q685",
+    "pop_est": "669823",
+    "gdp_md": "1589.00",
+    "price": "4.5811672590000"
+  },
+  {
+    "name_long": "Somalia",
+    "adm0_a3": "SOM",
+    "iso_a2": "SO",
+    "wikidataid": "Q1045",
+    "pop_est": "10192317",
+    "gdp_md": "4719.00",
+    "price": "16.5621346770000"
+  },
+  {
+    "name_long": "Somaliland",
+    "adm0_a3": "SOL",
+    "iso_a2": "SO",
+    "wikidataid": "Q34754",
+    "pop_est": "5096159",
+    "gdp_md": "17836.00",
+    "price": "9.0267570810000"
+  },
+  {
+    "name_long": "South Africa",
+    "adm0_a3": "ZAF",
+    "iso_a2": "ZA",
+    "wikidataid": "Q258",
+    "pop_est": "58558270",
+    "gdp_md": "351431.00",
+    "price": "40.5569792010000"
+  },
+  {
+    "name_long": "South Carolina",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1456",
+    "pop_est": "4832482",
+    "gdp_md": "189655.50",
+    "price": "20.0881345350000"
+  },
+  {
+    "name_long": "South Dakota",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1211",
+    "pop_est": "853175",
+    "gdp_md": "45600.00",
+    "price": "28.3195699380000"
+  },
+  {
+    "name_long": "South Sudan",
+    "adm0_a3": "SDS",
+    "iso_a2": "SS",
+    "wikidataid": "Q958",
+    "pop_est": "11062113",
+    "gdp_md": "11998.00",
+    "price": "20.5731911940000"
+  },
+  {
+    "name_long": "Spain",
+    "adm0_a3": "ESP",
+    "iso_a2": "ES",
+    "wikidataid": "Q29",
+    "pop_est": "47076781",
+    "gdp_md": "1393490.00",
+    "price": "29.8742984700000"
+  },
+  {
+    "name_long": "Sri Lanka",
+    "adm0_a3": "LKA",
+    "iso_a2": "LK",
+    "wikidataid": "Q854",
+    "pop_est": "21803000",
+    "gdp_md": "84008.00",
+    "price": "7.3481603430000"
+  },
+  {
+    "name_long": "Sudan",
+    "adm0_a3": "SDN",
+    "iso_a2": "SD",
+    "wikidataid": "Q1049",
+    "pop_est": "42813238",
+    "gdp_md": "30513.00",
+    "price": "54.5838378810000"
+  },
+  {
+    "name_long": "Suriname",
+    "adm0_a3": "SUR",
+    "iso_a2": "SR",
+    "wikidataid": "Q730",
+    "pop_est": "581363",
+    "gdp_md": "3697.00",
+    "price": "9.2425059570000"
+  },
+  {
+    "name_long": "Sweden",
+    "adm0_a3": "SWE",
+    "iso_a2": "SE",
+    "wikidataid": "Q34",
+    "pop_est": "10285453",
+    "gdp_md": "530883.00",
+    "price": "34.7385329490000"
+  },
+  {
+    "name_long": "Switzerland",
+    "adm0_a3": "CHE",
+    "iso_a2": "CH",
+    "wikidataid": "Q39",
+    "pop_est": "8574832",
+    "gdp_md": "703082.00",
+    "price": "35.4238478640000"
+  },
+  {
+    "name_long": "Syria",
+    "adm0_a3": "SYR",
+    "iso_a2": "SY",
+    "wikidataid": "Q858",
+    "pop_est": "17070135",
+    "gdp_md": "98830.00",
+    "price": "10.9797648810000"
+  },
+  {
+    "name_long": "Taiwan",
+    "adm0_a3": "TWN",
+    "iso_a2": "CN-TW",
+    "wikidataid": "Q865",
+    "pop_est": "23568378",
+    "gdp_md": "1127000.00",
+    "price": "23.1062596260000"
+  },
+  {
+    "name_long": "Tajikistan",
+    "adm0_a3": "TJK",
+    "iso_a2": "TJ",
+    "wikidataid": "Q863",
+    "pop_est": "9321018",
+    "gdp_md": "8116.00",
+    "price": "7.4689760370000"
+  },
+  {
+    "name_long": "Tanzania",
+    "adm0_a3": "TZA",
+    "iso_a2": "TZ",
+    "wikidataid": "Q924",
+    "pop_est": "58005463",
+    "gdp_md": "63177.00",
+    "price": "31.2601345230000"
+  },
+  {
+    "name_long": "Tennessee",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1509",
+    "pop_est": "6549352",
+    "gdp_md": "300015.25",
+    "price": "23.4092461080000"
+  },
+  {
+    "name_long": "Texas",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1439",
+    "pop_est": "26956958",
+    "gdp_md": "1601976.75",
+    "price": "44.8552037790000"
+  },
+  {
+    "name_long": "Thailand",
+    "adm0_a3": "THA",
+    "iso_a2": "TH",
+    "wikidataid": "Q869",
+    "pop_est": "69625582",
+    "gdp_md": "543548.00",
+    "price": "23.1829229130000"
+  },
+  {
+    "name_long": "The Gambia",
+    "adm0_a3": "GMB",
+    "iso_a2": "GM",
+    "wikidataid": "Q1005",
+    "pop_est": "2347706",
+    "gdp_md": "1826.00",
+    "price": "3.7895376630000"
+  },
+  {
+    "name_long": "Timor-Leste",
+    "adm0_a3": "TLS",
+    "iso_a2": "TL",
+    "wikidataid": "Q574",
+    "pop_est": "1293119",
+    "gdp_md": "2017.00",
+    "price": "4.0444124640000"
+  },
+  {
+    "name_long": "Togo",
+    "adm0_a3": "TGO",
+    "iso_a2": "TG",
+    "wikidataid": "Q945",
+    "pop_est": "8082366",
+    "gdp_md": "5490.00",
+    "price": "5.3052362850000"
+  },
+  {
+    "name_long": "Trinidad and Tobago",
+    "adm0_a3": "TTO",
+    "iso_a2": "TT",
+    "wikidataid": "Q754",
+    "pop_est": "1394973",
+    "gdp_md": "24269.00",
+    "price": "9.8041124850000"
+  },
+  {
+    "name_long": "Tunisia",
+    "adm0_a3": "TUN",
+    "iso_a2": "TN",
+    "wikidataid": "Q948",
+    "pop_est": "11694719",
+    "gdp_md": "38796.00",
+    "price": "8.9996787360000"
+  },
+  {
+    "name_long": "Turkey",
+    "adm0_a3": "TUR",
+    "iso_a2": "TR",
+    "wikidataid": "Q43",
+    "pop_est": "83429615",
+    "gdp_md": "761425.00",
+    "price": "31.9724588640000"
+  },
+  {
+    "name_long": "Turkmenistan",
+    "adm0_a3": "TKM",
+    "iso_a2": "TM",
+    "wikidataid": "Q874",
+    "pop_est": "5942089",
+    "gdp_md": "40761.00",
+    "price": "18.5760076860000"
+  },
+  {
+    "name_long": "Uganda",
+    "adm0_a3": "UGA",
+    "iso_a2": "UG",
+    "wikidataid": "Q1036",
+    "pop_est": "44269594",
+    "gdp_md": "35165.00",
+    "price": "12.1925151390000"
+  },
+  {
+    "name_long": "Ukraine",
+    "adm0_a3": "UKR",
+    "iso_a2": "UA",
+    "wikidataid": "Q212",
+    "pop_est": "44385155",
+    "gdp_md": "153781.00",
+    "price": "21.7527099960000"
+  },
+  {
+    "name_long": "United Arab Emirates",
+    "adm0_a3": "ARE",
+    "iso_a2": "AE",
+    "wikidataid": "Q878",
+    "pop_est": "9770529",
+    "gdp_md": "421142.00",
+    "price": "21.8064223590000"
+  },
+  {
+    "name_long": "United Kingdom",
+    "adm0_a3": "GBR",
+    "iso_a2": "GB",
+    "wikidataid": "Q145",
+    "pop_est": "66834405",
+    "gdp_md": "2829108.00",
+    "price": "29.0323042320000"
+  },
+  {
+    "name_long": "United States",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q30",
+    "pop_est": "328239523",
+    "gdp_md": "21433226.00",
+    "price": "295.8052072950000"
+  },
+  {
+    "name_long": "Uruguay",
+    "adm0_a3": "URY",
+    "iso_a2": "UY",
+    "wikidataid": "Q77",
+    "pop_est": "3461734",
+    "gdp_md": "56045.00",
+    "price": "13.9306184100000"
+  },
+  {
+    "name_long": "Utah",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q829",
+    "pop_est": "2942902",
+    "gdp_md": "140565.00",
+    "price": "26.8677257940000"
+  },
+  {
+    "name_long": "Uzbekistan",
+    "adm0_a3": "UZB",
+    "iso_a2": "UZ",
+    "wikidataid": "Q265",
+    "pop_est": "33580650",
+    "gdp_md": "57921.00",
+    "price": "17.6128231740000"
+  },
+  {
+    "name_long": "Vanuatu",
+    "adm0_a3": "VUT",
+    "iso_a2": "VU",
+    "wikidataid": "Q686",
+    "pop_est": "299882",
+    "gdp_md": "934.00",
+    "price": "4.3826718960000"
+  },
+  {
+    "name_long": "Venezuela",
+    "adm0_a3": "VEN",
+    "iso_a2": "VE",
+    "wikidataid": "Q717",
+    "pop_est": "28515829",
+    "gdp_md": "482359.00",
+    "price": "34.9667725350000"
+  },
+  {
+    "name_long": "Vermont",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q16551",
+    "pop_est": "626562",
+    "gdp_md": "29661.75",
+    "price": "21.4341810990000"
+  },
+  {
+    "name_long": "Vietnam",
+    "adm0_a3": "VNM",
+    "iso_a2": "VN",
+    "wikidataid": "Q881",
+    "pop_est": "96462106",
+    "gdp_md": "261921.00",
+    "price": "18.0975292050000"
+  },
+  {
+    "name_long": "Virginia",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1370",
+    "pop_est": "8326289",
+    "gdp_md": "462243.00",
+    "price": "26.9793244110000"
+  },
+  {
+    "name_long": "Washington",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1223",
+    "pop_est": "7061530",
+    "gdp_md": "422766.50",
+    "price": "30.4081113480000"
+  },
+  {
+    "name_long": "West Virginia",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1371",
+    "pop_est": "1850326",
+    "gdp_md": "74432.75",
+    "price": "19.8361894650000"
+  },
+  {
+    "name_long": "Western Sahara",
+    "adm0_a3": "SAH",
+    "iso_a2": "EH",
+    "wikidataid": "Q6250",
+    "pop_est": "603253",
+    "gdp_md": "907.00",
+    "price": "6.1546850790000"
+  },
+  {
+    "name_long": "Wisconsin",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1537",
+    "pop_est": "5757564",
+    "gdp_md": "293341.25",
+    "price": "26.8769755380000"
+  },
+  {
+    "name_long": "Wyoming",
+    "adm0_a3": "USA",
+    "iso_a2": "US",
+    "wikidataid": "Q1214",
+    "pop_est": "584153",
+    "gdp_md": "40875.50",
+    "price": "35.9776795260000"
+  },
+  {
+    "name_long": "Yemen",
+    "adm0_a3": "YEM",
+    "iso_a2": "YE",
+    "wikidataid": "Q805",
+    "pop_est": "29161922",
+    "gdp_md": "22581.00",
+    "price": "16.9328023410000"
+  },
+  {
+    "name_long": "Zambia",
+    "adm0_a3": "ZMB",
+    "iso_a2": "ZM",
+    "wikidataid": "Q953",
+    "pop_est": "17861030",
+    "gdp_md": "23309.00",
+    "price": "24.3758411220000"
+  },
+  {
+    "name_long": "Zimbabwe",
+    "adm0_a3": "ZWE",
+    "iso_a2": "ZW",
+    "wikidataid": "Q954",
+    "pop_est": "14645468",
+    "gdp_md": "21440.00",
+    "price": "14.3021175960000"
+  }
+]

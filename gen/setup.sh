@@ -11,3 +11,6 @@ pip3 install pillow
 
 pip3 install requests
 pip3 install redis
+
+# setup stuff for jupyter notebooks and the colored-coded countries generation scripts
+pip3 install jupyter

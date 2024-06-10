@@ -21,6 +21,7 @@ def createPolygonBox(origin, width, height):
 def getIntersections(a, bs):
     result = []
     for j, b in enumerate(bs):
+        # print(b)
         if a.intersects(b):
             result.append(b)
 
@@ -45,6 +46,8 @@ def findLargestIntersection(a, b):
 
 def findTotalIntersection(a, bs):
     """
+    In the context of this file, is used to find the percent area of a pixel that is covered by land, where bs is the
+    list of countries represented by polygons.
     @a the main polygon
     @b the other polygons
     """
@@ -123,6 +126,7 @@ def quickFindTotalIntersection(a, bs):
 
 def intersectsGrid(polygons, subgridOrigin, subgridWidth, subgridHeight, cursorOrigin, cursorWidth, cursorHeight):
     """
+    I think I am doing this as a way to quickly find what polygons (which are really countries in this case) intersect a pixel
     @return [[Polygon]] a 2D grid where each cell represents the polygons that intersect with that cell.
     """
     rows = subgridHeight
@@ -255,8 +259,10 @@ def quickPixelate(polygons):
             color = 0
             origin = (x, y)
             cursor = createPolygonBox(origin, cursorWidth, cursorHeight)
+            # (pretty sure) the polygons that intersect with the current pixel
             intersectingPolygons = gridIntersections[r][c]
             # temp, maxIndex, maxArea = findLargestIntersection([cursor], polygons)
+            # I think maxIndex might be the index of the polygon (or country) that is contained in the pixel the most
             totalArea, maxIndex, maxArea = quickFindTotalIntersection(cursor, intersectingPolygons)
             if totalArea > waterTolerance:
                 color = 255
@@ -303,8 +309,19 @@ def replaceColor(inputPath, outputPath, originalColor, replacementColor):
     img2.save(outputPath)
 
 def main():
-    polygons = fiona.open(pathToCountries)
+    polygons: [fiona.model.Feature] = fiona.open(pathToCountries)
     polygonsX = [ shape(feat["geometry"]) for feat in polygons ]
+
+    # print("Printing polygons...")
+    # print(polygons)
+    # for feat in polygons:
+        # print(feat)
+        # dir(feat)
+        # print(feat.keys())
+        # print(feat["properties"])
+    # dir(polygons)
+    # print("Done printing polygons...")
+
     # bitmap = pixelate(polygonsX)
     bitmap = quickPixelate(polygonsX)
     # print(bitmap)
