@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 export default function usePreloadedImage(path: string): [HTMLImageElement, any] {
     const [image, setImage] = useState<HTMLImageElement>(new Image());
     useEffect(() => {
-        // console.log("image loading");
         // image.src = "../../assets/pixel-countries-mid-res.png";
         image.src = path;
         image.onload = () => {
@@ -11,6 +10,7 @@ export default function usePreloadedImage(path: string): [HTMLImageElement, any]
             // console.log(image);
         };
         setImage(image);
-    }, []); // TODO: should probably update this to change when the "path" parameter changes
+    }, []); // TODO: should probably update this to change when the "path" parameter changes // nah nvm I shouldn't
+    // }, [path]);
     return [image, setImage];
 }

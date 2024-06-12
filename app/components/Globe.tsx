@@ -14,6 +14,7 @@ import {drawPixelRgbaBuffer, fillCanvasWithImage} from '../utils/draw';
 import useFancyCanvas from "./hooks/useFancyCanvas";
 import {Baseboard} from "../constants/Baseboard";
 import {COLORING_BASEBOARD_PATH} from "../constants/system";
+import useImage from "./hooks/useImage";
 
 // THREE.WebGLRenderer._useLegacyLights = true;
 // THREE.WebGLRendererParameters;
@@ -134,6 +135,18 @@ function CanvasGlobe(props: CanvasGlobeProps) {
     const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
     const [coloringBaseboardImage, setColoringBaseboardImage] = usePreloadedImage(System.COLORING_BASEBOARD_PATH);
 
+    const highlightFileName = (props.activeCountry == null || props.activeCountry == "" ? "empty" : props.activeCountry) + ".png";
+    // const highlightFileName = (props.activeCountry == null || props.activeCountry == "" ? "Q16" : props.activeCountry) + ".png";
+    // console.log(["highlightFileName", highlightFileName]);
+    // const [territoryHighlightImage, setTerritoryHighlightImage] = usePreloadedImage(System.CANADA_HIGHLIGHT_PATH);
+    // wait is the functions input just the initial value? I think it's probably like just not done loading, when click it
+    // TODO: figure out the above problem
+    //- const [territoryHighlightImage, setTerritoryHighlightImage] = usePreloadedImage(System.HIGHLIGHTS_FOLDER + highlightFileName);
+    // const [territoryHighlightImage, setTerritoryHighlightImage] = usePreloadedImage(System.HIGHLIGHTS_FOLDER + "Q16.png");
+    const territoryHighlightImage = useImage(System.HIGHLIGHTS_FOLDER + highlightFileName);
+
+    // console.log(["System.CANADA_HIGHLIGHT_PATH", System.CANADA_HIGHLIGHT_PATH]);
+
     const drawBoard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
         drawPixelRgbaBuffer(ctx, tilesRgba, width);
     }
@@ -143,14 +156,19 @@ function CanvasGlobe(props: CanvasGlobeProps) {
     const drawColoringBaseboard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
         fillCanvasWithImage(ctx, coloringBaseboardImage, width, height);
     }
+    const drawHighlight = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+        if (territoryHighlightImage != null) {
+            fillCanvasWithImage(ctx, territoryHighlightImage, width, height);
+        }
+    }
 
     let layers = [];
     if (activeBaseboard == Baseboard.FLASHBACK) {
-        layers = [drawFlashback];
+        layers = [drawFlashback, drawHighlight];
     } else if (activeBaseboard == Baseboard.COLORING) {
-        layers = [drawColoringBaseboard];
+        layers = [drawColoringBaseboard, drawHighlight];
     } else {
-        layers = [drawBoard];
+        layers = [drawBoard, drawHighlight];
     }
 
     // const options = {
@@ -339,7 +357,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
 
         const directionalLight = globeEl.current.lights().find(obj3d => obj3d.type === 'DirectionalLight');
         directionalLight.intensity = 0.03 * Math.PI;
-    }, [props.viewFlashback, props.tiles, props.activeBaseboard]);
+    }, [territoryHighlightImage, props.viewFlashback, props.tiles, props.activeBaseboard]);
     // React.useEffect(() => {
     //     texture.needsUpdate = true;
     // }, [props.viewFlashback, props.tiles]);
@@ -498,6 +516,8 @@ function CanvasGlobe(props: CanvasGlobeProps) {
         fetch('/assets/ne_110m_admin_0_countries.geojson').then(res => res.json()).then(setCountries);
     }, []);
     */
+
+    // this right here really needs to be renamed
     const [activeCountry, setActiveCountry] = React.useState([]);
 
     React.useEffect(() => {
@@ -509,6 +529,12 @@ function CanvasGlobe(props: CanvasGlobeProps) {
         if (props.activeCountry == null || props.activeCountry == "") {
             return;
         }
+        // console.debug("props.activeCountry = ");
+        // console.debug(props.activeCountry);
+
+        // --- probably don't need to fetch the geojson anymore hopefully --- //
+        return;
+
         API.fetchTerritoryGeojsonFromName(props.activeCountry).then(res => {
             console.log("fetched country = ");
             console.log(res);

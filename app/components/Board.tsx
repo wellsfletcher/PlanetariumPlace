@@ -19,6 +19,7 @@ import { drawPixel, drawPixelBuffer, drawPixelRgbaBuffer, drawImageData, paintCa
 import {CanvasGlobeProps} from "./Globe";
 import useFancyCanvas from "./hooks/useFancyCanvas";
 import {Baseboard} from "../constants/Baseboard";
+import useImage from "./hooks/useImage";
 // import Tooltip from './TrackingTooltip.js';
 
 
@@ -181,6 +182,9 @@ const Board = (props: CanvasGlobeProps) => {
     const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
     const [coloringBaseboardImage, setColoringBaseboardImage] = usePreloadedImage(System.COLORING_BASEBOARD_PATH);
 
+    const highlightFileName = (props.activeCountry == null || props.activeCountry == "" ? "empty" : props.activeCountry) + ".png";
+    const territoryHighlightImage = useImage(System.HIGHLIGHTS_FOLDER + highlightFileName);
+
     const drawBoard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
         drawPixelRgbaBuffer(ctx, tilesRgba, width);
     }
@@ -190,14 +194,19 @@ const Board = (props: CanvasGlobeProps) => {
     const drawColoringBaseboard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
         fillCanvasWithImage(ctx, coloringBaseboardImage, width, height);
     }
+    const drawHighlight = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+        if (territoryHighlightImage != null) {
+            fillCanvasWithImage(ctx, territoryHighlightImage, width, height);
+        }
+    }
 
     let layers = [];
     if (activeBaseboard == Baseboard.FLASHBACK) {
-        layers = [drawFlashback];
+        layers = [drawFlashback, drawHighlight];
     } else if (activeBaseboard == Baseboard.COLORING) {
-        layers = [drawColoringBaseboard];
+        layers = [drawColoringBaseboard, drawHighlight];
     } else {
-        layers = [drawBoard];
+        layers = [drawBoard, drawHighlight];
     }
 
     const canvasRef = useFancyCanvas(layers);

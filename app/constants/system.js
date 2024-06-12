@@ -15,3 +15,13 @@ import FLASHBACK_BOARD from '../assets/pixel-countries-mid-res.png';
 export const FLASHBACK_BOARD_PATH = FLASHBACK_BOARD;
 import COLORING_BASEBOARD from '../assets/COLORING.png';
 export const COLORING_BASEBOARD_PATH = COLORING_BASEBOARD;
+
+// import HIGHLIGHTS_FOLDER from '../assets/highlights/';
+// export const CANADA_HIGHLIGHT = HIGHLIGHTS_FOLDER + CANADA_HIGHLIGHT;
+
+// import CANADA_HIGHLIGHT from '../assets/highlights/Q16.png';
+// export const CANADA_HIGHLIGHT_PATH = CANADA_HIGHLIGHT;
+
+// TODO: this probably won't work during npm run build, so fix it
+export const CANADA_HIGHLIGHT_PATH = '../assets/highlights/Q16.png';
+export const HIGHLIGHTS_FOLDER = '../assets/highlights/';

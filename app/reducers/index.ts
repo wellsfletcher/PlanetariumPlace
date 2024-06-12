@@ -137,7 +137,13 @@ const rootSlice = createSlice({
             return { ...state, mouseDown: action.payload };
         },
         setActiveCountry(state: BaseState, action) {
-            return { ...state, board: {...state.board, activeCountry: action.payload} };
+            // extra logic to allow toggle behavior
+            // TODO: maybe just move this to the CountryCard actually so like the CountryCard also shows if that country is active or not
+            let nextCountry = action.payload;
+            if (state.board.activeCountry == action.payload) {
+                nextCountry = "";
+            }
+            return { ...state, board: {...state.board, activeCountry: nextCountry} };
         },
         setBrushColor(state: BaseState, action) {
             return { ...state, brushColor: action.payload };

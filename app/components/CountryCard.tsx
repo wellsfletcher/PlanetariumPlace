@@ -68,13 +68,22 @@ export default function MediaCard(props) {
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary" onClick={() => {
-                var nextCountry = props.label;
-                /*
-                if (props.activeCountry === props.label) {
-                    nextCountry = "noCountrySelected";
-                }
-                */
-                props.setActiveCountry(nextCountry)
+            // console.log("props = ");
+            // console.log(props);
+            // alert('clicked');
+            // var nextCountry = props.label;
+            let nextCountry = props.country.wikidataid;
+            /*
+            if (props.activeCountry === props.label) {
+                nextCountry = "noCountrySelected";
+            }
+            */
+            // to avoid using unnecessary rerenders, imma gonna try to move this logic to setActiveCountry maybe?
+            // console.log(["nextCountry", nextCountry, "props.activeCountry", props.activeCountry]);
+            // if (nextCountry == props.activeCountry) {
+            //     nextCountry = ""; // or null
+            // }
+            props.setActiveCountry(nextCountry);
             }}>
           Show
         </Button>
