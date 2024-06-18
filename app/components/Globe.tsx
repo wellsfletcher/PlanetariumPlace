@@ -611,23 +611,23 @@ function CanvasGlobe(props: CanvasGlobeProps) {
     // god damn it of course the polygons block clicks
     const countryProps = {
         globeMaterial: globeMaterial,
-        // rendererConfig: {useLegacyLights: true, _useLegacyLights: true},
-        // rendererConfig: {outputColorSpace: THREE.LinearSRGBColorSpace},
-        // polygonsData: countries.features,
-        // polygonsData: countries.features.filter(filter),
-        polygonsData: activeCountry,
-        // polygonsData: testCountry,
-        polygonAltitude: .2, // .008,
-        // polygonCapColor: () => 'rgba(100, 50, 100, .5)',
-        // polygonCapColor: d => colorScale(getVal(d), maxVal),
-        polygonCapColor: () => '#E5D900', //'#888888', // E5D900 // 00D3DD
-        // polygonSideColor: () => 'rgba(0, 0, 0, 1.0)',
-        polygonSideColor: () => '#1B1B1B',
-        polygonLabel: ({ properties: d }) => `
-            <b>${d.name_long}</b> <br />
-        `,
-        // polygonLabel: label,
-        polygonsTransitionDuration: 0
+        // // rendererConfig: {useLegacyLights: true, _useLegacyLights: true},
+        // // rendererConfig: {outputColorSpace: THREE.LinearSRGBColorSpace},
+        // // polygonsData: countries.features,
+        // // polygonsData: countries.features.filter(filter),
+        // polygonsData: activeCountry,
+        // // polygonsData: testCountry,
+        // polygonAltitude: .2, // .008,
+        // // polygonCapColor: () => 'rgba(100, 50, 100, .5)',
+        // // polygonCapColor: d => colorScale(getVal(d), maxVal),
+        // polygonCapColor: () => '#E5D900', //'#888888', // E5D900 // 00D3DD
+        // // polygonSideColor: () => 'rgba(0, 0, 0, 1.0)',
+        // polygonSideColor: () => '#1B1B1B',
+        // polygonLabel: ({ properties: d }) => `
+        //     <b>${d.name_long}</b> <br />
+        // `,
+        // // polygonLabel: label,
+        // polygonsTransitionDuration: 0
     };
 
     //- const countryProps = {};
