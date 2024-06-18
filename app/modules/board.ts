@@ -1,9 +1,37 @@
-import { xy2index, int2rgba } from '../utils/general';
+import {xy2index, int2rgba, rgb2int} from '../utils/general';
 import { values as colorValues, hexcolor2colorcode, colorcode2hexcolor } from '../constants/colors';
 import * as API from '../utils/api';
 import * as Time from '../utils/time';
 import {BaseState} from "../reducers";
 
+
+/**
+ * Returns a hex color
+ * @param pixelsRgba
+ */
+function getRgbHexIntFromPixelsRgba(pixelsRgba: Uint8ClampedArray, index: number): number {
+    index = index * 4;
+    let r = pixelsRgba[index + 0];
+    let g = pixelsRgba[index + 1];
+    let b = pixelsRgba[index + 2];
+    // let a = pixelsRgba[index + 3];
+    return rgb2int({r, g, b});
+}
+
+export function getWikidataidFromWikidataidBaseboard(wikidataidRgba: Uint8ClampedArray, {x, y}, width: number): string {
+    const BLACK = 0x1B1B1B; // 1776411
+    let result = "";
+    if (wikidataidRgba.length <= 0) return result;
+
+    const index = xy2index(x, y, width);
+    const hexInt = getRgbHexIntFromPixelsRgba(wikidataidRgba, index);
+
+    if (hexInt != 0 && hexInt != BLACK) {
+        result = "Q" + hexInt;
+    }
+
+    return result;
+}
 
 /**
 @colors hex integer array that maps integer color [0, 15] to hex values

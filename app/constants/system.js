@@ -15,6 +15,8 @@ import FLASHBACK_BOARD from '../assets/pixel-countries-mid-res.png';
 export const FLASHBACK_BOARD_PATH = FLASHBACK_BOARD;
 import COLORING_BASEBOARD from '../assets/COLORING.png';
 export const COLORING_BASEBOARD_PATH = COLORING_BASEBOARD;
+import WIKIDATAID_BASEBOARD from '../assets/WIKIDATAID.png';
+export const WIKIDATAID_BASEBOARD_PATH = WIKIDATAID_BASEBOARD;
 
 // import HIGHLIGHTS_FOLDER from '../assets/highlights/';
 // export const CANADA_HIGHLIGHT = HIGHLIGHTS_FOLDER + CANADA_HIGHLIGHT;

@@ -15,6 +15,7 @@ import useFancyCanvas from "./hooks/useFancyCanvas";
 import {Baseboard} from "../constants/Baseboard";
 import {COLORING_BASEBOARD_PATH} from "../constants/system";
 import useImage from "./hooks/useImage";
+import {getWikidataidFromWikidataidBaseboard} from "../modules/board";
 
 // THREE.WebGLRenderer._useLegacyLights = true;
 // THREE.WebGLRendererParameters;
@@ -66,6 +67,7 @@ function geo2xy(lat: number, lng: number, width: number, height: number): any {
 export interface CanvasGlobeProps {
     viewFlashback: boolean,
     tilesRgba: Uint8ClampedArray,
+    wikidataidRgba: Uint8ClampedArray,
     tiles: number[],
     width: number,
     brushColor: number,
@@ -73,7 +75,8 @@ export interface CanvasGlobeProps {
     activeBaseboard: Baseboard,
     setActiveBaseboard: (value: Baseboard) => void,
     setTile: ({x, y}, color: number) => void,
-    activeCountry: string
+    activeCountry: string,
+    setActiveCountry: (value: string) => void
 }
 
 let globeMaterial = new THREE.MeshPhongMaterial();
@@ -459,6 +462,12 @@ function CanvasGlobe(props: CanvasGlobeProps) {
         // console.log({x, y});
         var color = props.brushColor;
 
+        // try getting the wikidataid of the clicked on tile here
+        let wikidataid = getWikidataidFromWikidataidBaseboard(props.wikidataidRgba, {x, y}, width);
+        // then try using setActiveCountry to change the highlighted country
+        // console.log(["Clicked and got wikidataid: ", wikidataid]);
+        props.setActiveCountry(wikidataid);
+
         // exit if in view flashback mode
         if (viewFlashback) {
             props.setViewFlashback(false);
@@ -518,6 +527,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
     */
 
     // this right here really needs to be renamed
+    // yeah this just tripped me up
     const [activeCountry, setActiveCountry] = React.useState([]);
 
     React.useEffect(() => {

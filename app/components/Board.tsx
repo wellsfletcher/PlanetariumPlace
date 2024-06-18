@@ -20,6 +20,7 @@ import {CanvasGlobeProps} from "./Globe";
 import useFancyCanvas from "./hooks/useFancyCanvas";
 import {Baseboard} from "../constants/Baseboard";
 import useImage from "./hooks/useImage";
+import {getWikidataidFromWikidataidBaseboard} from "../modules/board";
 // import Tooltip from './TrackingTooltip.js';
 
 
@@ -295,6 +296,11 @@ const Board = (props: CanvasGlobeProps) => {
 
         const mouse = {x: round((screenPosition.x - rect.left) / zoom.x), y: round((screenPosition.y - rect.top)/ zoom.y)};
         var color = props.brushColor;
+
+        // try getting the wikidataid of the clicked on tile here
+        let wikidataid = getWikidataidFromWikidataidBaseboard(props.wikidataidRgba, mouse, width);
+        // then try using setActiveCountry to change the highlighted country
+        props.setActiveCountry(wikidataid);
 
         // exit if in view flashback mode
         if (viewFlashback) {

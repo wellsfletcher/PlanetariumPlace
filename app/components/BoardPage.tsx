@@ -63,6 +63,8 @@ import { useSelector } from 'react-redux';
 import {useAppSelector} from "./hooks/redux";
 import {AppDispatch} from "../store";
 import {Baseboard} from "../constants/Baseboard";
+import usePixelsFromImage from "./hooks/usePixelsFromImage";
+import HiddenCanvas from "./HiddenCanvas";
 // import {useAppSelector} from "./hooks/redux";
 const mapStateToProps = (state) => { // this will be placed with a bunch of selectors
     return {
@@ -92,9 +94,11 @@ const mapStateToProps = (state) => { // this will be placed with a bunch of sele
 interface BoardProps {
     tilesRgba: Uint8ClampedArray,
     tiles: number[],
+    wikidataidRgba: Uint8ClampedArray, // technically should equal maybe new Uint8ClampedArray(new ArrayBuffer(System.INITIAL_WIDTH * System.INITIAL_HEIGHT * 4)),
     map: number[],
     values: string[],
     activeCountry: string,
+    setActiveCountry: (value: string) => void,
     width: number,
     // mouseDown: any,
     brushColor: number,
@@ -184,17 +188,20 @@ const BoardPage = (props: any) => {
         const [viewFlashback, setViewFlashback] = React.useState(false);
         const [activeBaseboard, setActiveBaseboard] = React.useState(Baseboard.INTERACTIVE);
         const [tool, setTool] = React.useState(0);
+        const [wikidataidRgba, wikidataidCanvasRef] = usePixelsFromImage(System.WIKIDATAID_BASEBOARD_PATH);
 
         // var tiles = [];
         const boardProps: BoardProps = {
             tilesRgba: props.tilesRgba,
             tiles: props.tiles,
+            wikidataidRgba: wikidataidRgba,
             map: props.map,
             values: props.values,
             width: props.width,
             // mouseDown: props.mouseDown,
             brushColor: props.brushColor,
             activeCountry: props.activeCountry,
+            setActiveCountry: props.setActiveCountry,
             viewFlashback: viewFlashback,
             setViewFlashback: setViewFlashback,
             activeBaseboard: activeBaseboard,
@@ -236,6 +243,7 @@ const BoardPage = (props: any) => {
                 >
 
                 </Overlay>
+                <HiddenCanvas canvasRef={wikidataidCanvasRef} />
             </>
         );
 }

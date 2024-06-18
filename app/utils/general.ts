@@ -89,6 +89,16 @@ export function int2rgb(num: number): any {
     };
 }
 
+export function rgba2int(rgba: {r: number, g: number, b: number, a: number}): number {
+    let { r, g, b, a } = rgba;
+    return (r << 24) + (g << 16) + (b << 8) + a;
+}
+
+export function rgb2int(rgb: {r: number, g: number, b: number}): number {
+    let { r, g, b } = rgb;
+    return (r << 16) + (g << 8) + b;
+}
+
 export function XOR(a: boolean, b: boolean): boolean {
     return (a && !b) || (!a && b);
 }
