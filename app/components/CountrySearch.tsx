@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
 
 interface CountrySearchProps {
     containerHeight: number,
-    setActiveCountry: any
+    activeCountry: string,
+    setActiveCountry: (value: string) => void
 }
 
 export default function CountrySearch(props: CountrySearchProps) {
@@ -160,6 +161,7 @@ export default function CountrySearch(props: CountrySearchProps) {
                         label={country.name_long}
                         code={country.iso_a2}
                         country={country}
+                        activeCountry={props.activeCountry}
                         setActiveCountry={props.setActiveCountry}
                     />
                 </ListItem>

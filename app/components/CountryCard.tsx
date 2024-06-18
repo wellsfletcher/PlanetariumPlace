@@ -32,15 +32,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// interface CountryCardProps {
-//
-// }
+interface CountryCardProps {
+    label: string,
+    code: string,
+    country: any, // TODO: define like a Country type
+    activeCountry: string,
+    setActiveCountry: (value: string) => void
+}
 
-export default function MediaCard(props) {
+export default function MediaCard(props: CountryCardProps) {
   const classes = useStyles();
 
   const flag = countryToFlag(props.code);
   // "https://en.wikipedia.org/w/index.php?search=" + props.label.replace(/ /g, '')
+
+  let isActiveCountry = props.activeCountry == props.country.wikidataid;
 
   return (
     <Card className={classes.root}>
@@ -80,15 +86,15 @@ export default function MediaCard(props) {
             */
             // to avoid using unnecessary rerenders, imma gonna try to move this logic to setActiveCountry maybe?
             // console.log(["nextCountry", nextCountry, "props.activeCountry", props.activeCountry]);
-            // if (nextCountry == props.activeCountry) {
-            //     nextCountry = ""; // or null
-            // }
+            if (isActiveCountry) {
+                nextCountry = "";
+            }
             props.setActiveCountry(nextCountry);
             }}>
-          Show
+          {isActiveCountry ? "Hide" : "Show"}
         </Button>
         <Button size="small" color="primary" target="_blank" href={"https://www.wikidata.org/wiki/" + props.country.wikidataid}>
-          Open Wiki
+          View Stats
         </Button>
       </CardActions>
     </Card>

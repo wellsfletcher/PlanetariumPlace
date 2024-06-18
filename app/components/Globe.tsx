@@ -537,6 +537,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
         //- fetch('/assets/ne_110m_admin_0_countries.geojson').then(res => res.json()).then(setCountries);
         // API.fetchTerritoryGeojsonFromName(props.activeCountry).then(res => res.json()).then(setCountries);
         if (props.activeCountry == null || props.activeCountry == "") {
+            // setActiveCountry([]); // hmmm
             return;
         }
         // console.debug("props.activeCountry = ");

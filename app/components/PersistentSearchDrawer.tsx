@@ -104,7 +104,8 @@ const useStyles = makeStyles((theme) => ({
 
 interface PersistentDrawerProps {
     onChangeComplete: (color: any) => void,
-    setActiveCountry: any
+    activeCountry: string,
+    setActiveCountry: (value: string) => void
 }
 
 export default function PersistentDrawer(props: PersistentDrawerProps) {
@@ -208,6 +209,7 @@ export default function PersistentDrawer(props: PersistentDrawerProps) {
 
         <CountrySearch
             containerHeight={windowHeight - 64 - 1}
+            activeCountry={props.activeCountry}
             setActiveCountry={props.setActiveCountry} 
         />
 
