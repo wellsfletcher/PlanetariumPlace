@@ -141,6 +141,8 @@ export default function CountrySearch(props: CountrySearchProps) {
             }
         };
 
+        // TODO: investigate why I remove sorting in https://github.com/wellsfletcher/PlanetariumPlace/commit/313afc21535344562ebdd1d1f60b06041e2e0a11
+        // is it because the countries are already sorted?
         const newFilterCountries = countries.filter((data) => filter(data, queryString)).sort(comparator);
         setFiltered(newFilterCountries);
     };

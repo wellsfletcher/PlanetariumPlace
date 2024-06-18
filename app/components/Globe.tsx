@@ -448,8 +448,8 @@ function CanvasGlobe(props: CanvasGlobeProps) {
         //- console.log(camera);
         var deltaRotation = mapRotation.distanceTo(mapRotationOnTouchStart);
         var deltaScale = mapScaleOnTouchStart - mapScale;
-        console.debug("deltaRotation = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
-        console.debug("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
+        // console.debug("deltaRotation = " + deltaRotation + " = " + mapRotationOnTouchStart + " - " + mapRotation);
+        // console.debug("deltaScale = " + deltaScale + " = " + mapScaleOnTouchStart + " - " + mapScale);
 
         // TODO: Investigate if I can get rid of this; would need to be able to like test on mobile though
         if (Math.abs(deltaRotation) > MAP_ROTATION_TOLERANCE || Math.abs(deltaScale) > MAP_ROTATION_TOLERANCE) {
@@ -627,7 +627,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
             <b>${d.name_long}</b> <br />
         `,
         // polygonLabel: label,
-        polygonsTransitionDuration: 300
+        polygonsTransitionDuration: 0
     };
 
     //- const countryProps = {};
