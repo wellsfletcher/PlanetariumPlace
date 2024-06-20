@@ -4,15 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "buildprod": "webpack --config webpack.production.js",
-    "start": "webpack-dev-server",
+    "build": "webpack --config webpack.production.js",
+    "builddev": "webpack --config webpack.development.js",
+    "start": "webpack-dev-server --config webpack.development.js",
     "tsc": "tsc",
     "postinstall": "npm run tsc",
     "dev": "ts-node-dev — respawn — pretty — transpile-only index.ts",
-    "start2": "webpack serve --config webpack.config.js",
-    "start3": "webpack-dev-server --config webpack.config.js",
-    "start4": "webpack-dev-server --config webpack.development.js",
     "startprod": "webpack-dev-server --config webpack.production.js",
     "test": "jest"
   },

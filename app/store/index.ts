@@ -50,7 +50,7 @@ const storeOptions = {
     */
     // middleware: [forbiddenWordsMiddleware, thunk]
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false, immutableCheck: false}).concat(forbiddenWordsMiddleware),
-    devTools: {
+    devTools: (process.env.NODE_ENV === 'production') ? false : {
         stateSanitizer
     }
 };

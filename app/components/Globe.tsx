@@ -462,6 +462,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
         // console.log({x, y});
         var color = props.brushColor;
 
+        // I could make it do this when you right click on the globe (see onGlobeRightClick)
         // try getting the wikidataid of the clicked on tile here
         let wikidataid = getWikidataidFromWikidataidBaseboard(props.wikidataidRgba, {x, y}, width);
         // then try using setActiveCountry to change the highlighted country
