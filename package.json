@@ -11,6 +11,7 @@
     "postinstall": "npm run tsc",
     "dev": "ts-node-dev — respawn — pretty — transpile-only index.ts",
     "startprod": "webpack-dev-server --config webpack.production.js",
+    "serve": "serve -s build",
     "test": "jest"
   },
   "keywords": [

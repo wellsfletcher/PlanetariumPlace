@@ -185,15 +185,20 @@ const Board = (props: CanvasGlobeProps) => {
 
     const highlightFileName = (props.activeCountry == null || props.activeCountry == "" ? "empty" : props.activeCountry) + ".png";
     const territoryHighlightImage = useImage(System.HIGHLIGHTS_FOLDER + highlightFileName);
+    // const boardImages = [flashBackImage, coloringBaseboardImage, territoryHighlightImage];
 
     const drawBoard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
         drawPixelRgbaBuffer(ctx, tilesRgba, width);
     }
     const drawFlashback = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-        fillCanvasWithImage(ctx, flashBackImage, width, height);
+        if (flashBackImage != null) {
+            fillCanvasWithImage(ctx, flashBackImage, width, height);
+        }
     }
     const drawColoringBaseboard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-        fillCanvasWithImage(ctx, coloringBaseboardImage, width, height);
+        if (coloringBaseboardImage != null) {
+            fillCanvasWithImage(ctx, coloringBaseboardImage, width, height);
+        }
     }
     const drawHighlight = (ctx: CanvasRenderingContext2D, frameCount: number) => {
         if (territoryHighlightImage != null) {

@@ -147,6 +147,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
     //- const [territoryHighlightImage, setTerritoryHighlightImage] = usePreloadedImage(System.HIGHLIGHTS_FOLDER + highlightFileName);
     // const [territoryHighlightImage, setTerritoryHighlightImage] = usePreloadedImage(System.HIGHLIGHTS_FOLDER + "Q16.png");
     const territoryHighlightImage = useImage(System.HIGHLIGHTS_FOLDER + highlightFileName);
+    const boardImages = [flashBackImage, coloringBaseboardImage, territoryHighlightImage];
 
     // console.log(["System.CANADA_HIGHLIGHT_PATH", System.CANADA_HIGHLIGHT_PATH]);
 
@@ -154,10 +155,14 @@ function CanvasGlobe(props: CanvasGlobeProps) {
         drawPixelRgbaBuffer(ctx, tilesRgba, width);
     }
     const drawFlashback = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-        fillCanvasWithImage(ctx, flashBackImage, width, height);
+        if (flashBackImage != null) {
+            fillCanvasWithImage(ctx, flashBackImage, width, height);
+        }
     }
     const drawColoringBaseboard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-        fillCanvasWithImage(ctx, coloringBaseboardImage, width, height);
+        if (coloringBaseboardImage != null) {
+            fillCanvasWithImage(ctx, coloringBaseboardImage, width, height);
+        }
     }
     const drawHighlight = (ctx: CanvasRenderingContext2D, frameCount: number) => {
         if (territoryHighlightImage != null) {
@@ -360,7 +365,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
 
         const directionalLight = globeEl.current.lights().find(obj3d => obj3d.type === 'DirectionalLight');
         directionalLight.intensity = 0.03 * Math.PI;
-    }, [territoryHighlightImage, props.viewFlashback, props.tiles, props.activeBaseboard]);
+    }, [boardImages, props.viewFlashback, props.tiles, props.activeBaseboard]);
     // React.useEffect(() => {
     //     texture.needsUpdate = true;
     // }, [props.viewFlashback, props.tiles]);
