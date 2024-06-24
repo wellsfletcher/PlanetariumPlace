@@ -68,7 +68,7 @@ export default function MediaCard(props: CountryCardProps) {
             {props.label}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.label} has a gross domestic product of {parseInt(props.country.gdp_md).toLocaleString('en-US')} and a population of about {parseInt(props.country.pop_est).toLocaleString('en-US')}.
+            {props.label} has a gross domestic product of {parseInt(props.country.gdp_md).toLocaleString('en-US')}K and a population of about {parseInt(props.country.pop_est).toLocaleString('en-US')}.
           </Typography>
         </CardContent>
       </CardActionArea>
