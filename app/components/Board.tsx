@@ -305,7 +305,8 @@ const Board = (props: CanvasGlobeProps) => {
         // try getting the wikidataid of the clicked on tile here
         let wikidataid = getWikidataidFromWikidataidBaseboard(props.wikidataidRgba, mouse, width);
         // then try using setActiveCountry to change the highlighted country
-        props.setActiveCountry(wikidataid);
+        // temporary
+        //- props.setActiveCountry(wikidataid);
 
         // exit if in view flashback mode
         if (viewFlashback) {

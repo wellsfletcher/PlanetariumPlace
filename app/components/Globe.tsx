@@ -472,7 +472,8 @@ function CanvasGlobe(props: CanvasGlobeProps) {
         let wikidataid = getWikidataidFromWikidataidBaseboard(props.wikidataidRgba, {x, y}, width);
         // then try using setActiveCountry to change the highlighted country
         // console.log(["Clicked and got wikidataid: ", wikidataid]);
-        props.setActiveCountry(wikidataid);
+        // temporary
+        //- props.setActiveCountry(wikidataid);
 
         // exit if in view flashback mode
         if (viewFlashback) {
