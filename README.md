@@ -48,7 +48,7 @@ Most of the program contents are located under the `app/components/` folder. I m
 
 ### Important files
 
-`BoardPage.js`, `Board.js`, `Globe.js`, and `reducers/index.js` are all quite important.
+`BoardPage.tsx`, `Board.tsx`, `Globe.tsx`, and `reducers/index.ts` are all quite important.
 
 ### Manipulating global state with React Redux
 
