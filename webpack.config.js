@@ -7,6 +7,7 @@ var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
 });
 
 
+// TODO: maybe rename this file to webpack.common.js
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 var CopyWebpackPluginConfig = new CopyWebpackPlugin(
     {
@@ -29,18 +30,53 @@ module.exports = {
     mode: 'development',
     module: {
         rules: [
-            {
+            /*{
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
-            }, /*{
+            },*/
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'babel-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.(tsx|ts)$/,
+                // test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'ts-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.mjs$/,
+                include: /node_modules/,
+                type: 'javascript/auto',
+            },
+            /*{
                 test: /\.css$/,
                 loader: "style-loader!css-loader"
             },*/ {
                 test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
-                loader: 'url-loader?limit=100000'
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 100000
+                        }
+                    }
+                ]
             }
         ]
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js', ".mjs"],
     },
     output: {
         filename: 'transformed.js',
