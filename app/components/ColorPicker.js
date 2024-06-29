@@ -1,18 +1,19 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { rgbToHex, withStyles, useTheme } from '@material-ui/core/styles';
-// import * as colors from '@material-ui/core/colors';
-import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
-import Radio from '@material-ui/core/Radio';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import CheckIcon from '@material-ui/icons/Check';
-import Slider from '@material-ui/core/Slider';
-import { capitalize } from '@material-ui/core/utils';
+import { rgbToHex, useTheme } from '@mui/material/styles';
+import withStyles from '@mui/styles/withStyles';
+// import * as colors from '@mui/material/colors';
+import Grid from '@mui/material/Grid';
+import Input from '@mui/material/Input';
+import Radio from '@mui/material/Radio';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import CheckIcon from '@mui/icons-material/Check';
+import Slider from '@mui/material/Slider';
+import { capitalize } from '@mui/material/utils';
 
-import blue from '@material-ui/core/colors/blue';
+import { blue } from '@mui/material/colors';
 
 // {{"demo": "pages/customization/color/ColorTool.js", "hideToolbar": true, "bg": true}}
 

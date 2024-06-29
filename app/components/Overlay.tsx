@@ -1,31 +1,31 @@
 import React, {PropsWithChildren} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
-import Grid from '@material-ui/core/Grid';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import IconButton from '@material-ui/core/IconButton';
-import RedditIcon from '@material-ui/icons/Reddit';
-import GithubIcon from '@material-ui/icons/Github';
+import Grid from '@mui/material/Grid';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import IconButton from '@mui/material/IconButton';
+import RedditIcon from '@mui/icons-material/Reddit';
+import GithubIcon from '@mui/icons-material/Github';
 
-import GlobeIcon from '@material-ui/icons/Public';
-import MapIcon from '@material-ui/icons/Map';
+import GlobeIcon from '@mui/icons-material/Public';
+import MapIcon from '@mui/icons-material/Map';
 // import DownloadIcon from '@mui/icons-material/Download';
-import ViewIcon from '@material-ui/icons/GridOff'; // History, Visibility, HourglassFullTwoTone, History
-import ViewOffIcon from '@material-ui/icons/GridOn'; // FastForward, VisibilityOff, HourglassEmpty, Update, FastForward
-import ColoringBaseboardIcon from '@material-ui/icons/FormatPaint'; // FastForward, VisibilityOff, HourglassEmpty, Update, FastForward
-import AddIcon from '@material-ui/icons/Add';
+import ViewIcon from '@mui/icons-material/GridOff'; // History, Visibility, HourglassFullTwoTone, History
+import ViewOffIcon from '@mui/icons-material/GridOn'; // FastForward, VisibilityOff, HourglassEmpty, Update, FastForward
+import ColoringBaseboardIcon from '@mui/icons-material/FormatPaint'; // FastForward, VisibilityOff, HourglassEmpty, Update, FastForward
+import AddIcon from '@mui/icons-material/Add';
 
-import BrushIcon from '@material-ui/icons/Brush';
-import PanToolIcon from '@material-ui/icons/PanTool';
-import PaletteIcon from '@material-ui/icons/Palette';
-import ColorizeIcon from '@material-ui/icons/Colorize';
+import BrushIcon from '@mui/icons-material/Brush';
+import PanToolIcon from '@mui/icons-material/PanTool';
+import PaletteIcon from '@mui/icons-material/Palette';
+import ColorizeIcon from '@mui/icons-material/Colorize';
 
 import VerticalColorPicker from './VerticalColorPicker';
 import useWindowDimensions from './hooks/useWindowDimensions';
-import {GridDirection, GridItemsAlignment, GridJustification} from "@material-ui/core/Grid/Grid";
+import {GridDirection, GridItemsAlignment, GridJustification} from "@mui/material/Grid/Grid";
 import {Baseboard} from "../constants/Baseboard";
-import Tooltip from "@material-ui/core/Tooltip";
+import Tooltip from "@mui/material/Tooltip";
 
 
 
@@ -228,7 +228,7 @@ export default function Overlay(props: PropsWithChildren<OverlayProps>) {
           }}
         >
             <Grid item>
-                <IconButton target="_blank" href="https://reddit.com/r/planetariumplace">
+                <IconButton target="_blank" href="https://reddit.com/r/planetariumplace" size="large">
                     <RedditIcon/>
                 </IconButton>
             </Grid>
