@@ -13,13 +13,15 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider, Theme, StyledEngineProvider, adaptV4Theme } from '@mui/material/styles';
 import * as System from "../constants/system";
 import {AppDispatch} from "../store";
-import { indigo as themeColor } from '@mui/material/colors';
+import {grey, indigo as themeColor} from '@mui/material/colors';
+import {darkScrollbar} from "@mui/material";
 
 
-declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
+// commented during mui v5 migration
+// declare module '@mui/styles/defaultTheme' {
+//   // eslint-disable-next-line @typescript-eslint/no-empty-interface
+//   interface DefaultTheme extends Theme {}
+// }
 
 
 // console.log("setMouseDown = ");
@@ -45,24 +47,65 @@ declare module '@mui/material/styles' {
         paletteBackground: {
             darkPaper: string;
             lightPaper: string;
+            cardBackgroundMuiV5: string;
         };
     }
     // allow configuration using `createTheme`
-    interface DeprecatedThemeOptions {
+    // interface DeprecatedThemeOptions {
+    interface ThemeOptions {
         paletteBackground?: {
             darkPaper?: string;
             lightPaper?: string;
+            cardBackgroundMuiV5?: string;
         };
     }
 }
 
-const theme = createTheme(adaptV4Theme({
+// const theme = createTheme(adaptV4Theme({
+//     paletteBackground: {
+//         darkPaper: "#303030",
+//         lightPaper: "#424242"
+//     },
+//     palette: {
+//         primary: {
+//             light: "#7FBDF8", // adfsaf
+//             main: "#7FBDF8", // #6EADF7, #7FBDF8
+//             dark: "#7FBDF8",
+//             contrastText: "#fff"
+//         },
+//         // customBackground: {
+//         //     darkPaper: "#303030",
+//         //     lightPaper: "#424242"
+//         // },
+//         // primary: themeColor,
+//         // primary: "#90caf9", // palette.primary.main
+//         // commented during mui v5 migration
+//         //-- type: 'dark',
+//         background: {
+//             default: "#00000E",
+//             // paper: "#424242",
+//             // Commented out because of TS bug
+//             // darkPaper: "#303030", // "#424242"
+//             // Commented out because of TS bug
+//             // lightPaper: "#424242", // "#424242"
+//         },
+//         /*
+//         action: {
+//             active: "#fff"
+//         }
+//         */
+//     }
+// }));
+
+const theme = createTheme({
     paletteBackground: {
         darkPaper: "#303030",
-        lightPaper: "#424242"
+        lightPaper: "#424242",
+        cardBackgroundMuiV5: "#1E1E1E" // I couldn't figure out to replicate the color now used as the background for Cards in Mui V5
     },
     palette: {
-        primary: {
+        mode: 'dark',
+        primary: { // alternatively this primary color can just be a single color and the rest get set automatically
             light: "#7FBDF8", // adfsaf
             main: "#7FBDF8", // #6EADF7, #7FBDF8
             dark: "#7FBDF8",
@@ -74,9 +117,10 @@ const theme = createTheme(adaptV4Theme({
         // },
         // primary: themeColor,
         // primary: "#90caf9", // palette.primary.main
-        type: 'dark',
+        // commented during mui v5 migration
+        //-- type: 'dark',
         background: {
-            default: "#00000E",
+            // default: "#00000E",
             // paper: "#424242",
             // Commented out because of TS bug
             // darkPaper: "#303030", // "#424242"
@@ -88,8 +132,24 @@ const theme = createTheme(adaptV4Theme({
             active: "#fff"
         }
         */
+    },
+    components: {
+        MuiCssBaseline: {
+            styleOverrides: {
+                html: {
+                    ...darkScrollbar(),
+                    // ...darkScrollbar({
+                    //     track: grey[200],
+                    //     thumb: grey[400],
+                    //     active: grey[400]
+                    // }),
+                    //scrollbarWidth for Firefox
+                    // scrollbarWidth: "thin"
+                }
+            }
+        }
     }
-}));
+});
 
 // const initialState: State = {
 //     articles: [], // remove this
@@ -134,6 +194,7 @@ class App extends React.Component {
         return (
             <div>
             {/*<div onPointerDown={this.handleMouseDown}>*/}
+                {/* TODO: see if I can remove this StyledEngineProvider thing */}
                 <StyledEngineProvider injectFirst>
                     <ThemeProvider theme={theme}>
                         <CssBaseline />

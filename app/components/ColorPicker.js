@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { rgbToHex, useTheme } from '@mui/material/styles';
-import withStyles from '@mui/styles/withStyles';
+import { withStyles } from 'tss-react/mui';
 // import * as colors from '@mui/material/colors';
 import Grid from '@mui/material/Grid';
 import Input from '@mui/material/Input';
@@ -145,4 +145,4 @@ ColorTool.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ColorTool);
+export default withStyles(ColorTool, styles);

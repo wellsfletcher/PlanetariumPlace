@@ -1,6 +1,6 @@
 import React from 'react';
 import { alpha } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from 'tss-react/mui';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -20,14 +20,20 @@ interface PrimarySearchAppBarProps {
   onChange: (event: any) => any | undefined
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    // backgroundColor: alpha(theme.palette.background, 1.0),
+    backgroundColor: alpha(theme.paletteBackground.cardBackgroundMuiV5, 1.0),
+    // backgroundColor: theme.palette.background.paper,
     '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
+      backgroundColor: alpha(theme.paletteBackground.darkPaper, 1.0), // darkpaper happens to the correct color
     },
+    // backgroundColor: alpha(theme.palette.common.white, 0.15),
+    // '&:hover': {
+    //   backgroundColor: alpha(theme.palette.common.white, 0.25),
+    // },
     // marginRight: theme.spacing(2), // originally 2
     marginLeft: 0,
     width: '100%',
@@ -70,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PrimarySearchAppBar(props: PrimarySearchAppBarProps) {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   return (
       <div className={classes.search}>

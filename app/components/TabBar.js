@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from 'tss-react/mui';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
@@ -48,7 +48,7 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function VerticalTabs(props) {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [value, setValue] = React.useState(1);
 
   const handleChange = (event, newValue) => {

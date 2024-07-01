@@ -1,5 +1,5 @@
 import React from 'react';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from 'tss-react/mui';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
@@ -18,10 +18,11 @@ function countryToFlag(isoCode) {
     : isoCode;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   root: {
     maxWidth: 345,
     // background: theme.palette.background.darkPaper,
+    // background: theme.paletteBackground.darkPaper,
     whiteSpace: 'normal',
   },
   media: {
@@ -41,7 +42,7 @@ interface CountryCardProps {
 }
 
 export default function MediaCard(props: CountryCardProps) {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   const flag = countryToFlag(props.code);
   // "https://en.wikipedia.org/w/index.php?search=" + props.label.replace(/ /g, '')

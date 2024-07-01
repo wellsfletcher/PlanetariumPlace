@@ -12,7 +12,8 @@ import { useTimeout } from './hooks/useTimeout';
 
 import Board from './Board';
 import Globe from './Globe';
-import PersistentSearchDrawer from './PersistentSearchDrawer';
+// import PersistentSearchDrawer from './PersistentSearchDrawer';
+import PersistentSearchDrawer2 from './PersistentSearchDrawer2';
 import TabBar from './TabBar';
 import VerticalColorPicker from './VerticalColorPicker';
 import Overlay from './Overlay';
@@ -230,12 +231,18 @@ const BoardPage = (props: any) => {
         return (
             <>
                 <div style={style}>
-                    <PersistentSearchDrawer
+                    {/*<PersistentSearchDrawer*/}
+                    {/*    onChangeComplete={onChangeComplete}*/}
+                    {/*    activeCountry={""}*/}
+                    {/*    setActiveCountry={props.setActiveCountry}*/}
+                    {/*>*/}
+                    {/*</PersistentSearchDrawer>*/}
+                    <PersistentSearchDrawer2
                         onChangeComplete={onChangeComplete}
-                        activeCountry={""}
+                        activeCountry={props.activeCountry}
                         setActiveCountry={props.setActiveCountry}
                     >
-                    </PersistentSearchDrawer>
+                    </PersistentSearchDrawer2>
                     {boardViewer}
                 </div>
                 <Overlay
