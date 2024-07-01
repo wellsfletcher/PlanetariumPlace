@@ -226,6 +226,7 @@ const BoardPage = (props: any) => {
         ;
 
         // if you start seeing performance issues, maybe have the first thing you try to do be this:
+        // the activeCountry issue still seems to be a problem even with pagination; issues is especially noticable on safari
         // activeCountry={""} instead of activeCountry={props.activeCountry}, bc that would make sense to me, and that could've been what was causing issues on iphone last time
         // I think that actually might be the problem; TODO: investigate this
         return (
@@ -239,7 +240,8 @@ const BoardPage = (props: any) => {
                     {/*</PersistentSearchDrawer>*/}
                     <PersistentSearchDrawer2
                         onChangeComplete={onChangeComplete}
-                        activeCountry={props.activeCountry}
+                        // activeCountry={props.activeCountry}
+                        activeCountry={""}
                         setActiveCountry={props.setActiveCountry}
                     >
                     </PersistentSearchDrawer2>
