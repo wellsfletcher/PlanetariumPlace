@@ -106,6 +106,7 @@ export default function CountrySearch(props: CountrySearchProps) {
         if (event == null) {
             // setFiltered(countries);
         }
+        setPage(1);
         var queryString = event.target.value;
         // what the heck is this little chunk
         if (queryString == null) {
@@ -150,6 +151,8 @@ export default function CountrySearch(props: CountrySearchProps) {
         // is it because the countries are already sorted?
         const newFilterCountries = countries.filter((data) => filter(data, queryString)); // .sort(comparator);
         setFiltered(newFilterCountries);
+        // const amountOfPages = Math.ceil(filtered.length / entriesPerPage);
+        // setPage(Math.min(page, amountOfPages));
     };
 
     const amountOfPages = Math.ceil(filtered.length / entriesPerPage);
