@@ -14,20 +14,23 @@ import Input from '@mui/material/Input';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchBar from './SearchBar';
 import CountryCard from './CountryCard';
+import {Pagination} from "@mui/material";
 // import { countries } from '../constants/countries';
 
 // var Infinite = require('react-infinite');
 
+const DEFAULT_ENTRIES_PER_PAGE = 10;
+
 // @ts-ignore
 const useStyles = makeStyles()((theme) => ({
-  root: {
-      width: '100%',
-      // commenting out bc TS bug
-      // backgroundColor: theme.palette.background.darkPaper,
-      // backgroundColor: undefined
-      backgroundColor: theme.paletteBackground.darkPaper,
-      // backgroundColor: "#303030"
-  },
+    root: {
+        width: '100%',
+        // commenting out bc TS bug
+        // backgroundColor: theme.palette.background.darkPaper,
+        // backgroundColor: undefined
+        //- backgroundColor: theme.paletteBackground.darkPaper,
+        // backgroundColor: "#303030"
+    },
 }));
 
 interface CountrySearchProps {
@@ -39,6 +42,8 @@ interface CountrySearchProps {
 export default function CountrySearch(props: CountrySearchProps) {
     const materialProps = props;
     const { classes } = useStyles();
+    const [page, setPage] = React.useState(1);
+    const [entriesPerPage] = useState(DEFAULT_ENTRIES_PER_PAGE);
 
     /*
     const containerRef = useRef(null);
@@ -101,6 +106,7 @@ export default function CountrySearch(props: CountrySearchProps) {
         if (event == null) {
             // setFiltered(countries);
         }
+        setPage(1);
         var queryString = event.target.value;
         // what the heck is this little chunk
         if (queryString == null) {
@@ -145,31 +151,63 @@ export default function CountrySearch(props: CountrySearchProps) {
         // is it because the countries are already sorted?
         const newFilterCountries = countries.filter((data) => filter(data, queryString)); // .sort(comparator);
         setFiltered(newFilterCountries);
+        // const amountOfPages = Math.ceil(filtered.length / entriesPerPage);
+        // setPage(Math.min(page, amountOfPages));
     };
+
+    const amountOfPages = Math.ceil(filtered.length / entriesPerPage);
+    const indexOfLastEntry = page * entriesPerPage;
+    const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
 
     // 318.71
     // 16 total padding around list, 35 search bar height, 16 padding around search bar
-  return (
-    <>
-        <List className={classes.root}>
-            <ListItem>
-              <SearchBar onChange={onChange}/>
-            </ListItem>
+    return (
+        <>
+            <List className={classes.root}>
+                <ListItem>
+                    <SearchBar onChange={onChange}/>
+                </ListItem>
 
-            {/*<Infinite containerHeight={containerHeight - 16 - 35 - 16} elementHeight={302.707}>*/}
-            {/*{filtered.map((country) => (*/}
-            {/*    <ListItem key={`country-${country.name_long}-${country.adm0_a3}`}>*/}
-            {/*        <CountryCard*/}
-            {/*            label={country.name_long}*/}
-            {/*            code={country.iso_a2}*/}
-            {/*            country={country}*/}
-            {/*            activeCountry={props.activeCountry}*/}
-            {/*            setActiveCountry={props.setActiveCountry}*/}
-            {/*        />*/}
-            {/*    </ListItem>*/}
-            {/*))}*/}
-            {/*</Infinite>*/}
-        </List>
+                {/*<Infinite containerHeight={containerHeight - 16 - 35 - 16} elementHeight={302.707}>*/}
+                {/*{filtered.map((country) => (*/}
+                {/*    <ListItem key={`country-${country.name_long}-${country.adm0_a3}`}>*/}
+                {/*        <CountryCard*/}
+                {/*            label={country.name_long}*/}
+                {/*            code={country.iso_a2}*/}
+                {/*            country={country}*/}
+                {/*            activeCountry={props.activeCountry}*/}
+                {/*            setActiveCountry={props.setActiveCountry}*/}
+                {/*        />*/}
+                {/*    </ListItem>*/}
+                {/*))}*/}
+                {/*</Infinite>*/}
+
+                {filtered.map((country) => (
+                    <ListItem key={`country-${country.name_long}-${country.adm0_a3}`}>
+                        <CountryCard
+                            label={country.name_long}
+                            code={country.iso_a2}
+                            country={country}
+                            activeCountry={props.activeCountry}
+                            setActiveCountry={props.setActiveCountry}
+                        />
+                    </ListItem>
+                )).slice(indexOfFirstEntry, indexOfLastEntry)}
+            </List>
+            <ListItem>
+                {/*TODO: make this pagination be floating/have absolute position*/}
+                <Pagination
+                    count={amountOfPages}
+                    page={page}
+                    onChange={(event, value) => { setPage(value) }}
+                    siblingCount={0}
+                />
+            </ListItem>
+            {/*<Pagination*/}
+            {/*    count={amountOfPages}*/}
+            {/*    page={page}*/}
+            {/*    onChange={(event, value) => { setPage(value) }}*/}
+            {/*/>*/}
         </>
-  );
+    );
 }

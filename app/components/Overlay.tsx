@@ -1,36 +1,46 @@
 import React, {PropsWithChildren} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
 
-import Grid from '@material-ui/core/Grid';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import IconButton from '@material-ui/core/IconButton';
-import RedditIcon from '@material-ui/icons/Reddit';
-import GithubIcon from '@material-ui/icons/Github';
+import Grid from '@mui/material/Grid';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import IconButton from '@mui/material/IconButton';
+import RedditIcon from '@mui/icons-material/Reddit';
+import GithubIcon from '@mui/icons-material/Github';
 
-import GlobeIcon from '@material-ui/icons/Public';
-import MapIcon from '@material-ui/icons/Map';
+import GlobeIcon from '@mui/icons-material/Public';
+import MapIcon from '@mui/icons-material/Map';
 // import DownloadIcon from '@mui/icons-material/Download';
-import ViewIcon from '@material-ui/icons/GridOff'; // History, Visibility, HourglassFullTwoTone, History
-import ViewOffIcon from '@material-ui/icons/GridOn'; // FastForward, VisibilityOff, HourglassEmpty, Update, FastForward
-import ColoringBaseboardIcon from '@material-ui/icons/FormatPaint'; // FastForward, VisibilityOff, HourglassEmpty, Update, FastForward
-import AddIcon from '@material-ui/icons/Add';
+import ViewIcon from '@mui/icons-material/GridOff'; // History, Visibility, HourglassFullTwoTone, History
+import ViewOffIcon from '@mui/icons-material/GridOn'; // FastForward, VisibilityOff, HourglassEmpty, Update, FastForward
+import ColoringBaseboardIcon from '@mui/icons-material/FormatPaint'; // FastForward, VisibilityOff, HourglassEmpty, Update, FastForward
+import AddIcon from '@mui/icons-material/Add';
 
-import BrushIcon from '@material-ui/icons/Brush';
-import PanToolIcon from '@material-ui/icons/PanTool';
-import PaletteIcon from '@material-ui/icons/Palette';
-import ColorizeIcon from '@material-ui/icons/Colorize';
+import BrushIcon from '@mui/icons-material/Brush';
+import PanToolIcon from '@mui/icons-material/PanTool';
+import PaletteIcon from '@mui/icons-material/Palette';
+import ColorizeIcon from '@mui/icons-material/Colorize';
 
-import VerticalColorPicker from './VerticalColorPicker';
+import VerticalColorPicker, {stylesVCP} from './VerticalColorPicker';
 import useWindowDimensions from './hooks/useWindowDimensions';
-import {GridDirection, GridItemsAlignment, GridJustification} from "@material-ui/core/Grid/Grid";
+// commented bc fu mui
+// import {GridDirection, GridItemsAlignment, GridJustification} from "@mui/material/Grid/Grid";
+import {GridDirection} from "@mui/material/Grid/Grid";
 import {Baseboard} from "../constants/Baseboard";
-import Tooltip from "@material-ui/core/Tooltip";
+import Tooltip from "@mui/material/Tooltip";
+
+// TODO: find out what this are now called inside material ui; they got renamed / moved recently
+type GridItemsAlignment = 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
+type GridJustification =
+    | 'flex-start'
+    | 'center'
+    | 'flex-end'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
 
 
-
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
     overlay: {
         position: "absolute",
         width: "100%",
@@ -67,12 +77,13 @@ interface OverlayProps {
 
 interface Alignment {
     direction: GridDirection,
+    // commented bc fu mui
     justifyContent: GridJustification,
     alignItems: GridItemsAlignment
 }
 
 export default function Overlay(props: PropsWithChildren<OverlayProps>) {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const {children, onChangeComplete,
         useGlobe, setUseGlobe,
         viewFlashback, setViewFlashback,
@@ -85,21 +96,24 @@ export default function Overlay(props: PropsWithChildren<OverlayProps>) {
 
     const verticalAlignment: Alignment = {
         direction: "row",
+        // commented bc fu mui
         justifyContent: "flex-end",
         alignItems: "flex-end",
     };
 
     const horizontalAlignment: Alignment = {
         direction: "column",
+        // commented bc fu mui
         justifyContent: "flex-end",
         alignItems: "flex-end",
     };
 
     const alignment: Alignment = (isLandscape) ? verticalAlignment : horizontalAlignment;
 
+    // the main think here is a prolly just need to make it dark mode
     const globeFab = <ToggleButtonGroup
         orientation="horizontal"
-        color="primary"
+        // color="primary"
         aria-label="view"
         style={{
             // marginBottom: "0px"
@@ -138,7 +152,7 @@ export default function Overlay(props: PropsWithChildren<OverlayProps>) {
     // </ToggleButtonGroup>;
     const flashbackFab = <ToggleButtonGroup
         orientation="horizontal"
-        color="primary"
+        // color="primary"
         aria-label="view"
         style={{
             // marginBottom: "14px"
@@ -162,24 +176,24 @@ export default function Overlay(props: PropsWithChildren<OverlayProps>) {
         </ToggleButton>
     </ToggleButtonGroup>;
 
-    const toolFab = <ToggleButtonGroup
-        orientation="horizontal"
-        color="primary"
-        aria-label="view"
-        style={{
-            // marginBottom: "14px"
-        }}
-     >
-        <ToggleButton selected={tool == 0} onClick={() => setTool(0)}>
-            <BrushIcon />
-        </ToggleButton>
-        <ToggleButton selected={tool == 1} onClick={() => setTool(1)}>
-            <PanToolIcon />
-        </ToggleButton>
-        <ToggleButton selected={tool == 2} onClick={() => setTool(2)}>
-            <ColorizeIcon />
-        </ToggleButton>
-    </ToggleButtonGroup>;
+    // const toolFab = <ToggleButtonGroup
+    //     orientation="horizontal"
+    //     color="primary"
+    //     aria-label="view"
+    //     style={{
+    //         // marginBottom: "14px"
+    //     }}
+    //  >
+    //     <ToggleButton selected={tool == 0} onClick={() => setTool(0)}>
+    //         <BrushIcon />
+    //     </ToggleButton>
+    //     <ToggleButton selected={tool == 1} onClick={() => setTool(1)}>
+    //         <PanToolIcon />
+    //     </ToggleButton>
+    //     <ToggleButton selected={tool == 2} onClick={() => setTool(2)}>
+    //         <ColorizeIcon />
+    //     </ToggleButton>
+    // </ToggleButtonGroup>;
 
     /*
     const downloadButton = <IconButton target="_blank" href="https://reddit.com/r/planetariumplace">
@@ -228,7 +242,7 @@ export default function Overlay(props: PropsWithChildren<OverlayProps>) {
           }}
         >
             <Grid item>
-                <IconButton target="_blank" href="https://reddit.com/r/planetariumplace">
+                <IconButton target="_blank" href="https://reddit.com/r/planetariumplace" size="large">
                     <RedditIcon/>
                 </IconButton>
             </Grid>
@@ -248,7 +262,7 @@ export default function Overlay(props: PropsWithChildren<OverlayProps>) {
                 {fabView}
             </Grid>
             <Grid item>
-                <VerticalColorPicker vertical={isLandscape} onChangeComplete={onChangeComplete} />
+                <VerticalColorPicker classes={stylesVCP(null)}vertical={isLandscape} onChangeComplete={onChangeComplete} />
             </Grid>
         </Grid>
     );
