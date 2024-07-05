@@ -352,6 +352,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
         const canvas = canvasRef.current;
         const texture = new THREE.CanvasTexture(canvas);
         // pixelate the texture
+        // TODO: investigate how to make the edges not look so crispy/harsh while still being pixelated; bc there's def a way
         texture.magFilter = THREE.NearestFilter;
         texture.minFilter = THREE.LinearMipMapLinearFilter;
         texture.colorSpace = THREE.SRGBColorSpace; // this actually makes a visible impact // NoColorSpace

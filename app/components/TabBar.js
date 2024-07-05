@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import { makeStyles } from 'tss-react/mui';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
-import PanToolIcon from '@material-ui/icons/PanTool';
-import PaletteIcon from '@material-ui/icons/Palette';
-import BrushIcon from '@material-ui/icons/Brush';
-import SearchIcon from '@material-ui/icons/Search';
-import InfoIcon from '@material-ui/icons/Info';
+import PanToolIcon from '@mui/icons-material/PanTool';
+import PaletteIcon from '@mui/icons-material/Palette';
+import BrushIcon from '@mui/icons-material/Brush';
+import SearchIcon from '@mui/icons-material/Search';
+import InfoIcon from '@mui/icons-material/Info';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,7 +48,7 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function VerticalTabs(props) {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [value, setValue] = React.useState(1);
 
   const handleChange = (event, newValue) => {

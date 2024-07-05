@@ -9,11 +9,20 @@ import {actions, BaseState} from "../reducers";
 
 import BoardPage from './BoardPage';
 
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import themeColor from '@material-ui/core/colors/indigo';
+import CssBaseline from "@mui/material/CssBaseline";
+import { createTheme, ThemeProvider, Theme, StyledEngineProvider, adaptV4Theme } from '@mui/material/styles';
 import * as System from "../constants/system";
 import {AppDispatch} from "../store";
+import {grey, indigo as themeColor} from '@mui/material/colors';
+import {darkScrollbar} from "@mui/material";
+
+
+// commented during mui v5 migration
+// declare module '@mui/styles/defaultTheme' {
+//   // eslint-disable-next-line @typescript-eslint/no-empty-interface
+//   interface DefaultTheme extends Theme {}
+// }
+
 
 // console.log("setMouseDown = ");
 // console.log(setMouseDown);
@@ -26,36 +35,77 @@ function mapDispatchToProps(dispatch: AppDispatch) {
   };
 }
 
-// declare module '@material-ui/core/styles' { // @material-ui/core/styles
+// declare module '@mui/material/styles' { // @mui/material/styles
 //     interface TypeBackground {
 //         darkPaper: string;
 //         lightPaper?: string;
 //     }
 // }
 
-declare module '@material-ui/core/styles' {
+declare module '@mui/material/styles' {
     interface Theme {
         paletteBackground: {
             darkPaper: string;
             lightPaper: string;
+            cardBackgroundMuiV5: string;
         };
     }
     // allow configuration using `createTheme`
+    // interface DeprecatedThemeOptions {
     interface ThemeOptions {
         paletteBackground?: {
             darkPaper?: string;
             lightPaper?: string;
+            cardBackgroundMuiV5?: string;
         };
     }
 }
 
+// const theme = createTheme(adaptV4Theme({
+//     paletteBackground: {
+//         darkPaper: "#303030",
+//         lightPaper: "#424242"
+//     },
+//     palette: {
+//         primary: {
+//             light: "#7FBDF8", // adfsaf
+//             main: "#7FBDF8", // #6EADF7, #7FBDF8
+//             dark: "#7FBDF8",
+//             contrastText: "#fff"
+//         },
+//         // customBackground: {
+//         //     darkPaper: "#303030",
+//         //     lightPaper: "#424242"
+//         // },
+//         // primary: themeColor,
+//         // primary: "#90caf9", // palette.primary.main
+//         // commented during mui v5 migration
+//         //-- type: 'dark',
+//         background: {
+//             default: "#00000E",
+//             // paper: "#424242",
+//             // Commented out because of TS bug
+//             // darkPaper: "#303030", // "#424242"
+//             // Commented out because of TS bug
+//             // lightPaper: "#424242", // "#424242"
+//         },
+//         /*
+//         action: {
+//             active: "#fff"
+//         }
+//         */
+//     }
+// }));
+
 const theme = createTheme({
     paletteBackground: {
         darkPaper: "#303030",
-        lightPaper: "#424242"
+        lightPaper: "#424242",
+        cardBackgroundMuiV5: "#1E1E1E" // I couldn't figure out to replicate the color now used as the background for Cards in Mui V5
     },
     palette: {
-        primary: {
+        mode: 'dark',
+        primary: { // alternatively this primary color can just be a single color and the rest get set automatically
             light: "#7FBDF8", // adfsaf
             main: "#7FBDF8", // #6EADF7, #7FBDF8
             dark: "#7FBDF8",
@@ -67,9 +117,10 @@ const theme = createTheme({
         // },
         // primary: themeColor,
         // primary: "#90caf9", // palette.primary.main
-        type: 'dark',
+        // commented during mui v5 migration
+        //-- type: 'dark',
         background: {
-            default: "#00000E",
+            // default: "#00000E",
             // paper: "#424242",
             // Commented out because of TS bug
             // darkPaper: "#303030", // "#424242"
@@ -81,6 +132,22 @@ const theme = createTheme({
             active: "#fff"
         }
         */
+    },
+    components: {
+        MuiCssBaseline: {
+            styleOverrides: {
+                html: {
+                    ...darkScrollbar(),
+                    // ...darkScrollbar({
+                    //     track: grey[200],
+                    //     thumb: grey[400],
+                    //     active: grey[400]
+                    // }),
+                    //scrollbarWidth for Firefox
+                    // scrollbarWidth: "thin"
+                }
+            }
+        }
     }
 });
 
@@ -127,10 +194,13 @@ class App extends React.Component {
         return (
             <div>
             {/*<div onPointerDown={this.handleMouseDown}>*/}
-                <ThemeProvider theme={theme}>
-                    <CssBaseline />
-                    <BoardPage />
-                </ThemeProvider>
+                {/* TODO: see if I can remove this StyledEngineProvider thing */}
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={theme}>
+                        <CssBaseline />
+                        <BoardPage />
+                    </ThemeProvider>
+                </StyledEngineProvider>
             </div>
         );
     }

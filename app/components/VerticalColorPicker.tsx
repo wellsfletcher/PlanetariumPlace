@@ -1,19 +1,20 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { rgbToHex, withStyles, useTheme } from '@material-ui/core/styles';
-// import * as colors from '@material-ui/core/colors';
-import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
-import Radio from '@material-ui/core/Radio';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import CheckIcon from '@material-ui/icons/Check';
-import Slider from '@material-ui/core/Slider';
-import { capitalize } from '@material-ui/core/utils';
+import { rgbToHex, useTheme } from '@mui/material/styles';
+import { withStyles } from 'tss-react/mui';
+// import * as colors from '@mui/material/colors';
+import Grid from '@mui/material/Grid';
+import Input from '@mui/material/Input';
+import Radio from '@mui/material/Radio';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import CheckIcon from '@mui/icons-material/Check';
+import Slider from '@mui/material/Slider';
+import { capitalize } from '@mui/material/utils';
 
-import blue from '@material-ui/core/colors/blue';
 import useWindowDimensions from './hooks/useWindowDimensions';
+import { blue } from '@mui/material/colors';
 
 // {{"demo": "pages/customization/color/ColorTool.js", "hideToolbar": true, "bg": true}}
 
@@ -21,7 +22,7 @@ const defaults = {
   primary: '#00D3DD',
 };
 
-const styles = (theme) => ({
+export const stylesVCP = (theme) => ({
   radio: {
     padding: 0,
   },
@@ -42,7 +43,8 @@ const styles = (theme) => ({
     // width: "6.25vw",
     // height: 48,
     border: '1px solid white',
-    color: theme.palette.common.white,
+    // commented bc fu mui v5
+    color: theme?.palette.common.white,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -68,9 +70,14 @@ const defaultColors = {
           "purple": "#820080"
       };
 
+// export interface ColorToolClasses {
+//
+// }
+
 // TODO: look into whether this file was originally typescript? bc I feel like it was but I changed it?
 interface ColorToolProps {
     onChangeComplete: (color: string) => void,
+    // commented bc fu mui v5
     classes: any,
     colors?: any,
     vertical: boolean
@@ -78,7 +85,10 @@ interface ColorToolProps {
 
 // still need to create parameters for default color value...
 function ColorTool(props: ColorToolProps) {
+    // commented bc fu mui v5
   const { onChangeComplete, classes } = props; // colors, names
+    // const { onChangeComplete } = props; // colors, names
+    // const classes = styles(null);
   var colors = props.colors;
   if (colors == null) {
       colors = defaultColors;
@@ -219,4 +229,4 @@ function ColorTool(props: ColorToolProps) {
 //   classes: PropTypes.object.isRequired,
 // };
 
-export default withStyles(styles)(ColorTool);
+export default withStyles(ColorTool, stylesVCP);
