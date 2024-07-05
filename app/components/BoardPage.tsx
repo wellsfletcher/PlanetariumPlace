@@ -12,7 +12,8 @@ import { useTimeout } from './hooks/useTimeout';
 
 import Board from './Board';
 import Globe from './Globe';
-import PersistentSearchDrawer from './PersistentSearchDrawer';
+// import PersistentSearchDrawer from './PersistentSearchDrawer';
+import PersistentSearchDrawer2 from './PersistentSearchDrawer2';
 import TabBar from './TabBar';
 import VerticalColorPicker from './VerticalColorPicker';
 import Overlay from './Overlay';
@@ -25,18 +26,18 @@ import * as System from '../constants/system';
 //- import { CSSProperties } from "react";
 
 
-import Fab from '@material-ui/core/Fab';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import Grid from '@material-ui/core/Grid';
+import Fab from '@mui/material/Fab';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Grid from '@mui/material/Grid';
 /*
-import GlobeIcon from '@material-ui/icons/Public';
-import MapIcon from '@material-ui/icons/Map';
-import ViewIcon from '@material-ui/icons/History'; // Visibility, HourglassFullTwoTone, History
-import ViewOffIcon from '@material-ui/icons/FastForward'; // VisibilityOff, HourglassEmpty, Update, FastForward
-import AddIcon from '@material-ui/icons/Add';
+import GlobeIcon from '@mui/icons-material/Public';
+import MapIcon from '@mui/icons-material/Map';
+import ViewIcon from '@mui/icons-material/History'; // Visibility, HourglassFullTwoTone, History
+import ViewOffIcon from '@mui/icons-material/FastForward'; // VisibilityOff, HourglassEmpty, Update, FastForward
+import AddIcon from '@mui/icons-material/Add';
 */
 
 function mapDispatchToProps(dispatch: AppDispatch) {
@@ -225,17 +226,25 @@ const BoardPage = (props: any) => {
         ;
 
         // if you start seeing performance issues, maybe have the first thing you try to do be this:
+        // the activeCountry issue still seems to be a problem even with pagination; issues is especially noticable on safari
         // activeCountry={""} instead of activeCountry={props.activeCountry}, bc that would make sense to me, and that could've been what was causing issues on iphone last time
         // I think that actually might be the problem; TODO: investigate this
         return (
             <>
                 <div style={style}>
-                    <PersistentSearchDrawer
+                    {/*<PersistentSearchDrawer*/}
+                    {/*    onChangeComplete={onChangeComplete}*/}
+                    {/*    activeCountry={""}*/}
+                    {/*    setActiveCountry={props.setActiveCountry}*/}
+                    {/*>*/}
+                    {/*</PersistentSearchDrawer>*/}
+                    <PersistentSearchDrawer2
                         onChangeComplete={onChangeComplete}
+                        // activeCountry={props.activeCountry}
                         activeCountry={""}
                         setActiveCountry={props.setActiveCountry}
                     >
-                    </PersistentSearchDrawer>
+                    </PersistentSearchDrawer2>
                     {boardViewer}
                 </div>
                 <Overlay

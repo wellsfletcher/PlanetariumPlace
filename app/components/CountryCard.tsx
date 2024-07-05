@@ -1,12 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from 'tss-react/mui';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import * as System from '../constants/system';
+import LayeredCardMedia from "./LayeredCardMedia";
 
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11
@@ -18,10 +20,12 @@ function countryToFlag(isoCode) {
     : isoCode;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   root: {
     maxWidth: 345,
+    // minWidth: 345,
     // background: theme.palette.background.darkPaper,
+    // background: theme.paletteBackground.darkPaper,
     whiteSpace: 'normal',
   },
   media: {
@@ -41,21 +45,22 @@ interface CountryCardProps {
 }
 
 export default function MediaCard(props: CountryCardProps) {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   const flag = countryToFlag(props.code);
   // "https://en.wikipedia.org/w/index.php?search=" + props.label.replace(/ /g, '')
+    // System.HIGHLIGHTS_FOLDER + highlightFileName
 
   let isActiveCountry = props.activeCountry == props.country.wikidataid;
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} sx={{ width: '100%' }}>
       <CardActionArea>
-        <CardContent>
-            <Typography variant="h1" component="h1" align="center">
-              {flag}
-            </Typography>
-        </CardContent>
+        {/*<CardContent>*/}
+        {/*    <Typography variant="h1" component="h1" align="center">*/}
+        {/*      {flag}*/}
+        {/*    </Typography>*/}
+        {/*</CardContent>*/}
         {/*
         <CardMedia
           className={classes.media}
@@ -63,9 +68,22 @@ export default function MediaCard(props: CountryCardProps) {
           title={props.label}
         />
         */}
+          {/*honestly there's gotta be a way to make these images get loaded as static images, and not have to use state to do it*/}
+        {/*<CardMedia*/}
+        {/*  className={classes.media}*/}
+        {/*  image={System.HIGHLIGHTS_FOLDER + props.country.wikidataid + ".png"}*/}
+        {/*  title={props.label}*/}
+        {/*/>*/}
+          <LayeredCardMedia
+              backgroundImage={System.FLASHBACK_BOARD_PATH}
+              overlayImage={System.HIGHLIGHTS_FOLDER + props.country.wikidataid + ".png"}
+              className={classes.media}
+              // image={System.HIGHLIGHTS_FOLDER + props.country.wikidataid + ".png"}
+              title={props.label}
+          />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {props.label}
+            {props.label + " " + flag}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {props.label} has a gross domestic product of {parseInt(props.country.gdp_md).toLocaleString('en-US')}K and a population of about {parseInt(props.country.pop_est).toLocaleString('en-US')}.
