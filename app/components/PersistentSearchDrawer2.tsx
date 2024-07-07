@@ -140,8 +140,11 @@ export default function PersistentDrawerLeft(props: PersistentDrawerProps) {
                     background: theme.paletteBackground.darkPaper, // not working
                 }}
                 variant="persistent"
+                // TODO: fix this, or start using a modal instead
+                // variant={windowWidth <= drawerWidth * 2 ? "temporary" : "persistent"} // this is so close to being perfect, but the animations and colors are wrong
                 anchor="left"
                 open={open}
+                onClose={handleDrawerClose} // I thought this would make it close via escape key but it doesn't
             >
                 <DrawerHeader>
                     <IconButton onClick={handleDrawerClose}>
