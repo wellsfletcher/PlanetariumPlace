@@ -15,6 +15,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import SearchBar from './SearchBar';
 import CountryCard from './CountryCard';
 import {Pagination} from "@mui/material";
+import {useScrollIntoView} from "./hooks/useScrollIntoView";
 // import { countries } from '../constants/countries';
 
 // var Infinite = require('react-infinite');
@@ -44,6 +45,10 @@ export default function CountrySearch(props: CountrySearchProps) {
     const { classes } = useStyles();
     const [page, setPage] = React.useState(1);
     const [entriesPerPage] = useState(DEFAULT_ENTRIES_PER_PAGE);
+    // TODO: fix issue where when it scrolls there's a tiny bit extra pixels below the Pagination component
+    // See this chatgpt convo for more details https://chatgpt.com/c/d7023d97-788a-4fd0-9fe3-d91d43f74487
+    // const PADDING_BELOW_PAGINATION_COMPONENT = 1000; // this is kinda hacky but oh well
+    const scrollToThisRef = useScrollIntoView<HTMLDivElement>([page]);
 
     /*
     const containerRef = useRef(null);
@@ -197,6 +202,7 @@ export default function CountrySearch(props: CountrySearchProps) {
             <ListItem>
                 {/*TODO: make this pagination be floating/have absolute position*/}
                 <Pagination
+                    ref={scrollToThisRef}
                     count={amountOfPages}
                     page={page}
                     onChange={(event, value) => { setPage(value) }}
