@@ -138,7 +138,7 @@ const Highlights = (props) => {
 }
 
 // I have to update my dependencies (I think react in particular) to be able to convert this file to TS
-const Board = (props: CanvasGlobeProps) => {
+const Board = (props: any) => {
     var tilesRgba = props.tilesRgba;
     // var tiles = props.tiles;
     var width = props.width;
@@ -150,74 +150,76 @@ const Board = (props: CanvasGlobeProps) => {
 
     const [selectedTile, setSelectedTile] = React.useState(null); // {x: 0, y: 0}
 
-    // // ------ old canvas code start ------ //
+    const canvasRef = props.canvasRef;
+
+    // // // ------ old canvas code start ------ //
+    // // const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
+    // //
+    // // var draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+    // //     // drawAnimatedCircle(ctx, frameCount);
+    // //     // drawPixel(ctx, 69, 42);
+    // //     // has redraw the pixel buffer every time when I do it like this
+    // //     // but this is the only way to do it in a reacty way methinks
+    // //     // unless maybe if lifecycle methods could solve my problems?
+    // //     // drawPixelBuffer(ctx, tiles, width);
+    // //
+    // //     // drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    // //     if (!viewFlashback) {
+    // //         drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    // //     } else {
+    // //         // paintCanvasBlack(ctx, width, height);
+    // //         // fillCanvasWithImage(ctx, "../../assets/pixel-countries-mid-res.png", width, height);
+    // //         fillCanvasWithImage(ctx, flashBackImage, width, height);
+    // //     }
+    // // };
+    // //
+    // //
+    // // // const options = {
+    // // //     context: "2d"
+    // // // };
+    // // // const { context, ...moreConfig } = options;
+    // // const canvasRef = useCanvas(draw);
+    // // // ------ old canvas code end ------ //
+    //
+    //
+    // // ------ new canvas code start ------ //
     // const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
+    // const [coloringBaseboardImage, setColoringBaseboardImage] = usePreloadedImage(System.COLORING_BASEBOARD_PATH);
     //
-    // var draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-    //     // drawAnimatedCircle(ctx, frameCount);
-    //     // drawPixel(ctx, 69, 42);
-    //     // has redraw the pixel buffer every time when I do it like this
-    //     // but this is the only way to do it in a reacty way methinks
-    //     // unless maybe if lifecycle methods could solve my problems?
-    //     // drawPixelBuffer(ctx, tiles, width);
+    // const highlightFileName = (props.activeCountry == null || props.activeCountry == "" ? "empty" : props.activeCountry) + ".png";
+    // const territoryHighlightImage = useImage(System.HIGHLIGHTS_FOLDER + highlightFileName);
+    // // const boardImages = [flashBackImage, coloringBaseboardImage, territoryHighlightImage];
     //
-    //     // drawPixelRgbaBuffer(ctx, tilesRgba, width);
-    //     if (!viewFlashback) {
-    //         drawPixelRgbaBuffer(ctx, tilesRgba, width);
-    //     } else {
-    //         // paintCanvasBlack(ctx, width, height);
-    //         // fillCanvasWithImage(ctx, "../../assets/pixel-countries-mid-res.png", width, height);
+    // const drawBoard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+    //     drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    // }
+    // const drawFlashback = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+    //     if (flashBackImage != null) {
     //         fillCanvasWithImage(ctx, flashBackImage, width, height);
     //     }
-    // };
+    // }
+    // const drawColoringBaseboard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+    //     if (coloringBaseboardImage != null) {
+    //         fillCanvasWithImage(ctx, coloringBaseboardImage, width, height);
+    //     }
+    // }
+    // const drawHighlight = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+    //     if (territoryHighlightImage != null) {
+    //         fillCanvasWithImage(ctx, territoryHighlightImage, width, height);
+    //     }
+    // }
     //
+    // let layers = [];
+    // if (activeBaseboard == Baseboard.FLASHBACK) {
+    //     layers = [drawFlashback, drawHighlight];
+    // } else if (activeBaseboard == Baseboard.COLORING) {
+    //     layers = [drawColoringBaseboard, drawHighlight];
+    // } else {
+    //     layers = [drawBoard, drawHighlight];
+    // }
     //
-    // // const options = {
-    // //     context: "2d"
-    // // };
-    // // const { context, ...moreConfig } = options;
-    // const canvasRef = useCanvas(draw);
-    // // ------ old canvas code end ------ //
-
-
-    // ------ new canvas code start ------ //
-    const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
-    const [coloringBaseboardImage, setColoringBaseboardImage] = usePreloadedImage(System.COLORING_BASEBOARD_PATH);
-
-    const highlightFileName = (props.activeCountry == null || props.activeCountry == "" ? "empty" : props.activeCountry) + ".png";
-    const territoryHighlightImage = useImage(System.HIGHLIGHTS_FOLDER + highlightFileName);
-    // const boardImages = [flashBackImage, coloringBaseboardImage, territoryHighlightImage];
-
-    const drawBoard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-        drawPixelRgbaBuffer(ctx, tilesRgba, width);
-    }
-    const drawFlashback = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-        if (flashBackImage != null) {
-            fillCanvasWithImage(ctx, flashBackImage, width, height);
-        }
-    }
-    const drawColoringBaseboard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-        if (coloringBaseboardImage != null) {
-            fillCanvasWithImage(ctx, coloringBaseboardImage, width, height);
-        }
-    }
-    const drawHighlight = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-        if (territoryHighlightImage != null) {
-            fillCanvasWithImage(ctx, territoryHighlightImage, width, height);
-        }
-    }
-
-    let layers = [];
-    if (activeBaseboard == Baseboard.FLASHBACK) {
-        layers = [drawFlashback, drawHighlight];
-    } else if (activeBaseboard == Baseboard.COLORING) {
-        layers = [drawColoringBaseboard, drawHighlight];
-    } else {
-        layers = [drawBoard, drawHighlight];
-    }
-
-    const canvasRef = useFancyCanvas(layers);
-    // ------ new canvas code end ------ //
+    // //--- const canvasRef = useFancyCanvas(layers);
+    // // ------ new canvas code end ------ //
 
 
     const canvas = canvasRef.current;
@@ -261,6 +263,8 @@ const Board = (props: CanvasGlobeProps) => {
         setMapScale( transform.scale );
     };
     const onMapTouchStart = () => setMapScaleOnTouchStart(mapScale);
+
+    // ------ disgusting Board click-handling code start ------ //
 
     var zoom = {x: 1, y: 1};
     var pan = {x: -100, y: 50};
@@ -328,18 +332,19 @@ const Board = (props: CanvasGlobeProps) => {
         // var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
         // console.log(dataUrl);
     }
+    // ------ disgusting Board click-handling code end ------ //
 
-    const rest = {
-        width: width,
-        height: height,
-        // onMouseDown: handleCanvasClick, // onClick // onMouseDown
-        // onMouseMove: handleMouseEnter, // this can be on the outside div or on the canvas itself // actually it can't or it'll be called when it shouldn't
-        style: {
-            // commenting out bc ts error
-            imageRendering: "pixelated" as "pixelated", // crisp-edges // pixelated // tf is this bs
-            cursor: "crosshair"
-        }
-    };
+    // const rest = {
+    //     width: width,
+    //     height: height,
+    //     // onMouseDown: handleCanvasClick, // onClick // onMouseDown
+    //     // onMouseMove: handleMouseEnter, // this can be on the outside div or on the canvas itself // actually it can't or it'll be called when it shouldn't
+    //     style: {
+    //         // commenting out bc ts error
+    //         imageRendering: "pixelated" as "pixelated", // crisp-edges // pixelated // tf is this bs
+    //         cursor: "crosshair"
+    //     }
+    // };
 
     /*
     const tooltip = (
@@ -358,6 +363,11 @@ const Board = (props: CanvasGlobeProps) => {
         onClick: handleCanvasClick, // this will never fire on mobile (trust me I tested it); It doesn't cause any issues as of now though
         // onMouseMove: handleMouseEnter
     }
+
+    // could perhaps use useCallback here idk prolly doesn't matter whatsoever
+    // React.useEffect(() => {
+    //     props.setClickHandlerProps(clickHandlerProps);
+    // }, []);
 
     /*
     const highligths = (
@@ -391,14 +401,16 @@ const Board = (props: CanvasGlobeProps) => {
         >
             {highligths}
             <div
-            {...swipeHandlers}
-            onTouchStart={onMapTouchStart}
-            >
-            <canvas
-                ref={canvasRef}
-                {...rest}
+                {...swipeHandlers}
+                onTouchStart={onMapTouchStart}
                 {...clickHandlerProps}
-            />
+            >
+                {/*<canvas*/}
+                {/*    ref={canvasRef}*/}
+                {/*    {...rest}*/}
+                {/*    {...clickHandlerProps}*/}
+                {/*/>*/}
+                {props.children}
             </div>
         </MapInteractionCSS>
     );

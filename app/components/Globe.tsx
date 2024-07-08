@@ -81,7 +81,7 @@ export interface CanvasGlobeProps {
 
 let globeMaterial = new THREE.MeshPhongMaterial();
 
-function CanvasGlobe(props: CanvasGlobeProps) {
+function CanvasGlobe(props: any) {
     const globeEl: MutableRefObject<GlobeMethods> = React.useRef();
 
     const viewFlashback = props.viewFlashback;
@@ -92,6 +92,8 @@ function CanvasGlobe(props: CanvasGlobeProps) {
     var width = props.width;
     // removing Tiles array to improve performance
     var height = getHeightFromTilesRgba(tilesRgba, width);
+
+    const canvasRef = props.canvasRef;
 
     /*
     // maybe change this to a custom usePreloadedImage hook
@@ -109,104 +111,104 @@ function CanvasGlobe(props: CanvasGlobeProps) {
     // console.log(System.FLASHBACK_BOARD_PATH); // this in base 64 for some reason...
 
 
-    // // ------ old canvas code start ------ //
+    // // // ------ old canvas code start ------ //
+    // // const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
+    // //
+    // // var draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+    // //     // drawPixelBuffer(ctx, tiles, width);
+    // //     // drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    // //
+    // //     if (!viewFlashback) {
+    // //         drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    // //     } else {
+    // //         // paintCanvasBlack(ctx, width, height);
+    // //         // fillCanvasWithImage(ctx, "../../assets/pixel-countries-mid-res.png", width, height);
+    // //         // console.log(image);
+    // //         fillCanvasWithImage(ctx, flashBackImage, width, height);
+    // //     }
+    // //     // console.log("drew");
+    // // }
+    // //
+    // // // const options = {
+    // // //     context: "2d"
+    // // // };
+    // // // const { context, ...moreConfig } = options;
+    // // const canvasRef = useCanvas(draw);
+    // // // ------ old canvas code end ------ //
+    //
+    //
+    // // ------ new canvas code start ------ //
     // const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
+    // const [coloringBaseboardImage, setColoringBaseboardImage] = usePreloadedImage(System.COLORING_BASEBOARD_PATH);
     //
-    // var draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-    //     // drawPixelBuffer(ctx, tiles, width);
-    //     // drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    // const highlightFileName = (props.activeCountry == null || props.activeCountry == "" ? "empty" : props.activeCountry) + ".png";
+    // // const highlightFileName = (props.activeCountry == null || props.activeCountry == "" ? "Q16" : props.activeCountry) + ".png";
+    // // console.log(["highlightFileName", highlightFileName]);
+    // // const [territoryHighlightImage, setTerritoryHighlightImage] = usePreloadedImage(System.CANADA_HIGHLIGHT_PATH);
+    // // wait is the functions input just the initial value? I think it's probably like just not done loading, when click it
+    // // TODO: figure out the above problem
+    // //- const [territoryHighlightImage, setTerritoryHighlightImage] = usePreloadedImage(System.HIGHLIGHTS_FOLDER + highlightFileName);
+    // // const [territoryHighlightImage, setTerritoryHighlightImage] = usePreloadedImage(System.HIGHLIGHTS_FOLDER + "Q16.png");
+    // const territoryHighlightImage = useImage(System.HIGHLIGHTS_FOLDER + highlightFileName);
+    // const boardImages = [flashBackImage, coloringBaseboardImage, territoryHighlightImage];
     //
-    //     if (!viewFlashback) {
-    //         drawPixelRgbaBuffer(ctx, tilesRgba, width);
-    //     } else {
-    //         // paintCanvasBlack(ctx, width, height);
-    //         // fillCanvasWithImage(ctx, "../../assets/pixel-countries-mid-res.png", width, height);
-    //         // console.log(image);
+    // // console.log(["System.CANADA_HIGHLIGHT_PATH", System.CANADA_HIGHLIGHT_PATH]);
+    //
+    // const drawBoard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+    //     drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    // }
+    // const drawFlashback = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+    //     if (flashBackImage != null) {
     //         fillCanvasWithImage(ctx, flashBackImage, width, height);
     //     }
-    //     // console.log("drew");
+    // }
+    // const drawColoringBaseboard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+    //     if (coloringBaseboardImage != null) {
+    //         fillCanvasWithImage(ctx, coloringBaseboardImage, width, height);
+    //     }
+    // }
+    // const drawHighlight = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+    //     if (territoryHighlightImage != null) {
+    //         fillCanvasWithImage(ctx, territoryHighlightImage, width, height);
+    //     }
+    // }
+    //
+    // let layers = [];
+    // if (activeBaseboard == Baseboard.FLASHBACK) {
+    //     layers = [drawFlashback, drawHighlight];
+    // } else if (activeBaseboard == Baseboard.COLORING) {
+    //     layers = [drawColoringBaseboard, drawHighlight];
+    // } else {
+    //     layers = [drawBoard, drawHighlight];
     // }
     //
     // // const options = {
     // //     context: "2d"
     // // };
     // // const { context, ...moreConfig } = options;
-    // const canvasRef = useCanvas(draw);
-    // // ------ old canvas code end ------ //
-
-
-    // ------ new canvas code start ------ //
-    const [flashBackImage, setFlashbackImage] = usePreloadedImage(System.FLASHBACK_BOARD_PATH);
-    const [coloringBaseboardImage, setColoringBaseboardImage] = usePreloadedImage(System.COLORING_BASEBOARD_PATH);
-
-    const highlightFileName = (props.activeCountry == null || props.activeCountry == "" ? "empty" : props.activeCountry) + ".png";
-    // const highlightFileName = (props.activeCountry == null || props.activeCountry == "" ? "Q16" : props.activeCountry) + ".png";
-    // console.log(["highlightFileName", highlightFileName]);
-    // const [territoryHighlightImage, setTerritoryHighlightImage] = usePreloadedImage(System.CANADA_HIGHLIGHT_PATH);
-    // wait is the functions input just the initial value? I think it's probably like just not done loading, when click it
-    // TODO: figure out the above problem
-    //- const [territoryHighlightImage, setTerritoryHighlightImage] = usePreloadedImage(System.HIGHLIGHTS_FOLDER + highlightFileName);
-    // const [territoryHighlightImage, setTerritoryHighlightImage] = usePreloadedImage(System.HIGHLIGHTS_FOLDER + "Q16.png");
-    const territoryHighlightImage = useImage(System.HIGHLIGHTS_FOLDER + highlightFileName);
-    const boardImages = [flashBackImage, coloringBaseboardImage, territoryHighlightImage];
-
-    // console.log(["System.CANADA_HIGHLIGHT_PATH", System.CANADA_HIGHLIGHT_PATH]);
-
-    const drawBoard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-        drawPixelRgbaBuffer(ctx, tilesRgba, width);
-    }
-    const drawFlashback = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-        if (flashBackImage != null) {
-            fillCanvasWithImage(ctx, flashBackImage, width, height);
-        }
-    }
-    const drawColoringBaseboard = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-        if (coloringBaseboardImage != null) {
-            fillCanvasWithImage(ctx, coloringBaseboardImage, width, height);
-        }
-    }
-    const drawHighlight = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-        if (territoryHighlightImage != null) {
-            fillCanvasWithImage(ctx, territoryHighlightImage, width, height);
-        }
-    }
-
-    let layers = [];
-    if (activeBaseboard == Baseboard.FLASHBACK) {
-        layers = [drawFlashback, drawHighlight];
-    } else if (activeBaseboard == Baseboard.COLORING) {
-        layers = [drawColoringBaseboard, drawHighlight];
-    } else {
-        layers = [drawBoard, drawHighlight];
-    }
-
-    // const options = {
-    //     context: "2d"
-    // };
-    // const { context, ...moreConfig } = options;
-    const canvasRef = useFancyCanvas(layers);
-    // ------ new canvas code end ------ //
-
-
-
-    // ------ new canvas code start ------ //
-
-    // const { canvasRefs, baseCanvasRef } = useLayeredCanvas([
-    //     {
-    //         drawFunction: (ctx, frameCount) => {
-    //             drawPixelRgbaBuffer(ctx, tilesRgba, width);
-    //         },
-    //         enabled: !viewFlashback
-    //     },
-    //     {
-    //         drawFunction: (ctx, frameCount) => {
-    //             fillCanvasWithImage(ctx, flashBackImage, width, height);
-    //         },
-    //         enabled: viewFlashback
-    //     }
-    // ]);
-
-    // ------ new canvas code end ------ //
+    // //--- const canvasRef = useFancyCanvas(layers);
+    // // ------ new canvas code end ------ //
+    //
+    //
+    //
+    // // ------ new canvas code start ------ //
+    //
+    // // const { canvasRefs, baseCanvasRef } = useLayeredCanvas([
+    // //     {
+    // //         drawFunction: (ctx, frameCount) => {
+    // //             drawPixelRgbaBuffer(ctx, tilesRgba, width);
+    // //         },
+    // //         enabled: !viewFlashback
+    // //     },
+    // //     {
+    // //         drawFunction: (ctx, frameCount) => {
+    // //             fillCanvasWithImage(ctx, flashBackImage, width, height);
+    // //         },
+    // //         enabled: viewFlashback
+    // //     }
+    // // ]);
+    //
+    // // ------ new canvas code end ------ //
 
 
 
@@ -367,7 +369,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
 
         const directionalLight = globeEl.current.lights().find(obj3d => obj3d.type === 'DirectionalLight');
         directionalLight.intensity = 0.03 * Math.PI;
-    }, [boardImages, props.viewFlashback, props.tilesRgba, props.activeBaseboard]);
+    }, [props.dependencies, props.viewFlashback, props.tilesRgba, props.activeBaseboard]);
     // React.useEffect(() => {
     //     texture.needsUpdate = true;
     // }, [props.viewFlashback, props.tiles]);
@@ -641,16 +643,16 @@ function CanvasGlobe(props: CanvasGlobeProps) {
 
     //- const countryProps = {};
 
-    const rest = {
-        width: width,
-        height: height,
-        style: {
-            // Commented out bc of TS error
-            //- imageRendering: "pixelated",
-            cursor: "crosshair",
-            display: "none"
-        }
-    };
+    // const rest = {
+    //     width: width,
+    //     height: height,
+    //     style: {
+    //         // Commented out bc of TS error
+    //         //- imageRendering: "pixelated",
+    //         cursor: "crosshair",
+    //         display: "none"
+    //     }
+    // };
 
 
     //- const { windowWidth, windowHeight } = useWindowDimensions();
@@ -679,10 +681,10 @@ function CanvasGlobe(props: CanvasGlobeProps) {
                 onZoom={onZoom}
                 {...countryProps}
             />
-            <canvas
-                ref={canvasRef}
-                {...rest}
-            />
+            {/*<canvas*/}
+            {/*    ref={canvasRef}*/}
+            {/*    {...rest}*/}
+            {/*/>*/}
         </div>
     );
 }
