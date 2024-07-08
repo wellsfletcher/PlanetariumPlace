@@ -66,6 +66,7 @@ import {AppDispatch} from "../store";
 import {Baseboard} from "../constants/Baseboard";
 import usePixelsFromImage from "./hooks/usePixelsFromImage";
 import HiddenCanvas from "./HiddenCanvas";
+import Viewer from "./Viewer";
 // import {useAppSelector} from "./hooks/redux";
 const mapStateToProps = (state) => { // this will be placed with a bunch of selectors
     return {
@@ -193,6 +194,7 @@ const MainPage = (props: any) => {
         const [viewFlashback, setViewFlashback] = React.useState(false);
         const [activeBaseboard, setActiveBaseboard] = React.useState(Baseboard.INTERACTIVE);
         const [tool, setTool] = React.useState(0);
+        // TODO: move this to be inside the Viewer component
         const [wikidataidRgba, wikidataidCanvasRef] = usePixelsFromImage(System.WIKIDATAID_BASEBOARD_PATH);
 
         // var tiles = [];
@@ -218,16 +220,16 @@ const MainPage = (props: any) => {
         const NUM_BOARD_IDS = 2;
 
         const [useGlobe, setUseGlobe] = React.useState(true);
-        const boardViewer = (!useGlobe) ?
-            <Board
-                {...boardProps}
-            /*{mouseDown={props.mouseDown}*/
-            />
-            :
-            <Globe
-                {...boardProps}
-            />
-        ;
+        // const boardViewer = (!useGlobe) ?
+        //     <Board
+        //         {...boardProps}
+        //     /*{mouseDown={props.mouseDown}*/
+        //     />
+        //     :
+        //     <Globe
+        //         {...boardProps}
+        //     />
+        // ;
 
         // if you start seeing performance issues, maybe have the first thing you try to do be this:
         // the activeCountry issue still seems to be a problem even with pagination; issues is especially noticable on safari
@@ -249,7 +251,11 @@ const MainPage = (props: any) => {
                         setActiveCountry={props.setActiveCountry}
                     >
                     </PersistentSearchDrawer2>
-                    {boardViewer}
+                    {/*{boardViewer}*/}
+                    <Viewer
+                        {...boardProps}
+                        useGlobe={useGlobe}
+                    />
                 </div>
                 <Overlay
                     onChangeComplete={onChangeComplete}
