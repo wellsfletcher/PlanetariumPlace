@@ -66,6 +66,7 @@ import {AppDispatch} from "../store";
 import {Baseboard} from "../constants/Baseboard";
 import usePixelsFromImage from "./hooks/usePixelsFromImage";
 import HiddenCanvas from "./HiddenCanvas";
+import Viewer from "./Viewer";
 // import {useAppSelector} from "./hooks/redux";
 const mapStateToProps = (state) => { // this will be placed with a bunch of selectors
     return {
@@ -94,10 +95,10 @@ const mapStateToProps = (state) => { // this will be placed with a bunch of sele
 // TODO: simplify this code so we don't need the extra type definition (and just like use State instead or something)
 interface BoardProps {
     tilesRgba: Uint8ClampedArray,
-    tiles: number[],
+    // tiles: number[],
     wikidataidRgba: Uint8ClampedArray, // technically should equal maybe new Uint8ClampedArray(new ArrayBuffer(System.INITIAL_WIDTH * System.INITIAL_HEIGHT * 4)),
-    map: number[],
-    values: string[],
+    // map: number[],
+    // values: string[],
     activeCountry: string,
     setActiveCountry: (value: string) => void,
     width: number,
@@ -121,24 +122,26 @@ interface BoardPageProps extends BoardProps {
     boardId: number,
 }
 
-// export default class BoardPage extends React.Component {
-const BoardPage = (props: any) => {
+// export default class MainPage extends React.Component {
+const MainPage = (props: any) => {
     // console.log("something is happening right now");
-    const tiles = useAppSelector(state => { // const tiles = useAppSelector(state => { // causes issues
-        // console.log(state);
-        // console.log(state.board);
-        return state.board.tiles;
-    });
+    // why is this being done?
+    // oh I'm just only logging this one sometimes
+    // const tiles = useAppSelector(state => { // const tiles = useAppSelector(state => { // causes issues
+    //     // console.log(state);
+    //     // console.log(state.board);
+    //     return state.board.tiles;
+    // });
     const tilesRgba = useAppSelector(state => state.board.tilesRgba);
-    const map = useAppSelector(state => state.board.map);
-    const values = useAppSelector(state => state.board.values);
+    // const map = useAppSelector(state => state.board.map);
+    // const values = useAppSelector(state => state.board.values);
     const width = useAppSelector(state => state.board.width);
     const activeCountry = useAppSelector(state => state.board.activeCountry);
     const brushColor = useAppSelector(state => state.brushColor);
 
     // console.log(tiles);
 
-    props = { tiles, tilesRgba, map, values, width, activeCountry, brushColor, ...props };
+    props = { tilesRgba, width, activeCountry, brushColor, ...props };
     // console.log("cool beans");
 
         // const style: CSSProperties = { // may wanna move this elsewhere and delet the div
@@ -191,15 +194,16 @@ const BoardPage = (props: any) => {
         const [viewFlashback, setViewFlashback] = React.useState(false);
         const [activeBaseboard, setActiveBaseboard] = React.useState(Baseboard.INTERACTIVE);
         const [tool, setTool] = React.useState(0);
+        // TODO: move this to be inside the Viewer component
         const [wikidataidRgba, wikidataidCanvasRef] = usePixelsFromImage(System.WIKIDATAID_BASEBOARD_PATH);
 
         // var tiles = [];
         const boardProps: BoardProps = {
             tilesRgba: props.tilesRgba,
-            tiles: props.tiles,
+            // tiles: props.tiles,
             wikidataidRgba: wikidataidRgba,
-            map: props.map,
-            values: props.values,
+            // map: props.map,
+            // values: props.values,
             width: props.width,
             // mouseDown: props.mouseDown,
             brushColor: props.brushColor,
@@ -216,16 +220,16 @@ const BoardPage = (props: any) => {
         const NUM_BOARD_IDS = 2;
 
         const [useGlobe, setUseGlobe] = React.useState(true);
-        const boardViewer = (!useGlobe) ?
-            <Board
-                {...boardProps}
-            /*{mouseDown={props.mouseDown}*/
-            />
-            :
-            <Globe
-                {...boardProps}
-            />
-        ;
+        // const boardViewer = (!useGlobe) ?
+        //     <Board
+        //         {...boardProps}
+        //     /*{mouseDown={props.mouseDown}*/
+        //     />
+        //     :
+        //     <Globe
+        //         {...boardProps}
+        //     />
+        // ;
 
         // if you start seeing performance issues, maybe have the first thing you try to do be this:
         // the activeCountry issue still seems to be a problem even with pagination; issues is especially noticable on safari
@@ -247,7 +251,11 @@ const BoardPage = (props: any) => {
                         setActiveCountry={props.setActiveCountry}
                     >
                     </PersistentSearchDrawer2>
-                    {boardViewer}
+                    {/*{boardViewer}*/}
+                    <Viewer
+                        {...boardProps}
+                        useGlobe={useGlobe}
+                    />
                 </div>
                 <Overlay
                     onChangeComplete={onChangeComplete}
@@ -281,4 +289,4 @@ export default connect(
   mapStateToProps,
   // { getData },
   mapDispatchToProps
-)(BoardPage);
+)(MainPage);

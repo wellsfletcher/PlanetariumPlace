@@ -33,6 +33,14 @@ export function getWikidataidFromWikidataidBaseboard(wikidataidRgba: Uint8Clampe
     return result;
 }
 
+export function getTotalPixelsFromTilesRgba(tilesRgba: Uint8ClampedArray) {
+    return tilesRgba.length / 4;
+}
+
+export function getHeightFromTilesRgba(tilesRgba: Uint8ClampedArray, width: number) {
+    return getTotalPixelsFromTilesRgba(tilesRgba) / width;
+}
+
 /**
 @colors hex integer array that maps integer color [0, 15] to hex values
 */
@@ -100,13 +108,13 @@ export function setRgbaPixel(pixelsRgba: Uint8ClampedArray, originalIndex: numbe
  TODO: figure out the proper type of the buffer arg
 */
 export function setTiles(state: BaseState, buffer: number[]): any {
-    const tiles = buffer2hex(buffer, colorValues);
+    // const tiles = buffer2hex(buffer, colorValues);
     const tilesRgba = buffer2rgbabuffer(buffer, colorValues);
     // console.log(state.board.tiles);
     // return state;
     return { ...state, board: {
         ...state.board,
-        tiles: tiles,
+        // tiles: tiles,
         tilesRgba: tilesRgba
     }};
 }
@@ -115,11 +123,11 @@ export function setTiles(state: BaseState, buffer: number[]): any {
 Takes hex color as input.
 */
 export function setTile(state: BaseState, {x, y}, width: number, color: number): any {
-    var tiles = state.board.tiles.slice();
+    // var tiles = state.board.tiles.slice();
     var tilesRgba = state.board.tilesRgba.slice(); // mayhaps remove slicing?
 
     const index = (y * width) + x;
-    tiles[index] = color;
+    // tiles[index] = color;
     setRgbaPixel(tilesRgba, index, color);
 
     const boardId = state.boardId;
@@ -128,7 +136,7 @@ export function setTile(state: BaseState, {x, y}, width: number, color: number):
 
     return { ...state, board: {
         ...state.board,
-        tiles: tiles,
+        // tiles: tiles,
         tilesRgba: tilesRgba
     }};
 }
@@ -136,12 +144,12 @@ export function setTile(state: BaseState, {x, y}, width: number, color: number):
 /**
 Sets a tile without making a call to an API.
 */
-export function setTileLocallyInternal(tiles: number[], tilesRgba: Uint8ClampedArray, state: any, index: number, width: number, color: number): any { // should use function chaining
+export function setTileLocallyInternal(tilesRgba: Uint8ClampedArray, state: any, index: number, width: number, color: number): any { // should use function chaining
     // var tiles = state.board.tiles.slice();
     // var tilesRgba = state.board.tilesRgba.slice();
 
     // const index = (y * width) + x;
-    tiles[index] = color;
+    // tiles[index] = color;
     setRgbaPixel(tilesRgba, index, color);
 
     const boardId = state.boardId;
@@ -149,20 +157,20 @@ export function setTileLocallyInternal(tiles: number[], tilesRgba: Uint8ClampedA
 
     return { ...state, board: {
         ...state.board,
-        tiles: tiles,
+        // tiles: tiles,
         tilesRgba: tilesRgba
     }};
 }
 
 export function setTileLocally(state: BaseState, index: number, width: number, color: number): any { // should use function chaining
-    var tiles = state.board.tiles.slice();
+    // var tiles = state.board.tiles.slice();
     var tilesRgba = state.board.tilesRgba.slice();
     // const width = state.board.width;
 
     index = Number(index);
     color = colorcode2hexcolor(Number(color));
 
-    return setTileLocallyInternal(tiles, tilesRgba, state, index, width, color);
+    return setTileLocallyInternal(tilesRgba, state, index, width, color);
 }
 
 /*
@@ -178,14 +186,14 @@ Takes list of tiles to be set as input.
 export function importTiles(state: any, tileChanges: any): any {
     const width = state.board.width;
 
-    var tiles = state.board.tiles.slice();
+    // var tiles = state.board.tiles.slice();
     var tilesRgba = state.board.tilesRgba.slice();
 
     for (var k = 0; k < tileChanges.length; k++) {
         var {index, color, timestamp} = tileChanges[k];
         index = Number(index);
         color = colorcode2hexcolor(Number(color));
-        state = setTileLocallyInternal(tiles, tilesRgba, state, index, width, color);
+        state = setTileLocallyInternal(tilesRgba, state, index, width, color);
         // console.log("set tile " + index + " to " + "color");
     }
 

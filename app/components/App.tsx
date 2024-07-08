@@ -7,7 +7,7 @@ import {connect, ConnectedProps} from "react-redux";
 // import { } from "../actions/index";
 import {actions, BaseState} from "../reducers";
 
-import BoardPage from './BoardPage';
+import BoardPage from './MainPage';
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider, Theme, StyledEngineProvider, adaptV4Theme } from '@mui/material/styles';

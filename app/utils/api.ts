@@ -114,6 +114,9 @@ export function fetchTilesGivenSize(boardId: number, width: number, height: numb
                             resolve(canvas);
                         });
                         */
+                        // let newCanvas = concatenateUint8Arrays([canvas, canvas, canvas, canvas]);
+                        // newCanvas = concatenateUint8Arrays([newCanvas, newCanvas, newCanvas, newCanvas]);
+                        // return dispatch({ type: TILES_FETCHED, payload: {canvas: newCanvas, width: width*4} });
                         return dispatch({ type: TILES_FETCHED, payload: {canvas, width} });
                     } else {
                         handleChunk(chunk.value);
@@ -125,6 +128,23 @@ export function fetchTilesGivenSize(boardId: number, width: number, height: numb
 
         });
 }
+
+// function concatenateUint8Arrays(arrays) { // this was just for testing performance w/ bigger canvases
+//     // Calculate the total length of all arrays
+//     let totalLength = arrays.reduce((acc, value) => acc + value.length, 0);
+//
+//     // Create a new Uint8Array with the total length
+//     let result = new Uint8Array(totalLength);
+//
+//     // Keep track of the current offset
+//     let offset = 0;
+//     for (let array of arrays) {
+//         result.set(array, offset);
+//         offset += array.length;
+//     }
+//
+//     return result;
+// }
 
 /*
 @color is colorCode with value from [0–15]

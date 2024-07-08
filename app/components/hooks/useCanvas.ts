@@ -16,6 +16,7 @@ const useCanvas = (draw: (ctx: CanvasRenderingContext2D, frameCount: number) => 
       frameCount++;
       draw(context, frameCount);
       // console.log("drawn");
+      // TODO: investigate how to make use of the requestAnimationFrame stuff https://www.redditinc.com/blog/how-we-built-rplace/
       // uncommenting this will enable animation and cause it to constantly get rerendered
       // animationFrameId = window.requestAnimationFrame(render);
     }
