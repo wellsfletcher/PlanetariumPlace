@@ -20,7 +20,7 @@ import {CanvasGlobeProps} from "./Globe";
 import useFancyCanvas from "./hooks/useFancyCanvas";
 import {Baseboard} from "../constants/Baseboard";
 import useImage from "./hooks/useImage";
-import {getWikidataidFromWikidataidBaseboard} from "../modules/board";
+import {getHeightFromTilesRgba, getWikidataidFromWikidataidBaseboard} from "../modules/board";
 // import Tooltip from './TrackingTooltip.js';
 
 
@@ -140,9 +140,10 @@ const Highlights = (props) => {
 // I have to update my dependencies (I think react in particular) to be able to convert this file to TS
 const Board = (props: CanvasGlobeProps) => {
     var tilesRgba = props.tilesRgba;
-    var tiles = props.tiles;
+    // var tiles = props.tiles;
     var width = props.width;
-    var height = tiles.length / width;
+    // removing Tiles array to improve performance
+    var height = getHeightFromTilesRgba(tilesRgba, width);
 
     const viewFlashback = props.viewFlashback;
     const activeBaseboard = props.activeBaseboard;

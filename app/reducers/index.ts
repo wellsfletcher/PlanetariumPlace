@@ -87,7 +87,8 @@ export interface BoardState {
     lastUpdated: Date,
     //- unplayedChanges: typeof Queue, // TODO: investigate why typeof is needed here
     tilesRgba: Uint8ClampedArray,
-    tiles: number[],
+    // removing Tiles array to improve performance
+    // tiles: number[],
     map: number[],
     values: string[],
     activeCountry: string,
@@ -105,8 +106,10 @@ const initialState: BaseState = {
         //- unplayedChanges: new Queue(), // not used
 
         tilesRgba: new Uint8ClampedArray(new ArrayBuffer(System.INITIAL_WIDTH * System.INITIAL_HEIGHT * 4)),
-        tiles: initBoard(System.INITIAL_WIDTH, System.INITIAL_HEIGHT),
+        // removing Tiles array to improve performance
+        // tiles: initBoard(System.INITIAL_WIDTH, System.INITIAL_HEIGHT),
         // links: initLinks, // maps pixel to relative url string
+        // TODO: investigate if I can finally remove this
         map: initMap(System.INITIAL_WIDTH, System.INITIAL_HEIGHT), // new Map(), // initMap(), // not used anymore I think
         values: ["", "canada", "usa", "mexico", "brazil"], // features // also not used
         activeCountry: "",

@@ -6,6 +6,7 @@ import { mod } from '../utils/general';
 import * as Time from '../utils/time';
 import {BaseState} from "../reducers";
 import {AppDispatch, RootState} from "../store";
+import {getTotalPixelsFromTilesRgba} from "../modules/board";
 
 interface MiddlewareInput {
     getState: () => RootState,
@@ -19,9 +20,10 @@ export function forbiddenWordsMiddleware({ getState, dispatch }: MiddlewareInput
                 var {x, y} = action.payload;
                 const state: BaseState = getState();
                 // console.log(state.board);
-                const tiles = state.board.tiles;
+                // removing Tiles array to improve performance
+                const tilesRgba = state.board.tilesRgba;
                 const index = (action.payload.y * state.board.width) + action.payload.x;
-                if (mod(index, tiles.length) != index) {
+                if (mod(index, getTotalPixelsFromTilesRgba(tilesRgba)) != index) {
                     alert("TILE_OUT_OF_BOUNDS: " + x + ", " + y + " is invalid.");
                     return dispatch({ type: "TILE_OUT_OF_BOUNDS" });
                 }

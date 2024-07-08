@@ -15,7 +15,7 @@ import useFancyCanvas from "./hooks/useFancyCanvas";
 import {Baseboard} from "../constants/Baseboard";
 import {COLORING_BASEBOARD_PATH} from "../constants/system";
 import useImage from "./hooks/useImage";
-import {getWikidataidFromWikidataidBaseboard} from "../modules/board";
+import {getHeightFromTilesRgba, getWikidataidFromWikidataidBaseboard} from "../modules/board";
 
 // THREE.WebGLRenderer._useLegacyLights = true;
 // THREE.WebGLRendererParameters;
@@ -68,7 +68,7 @@ export interface CanvasGlobeProps {
     viewFlashback: boolean,
     tilesRgba: Uint8ClampedArray,
     wikidataidRgba: Uint8ClampedArray,
-    tiles: number[],
+    // tiles: number[],
     width: number,
     brushColor: number,
     setViewFlashback: (value: boolean) => void,
@@ -88,9 +88,10 @@ function CanvasGlobe(props: CanvasGlobeProps) {
     const activeBaseboard = props.activeBaseboard;
     // const setViewFlashback = props.setViewFlashback;
     var tilesRgba = props.tilesRgba;
-    var tiles = props.tiles;
+    // var tiles = props.tiles;
     var width = props.width;
-    var height = tiles.length / width;
+    // removing Tiles array to improve performance
+    var height = getHeightFromTilesRgba(tilesRgba, width);
 
     /*
     // maybe change this to a custom usePreloadedImage hook
@@ -366,7 +367,7 @@ function CanvasGlobe(props: CanvasGlobeProps) {
 
         const directionalLight = globeEl.current.lights().find(obj3d => obj3d.type === 'DirectionalLight');
         directionalLight.intensity = 0.03 * Math.PI;
-    }, [boardImages, props.viewFlashback, props.tiles, props.activeBaseboard]);
+    }, [boardImages, props.viewFlashback, props.tilesRgba, props.activeBaseboard]);
     // React.useEffect(() => {
     //     texture.needsUpdate = true;
     // }, [props.viewFlashback, props.tiles]);

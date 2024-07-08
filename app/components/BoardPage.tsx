@@ -94,7 +94,7 @@ const mapStateToProps = (state) => { // this will be placed with a bunch of sele
 // TODO: simplify this code so we don't need the extra type definition (and just like use State instead or something)
 interface BoardProps {
     tilesRgba: Uint8ClampedArray,
-    tiles: number[],
+    // tiles: number[],
     wikidataidRgba: Uint8ClampedArray, // technically should equal maybe new Uint8ClampedArray(new ArrayBuffer(System.INITIAL_WIDTH * System.INITIAL_HEIGHT * 4)),
     map: number[],
     values: string[],
@@ -124,11 +124,13 @@ interface BoardPageProps extends BoardProps {
 // export default class BoardPage extends React.Component {
 const BoardPage = (props: any) => {
     // console.log("something is happening right now");
-    const tiles = useAppSelector(state => { // const tiles = useAppSelector(state => { // causes issues
-        // console.log(state);
-        // console.log(state.board);
-        return state.board.tiles;
-    });
+    // why is this being done?
+    // oh I'm just only logging this one sometimes
+    // const tiles = useAppSelector(state => { // const tiles = useAppSelector(state => { // causes issues
+    //     // console.log(state);
+    //     // console.log(state.board);
+    //     return state.board.tiles;
+    // });
     const tilesRgba = useAppSelector(state => state.board.tilesRgba);
     const map = useAppSelector(state => state.board.map);
     const values = useAppSelector(state => state.board.values);
@@ -138,7 +140,7 @@ const BoardPage = (props: any) => {
 
     // console.log(tiles);
 
-    props = { tiles, tilesRgba, map, values, width, activeCountry, brushColor, ...props };
+    props = { tilesRgba, map, values, width, activeCountry, brushColor, ...props };
     // console.log("cool beans");
 
         // const style: CSSProperties = { // may wanna move this elsewhere and delet the div
@@ -196,7 +198,7 @@ const BoardPage = (props: any) => {
         // var tiles = [];
         const boardProps: BoardProps = {
             tilesRgba: props.tilesRgba,
-            tiles: props.tiles,
+            // tiles: props.tiles,
             wikidataidRgba: wikidataidRgba,
             map: props.map,
             values: props.values,
