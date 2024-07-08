@@ -90,7 +90,7 @@ export interface BoardState {
     // removing Tiles array to improve performance
     // tiles: number[],
     // map: number[],
-    values: string[],
+    // values: string[],
     activeCountry: string,
     width: number,
 }
@@ -111,7 +111,7 @@ const initialState: BaseState = {
         // links: initLinks, // maps pixel to relative url string
         // TODO: investigate if I can finally remove this
         // map: initMap(System.INITIAL_WIDTH, System.INITIAL_HEIGHT), // new Map(), // initMap(), // not used anymore I think
-        values: ["", "canada", "usa", "mexico", "brazil"], // features // also not used
+        // values: ["", "canada", "usa", "mexico", "brazil"], // features // also not used
         activeCountry: "",
         width: System.INITIAL_WIDTH
     },

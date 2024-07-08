@@ -98,7 +98,7 @@ interface BoardProps {
     // tiles: number[],
     wikidataidRgba: Uint8ClampedArray, // technically should equal maybe new Uint8ClampedArray(new ArrayBuffer(System.INITIAL_WIDTH * System.INITIAL_HEIGHT * 4)),
     // map: number[],
-    values: string[],
+    // values: string[],
     activeCountry: string,
     setActiveCountry: (value: string) => void,
     width: number,
@@ -134,14 +134,14 @@ const MainPage = (props: any) => {
     // });
     const tilesRgba = useAppSelector(state => state.board.tilesRgba);
     // const map = useAppSelector(state => state.board.map);
-    const values = useAppSelector(state => state.board.values);
+    // const values = useAppSelector(state => state.board.values);
     const width = useAppSelector(state => state.board.width);
     const activeCountry = useAppSelector(state => state.board.activeCountry);
     const brushColor = useAppSelector(state => state.brushColor);
 
     // console.log(tiles);
 
-    props = { tilesRgba, values, width, activeCountry, brushColor, ...props };
+    props = { tilesRgba, width, activeCountry, brushColor, ...props };
     // console.log("cool beans");
 
         // const style: CSSProperties = { // may wanna move this elsewhere and delet the div
@@ -203,7 +203,7 @@ const MainPage = (props: any) => {
             // tiles: props.tiles,
             wikidataidRgba: wikidataidRgba,
             // map: props.map,
-            values: props.values,
+            // values: props.values,
             width: props.width,
             // mouseDown: props.mouseDown,
             brushColor: props.brushColor,
