@@ -38,104 +38,104 @@ function round(num: number) {
     return Math.floor(num + 0.0);
 }
 
-var drawAnimatedCircle = (ctx, frameCount) => {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = '#000000';
-    ctx.beginPath();
-    ctx.arc(50, 100, 20*Math.sin(frameCount*0.05)**2, 0, 2*Math.PI);
-    ctx.fill();
-};
+// var drawAnimatedCircle = (ctx, frameCount) => {
+//     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+//     ctx.fillStyle = '#000000';
+//     ctx.beginPath();
+//     ctx.arc(50, 100, 20*Math.sin(frameCount*0.05)**2, 0, 2*Math.PI);
+//     ctx.fill();
+// };
 
-const extractPixelBufferFromMap = (map, selectedId) => {
-    var result = [];
-    const highlightColor = 0x88ffdf65; // 16768869; // 0xffdf65
-    for (var ids of map) {
-        var color = 0x00000000;// 1752220;
-        if (selectedId == 0) {
+// const extractPixelBufferFromMap = (map, selectedId) => {
+//     var result = [];
+//     const highlightColor = 0x88ffdf65; // 16768869; // 0xffdf65
+//     for (var ids of map) {
+//         var color = 0x00000000;// 1752220;
+//         if (selectedId == 0) {
+//
+//         } else if (selectedId == ids) { // selectedId in ids
+//             color = highlightColor;
+//             // console.log("highlighted");
+//         }
+//         result.push(color);
+//     }
+//     return result;
+// };
 
-        } else if (selectedId == ids) { // selectedId in ids
-            color = highlightColor;
-            // console.log("highlighted");
-        }
-        result.push(color);
-    }
-    return result;
-};
+// const drawSelection = (ctx, map, bufferWidth, selectedId) => {
+//     var pixels = extractPixelBufferFromMap(map, selectedId);
+//     const hasAlpha = true;
+//     return drawPixelBuffer(ctx, pixels, bufferWidth, hasAlpha); // currently not used
+// };
 
-const drawSelection = (ctx, map, bufferWidth, selectedId) => {
-    var pixels = extractPixelBufferFromMap(map, selectedId);
-    const hasAlpha = true;
-    return drawPixelBuffer(ctx, pixels, bufferWidth, hasAlpha); // currently not used
-};
-
-const Highlights = (props) => {
-    const { map, values, width, selectedTile, ...otherProps } = props;
-    var height = map.length / width;
-
-    var index, selectedIds, value;
-    value = "";
-    if (selectedTile != null) {
-        index = vector2index(selectedTile, width);
-        selectedIds = map[index];
-        value = values[selectedIds];
-    }
-
-    const [mapCache, setMapCache] = React.useState(new Map());
-
-    var draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-        if (selectedTile == null) return;
-        // drawPixelBuffer(ctx, map, width);
-        var index = vector2index(selectedTile, width);
-        // var value = props.values[props.map[index]];
-        // console.log("selected = " + selectedIds);
-        // drawSelection(ctx, map, width, selectedIds);
-        if (mapCache.has(selectedIds)) {
-            const highlightImageData = mapCache.get(selectedIds);
-            drawImageData(ctx, highlightImageData);
-        } else {
-            const highlightImageData = drawSelection(ctx, map, width, selectedIds);
-            mapCache.set(selectedIds, highlightImageData);
-            setMapCache(mapCache);
-            // setMapCache(new Map(mapCache));
-        }
-    };
-
-    // const options = {
-    //     context: "2d"
-    // };
-    // const { context, ...moreConfig } = options;
-    const canvasRef = useCanvas(draw);
-
-    const canvas = canvasRef.current;
-
-    const rest = {
-        width: width,
-        height: height,
-        style: {
-            // Commenting out bc ts error
-            imageRendering:  "pixelated" as "pixelated",
-            /*
-            imageRendering: "-moz-crisp-edges",
-            imageRendering: "-webkit-crisp-edges",
-            imageRendering: "crisp-edges",
-            */
-            position: "absolute",
-            // zIndex: 100,
-            cursor: "crosshair"
-        }
-    };
-
-    // followCursor property will soon exist...
-    return (
-        <Tooltip title={value} arrow>
-            <canvas
-                ref={canvasRef}
-                {...rest}
-                {...otherProps}
-            />
-        </Tooltip>
-    );
-}
+// const Highlights = (props) => {
+//     const { map, values, width, selectedTile, ...otherProps } = props;
+//     var height = map.length / width;
+//
+//     var index, selectedIds, value;
+//     value = "";
+//     if (selectedTile != null) {
+//         index = vector2index(selectedTile, width);
+//         selectedIds = map[index];
+//         value = values[selectedIds];
+//     }
+//
+//     const [mapCache, setMapCache] = React.useState(new Map());
+//
+//     var draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
+//         if (selectedTile == null) return;
+//         // drawPixelBuffer(ctx, map, width);
+//         var index = vector2index(selectedTile, width);
+//         // var value = props.values[props.map[index]];
+//         // console.log("selected = " + selectedIds);
+//         // drawSelection(ctx, map, width, selectedIds);
+//         if (mapCache.has(selectedIds)) {
+//             const highlightImageData = mapCache.get(selectedIds);
+//             drawImageData(ctx, highlightImageData);
+//         } else {
+//             const highlightImageData = drawSelection(ctx, map, width, selectedIds);
+//             mapCache.set(selectedIds, highlightImageData);
+//             setMapCache(mapCache);
+//             // setMapCache(new Map(mapCache));
+//         }
+//     };
+//
+//     // const options = {
+//     //     context: "2d"
+//     // };
+//     // const { context, ...moreConfig } = options;
+//     const canvasRef = useCanvas(draw);
+//
+//     const canvas = canvasRef.current;
+//
+//     const rest = {
+//         width: width,
+//         height: height,
+//         style: {
+//             // Commenting out bc ts error
+//             imageRendering:  "pixelated" as "pixelated",
+//             /*
+//             imageRendering: "-moz-crisp-edges",
+//             imageRendering: "-webkit-crisp-edges",
+//             imageRendering: "crisp-edges",
+//             */
+//             position: "absolute",
+//             // zIndex: 100,
+//             cursor: "crosshair"
+//         }
+//     };
+//
+//     // followCursor property will soon exist...
+//     return (
+//         <Tooltip title={value} arrow>
+//             <canvas
+//                 ref={canvasRef}
+//                 {...rest}
+//                 {...otherProps}
+//             />
+//         </Tooltip>
+//     );
+// }
 
 // I have to update my dependencies (I think react in particular) to be able to convert this file to TS
 const Board = (props: any) => {

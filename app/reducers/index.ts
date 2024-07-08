@@ -89,7 +89,7 @@ export interface BoardState {
     tilesRgba: Uint8ClampedArray,
     // removing Tiles array to improve performance
     // tiles: number[],
-    map: number[],
+    // map: number[],
     values: string[],
     activeCountry: string,
     width: number,
@@ -110,7 +110,7 @@ const initialState: BaseState = {
         // tiles: initBoard(System.INITIAL_WIDTH, System.INITIAL_HEIGHT),
         // links: initLinks, // maps pixel to relative url string
         // TODO: investigate if I can finally remove this
-        map: initMap(System.INITIAL_WIDTH, System.INITIAL_HEIGHT), // new Map(), // initMap(), // not used anymore I think
+        // map: initMap(System.INITIAL_WIDTH, System.INITIAL_HEIGHT), // new Map(), // initMap(), // not used anymore I think
         values: ["", "canada", "usa", "mexico", "brazil"], // features // also not used
         activeCountry: "",
         width: System.INITIAL_WIDTH
