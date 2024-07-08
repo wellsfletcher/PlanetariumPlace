@@ -121,8 +121,8 @@ interface BoardPageProps extends BoardProps {
     boardId: number,
 }
 
-// export default class BoardPage extends React.Component {
-const BoardPage = (props: any) => {
+// export default class MainPage extends React.Component {
+const MainPage = (props: any) => {
     // console.log("something is happening right now");
     // why is this being done?
     // oh I'm just only logging this one sometimes
@@ -283,4 +283,4 @@ export default connect(
   mapStateToProps,
   // { getData },
   mapDispatchToProps
-)(BoardPage);
+)(MainPage);
