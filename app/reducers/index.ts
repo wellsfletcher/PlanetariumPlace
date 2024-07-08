@@ -76,7 +76,6 @@ const initMap = (width: number, height: number): number[] => { // technically sh
 // but the server would probably explode
 
 export interface BaseState {
-    articles: any[],
     mouseDown: boolean,
     boardId: number,
     board: BoardState,
@@ -96,7 +95,6 @@ export interface BoardState {
 }
 
 const initialState: BaseState = {
-    articles: [], // remove this
     mouseDown: false, // not used
     boardId: System.INITIAL_BOARD_ID,
     // remoteTiles: null,
