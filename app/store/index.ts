@@ -31,8 +31,10 @@ import { configureStore } from '@reduxjs/toolkit';
 const stateSanitizer = (state: any) => {
     var result: any = state;
     if (state.board) {
-        const {tilesRgba, tiles, map, ...includedProps} = state.board;
-        const board = {...includedProps, tilesRgba: "{OMITTED}", tiles: "[OMITTED]", map: "[OMITTED]"};
+        // const {tilesRgba, tiles, map, ...includedProps} = state.board;
+        const {tilesRgba, ...includedProps} = state.board;
+        // const board = {...includedProps, tilesRgba: "{OMITTED}", tiles: "[OMITTED]", map: "[OMITTED]"};
+        const board = {...includedProps, tilesRgba: "{OMITTED}"};
         result = {
             ...state, board: board // '<<LONG_BLOB>>'
         };
