@@ -28,13 +28,16 @@ export function forbiddenWordsMiddleware({ getState, dispatch }: MiddlewareInput
                     return dispatch({ type: "TILE_OUT_OF_BOUNDS" });
                 }
             } else if (action.type === Action.PLAY_CHANGE) {
+                if (System.SHOULD_BULK_UPDATE_TILES == true) {
+                    next(action);
+                }
                 // console.log("Going through play_change middleware");
                 const change = action.payload.change;
                 // console.log("change = ");
                 // console.log(change);
                 const TILE_UPDATE_OFFSET = System.TILE_UPDATE_OFFSET;
                 const changeTimestamp: Date = Time.str2date(change.timestamp);
-                const timestampToPlayChange = Time.addMillis(changeTimestamp, TILE_UPDATE_OFFSET);
+                const timestampToPlayChange = Time.addMillis(changeTimestamp, TILE_UPDATE_OFFSET); // shouldn't this equal TILE_UPDATE_FREQUENCY?
                 // refactored bc TS error
                 // const changeDelay = Time.getRemaining(Time.addMillis(Time.str2date(change.timestamp), TILE_UPDATE_OFFSET));
                 const changeDelay = Time.getRemaining(timestampToPlayChange.getTime());

@@ -143,8 +143,9 @@ const MainPage = (props: any) => {
 
     props = { tilesRgba, width, activeCountry, brushColor, ...props };
     // console.log("cool beans");
+    // const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
 
-        // const style: CSSProperties = { // may wanna move this elsewhere and delet the div
+    // const style: CSSProperties = { // may wanna move this elsewhere and delet the div
         const style: CSSProperties = {
             position: "absolute",
             width: "100%",
@@ -161,29 +162,29 @@ const MainPage = (props: any) => {
         // console.log(props.remoteTiles);
 
         const TILE_UPDATE_FREQUENCY = System.TILE_UPDATE_FREQUENCY;
-        const TILE_UPDATE_OFFSET = System.TILE_UPDATE_OFFSET;
+        // const TILE_UPDATE_OFFSET = System.TILE_UPDATE_OFFSET;
         // setInterval(() => {
 
         // July 6, 2024: temporarily commenting this out, since it's causing performance issues on safari; TODO: investigate this
-        // useInterval(() => {
-        //     console.debug("updating async tiles...");
-        //     const placeholderDate = new Date();
-        //     //- props.fetchTileChanges(props.boardId, placeholderDate);
-        //     props.fetchTileChanges(placeholderDate, props.boardId); // wait this would be the current time right? it should be props.lastUpdated right? nah it looks all good in the console
-        //     // props.fetchTileChanges(props.boardId, props.lastUpdated);
-        //     // props.fetchTileChanges(1, new Date());
-        //
-        //     // play a bunch of actions after some time (the delay is stored in the payload)
-        //     // this shit needs to get run after tile changes have been fetched
-        //     /*
-        //     console.log(props.unplayedChanges);
-        //     while (!props.unplayedChanges.isEmpty()) {
-        //         let change = props.unplayedChanges.dequeue();
-        //         console.log(change);
-        //         props.playChange(change);
-        //     }
-        //     */
-        // }, TILE_UPDATE_FREQUENCY);
+        useInterval(() => {
+            console.debug("updating async tiles...");
+            const placeholderDate = new Date();
+            //- props.fetchTileChanges(props.boardId, placeholderDate);
+            props.fetchTileChanges(placeholderDate, props.boardId); // wait this would be the current time right? it should be props.lastUpdated right? nah it looks all good in the console
+            // props.fetchTileChanges(props.boardId, props.lastUpdated);
+            // props.fetchTileChanges(1, new Date());
+
+            // play a bunch of actions after some time (the delay is stored in the payload)
+            // this shit needs to get run after tile changes have been fetched
+            /*
+            console.log(props.unplayedChanges);
+            while (!props.unplayedChanges.isEmpty()) {
+                let change = props.unplayedChanges.dequeue();
+                console.log(change);
+                props.playChange(change);
+            }
+            */
+        }, TILE_UPDATE_FREQUENCY);
 
         const onChangeComplete = (color) => {
             var brushColorInt = hexcolor2int(color);
