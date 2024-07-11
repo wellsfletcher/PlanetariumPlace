@@ -9,8 +9,9 @@ export const INITIAL_BRUSH_COLOR = 0x00D3DD; // 1752220;
 // export const BASE_PATH = "../";
 export const BASE_PATH = (process.env.NODE_ENV === 'production') ? "" : "../../";
 
-export const TILE_UPDATE_FREQUENCY = 5000;
-export const TILE_UPDATE_OFFSET = 6000;
+export const SHOULD_BULK_UPDATE_TILES = true;
+export const TILE_UPDATE_FREQUENCY = 10000; // 5000;
+export const TILE_UPDATE_OFFSET = TILE_UPDATE_FREQUENCY; // 6000;
 // export const FLASHBACK_BOARD_PATH = "../../assets/pixel-countries-mid-res.png";
 // export const FLASHBACK_BOARD_PATH = "../assets/pixel-countries-mid-res.png";
 // export const FLASHBACK_BOARD_PATH = process.env.PUBLIC_URL + "/assets/pixel-countries-mid-res.png";
